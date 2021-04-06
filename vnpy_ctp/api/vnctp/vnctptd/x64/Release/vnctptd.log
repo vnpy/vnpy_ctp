@@ -1,0 +1,8 @@
+﻿  stdafx.cpp
+  dllmain.cpp
+  vnctptd.cpp
+    正在创建库 C:\GitHub\vnpy\vnpy\api\ctp\vnctp\..\vnctptd.lib 和对象 C:\GitHub\vnpy\vnpy\api\ctp\vnctp\..\vnctptd.exp
+  正在生成代码
+  All 4757 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  已完成代码的生成
+  vnctptd.vcxproj -> C:\GitHub\vnpy\vnpy\api\ctp\vnctp\..\vnctptd.pyd
