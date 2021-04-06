@@ -88,9 +88,9 @@ case ONRSPORDERACTION:
 	break;
 }
 
-case ONRSPQUERYMAXORDERVOLUME:
+case ONRSPQRYMAXORDERVOLUME:
 {
-	this->processRspQueryMaxOrderVolume(&task);
+	this->processRspQryMaxOrderVolume(&task);
 	break;
 }
 
@@ -745,6 +745,18 @@ case ONRTNCANCELACCOUNTBYBANK:
 case ONRTNCHANGEACCOUNTBYBANK:
 {
 	this->processRtnChangeAccountByBank(&task);
+	break;
+}
+
+case ONRSPQRYCLASSIFIEDINSTRUMENT:
+{
+	this->processRspQryClassifiedInstrument(&task);
+	break;
+}
+
+case ONRSPQRYCOMBPROMOTIONPARAM:
+{
+	this->processRspQryCombPromotionParam(&task);
 	break;
 }
 

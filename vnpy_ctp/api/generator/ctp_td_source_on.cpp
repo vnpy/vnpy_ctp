@@ -178,11 +178,11 @@ void onRspOrderAction(const dict &data, const dict &error, int reqid, bool last)
 	}
 };
 
-void onRspQueryMaxOrderVolume(const dict &data, const dict &error, int reqid, bool last) override
+void onRspQryMaxOrderVolume(const dict &data, const dict &error, int reqid, bool last) override
 {
 	try
 	{
-		PYBIND11_OVERLOAD(void, TdApi, onRspQueryMaxOrderVolume, data, error, reqid, last);
+		PYBIND11_OVERLOAD(void, TdApi, onRspQryMaxOrderVolume, data, error, reqid, last);
 	}
 	catch (const error_already_set &e)
 	{
@@ -1491,6 +1491,30 @@ void onRtnChangeAccountByBank(const dict &data) override
 	try
 	{
 		PYBIND11_OVERLOAD(void, TdApi, onRtnChangeAccountByBank, data);
+	}
+	catch (const error_already_set &e)
+	{
+		cout << e.what() << endl;
+	}
+};
+
+void onRspQryClassifiedInstrument(const dict &data, const dict &error, int reqid, bool last) override
+{
+	try
+	{
+		PYBIND11_OVERLOAD(void, TdApi, onRspQryClassifiedInstrument, data, error, reqid, last);
+	}
+	catch (const error_already_set &e)
+	{
+		cout << e.what() << endl;
+	}
+};
+
+void onRspQryCombPromotionParam(const dict &data, const dict &error, int reqid, bool last) override
+{
+	try
+	{
+		PYBIND11_OVERLOAD(void, TdApi, onRspQryCombPromotionParam, data, error, reqid, last);
 	}
 	catch (const error_already_set &e)
 	{

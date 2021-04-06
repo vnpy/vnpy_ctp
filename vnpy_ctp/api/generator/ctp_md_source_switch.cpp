@@ -28,6 +28,12 @@ case ONRSPUSERLOGOUT:
 	break;
 }
 
+case ONRSPQRYMULTICASTINSTRUMENT:
+{
+	this->processRspQryMulticastInstrument(&task);
+	break;
+}
+
 case ONRSPERROR:
 {
 	this->processRspError(&task);

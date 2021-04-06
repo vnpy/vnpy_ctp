@@ -71,6 +71,33 @@ void MdApi::processRspUserLogout(Task *task)
 	this->onRspUserLogout(data, error, task->task_id, task->task_last);
 };
 
+void MdApi::processRspQryMulticastInstrument(Task *task)
+{
+	gil_scoped_acquire acquire;
+	dict data;
+	if (task->task_data)
+	{
+		CThostFtdcMulticastInstrumentField *task_data = (CThostFtdcMulticastInstrumentField*)task->task_data;
+		data["TopicID"] = task_data->TopicID;
+		data["reserve1"] = toUtf(task_data->reserve1);
+		data["InstrumentNo"] = task_data->InstrumentNo;
+		data["CodePrice"] = task_data->CodePrice;
+		data["VolumeMultiple"] = task_data->VolumeMultiple;
+		data["PriceTick"] = task_data->PriceTick;
+		data["InstrumentID"] = toUtf(task_data->InstrumentID);
+		delete task_data;
+	}
+	dict error;
+	if (task->task_error)
+	{
+		CThostFtdcRspInfoField *task_error = (CThostFtdcRspInfoField*)task->task_error;
+		error["ErrorID"] = task_error->ErrorID;
+		error["ErrorMsg"] = toUtf(task_error->ErrorMsg);
+		delete task_error;
+	}
+	this->onRspQryMulticastInstrument(data, error, task->task_id, task->task_last);
+};
+
 void MdApi::processRspError(Task *task)
 {
 	gil_scoped_acquire acquire;
@@ -92,6 +119,7 @@ void MdApi::processRspSubMarketData(Task *task)
 	if (task->task_data)
 	{
 		CThostFtdcSpecificInstrumentField *task_data = (CThostFtdcSpecificInstrumentField*)task->task_data;
+		data["reserve1"] = toUtf(task_data->reserve1);
 		data["InstrumentID"] = toUtf(task_data->InstrumentID);
 		delete task_data;
 	}
@@ -113,6 +141,7 @@ void MdApi::processRspUnSubMarketData(Task *task)
 	if (task->task_data)
 	{
 		CThostFtdcSpecificInstrumentField *task_data = (CThostFtdcSpecificInstrumentField*)task->task_data;
+		data["reserve1"] = toUtf(task_data->reserve1);
 		data["InstrumentID"] = toUtf(task_data->InstrumentID);
 		delete task_data;
 	}
@@ -134,6 +163,7 @@ void MdApi::processRspSubForQuoteRsp(Task *task)
 	if (task->task_data)
 	{
 		CThostFtdcSpecificInstrumentField *task_data = (CThostFtdcSpecificInstrumentField*)task->task_data;
+		data["reserve1"] = toUtf(task_data->reserve1);
 		data["InstrumentID"] = toUtf(task_data->InstrumentID);
 		delete task_data;
 	}
@@ -155,6 +185,7 @@ void MdApi::processRspUnSubForQuoteRsp(Task *task)
 	if (task->task_data)
 	{
 		CThostFtdcSpecificInstrumentField *task_data = (CThostFtdcSpecificInstrumentField*)task->task_data;
+		data["reserve1"] = toUtf(task_data->reserve1);
 		data["InstrumentID"] = toUtf(task_data->InstrumentID);
 		delete task_data;
 	}
@@ -177,9 +208,9 @@ void MdApi::processRtnDepthMarketData(Task *task)
 	{
 		CThostFtdcDepthMarketDataField *task_data = (CThostFtdcDepthMarketDataField*)task->task_data;
 		data["TradingDay"] = toUtf(task_data->TradingDay);
-		data["InstrumentID"] = toUtf(task_data->InstrumentID);
+		data["reserve1"] = toUtf(task_data->reserve1);
 		data["ExchangeID"] = toUtf(task_data->ExchangeID);
-		data["ExchangeInstID"] = toUtf(task_data->ExchangeInstID);
+		data["reserve2"] = toUtf(task_data->reserve2);
 		data["LastPrice"] = task_data->LastPrice;
 		data["PreSettlementPrice"] = task_data->PreSettlementPrice;
 		data["PreClosePrice"] = task_data->PreClosePrice;
@@ -220,6 +251,8 @@ void MdApi::processRtnDepthMarketData(Task *task)
 		data["AskVolume5"] = task_data->AskVolume5;
 		data["AveragePrice"] = task_data->AveragePrice;
 		data["ActionDay"] = toUtf(task_data->ActionDay);
+		data["InstrumentID"] = toUtf(task_data->InstrumentID);
+		data["ExchangeInstID"] = toUtf(task_data->ExchangeInstID);
 		delete task_data;
 	}
 	this->onRtnDepthMarketData(data);
@@ -233,11 +266,12 @@ void MdApi::processRtnForQuoteRsp(Task *task)
 	{
 		CThostFtdcForQuoteRspField *task_data = (CThostFtdcForQuoteRspField*)task->task_data;
 		data["TradingDay"] = toUtf(task_data->TradingDay);
-		data["InstrumentID"] = toUtf(task_data->InstrumentID);
+		data["reserve1"] = toUtf(task_data->reserve1);
 		data["ForQuoteSysID"] = toUtf(task_data->ForQuoteSysID);
 		data["ForQuoteTime"] = toUtf(task_data->ForQuoteTime);
 		data["ActionDay"] = toUtf(task_data->ActionDay);
 		data["ExchangeID"] = toUtf(task_data->ExchangeID);
+		data["InstrumentID"] = toUtf(task_data->InstrumentID);
 		delete task_data;
 	}
 	this->onRtnForQuoteRsp(data);

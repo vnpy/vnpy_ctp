@@ -28,7 +28,7 @@ virtual void onRspParkedOrderAction(const dict &data, const dict &error, int req
 
 virtual void onRspOrderAction(const dict &data, const dict &error, int reqid, bool last) {};
 
-virtual void onRspQueryMaxOrderVolume(const dict &data, const dict &error, int reqid, bool last) {};
+virtual void onRspQryMaxOrderVolume(const dict &data, const dict &error, int reqid, bool last) {};
 
 virtual void onRspSettlementInfoConfirm(const dict &data, const dict &error, int reqid, bool last) {};
 
@@ -247,4 +247,8 @@ virtual void onRtnOpenAccountByBank(const dict &data) {};
 virtual void onRtnCancelAccountByBank(const dict &data) {};
 
 virtual void onRtnChangeAccountByBank(const dict &data) {};
+
+virtual void onRspQryClassifiedInstrument(const dict &data, const dict &error, int reqid, bool last) {};
+
+virtual void onRspQryCombPromotionParam(const dict &data, const dict &error, int reqid, bool last) {};
 

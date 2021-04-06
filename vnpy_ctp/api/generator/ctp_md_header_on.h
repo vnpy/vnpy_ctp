@@ -8,6 +8,8 @@ virtual void onRspUserLogin(const dict &data, const dict &error, int reqid, bool
 
 virtual void onRspUserLogout(const dict &data, const dict &error, int reqid, bool last) {};
 
+virtual void onRspQryMulticastInstrument(const dict &data, const dict &error, int reqid, bool last) {};
+
 virtual void onRspError(const dict &error, int reqid, bool last) {};
 
 virtual void onRspSubMarketData(const dict &data, const dict &error, int reqid, bool last) {};

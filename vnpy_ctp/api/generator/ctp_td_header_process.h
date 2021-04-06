@@ -28,7 +28,7 @@ void processRspParkedOrderAction(Task *task);
 
 void processRspOrderAction(Task *task);
 
-void processRspQueryMaxOrderVolume(Task *task);
+void processRspQryMaxOrderVolume(Task *task);
 
 void processRspSettlementInfoConfirm(Task *task);
 
@@ -247,4 +247,8 @@ void processRtnOpenAccountByBank(Task *task);
 void processRtnCancelAccountByBank(Task *task);
 
 void processRtnChangeAccountByBank(Task *task);
+
+void processRspQryClassifiedInstrument(Task *task);
+
+void processRspQryCombPromotionParam(Task *task);
 

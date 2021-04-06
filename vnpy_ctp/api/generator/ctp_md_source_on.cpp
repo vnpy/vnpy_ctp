@@ -58,6 +58,18 @@ void onRspUserLogout(const dict &data, const dict &error, int reqid, bool last) 
 	}
 };
 
+void onRspQryMulticastInstrument(const dict &data, const dict &error, int reqid, bool last) override
+{
+	try
+	{
+		PYBIND11_OVERLOAD(void, MdApi, onRspQryMulticastInstrument, data, error, reqid, last);
+	}
+	catch (const error_already_set &e)
+	{
+		cout << e.what() << endl;
+	}
+};
+
 void onRspError(const dict &error, int reqid, bool last) override
 {
 	try

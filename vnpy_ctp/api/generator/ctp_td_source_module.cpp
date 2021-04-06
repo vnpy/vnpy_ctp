@@ -13,7 +13,7 @@
 .def("reqParkedOrderInsert", &TdApi::reqParkedOrderInsert)
 .def("reqParkedOrderAction", &TdApi::reqParkedOrderAction)
 .def("reqOrderAction", &TdApi::reqOrderAction)
-.def("reqQueryMaxOrderVolume", &TdApi::reqQueryMaxOrderVolume)
+.def("reqQryMaxOrderVolume", &TdApi::reqQryMaxOrderVolume)
 .def("reqSettlementInfoConfirm", &TdApi::reqSettlementInfoConfirm)
 .def("reqRemoveParkedOrder", &TdApi::reqRemoveParkedOrder)
 .def("reqRemoveParkedOrderAction", &TdApi::reqRemoveParkedOrderAction)
@@ -80,6 +80,8 @@
 .def("reqFromBankToFutureByFuture", &TdApi::reqFromBankToFutureByFuture)
 .def("reqFromFutureToBankByFuture", &TdApi::reqFromFutureToBankByFuture)
 .def("reqQueryBankAccountMoneyByFuture", &TdApi::reqQueryBankAccountMoneyByFuture)
+.def("reqQryClassifiedInstrument", &TdApi::reqQryClassifiedInstrument)
+.def("reqQryCombPromotionParam", &TdApi::reqQryCombPromotionParam)
 
 .def("onFrontConnected", &TdApi::onFrontConnected)
 .def("onFrontDisconnected", &TdApi::onFrontDisconnected)
@@ -96,7 +98,7 @@
 .def("onRspParkedOrderInsert", &TdApi::onRspParkedOrderInsert)
 .def("onRspParkedOrderAction", &TdApi::onRspParkedOrderAction)
 .def("onRspOrderAction", &TdApi::onRspOrderAction)
-.def("onRspQueryMaxOrderVolume", &TdApi::onRspQueryMaxOrderVolume)
+.def("onRspQryMaxOrderVolume", &TdApi::onRspQryMaxOrderVolume)
 .def("onRspSettlementInfoConfirm", &TdApi::onRspSettlementInfoConfirm)
 .def("onRspRemoveParkedOrder", &TdApi::onRspRemoveParkedOrder)
 .def("onRspRemoveParkedOrderAction", &TdApi::onRspRemoveParkedOrderAction)
@@ -206,4 +208,6 @@
 .def("onRtnOpenAccountByBank", &TdApi::onRtnOpenAccountByBank)
 .def("onRtnCancelAccountByBank", &TdApi::onRtnCancelAccountByBank)
 .def("onRtnChangeAccountByBank", &TdApi::onRtnChangeAccountByBank)
+.def("onRspQryClassifiedInstrument", &TdApi::onRspQryClassifiedInstrument)
+.def("onRspQryCombPromotionParam", &TdApi::onRspQryCombPromotionParam)
 ;

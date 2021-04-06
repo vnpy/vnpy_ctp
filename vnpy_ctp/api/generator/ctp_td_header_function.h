@@ -28,7 +28,7 @@ int reqParkedOrderAction(const dict &req, int reqid);
 
 int reqOrderAction(const dict &req, int reqid);
 
-int reqQueryMaxOrderVolume(const dict &req, int reqid);
+int reqQryMaxOrderVolume(const dict &req, int reqid);
 
 int reqSettlementInfoConfirm(const dict &req, int reqid);
 
@@ -161,4 +161,8 @@ int reqFromBankToFutureByFuture(const dict &req, int reqid);
 int reqFromFutureToBankByFuture(const dict &req, int reqid);
 
 int reqQueryBankAccountMoneyByFuture(const dict &req, int reqid);
+
+int reqQryClassifiedInstrument(const dict &req, int reqid);
+
+int reqQryCombPromotionParam(const dict &req, int reqid);
 

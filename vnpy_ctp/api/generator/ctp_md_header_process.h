@@ -8,6 +8,8 @@ void processRspUserLogin(Task *task);
 
 void processRspUserLogout(Task *task);
 
+void processRspQryMulticastInstrument(Task *task);
+
 void processRspError(Task *task);
 
 void processRspSubMarketData(Task *task);

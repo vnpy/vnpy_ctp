@@ -13,9 +13,10 @@ CThostFtdcReqUserLoginField = {
     "ProtocolInfo": "string",
     "MacAddress": "string",
     "OneTimePassword": "string",
-    "ClientIPAddress": "string",
+    "reserve1": "string",
     "LoginRemark": "string",
     "ClientIPPort": "int",
+    "ClientIPAddress": "string",
 }
 
 CThostFtdcRspUserLoginField = {
@@ -68,6 +69,8 @@ CThostFtdcAuthenticationInfoField = {
     "IsResult": "int",
     "AppID": "string",
     "AppType": "char",
+    "reserve1": "string",
+    "ClientIPAddress": "string",
 }
 
 CThostFtdcRspUserLogin2Field = {
@@ -189,7 +192,7 @@ CThostFtdcExchangeField = {
 }
 
 CThostFtdcProductField = {
-    "ProductID": "string",
+    "reserve1": "string",
     "ProductName": "string",
     "ExchangeID": "string",
     "ProductClass": "char",
@@ -204,16 +207,18 @@ CThostFtdcProductField = {
     "CloseDealType": "char",
     "TradeCurrencyID": "string",
     "MortgageFundUseRange": "char",
-    "ExchangeProductID": "string",
+    "reserve2": "string",
     "UnderlyingMultiple": "double",
+    "ProductID": "string",
+    "ExchangeProductID": "string",
 }
 
 CThostFtdcInstrumentField = {
-    "InstrumentID": "string",
+    "reserve1": "string",
     "ExchangeID": "string",
     "InstrumentName": "string",
-    "ExchangeInstID": "string",
-    "ProductID": "string",
+    "reserve2": "string",
+    "reserve3": "string",
     "ProductClass": "char",
     "DeliveryYear": "int",
     "DeliveryMonth": "int",
@@ -235,11 +240,15 @@ CThostFtdcInstrumentField = {
     "LongMarginRatio": "double",
     "ShortMarginRatio": "double",
     "MaxMarginSideAlgorithm": "char",
-    "UnderlyingInstrID": "string",
+    "reserve4": "string",
     "StrikePrice": "double",
     "OptionsType": "char",
     "UnderlyingMultiple": "double",
     "CombinationType": "char",
+    "InstrumentID": "string",
+    "ExchangeInstID": "string",
+    "ProductID": "string",
+    "UnderlyingInstrID": "string",
 }
 
 CThostFtdcBrokerField = {
@@ -364,7 +373,7 @@ CThostFtdcTradingAccountField = {
 }
 
 CThostFtdcInvestorPositionField = {
-    "InstrumentID": "string",
+    "reserve1": "string",
     "BrokerID": "string",
     "InvestorID": "string",
     "PosiDirection": "char",
@@ -410,10 +419,14 @@ CThostFtdcInvestorPositionField = {
     "ExchangeID": "string",
     "YdStrikeFrozen": "int",
     "InvestUnitID": "string",
+    "PositionCostOffset": "double",
+    "TasPosition": "int",
+    "TasPositionCost": "double",
+    "InstrumentID": "string",
 }
 
 CThostFtdcInstrumentMarginRateField = {
-    "InstrumentID": "string",
+    "reserve1": "string",
     "InvestorRange": "char",
     "BrokerID": "string",
     "InvestorID": "string",
@@ -425,10 +438,11 @@ CThostFtdcInstrumentMarginRateField = {
     "IsRelative": "int",
     "ExchangeID": "string",
     "InvestUnitID": "string",
+    "InstrumentID": "string",
 }
 
 CThostFtdcInstrumentCommissionRateField = {
-    "InstrumentID": "string",
+    "reserve1": "string",
     "InvestorRange": "char",
     "BrokerID": "string",
     "InvestorID": "string",
@@ -441,13 +455,14 @@ CThostFtdcInstrumentCommissionRateField = {
     "ExchangeID": "string",
     "BizType": "char",
     "InvestUnitID": "string",
+    "InstrumentID": "string",
 }
 
 CThostFtdcDepthMarketDataField = {
     "TradingDay": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "ExchangeID": "string",
-    "ExchangeInstID": "string",
+    "reserve2": "string",
     "LastPrice": "double",
     "PreSettlementPrice": "double",
     "PreClosePrice": "double",
@@ -488,14 +503,17 @@ CThostFtdcDepthMarketDataField = {
     "AskVolume5": "int",
     "AveragePrice": "double",
     "ActionDay": "string",
+    "InstrumentID": "string",
+    "ExchangeInstID": "string",
 }
 
 CThostFtdcInstrumentTradingRightField = {
-    "InstrumentID": "string",
+    "reserve1": "string",
     "InvestorRange": "char",
     "BrokerID": "string",
     "InvestorID": "string",
     "TradingRight": "char",
+    "InstrumentID": "string",
 }
 
 CThostFtdcBrokerUserField = {
@@ -558,7 +576,7 @@ CThostFtdcSettlementInfoField = {
 }
 
 CThostFtdcInstrumentMarginRateAdjustField = {
-    "InstrumentID": "string",
+    "reserve1": "string",
     "InvestorRange": "char",
     "BrokerID": "string",
     "InvestorID": "string",
@@ -568,22 +586,24 @@ CThostFtdcInstrumentMarginRateAdjustField = {
     "ShortMarginRatioByMoney": "double",
     "ShortMarginRatioByVolume": "double",
     "IsRelative": "int",
+    "InstrumentID": "string",
 }
 
 CThostFtdcExchangeMarginRateField = {
     "BrokerID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "HedgeFlag": "char",
     "LongMarginRatioByMoney": "double",
     "LongMarginRatioByVolume": "double",
     "ShortMarginRatioByMoney": "double",
     "ShortMarginRatioByVolume": "double",
     "ExchangeID": "string",
+    "InstrumentID": "string",
 }
 
 CThostFtdcExchangeMarginRateAdjustField = {
     "BrokerID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "HedgeFlag": "char",
     "LongMarginRatioByMoney": "double",
     "LongMarginRatioByVolume": "double",
@@ -597,6 +617,7 @@ CThostFtdcExchangeMarginRateAdjustField = {
     "NoLongMarginRatioByVolume": "double",
     "NoShortMarginRatioByMoney": "double",
     "NoShortMarginRatioByVolume": "double",
+    "InstrumentID": "string",
 }
 
 CThostFtdcExchangeRateField = {
@@ -632,7 +653,7 @@ CThostFtdcLoginInfoField = {
     "UserID": "string",
     "LoginDate": "string",
     "LoginTime": "string",
-    "IPAddress": "string",
+    "reserve1": "string",
     "UserProductInfo": "string",
     "InterfaceProductInfo": "string",
     "ProtocolInfo": "string",
@@ -649,6 +670,7 @@ CThostFtdcLoginInfoField = {
     "IsQryControl": "int",
     "LoginRemark": "string",
     "Password": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcLogoutAllField = {
@@ -674,7 +696,7 @@ CThostFtdcUserPasswordUpdateField = {
 CThostFtdcInputOrderField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "OrderRef": "string",
     "UserID": "string",
     "OrderPriceType": "char",
@@ -700,14 +722,16 @@ CThostFtdcInputOrderField = {
     "AccountID": "string",
     "CurrencyID": "string",
     "ClientID": "string",
-    "IPAddress": "string",
+    "reserve2": "string",
     "MacAddress": "string",
+    "InstrumentID": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcOrderField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "OrderRef": "string",
     "UserID": "string",
     "OrderPriceType": "char",
@@ -730,7 +754,7 @@ CThostFtdcOrderField = {
     "ExchangeID": "string",
     "ParticipantID": "string",
     "ClientID": "string",
-    "ExchangeInstID": "string",
+    "reserve2": "string",
     "TraderID": "string",
     "InstallID": "int",
     "OrderSubmitStatus": "char",
@@ -766,8 +790,11 @@ CThostFtdcOrderField = {
     "InvestUnitID": "string",
     "AccountID": "string",
     "CurrencyID": "string",
-    "IPAddress": "string",
+    "reserve3": "string",
     "MacAddress": "string",
+    "InstrumentID": "string",
+    "ExchangeInstID": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcExchangeOrderField = {
@@ -791,7 +818,7 @@ CThostFtdcExchangeOrderField = {
     "ExchangeID": "string",
     "ParticipantID": "string",
     "ClientID": "string",
-    "ExchangeInstID": "string",
+    "reserve1": "string",
     "TraderID": "string",
     "InstallID": "int",
     "OrderSubmitStatus": "char",
@@ -814,8 +841,10 @@ CThostFtdcExchangeOrderField = {
     "ClearingPartID": "string",
     "SequenceNo": "int",
     "BranchID": "string",
-    "IPAddress": "string",
+    "reserve2": "string",
     "MacAddress": "string",
+    "ExchangeInstID": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcExchangeOrderInsertErrorField = {
@@ -842,10 +871,12 @@ CThostFtdcInputOrderActionField = {
     "LimitPrice": "double",
     "VolumeChange": "int",
     "UserID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "InvestUnitID": "string",
-    "IPAddress": "string",
+    "reserve2": "string",
     "MacAddress": "string",
+    "InstrumentID": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcOrderActionField = {
@@ -873,11 +904,13 @@ CThostFtdcOrderActionField = {
     "OrderActionStatus": "char",
     "UserID": "string",
     "StatusMsg": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "BranchID": "string",
     "InvestUnitID": "string",
-    "IPAddress": "string",
+    "reserve2": "string",
     "MacAddress": "string",
+    "InstrumentID": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcExchangeOrderActionField = {
@@ -898,8 +931,9 @@ CThostFtdcExchangeOrderActionField = {
     "OrderActionStatus": "char",
     "UserID": "string",
     "BranchID": "string",
-    "IPAddress": "string",
+    "reserve1": "string",
     "MacAddress": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcExchangeOrderActionErrorField = {
@@ -921,7 +955,7 @@ CThostFtdcExchangeTradeField = {
     "ParticipantID": "string",
     "ClientID": "string",
     "TradingRole": "char",
-    "ExchangeInstID": "string",
+    "reserve1": "string",
     "OffsetFlag": "char",
     "HedgeFlag": "char",
     "Price": "double",
@@ -936,12 +970,13 @@ CThostFtdcExchangeTradeField = {
     "BusinessUnit": "string",
     "SequenceNo": "int",
     "TradeSource": "char",
+    "ExchangeInstID": "string",
 }
 
 CThostFtdcTradeField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "OrderRef": "string",
     "UserID": "string",
     "ExchangeID": "string",
@@ -951,7 +986,7 @@ CThostFtdcTradeField = {
     "ParticipantID": "string",
     "ClientID": "string",
     "TradingRole": "char",
-    "ExchangeInstID": "string",
+    "reserve2": "string",
     "OffsetFlag": "char",
     "HedgeFlag": "char",
     "Price": "double",
@@ -970,6 +1005,8 @@ CThostFtdcTradeField = {
     "BrokerOrderSeq": "int",
     "TradeSource": "char",
     "InvestUnitID": "string",
+    "InstrumentID": "string",
+    "ExchangeInstID": "string",
 }
 
 CThostFtdcUserSessionField = {
@@ -979,24 +1016,26 @@ CThostFtdcUserSessionField = {
     "UserID": "string",
     "LoginDate": "string",
     "LoginTime": "string",
-    "IPAddress": "string",
+    "reserve1": "string",
     "UserProductInfo": "string",
     "InterfaceProductInfo": "string",
     "ProtocolInfo": "string",
     "MacAddress": "string",
     "LoginRemark": "string",
+    "IPAddress": "string",
 }
 
-CThostFtdcQueryMaxOrderVolumeField = {
+CThostFtdcQryMaxOrderVolumeField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "Direction": "char",
     "OffsetFlag": "char",
     "HedgeFlag": "char",
     "MaxVolume": "int",
     "ExchangeID": "string",
     "InvestUnitID": "string",
+    "InstrumentID": "string",
 }
 
 CThostFtdcSettlementInfoConfirmField = {
@@ -1114,7 +1153,7 @@ CThostFtdcSyncingTradingAccountField = {
 }
 
 CThostFtdcSyncingInvestorPositionField = {
-    "InstrumentID": "string",
+    "reserve1": "string",
     "BrokerID": "string",
     "InvestorID": "string",
     "PosiDirection": "char",
@@ -1160,10 +1199,14 @@ CThostFtdcSyncingInvestorPositionField = {
     "ExchangeID": "string",
     "YdStrikeFrozen": "int",
     "InvestUnitID": "string",
+    "PositionCostOffset": "double",
+    "TasPosition": "int",
+    "TasPositionCost": "double",
+    "InstrumentID": "string",
 }
 
 CThostFtdcSyncingInstrumentMarginRateField = {
-    "InstrumentID": "string",
+    "reserve1": "string",
     "InvestorRange": "char",
     "BrokerID": "string",
     "InvestorID": "string",
@@ -1173,10 +1216,11 @@ CThostFtdcSyncingInstrumentMarginRateField = {
     "ShortMarginRatioByMoney": "double",
     "ShortMarginRatioByVolume": "double",
     "IsRelative": "int",
+    "InstrumentID": "string",
 }
 
 CThostFtdcSyncingInstrumentCommissionRateField = {
-    "InstrumentID": "string",
+    "reserve1": "string",
     "InvestorRange": "char",
     "BrokerID": "string",
     "InvestorID": "string",
@@ -1186,44 +1230,49 @@ CThostFtdcSyncingInstrumentCommissionRateField = {
     "CloseRatioByVolume": "double",
     "CloseTodayRatioByMoney": "double",
     "CloseTodayRatioByVolume": "double",
+    "InstrumentID": "string",
 }
 
 CThostFtdcSyncingInstrumentTradingRightField = {
-    "InstrumentID": "string",
+    "reserve1": "string",
     "InvestorRange": "char",
     "BrokerID": "string",
     "InvestorID": "string",
     "TradingRight": "char",
+    "InstrumentID": "string",
 }
 
 CThostFtdcQryOrderField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "ExchangeID": "string",
     "OrderSysID": "string",
     "InsertTimeStart": "string",
     "InsertTimeEnd": "string",
     "InvestUnitID": "string",
+    "InstrumentID": "string",
 }
 
 CThostFtdcQryTradeField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "ExchangeID": "string",
     "TradeID": "string",
     "TradeTimeStart": "string",
     "TradeTimeEnd": "string",
     "InvestUnitID": "string",
+    "InstrumentID": "string",
 }
 
 CThostFtdcQryInvestorPositionField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "ExchangeID": "string",
     "InvestUnitID": "string",
+    "InstrumentID": "string",
 }
 
 CThostFtdcQryTradingAccountField = {
@@ -1255,23 +1304,26 @@ CThostFtdcQryInvestorGroupField = {
 CThostFtdcQryInstrumentMarginRateField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "HedgeFlag": "char",
     "ExchangeID": "string",
     "InvestUnitID": "string",
+    "InstrumentID": "string",
 }
 
 CThostFtdcQryInstrumentCommissionRateField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "ExchangeID": "string",
     "InvestUnitID": "string",
+    "InstrumentID": "string",
 }
 
 CThostFtdcQryInstrumentTradingRightField = {
     "BrokerID": "string",
     "InvestorID": "string",
+    "reserve1": "string",
     "InstrumentID": "string",
 }
 
@@ -1309,9 +1361,10 @@ CThostFtdcQryFrontStatusField = {
 CThostFtdcQryExchangeOrderField = {
     "ParticipantID": "string",
     "ClientID": "string",
-    "ExchangeInstID": "string",
+    "reserve1": "string",
     "ExchangeID": "string",
     "TraderID": "string",
+    "ExchangeInstID": "string",
 }
 
 CThostFtdcQryOrderActionField = {
@@ -1336,21 +1389,26 @@ CThostFtdcQryExchangeField = {
 }
 
 CThostFtdcQryProductField = {
-    "ProductID": "string",
+    "reserve1": "string",
     "ProductClass": "char",
     "ExchangeID": "string",
+    "ProductID": "string",
 }
 
 CThostFtdcQryInstrumentField = {
-    "InstrumentID": "string",
+    "reserve1": "string",
     "ExchangeID": "string",
+    "reserve2": "string",
+    "reserve3": "string",
+    "InstrumentID": "string",
     "ExchangeInstID": "string",
     "ProductID": "string",
 }
 
 CThostFtdcQryDepthMarketDataField = {
-    "InstrumentID": "string",
+    "reserve1": "string",
     "ExchangeID": "string",
+    "InstrumentID": "string",
 }
 
 CThostFtdcQryBrokerUserField = {
@@ -1384,15 +1442,17 @@ CThostFtdcQrySettlementInfoField = {
 
 CThostFtdcQryExchangeMarginRateField = {
     "BrokerID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "HedgeFlag": "char",
     "ExchangeID": "string",
+    "InstrumentID": "string",
 }
 
 CThostFtdcQryExchangeMarginRateAdjustField = {
     "BrokerID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "HedgeFlag": "char",
+    "InstrumentID": "string",
 }
 
 CThostFtdcQryExchangeRateField = {
@@ -1409,27 +1469,29 @@ CThostFtdcQrySyncFundMortgageField = {
 CThostFtdcQryHisOrderField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "ExchangeID": "string",
     "OrderSysID": "string",
     "InsertTimeStart": "string",
     "InsertTimeEnd": "string",
     "TradingDay": "string",
     "SettlementID": "int",
+    "InstrumentID": "string",
 }
 
 CThostFtdcOptionInstrMiniMarginField = {
-    "InstrumentID": "string",
+    "reserve1": "string",
     "InvestorRange": "char",
     "BrokerID": "string",
     "InvestorID": "string",
     "MinMargin": "double",
     "ValueMethod": "char",
     "IsRelative": "int",
+    "InstrumentID": "string",
 }
 
 CThostFtdcOptionInstrMarginAdjustField = {
-    "InstrumentID": "string",
+    "reserve1": "string",
     "InvestorRange": "char",
     "BrokerID": "string",
     "InvestorID": "string",
@@ -1442,10 +1504,11 @@ CThostFtdcOptionInstrMarginAdjustField = {
     "IsRelative": "int",
     "MShortMarginRatioByMoney": "double",
     "MShortMarginRatioByVolume": "double",
+    "InstrumentID": "string",
 }
 
 CThostFtdcOptionInstrCommRateField = {
-    "InstrumentID": "string",
+    "reserve1": "string",
     "InvestorRange": "char",
     "BrokerID": "string",
     "InvestorID": "string",
@@ -1459,12 +1522,13 @@ CThostFtdcOptionInstrCommRateField = {
     "StrikeRatioByVolume": "double",
     "ExchangeID": "string",
     "InvestUnitID": "string",
+    "InstrumentID": "string",
 }
 
 CThostFtdcOptionInstrTradeCostField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "HedgeFlag": "char",
     "FixedMargin": "double",
     "MiniMargin": "double",
@@ -1473,37 +1537,41 @@ CThostFtdcOptionInstrTradeCostField = {
     "ExchMiniMargin": "double",
     "ExchangeID": "string",
     "InvestUnitID": "string",
+    "InstrumentID": "string",
 }
 
 CThostFtdcQryOptionInstrTradeCostField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "HedgeFlag": "char",
     "InputPrice": "double",
     "UnderlyingPrice": "double",
     "ExchangeID": "string",
     "InvestUnitID": "string",
+    "InstrumentID": "string",
 }
 
 CThostFtdcQryOptionInstrCommRateField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "ExchangeID": "string",
     "InvestUnitID": "string",
+    "InstrumentID": "string",
 }
 
 CThostFtdcIndexPriceField = {
     "BrokerID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "ClosePrice": "double",
+    "InstrumentID": "string",
 }
 
 CThostFtdcInputExecOrderField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "ExecOrderRef": "string",
     "UserID": "string",
     "Volume": "int",
@@ -1520,8 +1588,10 @@ CThostFtdcInputExecOrderField = {
     "AccountID": "string",
     "CurrencyID": "string",
     "ClientID": "string",
-    "IPAddress": "string",
+    "reserve2": "string",
     "MacAddress": "string",
+    "InstrumentID": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcInputExecOrderActionField = {
@@ -1536,16 +1606,18 @@ CThostFtdcInputExecOrderActionField = {
     "ExecOrderSysID": "string",
     "ActionFlag": "char",
     "UserID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "InvestUnitID": "string",
-    "IPAddress": "string",
+    "reserve2": "string",
     "MacAddress": "string",
+    "InstrumentID": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcExecOrderField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "ExecOrderRef": "string",
     "UserID": "string",
     "Volume": "int",
@@ -1561,7 +1633,7 @@ CThostFtdcExecOrderField = {
     "ExchangeID": "string",
     "ParticipantID": "string",
     "ClientID": "string",
-    "ExchangeInstID": "string",
+    "reserve2": "string",
     "TraderID": "string",
     "InstallID": "int",
     "OrderSubmitStatus": "char",
@@ -1585,8 +1657,11 @@ CThostFtdcExecOrderField = {
     "InvestUnitID": "string",
     "AccountID": "string",
     "CurrencyID": "string",
-    "IPAddress": "string",
+    "reserve3": "string",
     "MacAddress": "string",
+    "InstrumentID": "string",
+    "ExchangeInstID": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcExecOrderActionField = {
@@ -1613,21 +1688,24 @@ CThostFtdcExecOrderActionField = {
     "UserID": "string",
     "ActionType": "char",
     "StatusMsg": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "BranchID": "string",
     "InvestUnitID": "string",
-    "IPAddress": "string",
+    "reserve2": "string",
     "MacAddress": "string",
+    "InstrumentID": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcQryExecOrderField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "ExchangeID": "string",
     "ExecOrderSysID": "string",
     "InsertTimeStart": "string",
     "InsertTimeEnd": "string",
+    "InstrumentID": "string",
 }
 
 CThostFtdcExchangeExecOrderField = {
@@ -1644,7 +1722,7 @@ CThostFtdcExchangeExecOrderField = {
     "ExchangeID": "string",
     "ParticipantID": "string",
     "ClientID": "string",
-    "ExchangeInstID": "string",
+    "reserve1": "string",
     "TraderID": "string",
     "InstallID": "int",
     "OrderSubmitStatus": "char",
@@ -1659,16 +1737,19 @@ CThostFtdcExchangeExecOrderField = {
     "ClearingPartID": "string",
     "SequenceNo": "int",
     "BranchID": "string",
-    "IPAddress": "string",
+    "reserve2": "string",
     "MacAddress": "string",
+    "ExchangeInstID": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcQryExchangeExecOrderField = {
     "ParticipantID": "string",
     "ClientID": "string",
-    "ExchangeInstID": "string",
+    "reserve1": "string",
     "ExchangeID": "string",
     "TraderID": "string",
+    "ExchangeInstID": "string",
 }
 
 CThostFtdcQryExecOrderActionField = {
@@ -1694,10 +1775,12 @@ CThostFtdcExchangeExecOrderActionField = {
     "UserID": "string",
     "ActionType": "char",
     "BranchID": "string",
-    "IPAddress": "string",
+    "reserve1": "string",
     "MacAddress": "string",
-    "ExchangeInstID": "string",
+    "reserve2": "string",
     "Volume": "int",
+    "IPAddress": "string",
+    "ExchangeInstID": "string",
 }
 
 CThostFtdcQryExchangeExecOrderActionField = {
@@ -1710,7 +1793,7 @@ CThostFtdcQryExchangeExecOrderActionField = {
 CThostFtdcErrExecOrderField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "ExecOrderRef": "string",
     "UserID": "string",
     "Volume": "int",
@@ -1727,10 +1810,12 @@ CThostFtdcErrExecOrderField = {
     "AccountID": "string",
     "CurrencyID": "string",
     "ClientID": "string",
-    "IPAddress": "string",
+    "reserve2": "string",
     "MacAddress": "string",
     "ErrorID": "int",
     "ErrorMsg": "string",
+    "InstrumentID": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcQryErrExecOrderField = {
@@ -1750,12 +1835,14 @@ CThostFtdcErrExecOrderActionField = {
     "ExecOrderSysID": "string",
     "ActionFlag": "char",
     "UserID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "InvestUnitID": "string",
-    "IPAddress": "string",
+    "reserve2": "string",
     "MacAddress": "string",
     "ErrorID": "int",
     "ErrorMsg": "string",
+    "InstrumentID": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcQryErrExecOrderActionField = {
@@ -1764,44 +1851,48 @@ CThostFtdcQryErrExecOrderActionField = {
 }
 
 CThostFtdcOptionInstrTradingRightField = {
-    "InstrumentID": "string",
+    "reserve1": "string",
     "InvestorRange": "char",
     "BrokerID": "string",
     "InvestorID": "string",
     "Direction": "char",
     "TradingRight": "char",
+    "InstrumentID": "string",
 }
 
 CThostFtdcQryOptionInstrTradingRightField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "Direction": "char",
+    "InstrumentID": "string",
 }
 
 CThostFtdcInputForQuoteField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "ForQuoteRef": "string",
     "UserID": "string",
     "ExchangeID": "string",
     "InvestUnitID": "string",
-    "IPAddress": "string",
+    "reserve2": "string",
     "MacAddress": "string",
+    "InstrumentID": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcForQuoteField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "ForQuoteRef": "string",
     "UserID": "string",
     "ForQuoteLocalID": "string",
     "ExchangeID": "string",
     "ParticipantID": "string",
     "ClientID": "string",
-    "ExchangeInstID": "string",
+    "reserve2": "string",
     "TraderID": "string",
     "InstallID": "int",
     "InsertDate": "string",
@@ -1813,18 +1904,22 @@ CThostFtdcForQuoteField = {
     "ActiveUserID": "string",
     "BrokerForQutoSeq": "int",
     "InvestUnitID": "string",
-    "IPAddress": "string",
+    "reserve3": "string",
     "MacAddress": "string",
+    "InstrumentID": "string",
+    "ExchangeInstID": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcQryForQuoteField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "ExchangeID": "string",
     "InsertTimeStart": "string",
     "InsertTimeEnd": "string",
     "InvestUnitID": "string",
+    "InstrumentID": "string",
 }
 
 CThostFtdcExchangeForQuoteField = {
@@ -1832,28 +1927,31 @@ CThostFtdcExchangeForQuoteField = {
     "ExchangeID": "string",
     "ParticipantID": "string",
     "ClientID": "string",
-    "ExchangeInstID": "string",
+    "reserve1": "string",
     "TraderID": "string",
     "InstallID": "int",
     "InsertDate": "string",
     "InsertTime": "string",
     "ForQuoteStatus": "char",
-    "IPAddress": "string",
+    "reserve2": "string",
     "MacAddress": "string",
+    "ExchangeInstID": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcQryExchangeForQuoteField = {
     "ParticipantID": "string",
     "ClientID": "string",
-    "ExchangeInstID": "string",
+    "reserve1": "string",
     "ExchangeID": "string",
     "TraderID": "string",
+    "ExchangeInstID": "string",
 }
 
 CThostFtdcInputQuoteField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "QuoteRef": "string",
     "UserID": "string",
     "AskPrice": "double",
@@ -1872,8 +1970,10 @@ CThostFtdcInputQuoteField = {
     "ExchangeID": "string",
     "InvestUnitID": "string",
     "ClientID": "string",
-    "IPAddress": "string",
+    "reserve2": "string",
     "MacAddress": "string",
+    "InstrumentID": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcInputQuoteActionField = {
@@ -1888,17 +1988,19 @@ CThostFtdcInputQuoteActionField = {
     "QuoteSysID": "string",
     "ActionFlag": "char",
     "UserID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "InvestUnitID": "string",
     "ClientID": "string",
-    "IPAddress": "string",
+    "reserve2": "string",
     "MacAddress": "string",
+    "InstrumentID": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcQuoteField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "QuoteRef": "string",
     "UserID": "string",
     "AskPrice": "double",
@@ -1915,7 +2017,7 @@ CThostFtdcQuoteField = {
     "ExchangeID": "string",
     "ParticipantID": "string",
     "ClientID": "string",
-    "ExchangeInstID": "string",
+    "reserve2": "string",
     "TraderID": "string",
     "InstallID": "int",
     "NotifySequence": "int",
@@ -1944,8 +2046,11 @@ CThostFtdcQuoteField = {
     "InvestUnitID": "string",
     "AccountID": "string",
     "CurrencyID": "string",
-    "IPAddress": "string",
+    "reserve3": "string",
     "MacAddress": "string",
+    "InstrumentID": "string",
+    "ExchangeInstID": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcQuoteActionField = {
@@ -1971,22 +2076,25 @@ CThostFtdcQuoteActionField = {
     "OrderActionStatus": "char",
     "UserID": "string",
     "StatusMsg": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "BranchID": "string",
     "InvestUnitID": "string",
-    "IPAddress": "string",
+    "reserve2": "string",
     "MacAddress": "string",
+    "InstrumentID": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcQryQuoteField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "ExchangeID": "string",
     "QuoteSysID": "string",
     "InsertTimeStart": "string",
     "InsertTimeEnd": "string",
     "InvestUnitID": "string",
+    "InstrumentID": "string",
 }
 
 CThostFtdcExchangeQuoteField = {
@@ -2004,7 +2112,7 @@ CThostFtdcExchangeQuoteField = {
     "ExchangeID": "string",
     "ParticipantID": "string",
     "ClientID": "string",
-    "ExchangeInstID": "string",
+    "reserve1": "string",
     "TraderID": "string",
     "InstallID": "int",
     "NotifySequence": "int",
@@ -2022,16 +2130,19 @@ CThostFtdcExchangeQuoteField = {
     "BidOrderSysID": "string",
     "ForQuoteSysID": "string",
     "BranchID": "string",
-    "IPAddress": "string",
+    "reserve2": "string",
     "MacAddress": "string",
+    "ExchangeInstID": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcQryExchangeQuoteField = {
     "ParticipantID": "string",
     "ClientID": "string",
-    "ExchangeInstID": "string",
+    "reserve1": "string",
     "ExchangeID": "string",
     "TraderID": "string",
+    "ExchangeInstID": "string",
 }
 
 CThostFtdcQryQuoteActionField = {
@@ -2055,8 +2166,9 @@ CThostFtdcExchangeQuoteActionField = {
     "BusinessUnit": "string",
     "OrderActionStatus": "char",
     "UserID": "string",
-    "IPAddress": "string",
+    "reserve1": "string",
     "MacAddress": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcQryExchangeQuoteActionField = {
@@ -2067,34 +2179,38 @@ CThostFtdcQryExchangeQuoteActionField = {
 }
 
 CThostFtdcOptionInstrDeltaField = {
-    "InstrumentID": "string",
+    "reserve1": "string",
     "InvestorRange": "char",
     "BrokerID": "string",
     "InvestorID": "string",
     "Delta": "double",
+    "InstrumentID": "string",
 }
 
 CThostFtdcForQuoteRspField = {
     "TradingDay": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "ForQuoteSysID": "string",
     "ForQuoteTime": "string",
     "ActionDay": "string",
     "ExchangeID": "string",
+    "InstrumentID": "string",
 }
 
 CThostFtdcStrikeOffsetField = {
-    "InstrumentID": "string",
+    "reserve1": "string",
     "InvestorRange": "char",
     "BrokerID": "string",
     "InvestorID": "string",
     "Offset": "double",
     "OffsetType": "char",
+    "InstrumentID": "string",
 }
 
 CThostFtdcQryStrikeOffsetField = {
     "BrokerID": "string",
     "InvestorID": "string",
+    "reserve1": "string",
     "InstrumentID": "string",
 }
 
@@ -2108,8 +2224,9 @@ CThostFtdcInputBatchOrderActionField = {
     "ExchangeID": "string",
     "UserID": "string",
     "InvestUnitID": "string",
-    "IPAddress": "string",
+    "reserve1": "string",
     "MacAddress": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcBatchOrderActionField = {
@@ -2132,8 +2249,9 @@ CThostFtdcBatchOrderActionField = {
     "UserID": "string",
     "StatusMsg": "string",
     "InvestUnitID": "string",
-    "IPAddress": "string",
+    "reserve1": "string",
     "MacAddress": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcExchangeBatchOrderActionField = {
@@ -2148,8 +2266,9 @@ CThostFtdcExchangeBatchOrderActionField = {
     "BusinessUnit": "string",
     "OrderActionStatus": "char",
     "UserID": "string",
-    "IPAddress": "string",
+    "reserve1": "string",
     "MacAddress": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcQryBatchOrderActionField = {
@@ -2160,21 +2279,23 @@ CThostFtdcQryBatchOrderActionField = {
 
 CThostFtdcCombInstrumentGuardField = {
     "BrokerID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "GuarantRatio": "double",
     "ExchangeID": "string",
+    "InstrumentID": "string",
 }
 
 CThostFtdcQryCombInstrumentGuardField = {
     "BrokerID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "ExchangeID": "string",
+    "InstrumentID": "string",
 }
 
 CThostFtdcInputCombActionField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "CombActionRef": "string",
     "UserID": "string",
     "Direction": "char",
@@ -2182,15 +2303,19 @@ CThostFtdcInputCombActionField = {
     "CombDirection": "char",
     "HedgeFlag": "char",
     "ExchangeID": "string",
-    "IPAddress": "string",
+    "reserve2": "string",
     "MacAddress": "string",
     "InvestUnitID": "string",
+    "FrontID": "int",
+    "SessionID": "int",
+    "InstrumentID": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcCombActionField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "CombActionRef": "string",
     "UserID": "string",
     "Direction": "char",
@@ -2201,7 +2326,7 @@ CThostFtdcCombActionField = {
     "ExchangeID": "string",
     "ParticipantID": "string",
     "ClientID": "string",
-    "ExchangeInstID": "string",
+    "reserve2": "string",
     "TraderID": "string",
     "InstallID": "int",
     "ActionStatus": "char",
@@ -2213,19 +2338,23 @@ CThostFtdcCombActionField = {
     "SessionID": "int",
     "UserProductInfo": "string",
     "StatusMsg": "string",
-    "IPAddress": "string",
+    "reserve3": "string",
     "MacAddress": "string",
     "ComTradeID": "string",
     "BranchID": "string",
     "InvestUnitID": "string",
+    "InstrumentID": "string",
+    "ExchangeInstID": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcQryCombActionField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "ExchangeID": "string",
     "InvestUnitID": "string",
+    "InstrumentID": "string",
 }
 
 CThostFtdcExchangeCombActionField = {
@@ -2237,7 +2366,7 @@ CThostFtdcExchangeCombActionField = {
     "ExchangeID": "string",
     "ParticipantID": "string",
     "ClientID": "string",
-    "ExchangeInstID": "string",
+    "reserve1": "string",
     "TraderID": "string",
     "InstallID": "int",
     "ActionStatus": "char",
@@ -2245,48 +2374,55 @@ CThostFtdcExchangeCombActionField = {
     "TradingDay": "string",
     "SettlementID": "int",
     "SequenceNo": "int",
-    "IPAddress": "string",
+    "reserve2": "string",
     "MacAddress": "string",
     "ComTradeID": "string",
     "BranchID": "string",
+    "ExchangeInstID": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcQryExchangeCombActionField = {
     "ParticipantID": "string",
     "ClientID": "string",
-    "ExchangeInstID": "string",
+    "reserve1": "string",
     "ExchangeID": "string",
     "TraderID": "string",
+    "ExchangeInstID": "string",
 }
 
 CThostFtdcProductExchRateField = {
-    "ProductID": "string",
+    "reserve1": "string",
     "QuoteCurrencyID": "string",
     "ExchangeRate": "double",
     "ExchangeID": "string",
+    "ProductID": "string",
 }
 
 CThostFtdcQryProductExchRateField = {
-    "ProductID": "string",
+    "reserve1": "string",
     "ExchangeID": "string",
+    "ProductID": "string",
 }
 
 CThostFtdcQryForQuoteParamField = {
     "BrokerID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "ExchangeID": "string",
+    "InstrumentID": "string",
 }
 
 CThostFtdcForQuoteParamField = {
     "BrokerID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "ExchangeID": "string",
     "LastPrice": "double",
     "PriceInterval": "double",
+    "InstrumentID": "string",
 }
 
 CThostFtdcMMOptionInstrCommRateField = {
-    "InstrumentID": "string",
+    "reserve1": "string",
     "InvestorRange": "char",
     "BrokerID": "string",
     "InvestorID": "string",
@@ -2298,16 +2434,18 @@ CThostFtdcMMOptionInstrCommRateField = {
     "CloseTodayRatioByVolume": "double",
     "StrikeRatioByMoney": "double",
     "StrikeRatioByVolume": "double",
+    "InstrumentID": "string",
 }
 
 CThostFtdcQryMMOptionInstrCommRateField = {
     "BrokerID": "string",
     "InvestorID": "string",
+    "reserve1": "string",
     "InstrumentID": "string",
 }
 
 CThostFtdcMMInstrumentCommissionRateField = {
-    "InstrumentID": "string",
+    "reserve1": "string",
     "InvestorRange": "char",
     "BrokerID": "string",
     "InvestorID": "string",
@@ -2317,16 +2455,18 @@ CThostFtdcMMInstrumentCommissionRateField = {
     "CloseRatioByVolume": "double",
     "CloseTodayRatioByMoney": "double",
     "CloseTodayRatioByVolume": "double",
+    "InstrumentID": "string",
 }
 
 CThostFtdcQryMMInstrumentCommissionRateField = {
     "BrokerID": "string",
     "InvestorID": "string",
+    "reserve1": "string",
     "InstrumentID": "string",
 }
 
 CThostFtdcInstrumentOrderCommRateField = {
-    "InstrumentID": "string",
+    "reserve1": "string",
     "InvestorRange": "char",
     "BrokerID": "string",
     "InvestorID": "string",
@@ -2335,11 +2475,13 @@ CThostFtdcInstrumentOrderCommRateField = {
     "OrderActionCommByVolume": "double",
     "ExchangeID": "string",
     "InvestUnitID": "string",
+    "InstrumentID": "string",
 }
 
 CThostFtdcQryInstrumentOrderCommRateField = {
     "BrokerID": "string",
     "InvestorID": "string",
+    "reserve1": "string",
     "InstrumentID": "string",
 }
 
@@ -2351,7 +2493,7 @@ CThostFtdcTradeParamField = {
 }
 
 CThostFtdcInstrumentMarginRateULField = {
-    "InstrumentID": "string",
+    "reserve1": "string",
     "InvestorRange": "char",
     "BrokerID": "string",
     "InvestorID": "string",
@@ -2360,31 +2502,35 @@ CThostFtdcInstrumentMarginRateULField = {
     "LongMarginRatioByVolume": "double",
     "ShortMarginRatioByMoney": "double",
     "ShortMarginRatioByVolume": "double",
+    "InstrumentID": "string",
 }
 
 CThostFtdcFutureLimitPosiParamField = {
     "InvestorRange": "char",
     "BrokerID": "string",
     "InvestorID": "string",
-    "ProductID": "string",
+    "reserve1": "string",
     "SpecOpenVolume": "int",
     "ArbiOpenVolume": "int",
     "OpenVolume": "int",
+    "ProductID": "string",
 }
 
 CThostFtdcLoginForbiddenIPField = {
+    "reserve1": "string",
     "IPAddress": "string",
 }
 
 CThostFtdcIPListField = {
-    "IPAddress": "string",
+    "reserve1": "string",
     "IsWhite": "int",
+    "IPAddress": "string",
 }
 
 CThostFtdcInputOptionSelfCloseField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "OptionSelfCloseRef": "string",
     "UserID": "string",
     "Volume": "int",
@@ -2397,8 +2543,10 @@ CThostFtdcInputOptionSelfCloseField = {
     "AccountID": "string",
     "CurrencyID": "string",
     "ClientID": "string",
-    "IPAddress": "string",
+    "reserve2": "string",
     "MacAddress": "string",
+    "InstrumentID": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcInputOptionSelfCloseActionField = {
@@ -2413,16 +2561,18 @@ CThostFtdcInputOptionSelfCloseActionField = {
     "OptionSelfCloseSysID": "string",
     "ActionFlag": "char",
     "UserID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "InvestUnitID": "string",
-    "IPAddress": "string",
+    "reserve2": "string",
     "MacAddress": "string",
+    "InstrumentID": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcOptionSelfCloseField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "OptionSelfCloseRef": "string",
     "UserID": "string",
     "Volume": "int",
@@ -2434,7 +2584,7 @@ CThostFtdcOptionSelfCloseField = {
     "ExchangeID": "string",
     "ParticipantID": "string",
     "ClientID": "string",
-    "ExchangeInstID": "string",
+    "reserve2": "string",
     "TraderID": "string",
     "InstallID": "int",
     "OrderSubmitStatus": "char",
@@ -2458,8 +2608,11 @@ CThostFtdcOptionSelfCloseField = {
     "InvestUnitID": "string",
     "AccountID": "string",
     "CurrencyID": "string",
-    "IPAddress": "string",
+    "reserve3": "string",
     "MacAddress": "string",
+    "InstrumentID": "string",
+    "ExchangeInstID": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcOptionSelfCloseActionField = {
@@ -2485,21 +2638,24 @@ CThostFtdcOptionSelfCloseActionField = {
     "OrderActionStatus": "char",
     "UserID": "string",
     "StatusMsg": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "BranchID": "string",
     "InvestUnitID": "string",
-    "IPAddress": "string",
+    "reserve2": "string",
     "MacAddress": "string",
+    "InstrumentID": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcQryOptionSelfCloseField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "ExchangeID": "string",
     "OptionSelfCloseSysID": "string",
     "InsertTimeStart": "string",
     "InsertTimeEnd": "string",
+    "InstrumentID": "string",
 }
 
 CThostFtdcExchangeOptionSelfCloseField = {
@@ -2512,7 +2668,7 @@ CThostFtdcExchangeOptionSelfCloseField = {
     "ExchangeID": "string",
     "ParticipantID": "string",
     "ClientID": "string",
-    "ExchangeInstID": "string",
+    "reserve1": "string",
     "TraderID": "string",
     "InstallID": "int",
     "OrderSubmitStatus": "char",
@@ -2527,8 +2683,10 @@ CThostFtdcExchangeOptionSelfCloseField = {
     "ClearingPartID": "string",
     "SequenceNo": "int",
     "BranchID": "string",
-    "IPAddress": "string",
+    "reserve2": "string",
     "MacAddress": "string",
+    "ExchangeInstID": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcQryOptionSelfCloseActionField = {
@@ -2553,10 +2711,12 @@ CThostFtdcExchangeOptionSelfCloseActionField = {
     "OrderActionStatus": "char",
     "UserID": "string",
     "BranchID": "string",
-    "IPAddress": "string",
+    "reserve1": "string",
     "MacAddress": "string",
-    "ExchangeInstID": "string",
+    "reserve2": "string",
     "OptSelfCloseFlag": "char",
+    "IPAddress": "string",
+    "ExchangeInstID": "string",
 }
 
 CThostFtdcSyncDelaySwapField = {
@@ -2569,6 +2729,8 @@ CThostFtdcSyncDelaySwapField = {
     "FromRemainSwap": "double",
     "ToCurrencyID": "string",
     "ToAmount": "double",
+    "IsManualSwap": "int",
+    "IsAllRemainSetZero": "int",
 }
 
 CThostFtdcQrySyncDelaySwapField = {
@@ -2611,9 +2773,9 @@ CThostFtdcSecAgentTradeInfoField = {
 
 CThostFtdcMarketDataField = {
     "TradingDay": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "ExchangeID": "string",
-    "ExchangeInstID": "string",
+    "reserve2": "string",
     "LastPrice": "double",
     "PreSettlementPrice": "double",
     "PreClosePrice": "double",
@@ -2633,6 +2795,8 @@ CThostFtdcMarketDataField = {
     "UpdateTime": "string",
     "UpdateMillisec": "int",
     "ActionDay": "string",
+    "InstrumentID": "string",
+    "ExchangeInstID": "string",
 }
 
 CThostFtdcMarketDataBaseField = {
@@ -2697,10 +2861,11 @@ CThostFtdcMarketDataAsk45Field = {
 }
 
 CThostFtdcMarketDataUpdateTimeField = {
-    "InstrumentID": "string",
+    "reserve1": "string",
     "UpdateTime": "string",
     "UpdateMillisec": "int",
     "ActionDay": "string",
+    "InstrumentID": "string",
 }
 
 CThostFtdcMarketDataExchangeField = {
@@ -2708,22 +2873,26 @@ CThostFtdcMarketDataExchangeField = {
 }
 
 CThostFtdcSpecificInstrumentField = {
+    "reserve1": "string",
     "InstrumentID": "string",
 }
 
 CThostFtdcInstrumentStatusField = {
     "ExchangeID": "string",
-    "ExchangeInstID": "string",
+    "reserve1": "string",
     "SettlementGroupID": "string",
-    "InstrumentID": "string",
+    "reserve2": "string",
     "InstrumentStatus": "char",
     "TradingSegmentSN": "int",
     "EnterTime": "string",
     "EnterReason": "char",
+    "ExchangeInstID": "string",
+    "InstrumentID": "string",
 }
 
 CThostFtdcQryInstrumentStatusField = {
     "ExchangeID": "string",
+    "reserve1": "string",
     "ExchangeInstID": "string",
 }
 
@@ -2764,13 +2933,14 @@ CThostFtdcTransferBankField = {
 CThostFtdcQryInvestorPositionDetailField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "ExchangeID": "string",
     "InvestUnitID": "string",
+    "InstrumentID": "string",
 }
 
 CThostFtdcInvestorPositionDetailField = {
-    "InstrumentID": "string",
+    "reserve1": "string",
     "BrokerID": "string",
     "InvestorID": "string",
     "HedgeFlag": "char",
@@ -2782,7 +2952,7 @@ CThostFtdcInvestorPositionDetailField = {
     "TradingDay": "string",
     "SettlementID": "int",
     "TradeType": "char",
-    "CombInstrumentID": "string",
+    "reserve2": "string",
     "ExchangeID": "string",
     "CloseProfitByDate": "double",
     "CloseProfitByTrade": "double",
@@ -2796,7 +2966,11 @@ CThostFtdcInvestorPositionDetailField = {
     "SettlementPrice": "double",
     "CloseVolume": "int",
     "CloseAmount": "double",
+    "TimeFirstVolume": "int",
     "InvestUnitID": "string",
+    "SpecPosiType": "char",
+    "InstrumentID": "string",
+    "CombInstrumentID": "string",
 }
 
 CThostFtdcTradingAccountPasswordField = {
@@ -2891,8 +3065,10 @@ CThostFtdcTradingAccountPasswordUpdateField = {
 }
 
 CThostFtdcQryCombinationLegField = {
-    "CombInstrumentID": "string",
+    "reserve1": "string",
     "LegID": "int",
+    "reserve2": "string",
+    "CombInstrumentID": "string",
     "LegInstrumentID": "string",
 }
 
@@ -2901,12 +3077,14 @@ CThostFtdcQrySyncStatusField = {
 }
 
 CThostFtdcCombinationLegField = {
-    "CombInstrumentID": "string",
+    "reserve1": "string",
     "LegID": "int",
-    "LegInstrumentID": "string",
+    "reserve2": "string",
     "Direction": "char",
     "LegMultiple": "int",
     "ImplyLevel": "int",
+    "CombInstrumentID": "string",
+    "LegInstrumentID": "string",
 }
 
 CThostFtdcSyncStatusField = {
@@ -2949,6 +3127,7 @@ CThostFtdcBrokerUserEventField = {
     "EventTime": "string",
     "UserEventInfo": "string",
     "InvestorID": "string",
+    "reserve1": "string",
     "InstrumentID": "string",
 }
 
@@ -2974,7 +3153,7 @@ CThostFtdcInvestorPositionCombineDetailField = {
     "InvestorID": "string",
     "ComTradeID": "string",
     "TradeID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "HedgeFlag": "char",
     "Direction": "char",
     "TotalAmt": "int",
@@ -2984,15 +3163,17 @@ CThostFtdcInvestorPositionCombineDetailField = {
     "MarginRateByVolume": "double",
     "LegID": "int",
     "LegMultiple": "int",
-    "CombInstrumentID": "string",
+    "reserve2": "string",
     "TradeGroupID": "int",
     "InvestUnitID": "string",
+    "InstrumentID": "string",
+    "CombInstrumentID": "string",
 }
 
 CThostFtdcParkedOrderField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "OrderRef": "string",
     "UserID": "string",
     "OrderPriceType": "char",
@@ -3023,8 +3204,10 @@ CThostFtdcParkedOrderField = {
     "CurrencyID": "string",
     "ClientID": "string",
     "InvestUnitID": "string",
-    "IPAddress": "string",
+    "reserve2": "string",
     "MacAddress": "string",
+    "InstrumentID": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcParkedOrderActionField = {
@@ -3041,31 +3224,35 @@ CThostFtdcParkedOrderActionField = {
     "LimitPrice": "double",
     "VolumeChange": "int",
     "UserID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "ParkedOrderActionID": "string",
     "UserType": "char",
     "Status": "char",
     "ErrorID": "int",
     "ErrorMsg": "string",
     "InvestUnitID": "string",
-    "IPAddress": "string",
+    "reserve2": "string",
     "MacAddress": "string",
+    "InstrumentID": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcQryParkedOrderField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "ExchangeID": "string",
     "InvestUnitID": "string",
+    "InstrumentID": "string",
 }
 
 CThostFtdcQryParkedOrderActionField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "ExchangeID": "string",
     "InvestUnitID": "string",
+    "InstrumentID": "string",
 }
 
 CThostFtdcRemoveParkedOrderField = {
@@ -3094,9 +3281,10 @@ CThostFtdcInvestorWithdrawAlgorithmField = {
 CThostFtdcQryInvestorPositionCombineDetailField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "CombInstrumentID": "string",
+    "reserve1": "string",
     "ExchangeID": "string",
     "InvestUnitID": "string",
+    "CombInstrumentID": "string",
 }
 
 CThostFtdcMarketDataAveragePriceField = {
@@ -3112,9 +3300,11 @@ CThostFtdcVerifyInvestorPasswordField = {
 CThostFtdcUserIPField = {
     "BrokerID": "string",
     "UserID": "string",
+    "reserve1": "string",
+    "reserve2": "string",
+    "MacAddress": "string",
     "IPAddress": "string",
     "IPMask": "string",
-    "MacAddress": "string",
 }
 
 CThostFtdcTradingNoticeInfoField = {
@@ -3153,7 +3343,7 @@ CThostFtdcQryErrOrderField = {
 CThostFtdcErrOrderField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "OrderRef": "string",
     "UserID": "string",
     "OrderPriceType": "char",
@@ -3181,14 +3371,16 @@ CThostFtdcErrOrderField = {
     "AccountID": "string",
     "CurrencyID": "string",
     "ClientID": "string",
-    "IPAddress": "string",
+    "reserve2": "string",
     "MacAddress": "string",
+    "InstrumentID": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcErrorConditionalOrderField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "OrderRef": "string",
     "UserID": "string",
     "OrderPriceType": "char",
@@ -3211,7 +3403,7 @@ CThostFtdcErrorConditionalOrderField = {
     "ExchangeID": "string",
     "ParticipantID": "string",
     "ClientID": "string",
-    "ExchangeInstID": "string",
+    "reserve2": "string",
     "TraderID": "string",
     "InstallID": "int",
     "OrderSubmitStatus": "char",
@@ -3249,8 +3441,11 @@ CThostFtdcErrorConditionalOrderField = {
     "InvestUnitID": "string",
     "AccountID": "string",
     "CurrencyID": "string",
-    "IPAddress": "string",
+    "reserve3": "string",
     "MacAddress": "string",
+    "InstrumentID": "string",
+    "ExchangeInstID": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcQryErrOrderActionField = {
@@ -3283,13 +3478,15 @@ CThostFtdcErrOrderActionField = {
     "OrderActionStatus": "char",
     "UserID": "string",
     "StatusMsg": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "BranchID": "string",
     "InvestUnitID": "string",
-    "IPAddress": "string",
+    "reserve2": "string",
     "MacAddress": "string",
     "ErrorID": "int",
     "ErrorMsg": "string",
+    "InstrumentID": "string",
+    "IPAddress": "string",
 }
 
 CThostFtdcQryExchangeSequenceField = {
@@ -3302,10 +3499,10 @@ CThostFtdcExchangeSequenceField = {
     "MarketStatus": "char",
 }
 
-CThostFtdcQueryMaxOrderVolumeWithPriceField = {
+CThostFtdcQryMaxOrderVolumeWithPriceField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "Direction": "char",
     "OffsetFlag": "char",
     "HedgeFlag": "char",
@@ -3313,6 +3510,7 @@ CThostFtdcQueryMaxOrderVolumeWithPriceField = {
     "Price": "double",
     "ExchangeID": "string",
     "InvestUnitID": "string",
+    "InstrumentID": "string",
 }
 
 CThostFtdcQryBrokerTradingParamsField = {
@@ -3336,16 +3534,18 @@ CThostFtdcBrokerTradingParamsField = {
 CThostFtdcQryBrokerTradingAlgosField = {
     "BrokerID": "string",
     "ExchangeID": "string",
+    "reserve1": "string",
     "InstrumentID": "string",
 }
 
 CThostFtdcBrokerTradingAlgosField = {
     "BrokerID": "string",
     "ExchangeID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "HandlePositionAlgoID": "char",
     "FindMarginRateAlgoID": "char",
     "HandleTradingAccountAlgoID": "char",
+    "InstrumentID": "string",
 }
 
 CThostFtdcQueryBrokerDepositField = {
@@ -3442,32 +3642,35 @@ CThostFtdcEWarrantOffsetField = {
     "BrokerID": "string",
     "InvestorID": "string",
     "ExchangeID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "Direction": "char",
     "HedgeFlag": "char",
     "Volume": "int",
     "InvestUnitID": "string",
+    "InstrumentID": "string",
 }
 
 CThostFtdcQryEWarrantOffsetField = {
     "BrokerID": "string",
     "InvestorID": "string",
     "ExchangeID": "string",
-    "InstrumentID": "string",
+    "reserve1": "string",
     "InvestUnitID": "string",
+    "InstrumentID": "string",
 }
 
 CThostFtdcQryInvestorProductGroupMarginField = {
     "BrokerID": "string",
     "InvestorID": "string",
-    "ProductGroupID": "string",
+    "reserve1": "string",
     "HedgeFlag": "char",
     "ExchangeID": "string",
     "InvestUnitID": "string",
+    "ProductGroupID": "string",
 }
 
 CThostFtdcInvestorProductGroupMarginField = {
-    "ProductGroupID": "string",
+    "reserve1": "string",
     "BrokerID": "string",
     "InvestorID": "string",
     "TradingDay": "string",
@@ -3496,6 +3699,7 @@ CThostFtdcInvestorProductGroupMarginField = {
     "HedgeFlag": "char",
     "ExchangeID": "string",
     "InvestUnitID": "string",
+    "ProductGroupID": "string",
 }
 
 CThostFtdcQueryCFMMCTradingAccountTokenField = {
@@ -3513,13 +3717,16 @@ CThostFtdcCFMMCTradingAccountTokenField = {
 }
 
 CThostFtdcQryProductGroupField = {
-    "ProductID": "string",
+    "reserve1": "string",
     "ExchangeID": "string",
+    "ProductID": "string",
 }
 
 CThostFtdcProductGroupField = {
-    "ProductID": "string",
+    "reserve1": "string",
     "ExchangeID": "string",
+    "reserve2": "string",
+    "ProductID": "string",
     "ProductGroupID": "string",
 }
 
@@ -3544,6 +3751,28 @@ CThostFtdcQryBulletinField = {
     "SequenceNo": "int",
     "NewsType": "string",
     "NewsUrgency": "char",
+}
+
+CThostFtdcMulticastInstrumentField = {
+    "TopicID": "int",
+    "reserve1": "string",
+    "InstrumentNo": "int",
+    "CodePrice": "double",
+    "VolumeMultiple": "int",
+    "PriceTick": "double",
+    "InstrumentID": "string",
+}
+
+CThostFtdcQryMulticastInstrumentField = {
+    "TopicID": "int",
+    "reserve1": "string",
+    "InstrumentID": "string",
+}
+
+CThostFtdcAppIDAuthAssignField = {
+    "BrokerID": "string",
+    "AppID": "string",
+    "DRIdentityID": "int",
 }
 
 CThostFtdcReqOpenAccountField = {
@@ -4639,18 +4868,13 @@ CThostFtdcCurrTransferIdentityField = {
 CThostFtdcLoginForbiddenUserField = {
     "BrokerID": "string",
     "UserID": "string",
+    "reserve1": "string",
     "IPAddress": "string",
 }
 
 CThostFtdcQryLoginForbiddenUserField = {
     "BrokerID": "string",
     "UserID": "string",
-}
-
-CThostFtdcMulticastGroupInfoField = {
-    "GroupIP": "string",
-    "GroupPort": "int",
-    "SourceIP": "string",
 }
 
 CThostFtdcTradingAccountReserveField = {
@@ -4661,10 +4885,12 @@ CThostFtdcTradingAccountReserveField = {
 }
 
 CThostFtdcQryLoginForbiddenIPField = {
+    "reserve1": "string",
     "IPAddress": "string",
 }
 
 CThostFtdcQryIPListField = {
+    "reserve1": "string",
     "IPAddress": "string",
 }
 
@@ -4792,17 +5018,6 @@ CThostFtdcQrySecAgentTradeInfoField = {
     "BrokerSecAgentID": "string",
 }
 
-CThostFtdcUserSystemInfoField = {
-    "BrokerID": "string",
-    "UserID": "string",
-    "ClientSystemInfoLen": "int",
-    "ClientSystemInfo": "string",
-    "ClientPublicIP": "string",
-    "ClientIPPort": "int",
-    "ClientLoginTime": "string",
-    "ClientAppID": "string",
-}
-
 CThostFtdcReqUserAuthMethodField = {
     "TradingDay": "string",
     "BrokerID": "string",
@@ -4845,10 +5060,11 @@ CThostFtdcReqUserLoginWithCaptchaField = {
     "InterfaceProductInfo": "string",
     "ProtocolInfo": "string",
     "MacAddress": "string",
-    "ClientIPAddress": "string",
+    "reserve1": "string",
     "LoginRemark": "string",
     "Captcha": "string",
     "ClientIPPort": "int",
+    "ClientIPAddress": "string",
 }
 
 CThostFtdcReqUserLoginWithTextField = {
@@ -4860,10 +5076,11 @@ CThostFtdcReqUserLoginWithTextField = {
     "InterfaceProductInfo": "string",
     "ProtocolInfo": "string",
     "MacAddress": "string",
-    "ClientIPAddress": "string",
+    "reserve1": "string",
     "LoginRemark": "string",
     "Text": "string",
     "ClientIPPort": "int",
+    "ClientIPAddress": "string",
 }
 
 CThostFtdcReqUserLoginWithOTPField = {
@@ -4875,10 +5092,11 @@ CThostFtdcReqUserLoginWithOTPField = {
     "InterfaceProductInfo": "string",
     "ProtocolInfo": "string",
     "MacAddress": "string",
-    "ClientIPAddress": "string",
+    "reserve1": "string",
     "LoginRemark": "string",
     "OTPPassword": "string",
     "ClientIPPort": "int",
+    "ClientIPAddress": "string",
 }
 
 CThostFtdcReqApiHandshakeField = {
@@ -4906,3 +5124,69 @@ CThostFtdcDepartmentUserField = {
 CThostFtdcQueryFreqField = {
     "QueryFreq": "int",
 }
+
+CThostFtdcAuthForbiddenIPField = {
+    "reserve1": "string",
+    "IPAddress": "string",
+}
+
+CThostFtdcQryAuthForbiddenIPField = {
+    "reserve1": "string",
+    "IPAddress": "string",
+}
+
+CThostFtdcSyncDelaySwapFrozenField = {
+    "DelaySwapSeqNo": "string",
+    "BrokerID": "string",
+    "InvestorID": "string",
+    "FromCurrencyID": "string",
+    "FromRemainSwap": "double",
+    "IsManualSwap": "int",
+}
+
+CThostFtdcUserSystemInfoField = {
+    "BrokerID": "string",
+    "UserID": "string",
+    "ClientSystemInfoLen": "int",
+    "ClientSystemInfo": "string",
+    "reserve1": "string",
+    "ClientIPPort": "int",
+    "ClientLoginTime": "string",
+    "ClientAppID": "string",
+    "ClientPublicIP": "string",
+}
+
+CThostFtdcAuthUserIDField = {
+    "BrokerID": "string",
+    "AppID": "string",
+    "UserID": "string",
+    "AuthType": "char",
+}
+
+CThostFtdcAuthIPField = {
+    "BrokerID": "string",
+    "AppID": "string",
+    "IPAddress": "string",
+}
+
+CThostFtdcQryClassifiedInstrumentField = {
+    "InstrumentID": "string",
+    "ExchangeID": "string",
+    "ExchangeInstID": "string",
+    "ProductID": "string",
+    "TradingType": "char",
+    "ClassType": "char",
+}
+
+CThostFtdcQryCombPromotionParamField = {
+    "ExchangeID": "string",
+    "InstrumentID": "string",
+}
+
+CThostFtdcCombPromotionParamField = {
+    "ExchangeID": "string",
+    "InstrumentID": "string",
+    "CombHedgeFlag": "string",
+    "Xparameter": "double",
+}
+

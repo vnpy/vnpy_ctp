@@ -11,9 +11,10 @@ int MdApi::reqUserLogin(const dict &req, int reqid)
 	getString(req, "ProtocolInfo", myreq.ProtocolInfo);
 	getString(req, "MacAddress", myreq.MacAddress);
 	getString(req, "OneTimePassword", myreq.OneTimePassword);
-	getString(req, "ClientIPAddress", myreq.ClientIPAddress);
+	getString(req, "reserve1", myreq.reserve1);
 	getString(req, "LoginRemark", myreq.LoginRemark);
 	getInt(req, "ClientIPPort", &myreq.ClientIPPort);
+	getString(req, "ClientIPAddress", myreq.ClientIPAddress);
 	int i = this->api->ReqUserLogin(&myreq, reqid);
 	return i;
 };
@@ -25,6 +26,17 @@ int MdApi::reqUserLogout(const dict &req, int reqid)
 	getString(req, "BrokerID", myreq.BrokerID);
 	getString(req, "UserID", myreq.UserID);
 	int i = this->api->ReqUserLogout(&myreq, reqid);
+	return i;
+};
+
+int MdApi::reqQryMulticastInstrument(const dict &req, int reqid)
+{
+	CThostFtdcQryMulticastInstrumentField myreq = CThostFtdcQryMulticastInstrumentField();
+	memset(&myreq, 0, sizeof(myreq));
+	getInt(req, "TopicID", &myreq.TopicID);
+	getString(req, "reserve1", myreq.reserve1);
+	getString(req, "InstrumentID", myreq.InstrumentID);
+	int i = this->api->ReqQryMulticastInstrument(&myreq, reqid);
 	return i;
 };
 

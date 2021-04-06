@@ -1,11 +1,13 @@
 .def("reqUserLogin", &MdApi::reqUserLogin)
 .def("reqUserLogout", &MdApi::reqUserLogout)
+.def("reqQryMulticastInstrument", &MdApi::reqQryMulticastInstrument)
 
 .def("onFrontConnected", &MdApi::onFrontConnected)
 .def("onFrontDisconnected", &MdApi::onFrontDisconnected)
 .def("onHeartBeatWarning", &MdApi::onHeartBeatWarning)
 .def("onRspUserLogin", &MdApi::onRspUserLogin)
 .def("onRspUserLogout", &MdApi::onRspUserLogout)
+.def("onRspQryMulticastInstrument", &MdApi::onRspQryMulticastInstrument)
 .def("onRspError", &MdApi::onRspError)
 .def("onRspSubMarketData", &MdApi::onRspSubMarketData)
 .def("onRspUnSubMarketData", &MdApi::onRspUnSubMarketData)

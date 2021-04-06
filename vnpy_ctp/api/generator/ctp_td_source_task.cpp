@@ -273,14 +273,14 @@ void TdApi::OnRspOrderAction(CThostFtdcInputOrderActionField *pInputOrderAction,
 	this->task_queue.push(task);
 };
 
-void TdApi::OnRspQueryMaxOrderVolume(CThostFtdcQueryMaxOrderVolumeField *pQueryMaxOrderVolume, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
+void TdApi::OnRspQryMaxOrderVolume(CThostFtdcQryMaxOrderVolumeField *pQryMaxOrderVolume, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
 	Task task = Task();
-	task.task_name = ONRSPQUERYMAXORDERVOLUME;
-	if (pQueryMaxOrderVolume)
+	task.task_name = ONRSPQRYMAXORDERVOLUME;
+	if (pQryMaxOrderVolume)
 	{
-		CThostFtdcQueryMaxOrderVolumeField *task_data = new CThostFtdcQueryMaxOrderVolumeField();
-		*task_data = *pQueryMaxOrderVolume;
+		CThostFtdcQryMaxOrderVolumeField *task_data = new CThostFtdcQryMaxOrderVolumeField();
+		*task_data = *pQryMaxOrderVolume;
 		task.task_data = task_data;
 	}
 	if (pRspInfo)
@@ -2334,6 +2334,48 @@ void TdApi::OnRtnChangeAccountByBank(CThostFtdcChangeAccountField *pChangeAccoun
 		*task_data = *pChangeAccount;
 		task.task_data = task_data;
 	}
+	this->task_queue.push(task);
+};
+
+void TdApi::OnRspQryClassifiedInstrument(CThostFtdcInstrumentField *pInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
+{
+	Task task = Task();
+	task.task_name = ONRSPQRYCLASSIFIEDINSTRUMENT;
+	if (pInstrument)
+	{
+		CThostFtdcInstrumentField *task_data = new CThostFtdcInstrumentField();
+		*task_data = *pInstrument;
+		task.task_data = task_data;
+	}
+	if (pRspInfo)
+	{
+		CThostFtdcRspInfoField *task_error = new CThostFtdcRspInfoField();
+		*task_error = *pRspInfo;
+		task.task_error = task_error;
+	}
+	task.task_id = nRequestID;
+	task.task_last = bIsLast;
+	this->task_queue.push(task);
+};
+
+void TdApi::OnRspQryCombPromotionParam(CThostFtdcCombPromotionParamField *pCombPromotionParam, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
+{
+	Task task = Task();
+	task.task_name = ONRSPQRYCOMBPROMOTIONPARAM;
+	if (pCombPromotionParam)
+	{
+		CThostFtdcCombPromotionParamField *task_data = new CThostFtdcCombPromotionParamField();
+		*task_data = *pCombPromotionParam;
+		task.task_data = task_data;
+	}
+	if (pRspInfo)
+	{
+		CThostFtdcRspInfoField *task_error = new CThostFtdcRspInfoField();
+		*task_error = *pRspInfo;
+		task.task_error = task_error;
+	}
+	task.task_id = nRequestID;
+	task.task_last = bIsLast;
 	this->task_queue.push(task);
 };
 
