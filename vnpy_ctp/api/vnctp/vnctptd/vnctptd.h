@@ -26,7 +26,7 @@ using namespace pybind11;
 #define ONRSPPARKEDORDERINSERT 12
 #define ONRSPPARKEDORDERACTION 13
 #define ONRSPORDERACTION 14
-#define ONRSPQUERYMAXORDERVOLUME 15
+#define ONRSPQRYMAXORDERVOLUME 15
 #define ONRSPSETTLEMENTINFOCONFIRM 16
 #define ONRSPREMOVEPARKEDORDER 17
 #define ONRSPREMOVEPARKEDORDERACTION 18
@@ -136,6 +136,8 @@ using namespace pybind11;
 #define ONRTNOPENACCOUNTBYBANK 122
 #define ONRTNCANCELACCOUNTBYBANK 123
 #define ONRTNCHANGEACCOUNTBYBANK 124
+#define ONRSPQRYCLASSIFIEDINSTRUMENT 125
+#define ONRSPQRYCOMBPROMOTIONPARAM 126
 
 
 ///-------------------------------------------------------------------------------------
@@ -222,7 +224,7 @@ public:
 	virtual void OnRspOrderAction(CThostFtdcInputOrderActionField *pInputOrderAction, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
 	///查询最大报单数量响应
-	virtual void OnRspQueryMaxOrderVolume(CThostFtdcQueryMaxOrderVolumeField *pQueryMaxOrderVolume, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+	virtual void OnRspQryMaxOrderVolume(CThostFtdcQryMaxOrderVolumeField *pQryMaxOrderVolume, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
 	///投资者结算结果确认响应
 	virtual void OnRspSettlementInfoConfirm(CThostFtdcSettlementInfoConfirmField *pSettlementInfoConfirm, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
@@ -551,6 +553,12 @@ public:
 	///银行发起变更银行账号通知
 	virtual void OnRtnChangeAccountByBank(CThostFtdcChangeAccountField *pChangeAccount);
 
+	///请求查询分类合约响应
+	virtual void OnRspQryClassifiedInstrument(CThostFtdcInstrumentField *pInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+
+	///请求组合优惠比例响应
+	virtual void OnRspQryCombPromotionParam(CThostFtdcCombPromotionParamField *pCombPromotionParam, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+
     //-------------------------------------------------------------------------------------
     //task：任务
     //-------------------------------------------------------------------------------------
@@ -586,7 +594,7 @@ public:
 
 	void processRspOrderAction(Task *task);
 
-	void processRspQueryMaxOrderVolume(Task *task);
+	void processRspQryMaxOrderVolume(Task *task);
 
 	void processRspSettlementInfoConfirm(Task *task);
 
@@ -806,6 +814,10 @@ public:
 
 	void processRtnChangeAccountByBank(Task *task);
 
+	void processRspQryClassifiedInstrument(Task *task);
+
+	void processRspQryCombPromotionParam(Task *task);
+
     //-------------------------------------------------------------------------------------
     //data：回调函数的数据字典
     //error：回调函数的错误字典
@@ -844,7 +856,7 @@ public:
 
 	virtual void onRspOrderAction(const dict &data, const dict &error, int reqid, bool last) {};
 
-	virtual void onRspQueryMaxOrderVolume(const dict &data, const dict &error, int reqid, bool last) {};
+	virtual void onRspQryMaxOrderVolume(const dict &data, const dict &error, int reqid, bool last) {};
 
 	virtual void onRspSettlementInfoConfirm(const dict &data, const dict &error, int reqid, bool last) {};
 
@@ -1064,6 +1076,10 @@ public:
 
 	virtual void onRtnChangeAccountByBank(const dict &data) {};
 
+	virtual void onRspQryClassifiedInstrument(const dict &data, const dict &error, int reqid, bool last) {};
+
+	virtual void onRspQryCombPromotionParam(const dict &data, const dict &error, int reqid, bool last) {};
+
     //-------------------------------------------------------------------------------------
     //req:主动函数的请求字典
     //-------------------------------------------------------------------------------------
@@ -1116,7 +1132,7 @@ public:
 
 	int reqOrderAction(const dict &req, int reqid);
 
-	int reqQueryMaxOrderVolume(const dict &req, int reqid);
+	int reqQryMaxOrderVolume(const dict &req, int reqid);
 
 	int reqSettlementInfoConfirm(const dict &req, int reqid);
 
@@ -1249,4 +1265,8 @@ public:
 	int reqFromFutureToBankByFuture(const dict &req, int reqid);
 
 	int reqQueryBankAccountMoneyByFuture(const dict &req, int reqid);
+
+	int reqQryClassifiedInstrument(const dict &req, int reqid);
+
+	int reqQryCombPromotionParam(const dict &req, int reqid);
 };

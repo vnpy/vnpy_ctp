@@ -24,6 +24,9 @@
     <ClInclude Include="vnctptd.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\ctp\ThostFtdcUserApiStruct.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\include\ctp\ThostFtdcMdApi.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -31,9 +34,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\ctp\ThostFtdcUserApiDataType.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\ctp\ThostFtdcUserApiStruct.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\vnctp.h">

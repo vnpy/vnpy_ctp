@@ -34,5 +34,7 @@
 # Python
 *.pyc
 
-
+# Visual Studio
+.vs/
+x64/
 
