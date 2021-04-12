@@ -5189,4 +5189,3 @@ CThostFtdcCombPromotionParamField = {
     "CombHedgeFlag": "string",
     "Xparameter": "double",
 }
-

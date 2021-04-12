@@ -18,7 +18,7 @@ def get_version_string() -> str:
 def get_ext_modules() -> list:
     """
     获取三方模块
-    
+
     Linux需要编译封装接口
     Windows直接使用预编译的pyd即可
     Mac由于缺乏二进制库支持无法使用

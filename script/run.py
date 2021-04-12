@@ -12,7 +12,7 @@ def main():
     event_engine = EventEngine()
     main_engine = MainEngine(event_engine)
     main_engine.add_gateway(CtpGateway)
-    
+
     main_window = MainWindow(main_engine, event_engine)
     main_window.showMaximized()
 
