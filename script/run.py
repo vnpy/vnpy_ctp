@@ -1,6 +1,4 @@
-# flake8: noqa
 from vnpy.event import EventEngine
-
 from vnpy.trader.engine import MainEngine
 from vnpy.trader.ui import MainWindow, create_qapp
 
@@ -8,7 +6,7 @@ from vnpy_ctp import CtpGateway
 
 
 def main():
-    """"""
+    """主入口函数"""
     qapp = create_qapp()
 
     event_engine = EventEngine()
