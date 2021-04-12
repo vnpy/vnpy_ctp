@@ -528,7 +528,7 @@ class CtpTdApi(TdApi):
 
         while True:
             self.reqid += 1
-            n = self.reqQryInstrument({"ExchangeID": "CFFEX"}, self.reqid)
+            n = self.reqQryInstrument({}, self.reqid)
 
             if not n:
                 break
