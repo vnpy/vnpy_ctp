@@ -20,7 +20,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from .gateway import CtpGateway
+try:
+    from .gateway import CtpGateway
+except ImportError:
+    pass
 
 
 __version__ = "6.5.1"

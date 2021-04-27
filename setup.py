@@ -1,25 +1,6 @@
-""""""
-
-import ast
 import platform
-import re
-from pathlib import Path
 
-from setuptools import Extension, find_packages, setup
-
-
-here = Path(__file__).parent
-readme = here.joinpath("README.md")
-with open(str(readme), encoding="UTF-8") as f:
-    long_description = f.read()
-
-
-def get_version_string() -> str:
-    """获取版本号"""
-    with open("vnpy_ctp/__init__.py", "rb") as f:
-        content = f.read().decode("utf-8")
-        version_line = re.search(r"__version__\s+=\s+(.*)", content).group(1)
-        return str(ast.literal_eval(version_line))
+from setuptools import Extension, setup
 
 
 def get_ext_modules() -> list:
@@ -34,8 +15,8 @@ def get_ext_modules() -> list:
         return []
 
     compiler_flags = [
-        "-std=c++17",  # standard
-        "-O3",  # Optimization
+        "-std=c++17",
+        "-O3",
         "-Wno-delete-incomplete", "-Wno-sign-compare",
     ]
     extra_link_args = ["-lstdc++"]
@@ -81,33 +62,5 @@ def get_ext_modules() -> list:
 
 
 setup(
-    name="vnpy_ctp",
-    version=get_version_string(),
-    author="Xiaoyou Chen",
-    author_email="xiaoyou.chen@mail.vnpy.com",
-    license="MIT",
-    url="https://www.vnpy.com",
-    description="CTP gateway for vn.py quant trading framework.",
-    long_description=long_description,
-    keywords="quant quantitative investment trading algotrading",
-    include_package_data=True,
-    packages=find_packages(),
-    package_data={"": [
-        "*.dll",
-        "*.so",
-        "*.pyd",
-    ]},
-    install_requires=["vnpy"],
-    classifiers=[
-        "Development Status :: 5 - Production/Stable",
-        "Operating System :: Microsoft :: Windows",
-        "Operating System :: POSIX :: Linux"
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.7",
-        "Topic :: Office/Business :: Financial :: Investment",
-        "Programming Language :: Python :: Implementation :: CPython",
-        "License :: OSI Approved :: MIT License",
-        "Natural Language :: Chinese (Simplified)"
-    ],
     ext_modules=get_ext_modules(),
 )
