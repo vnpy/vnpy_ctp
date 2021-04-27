@@ -3,8 +3,15 @@
 import ast
 import platform
 import re
+from pathlib import Path
 
 from setuptools import Extension, find_packages, setup
+
+
+here = Path(__file__).parent
+readme = here.joinpath("README.md")
+with open(str(readme), encoding="UTF-8") as f:
+    long_description = f.read()
 
 
 def get_version_string() -> str:
@@ -23,7 +30,7 @@ def get_ext_modules() -> list:
     Windows直接使用预编译的pyd即可
     Mac由于缺乏二进制库支持无法使用
     """
-    if platform.system != "Linux":
+    if platform.system() != "Linux":
         return []
 
     compiler_flags = [
@@ -74,15 +81,15 @@ def get_ext_modules() -> list:
 
 
 setup(
-    name="vnpy",
+    name="vnpy_ctp",
     version=get_version_string(),
-    author="vn.py team",
-    author_email="vn.py@foxmail.com",
+    author="Xiaoyou Chen",
+    author_email="xiaoyou.chen@mail.vnpy.com",
     license="MIT",
     url="https://www.vnpy.com",
-    description="A framework for developing quant trading systems.",
-    long_description=__doc__,
-    keywords='quant quantitative investment trading algotrading',
+    description="CTP gateway for vn.py quant trading framework.",
+    long_description=long_description,
+    keywords="quant quantitative investment trading algotrading",
     include_package_data=True,
     packages=find_packages(),
     package_data={"": [
@@ -93,8 +100,7 @@ setup(
     install_requires=["vnpy"],
     classifiers=[
         "Development Status :: 5 - Production/Stable",
-        "Operating System :: Microsoft :: Windows :: Windows 10",
-        "Operating System :: Microsoft :: Windows :: Windows Server 2019",
+        "Operating System :: Microsoft :: Windows",
         "Operating System :: POSIX :: Linux"
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.7",
