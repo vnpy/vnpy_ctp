@@ -639,7 +639,7 @@ class CtpTdApi(TdApi):
             return
 
         symbol: str = data["InstrumentID"]
-        contract: ContractData = symbol_contract_map[symbol_contract_map]
+        contract: ContractData = symbol_contract_map[symbol]
 
         frontid: int = data["FrontID"]
         sessionid: int = data["SessionID"]
