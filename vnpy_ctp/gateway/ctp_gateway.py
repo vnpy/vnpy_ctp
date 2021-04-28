@@ -402,9 +402,9 @@ class CtpMdApi(MdApi):
 class CtpTdApi(TdApi):
     """"""
 
-    def __init__(self, gateway) -> None:
+    def __init__(self, gateway: CtpGateway) -> None:
         """构造函数"""
-        super(CtpTdApi, self).__init__()
+        super().__init__()
 
         self.gateway: CtpGateway = gateway
         self.gateway_name: str = gateway.gateway_name
