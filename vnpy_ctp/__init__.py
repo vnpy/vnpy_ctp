@@ -29,4 +29,4 @@ except ImportError:
 import importlib_metadata
 
 
-__version__ = importlib_metadata.version("vnpy_ctptest")
+__version__ = importlib_metadata.version("vnpy_ctp")
