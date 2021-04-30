@@ -26,4 +26,7 @@ except ImportError:
     pass
 
 
-__version__ = "6.5.1.1"
+import importlib_metadata
+
+
+__version__ = importlib_metadata.version("vnpy_ctptest")
