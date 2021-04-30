@@ -26,4 +26,4 @@ except ImportError:
     pass
 
 
-__version__ = "6.5.1"
+__version__ = "6.5.1.1"
