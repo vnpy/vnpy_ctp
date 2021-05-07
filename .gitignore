@@ -30,6 +30,7 @@
 dist/
 build/
 vnpy_ctp.egg-info/
+__pycache__/
 
 # Visual Studio
 .vs/
