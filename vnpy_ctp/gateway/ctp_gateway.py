@@ -90,7 +90,9 @@ DIRECTION_CTP2VT[THOST_FTDC_PD_Short] = Direction.SHORT
 # 委托类型映射
 ORDERTYPE_VT2CTP: Dict[OrderType, str] = {
     OrderType.LIMIT: THOST_FTDC_OPT_LimitPrice,
-    OrderType.MARKET: THOST_FTDC_OPT_AnyPrice
+    OrderType.MARKET: THOST_FTDC_OPT_AnyPrice,
+    OrderType.FAK: THOST_FTDC_OPT_LimitPrice,
+    OrderType.FOK: THOST_FTDC_OPT_LimitPrice
 }
 ORDERTYPE_CTP2VT: Dict[str, OrderType] = {v: k for k, v in ORDERTYPE_VT2CTP.items()}
 
