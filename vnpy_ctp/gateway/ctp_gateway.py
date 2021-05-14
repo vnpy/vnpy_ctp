@@ -799,11 +799,9 @@ class CtpTdApi(TdApi):
         }
 
         if req.type == OrderType.FAK:
-            ctp_req["OrderPriceType"] = THOST_FTDC_OPT_LimitPrice
             ctp_req["TimeCondition"] = THOST_FTDC_TC_IOC
             ctp_req["VolumeCondition"] = THOST_FTDC_VC_AV
         elif req.type == OrderType.FOK:
-            ctp_req["OrderPriceType"] = THOST_FTDC_OPT_LimitPrice
             ctp_req["TimeCondition"] = THOST_FTDC_TC_IOC
             ctp_req["VolumeCondition"] = THOST_FTDC_VC_CV
 
