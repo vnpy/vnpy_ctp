@@ -2,7 +2,7 @@ import sys
 import pytz
 from datetime import datetime
 from time import sleep
-from typing import Dict, List
+from typing import Dict, List, Tuple
 from pathlib import Path
 
 from vnpy.event import EventEngine
@@ -88,13 +88,13 @@ DIRECTION_CTP2VT[THOST_FTDC_PD_Long] = Direction.LONG
 DIRECTION_CTP2VT[THOST_FTDC_PD_Short] = Direction.SHORT
 
 # 委托类型映射
-ORDERTYPE_VT2CTP: Dict[OrderType, str] = {
-    OrderType.LIMIT: THOST_FTDC_OPT_LimitPrice,
-    OrderType.MARKET: THOST_FTDC_OPT_AnyPrice,
-    OrderType.FAK: THOST_FTDC_OPT_LimitPrice,
-    OrderType.FOK: THOST_FTDC_OPT_LimitPrice
+ORDERTYPE_VT2CTP: Dict[OrderType, Tuple] = {
+    OrderType.LIMIT: (THOST_FTDC_OPT_LimitPrice, THOST_FTDC_TC_GFD, THOST_FTDC_VC_AV),
+    OrderType.MARKET: (THOST_FTDC_OPT_AnyPrice, THOST_FTDC_TC_GFD, THOST_FTDC_VC_AV),
+    OrderType.FAK: (THOST_FTDC_OPT_LimitPrice, THOST_FTDC_TC_IOC, THOST_FTDC_VC_AV),
+    OrderType.FOK: (THOST_FTDC_OPT_LimitPrice, THOST_FTDC_TC_IOC, THOST_FTDC_VC_CV),
 }
-ORDERTYPE_CTP2VT: Dict[str, OrderType] = {v: k for k, v in ORDERTYPE_VT2CTP.items()}
+ORDERTYPE_CTP2VT: Dict[Tuple, OrderType] = {v: k for k, v in ORDERTYPE_VT2CTP.items()}
 
 # 开平方向映射
 OFFSET_VT2CTP: Dict[Offset, str] = {
@@ -652,11 +652,13 @@ class CtpTdApi(TdApi):
         dt: datetime = datetime.strptime(timestamp, "%Y%m%d %H:%M:%S")
         dt = CHINA_TZ.localize(dt)
 
+        tp = (data["OrderPriceType"], data["TimeCondition"], data["VolumeCondition"])
+
         order: OrderData = OrderData(
             symbol=symbol,
             exchange=contract.exchange,
             orderid=orderid,
-            type=ORDERTYPE_CTP2VT[data["OrderPriceType"]],
+            type=ORDERTYPE_CTP2VT[tp],
             direction=DIRECTION_CTP2VT[data["Direction"]],
             offset=OFFSET_CTP2VT[data["CombOffsetFlag"]],
             price=data["LimitPrice"],
@@ -777,12 +779,15 @@ class CtpTdApi(TdApi):
 
         self.order_ref += 1
 
+        tp = ORDERTYPE_VT2CTP[req.type]
+        price_type, time_condition, volume_condition = tp
+
         ctp_req: dict = {
             "InstrumentID": req.symbol,
             "ExchangeID": req.exchange.value,
             "LimitPrice": req.price,
             "VolumeTotalOriginal": int(req.volume),
-            "OrderPriceType": ORDERTYPE_VT2CTP.get(req.type, ""),
+            "OrderPriceType": price_type,
             "Direction": DIRECTION_VT2CTP.get(req.direction, ""),
             "CombOffsetFlag": OFFSET_VT2CTP.get(req.offset, ""),
             "OrderRef": str(self.order_ref),
@@ -793,17 +798,10 @@ class CtpTdApi(TdApi):
             "ContingentCondition": THOST_FTDC_CC_Immediately,
             "ForceCloseReason": THOST_FTDC_FCC_NotForceClose,
             "IsAutoSuspend": 0,
-            "TimeCondition": THOST_FTDC_TC_GFD,
-            "VolumeCondition": THOST_FTDC_VC_AV,
+            "TimeCondition": time_condition,
+            "VolumeCondition": volume_condition,
             "MinVolume": 1
         }
-
-        if req.type == OrderType.FAK:
-            ctp_req["TimeCondition"] = THOST_FTDC_TC_IOC
-            ctp_req["VolumeCondition"] = THOST_FTDC_VC_AV
-        elif req.type == OrderType.FOK:
-            ctp_req["TimeCondition"] = THOST_FTDC_TC_IOC
-            ctp_req["VolumeCondition"] = THOST_FTDC_VC_CV
 
         self.reqid += 1
         self.reqOrderInsert(ctp_req, self.reqid)
