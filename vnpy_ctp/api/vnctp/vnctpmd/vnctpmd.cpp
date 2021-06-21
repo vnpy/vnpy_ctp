@@ -647,6 +647,12 @@ string MdApi::getTradingDay()
 	return day;
 };
 
+string MdApi::getApiVersion()
+{
+	string version = this->api->GetApiVersion();
+	return version;
+};
+
 void MdApi::registerFront(string pszFrontAddress)
 {
 	this->api->RegisterFront((char*)pszFrontAddress.c_str());

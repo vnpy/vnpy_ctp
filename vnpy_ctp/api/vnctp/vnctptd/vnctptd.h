@@ -1096,6 +1096,8 @@ public:
 
     string getTradingDay();
 
+	string getApiVersion();
+
     void registerFront(string pszFrontAddress);
 
     void subscribePrivateTopic(int nType);
