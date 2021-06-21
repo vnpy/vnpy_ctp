@@ -90,7 +90,9 @@ DIRECTION_CTP2VT[THOST_FTDC_PD_Short] = Direction.SHORT
 # 委托类型映射
 ORDERTYPE_VT2CTP: Dict[OrderType, str] = {
     OrderType.LIMIT: THOST_FTDC_OPT_LimitPrice,
-    OrderType.MARKET: THOST_FTDC_OPT_AnyPrice
+    OrderType.MARKET: THOST_FTDC_OPT_AnyPrice,
+    OrderType.FAK: THOST_FTDC_OPT_LimitPrice,
+    OrderType.FOK: THOST_FTDC_OPT_LimitPrice
 }
 ORDERTYPE_CTP2VT: Dict[str, OrderType] = {v: k for k, v in ORDERTYPE_VT2CTP.items()}
 
@@ -650,7 +652,7 @@ class CtpTdApi(TdApi):
         dt: datetime = datetime.strptime(timestamp, "%Y%m%d %H:%M:%S")
         dt = CHINA_TZ.localize(dt)
 
-        order = OrderData(
+        order: OrderData = OrderData(
             symbol=symbol,
             exchange=contract.exchange,
             orderid=orderid,
@@ -683,7 +685,7 @@ class CtpTdApi(TdApi):
         dt: datetime = datetime.strptime(timestamp, "%Y%m%d %H:%M:%S")
         dt = CHINA_TZ.localize(dt)
 
-        trade = TradeData(
+        trade: TradeData = TradeData(
             symbol=symbol,
             exchange=contract.exchange,
             orderid=orderid,
@@ -797,11 +799,9 @@ class CtpTdApi(TdApi):
         }
 
         if req.type == OrderType.FAK:
-            ctp_req["OrderPriceType"] = THOST_FTDC_OPT_LimitPrice
             ctp_req["TimeCondition"] = THOST_FTDC_TC_IOC
             ctp_req["VolumeCondition"] = THOST_FTDC_VC_AV
         elif req.type == OrderType.FOK:
-            ctp_req["OrderPriceType"] = THOST_FTDC_OPT_LimitPrice
             ctp_req["TimeCondition"] = THOST_FTDC_TC_IOC
             ctp_req["VolumeCondition"] = THOST_FTDC_VC_CV
 
