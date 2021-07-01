@@ -312,7 +312,7 @@ class CtpMdApi(MdApi):
 
         timestamp: str = f"{self.current_date} {data['UpdateTime']}.{int(data['UpdateMillisec']/100)}"
         dt: datetime = datetime.strptime(timestamp, "%Y%m%d %H:%M:%S.%f")
-        dt = CHINA_TZ.localize(dt)
+        dt: datetime = CHINA_TZ.localize(dt)
 
         tick: TickData = TickData(
             symbol=symbol,
@@ -532,7 +532,7 @@ class CtpTdApi(TdApi):
             key: str = f"{data['InstrumentID'], data['PosiDirection']}"
             position: PositionData = self.positions.get(key, None)
             if not position:
-                position = PositionData(
+                position: PositionData = PositionData(
                     symbol=data["InstrumentID"],
                     exchange=contract.exchange,
                     direction=DIRECTION_CTP2VT[data["PosiDirection"]],
