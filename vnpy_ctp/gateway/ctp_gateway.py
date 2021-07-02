@@ -2,7 +2,7 @@ import sys
 import pytz
 from datetime import datetime
 from time import sleep
-from typing import Dict, List, Tuple
+from typing import Dict, List, Set, Tuple
 from pathlib import Path
 
 from vnpy.event import EventEngine
@@ -259,7 +259,7 @@ class CtpMdApi(MdApi):
 
         self.connect_status: bool = False
         self.login_status: bool = False
-        self.subscribed: List[str] = set()
+        self.subscribed: Set = set()
 
         self.userid: str = ""
         self.password: str = ""
