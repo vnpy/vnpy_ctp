@@ -20,13 +20,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-try:
-    from .gateway import CtpGateway
-except ImportError:
-    pass
-
 
 import importlib_metadata
 
+from .gateway import CtpGateway
 
-__version__ = importlib_metadata.version("vnpy_ctp")
+
+try:
+    __version__ = importlib_metadata.version("vnpy_ctp")
+except importlib_metadata.PackageNotFoundError:
+    __version__ = "dev"
