@@ -2,7 +2,7 @@ import sys
 import pytz
 from datetime import datetime
 from time import sleep
-from typing import Dict, List, Tuple
+from typing import Dict, List, Set, Tuple
 from pathlib import Path
 
 from vnpy.event import EventEngine
@@ -259,7 +259,7 @@ class CtpMdApi(MdApi):
 
         self.connect_status: bool = False
         self.login_status: bool = False
-        self.subscribed: List[str] = set()
+        self.subscribed: Set = set()
 
         self.userid: str = ""
         self.password: str = ""
@@ -319,7 +319,7 @@ class CtpMdApi(MdApi):
 
         timestamp: str = f"{date_str} {data['UpdateTime']}.{int(data['UpdateMillisec']/100)}"
         dt: datetime = datetime.strptime(timestamp, "%Y%m%d %H:%M:%S.%f")
-        dt = CHINA_TZ.localize(dt)
+        dt: datetime = CHINA_TZ.localize(dt)
 
         tick: TickData = TickData(
             symbol=symbol,
@@ -327,6 +327,7 @@ class CtpMdApi(MdApi):
             datetime=dt,
             name=contract.name,
             volume=data["Volume"],
+            turnover=data["Turnover"],
             open_interest=data["OpenInterest"],
             last_price=adjust_price(data["LastPrice"]),
             limit_up=data["UpperLimitPrice"],
@@ -539,7 +540,7 @@ class CtpTdApi(TdApi):
             key: str = f"{data['InstrumentID'], data['PosiDirection']}"
             position: PositionData = self.positions.get(key, None)
             if not position:
-                position = PositionData(
+                position: PositionData = PositionData(
                     symbol=data["InstrumentID"],
                     exchange=contract.exchange,
                     direction=DIRECTION_CTP2VT[data["PosiDirection"]],
@@ -657,7 +658,7 @@ class CtpTdApi(TdApi):
 
         timestamp: str = f"{data['InsertDate']} {data['InsertTime']}"
         dt: datetime = datetime.strptime(timestamp, "%Y%m%d %H:%M:%S")
-        dt = CHINA_TZ.localize(dt)
+        dt: datetime = CHINA_TZ.localize(dt)
 
         tp = (data["OrderPriceType"], data["TimeCondition"], data["VolumeCondition"])
 
@@ -692,7 +693,7 @@ class CtpTdApi(TdApi):
 
         timestamp: str = f"{data['TradeDate']} {data['TradeTime']}"
         dt: datetime = datetime.strptime(timestamp, "%Y%m%d %H:%M:%S")
-        dt = CHINA_TZ.localize(dt)
+        dt: datetime = CHINA_TZ.localize(dt)
 
         trade: TradeData = TradeData(
             symbol=symbol,
