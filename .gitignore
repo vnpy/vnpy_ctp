@@ -36,3 +36,5 @@ __pycache__/
 .vs/
 x64/
 
+# PyCharm
+.idea/

@@ -374,7 +374,7 @@ class CtpMdApi(MdApi):
 
         # 禁止重复发起连接，会导致异常崩溃
         if not self.connect_status:
-            path: Path = get_folder_path(self.gateway_name.lower())
+            path: Path = get_folder_path(self.gateway_name.lower() + "\\" + self.userid.lower())
             self.createFtdcMdApi((str(path) + "\\Md").encode("GBK"))
 
             self.registerFront(address)
@@ -736,7 +736,7 @@ class CtpTdApi(TdApi):
         self.appid = appid
 
         if not self.connect_status:
-            path: Path = get_folder_path(self.gateway_name.lower())
+            path: Path = get_folder_path(self.gateway_name.lower() + "\\" + self.userid.lower())
             self.createFtdcTraderApi((str(path) + "\\Td").encode("GBK"))
 
             self.subscribePrivateTopic(0)
