@@ -193,13 +193,7 @@ class CtpGateway(BaseGateway):
 
     def send_order(self, req: OrderRequest) -> str:
         """委托下单"""
-        # 期权询价
-        if req.type == OrderType.RFQ:
-            vt_orderid: str = self.td_api.send_rfq(req)
-        # 其他委托
-        else:
-            vt_orderid: str = self.td_api.send_order(req)
-        return vt_orderid
+        return self.td_api.send_order(req)
 
     def cancel_order(self, req: CancelRequest) -> None:
         """委托撤单"""
@@ -838,26 +832,6 @@ class CtpTdApi(TdApi):
 
         self.reqid += 1
         self.reqOrderAction(ctp_req, self.reqid)
-
-    def send_rfq(self, req: OrderRequest) -> str:
-        """询价请求"""
-        self.order_ref += 1
-
-        ctp_req: dict = {
-            "InstrumentID": req.symbol,
-            "ExchangeID": req.exchange.value,
-            "ForQuoteRef": str(self.order_ref),
-            "BrokerID": self.brokerid,
-            "InvestorID": self.userid
-        }
-
-        self.reqid += 1
-        self.reqForQuoteInsert(ctp_req, self.reqid)
-
-        orderid: str = f"{self.frontid}_{self.sessionid}_{self.order_ref}"
-        vt_orderid: str = f"{self.gateway_name}.{orderid}"
-
-        return vt_orderid
 
     def query_account(self) -> None:
         """查询资金"""
