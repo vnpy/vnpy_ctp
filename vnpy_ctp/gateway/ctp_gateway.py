@@ -430,7 +430,7 @@ class CtpTdApi(TdApi):
 
         self.frontid: int = 0
         self.sessionid: int = 0
-
+        self.error_code:int = 0
         self.order_data: List[dict] = []
         self.trade_data: List[dict] = []
         self.positions: Dict[str, PositionData] = {}
@@ -440,7 +440,7 @@ class CtpTdApi(TdApi):
         """服务器连接成功回报"""
         self.gateway.write_log("交易服务器连接成功")
 
-        if self.auth_code:
+        if self.auth_code and self.error_code != 63:
             self.authenticate()
         else:
             self.login()
@@ -457,6 +457,7 @@ class CtpTdApi(TdApi):
             self.gateway.write_log("交易服务器授权验证成功")
             self.login()
         else:
+            self.error_code = error["ErrorID"]
             self.gateway.write_error("交易服务器授权验证失败", error)
 
     def onRspUserLogin(self, data: dict, error: dict, reqid: int, last: bool) -> None:
