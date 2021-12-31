@@ -31,7 +31,7 @@ pip install vnpy_ctp
 ```
 python setup.py install
 ```
-
+由于在安装的同时需要编译C++代码，因此在执行上述命令之前需要去微软[官网](https://visualstudio.microsoft.com/zh-hans/downloads/?q=build+tools)下载Visual Studio Build Tools。其中工作负荷选择Visual C++生成工具，同时推荐下载2017版。
 ## 使用
 
 以脚本方式启动（script/run.py）：
