@@ -306,7 +306,7 @@ class CtpMdApi(MdApi):
             return
 
         # 对大商所的交易日字段取本地日期
-        if contract.exchange == Exchange.DCE:
+        if not data["ActionDay"] or contract.exchange == Exchange.DCE:
             date_str: str = self.current_date
         else:
             date_str: str = data["ActionDay"]
