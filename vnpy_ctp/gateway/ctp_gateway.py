@@ -141,6 +141,8 @@ class CtpGateway(BaseGateway):
     vn.py用于对接期货CTP柜台的交易接口。
     """
 
+    default_name: str = "CTP"
+
     default_setting: Dict[str, str] = {
         "用户名": "",
         "密码": "",
@@ -153,7 +155,7 @@ class CtpGateway(BaseGateway):
 
     exchanges: List[str] = list(EXCHANGE_CTP2VT.values())
 
-    def __init__(self, event_engine: EventEngine, gateway_name: str = "CTP") -> None:
+    def __init__(self, event_engine: EventEngine, gateway_name: str) -> None:
         """构造函数"""
         super().__init__(event_engine, gateway_name)
 
