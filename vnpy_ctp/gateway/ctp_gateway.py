@@ -175,12 +175,14 @@ class CtpGateway(BaseGateway):
         if (
             (not td_address.startswith("tcp://"))
             and (not td_address.startswith("ssl://"))
+            and (not td_address.startswith("socks"))
         ):
             td_address = "tcp://" + td_address
 
         if (
             (not md_address.startswith("tcp://"))
             and (not md_address.startswith("ssl://"))
+            and (not md_address.startswith("socks"))
         ):
             md_address = "tcp://" + md_address
 
