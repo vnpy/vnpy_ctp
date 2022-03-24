@@ -2,7 +2,7 @@ import sys
 import pytz
 from datetime import datetime
 from time import sleep
-from typing import Dict, List, Set, Tuple
+from typing import Dict, List, Tuple
 from pathlib import Path
 
 from vnpy.event import EventEngine
