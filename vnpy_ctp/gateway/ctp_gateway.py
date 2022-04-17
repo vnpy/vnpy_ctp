@@ -817,7 +817,7 @@ class CtpTdApi(TdApi):
 
         self.reqid += 1
         n: int = self.reqOrderInsert(ctp_req, self.reqid)
-        if not n:
+        if n:
             return ""
 
         orderid: str = f"{self.frontid}_{self.sessionid}_{self.order_ref}"
