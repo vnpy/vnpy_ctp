@@ -816,7 +816,9 @@ class CtpTdApi(TdApi):
         }
 
         self.reqid += 1
-        self.reqOrderInsert(ctp_req, self.reqid)
+        n: int = self.reqOrderInsert(ctp_req, self.reqid)
+        if not n:
+            return ""
 
         orderid: str = f"{self.frontid}_{self.sessionid}_{self.order_ref}"
         order: OrderData = req.create_order_data(orderid, self.gateway_name)
