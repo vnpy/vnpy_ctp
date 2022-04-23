@@ -2,7 +2,7 @@ import sys
 import pytz
 from datetime import datetime
 from time import sleep
-from typing import Dict, List, Set, Tuple
+from typing import Dict, List, Tuple
 from pathlib import Path
 
 from vnpy.event import EventEngine
@@ -138,7 +138,7 @@ symbol_contract_map: Dict[str, ContractData] = {}
 
 class CtpGateway(BaseGateway):
     """
-    vn.py用于对接期货CTP柜台的交易接口。
+    VeighNa用于对接期货CTP柜台的交易接口。
     """
 
     default_name: str = "CTP"
@@ -257,7 +257,7 @@ class CtpMdApi(MdApi):
 
         self.connect_status: bool = False
         self.login_status: bool = False
-        self.subscribed: Set = set()
+        self.subscribed: set = set()
 
         self.userid: str = ""
         self.password: str = ""
@@ -540,7 +540,7 @@ class CtpTdApi(TdApi):
             key: str = f"{data['InstrumentID'], data['PosiDirection']}"
             position: PositionData = self.positions.get(key, None)
             if not position:
-                position: PositionData = PositionData(
+                position = PositionData(
                     symbol=data["InstrumentID"],
                     exchange=contract.exchange,
                     direction=DIRECTION_CTP2VT[data["PosiDirection"]],
@@ -661,7 +661,7 @@ class CtpTdApi(TdApi):
         dt: datetime = datetime.strptime(timestamp, "%Y%m%d %H:%M:%S")
         dt: datetime = CHINA_TZ.localize(dt)
 
-        tp = (data["OrderPriceType"], data["TimeCondition"], data["VolumeCondition"])
+        tp: tuple = (data["OrderPriceType"], data["TimeCondition"], data["VolumeCondition"])
 
         order: OrderData = OrderData(
             symbol=symbol,
@@ -791,7 +791,7 @@ class CtpTdApi(TdApi):
 
         self.order_ref += 1
 
-        tp = ORDERTYPE_VT2CTP[req.type]
+        tp: tuple = ORDERTYPE_VT2CTP[req.type]
         price_type, time_condition, volume_condition = tp
 
         ctp_req: dict = {
