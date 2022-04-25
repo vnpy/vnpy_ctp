@@ -37,6 +37,7 @@ from ..api import (
     THOST_FTDC_OST_PartTradedQueueing,
     THOST_FTDC_OST_AllTraded,
     THOST_FTDC_OST_Canceled,
+    THOST_FTDC_OST_Unknown,
     THOST_FTDC_D_Buy,
     THOST_FTDC_D_Sell,
     THOST_FTDC_PD_Long,
@@ -69,7 +70,8 @@ STATUS_CTP2VT: Dict[str, Status] = {
     THOST_FTDC_OST_NoTradeQueueing: Status.NOTTRADED,
     THOST_FTDC_OST_PartTradedQueueing: Status.PARTTRADED,
     THOST_FTDC_OST_AllTraded: Status.ALLTRADED,
-    THOST_FTDC_OST_Canceled: Status.CANCELLED
+    THOST_FTDC_OST_Canceled: Status.CANCELLED,
+    THOST_FTDC_OST_Unknown: Status.SUBMITTING
 }
 
 # 多空方向映射
