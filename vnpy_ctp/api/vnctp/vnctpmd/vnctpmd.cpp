@@ -219,8 +219,6 @@ void MdApi::OnRtnForQuoteRsp(CThostFtdcForQuoteRspField *pForQuoteRsp)
 	this->task_queue.push(task);
 };
 
-
-
 ///-------------------------------------------------------------------------------------
 ///工作线程从队列中取出数据，转化为python对象后，进行推送
 ///-------------------------------------------------------------------------------------
@@ -358,6 +356,7 @@ void MdApi::processRspUserLogin(Task *task)
 		data["CZCETime"] = toUtf(task_data->CZCETime);
 		data["FFEXTime"] = toUtf(task_data->FFEXTime);
 		data["INETime"] = toUtf(task_data->INETime);
+		data["SysVersion"] = toUtf(task_data->SysVersion);
 		delete task_data;
 	}
 	dict error;
@@ -575,6 +574,8 @@ void MdApi::processRtnDepthMarketData(Task *task)
 		data["ActionDay"] = toUtf(task_data->ActionDay);
 		data["InstrumentID"] = toUtf(task_data->InstrumentID);
 		data["ExchangeInstID"] = toUtf(task_data->ExchangeInstID);
+		data["BandingUpperPrice"] = task_data->BandingUpperPrice;
+		data["BandingLowerPrice"] = task_data->BandingLowerPrice;
 		delete task_data;
 	}
 	this->onRtnDepthMarketData(data);
@@ -598,7 +599,6 @@ void MdApi::processRtnForQuoteRsp(Task *task)
 	}
 	this->onRtnForQuoteRsp(data);
 };
-
 
 ///-------------------------------------------------------------------------------------
 ///主动函数
@@ -658,6 +658,21 @@ void MdApi::registerFront(string pszFrontAddress)
 	this->api->RegisterFront((char*)pszFrontAddress.c_str());
 };
 
+void MdApi::registerNameServer(string pszNsAddress)
+{
+	this->api->RegisterNameServer((char*)pszNsAddress.c_str());
+};
+
+void MdApi::registerFensUserInfo(const dict &req)
+{
+	CThostFtdcFensUserInfoField myreq = CThostFtdcFensUserInfoField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "BrokerID", myreq.BrokerID);
+	getString(req, "UserID", myreq.UserID);
+	getChar(req, "LoginMode", &myreq.LoginMode);
+	this->api->RegisterFensUserInfo(&myreq);
+};
+
 int MdApi::subscribeMarketData(string instrumentID)
 {
 	char* buffer = (char*) instrumentID.c_str();
@@ -669,7 +684,7 @@ int MdApi::subscribeMarketData(string instrumentID)
 int MdApi::unSubscribeMarketData(string instrumentID)
 {
 	char* buffer = (char*)instrumentID.c_str();
-	char* myreq[1] = { buffer };;
+	char* myreq[1] = { buffer };
 	int i = this->api->UnSubscribeMarketData(myreq, 1);
 	return i;
 };
@@ -685,7 +700,7 @@ int MdApi::subscribeForQuoteRsp(string instrumentID)
 int MdApi::unSubscribeForQuoteRsp(string instrumentID)
 {
 	char* buffer = (char*)instrumentID.c_str();
-	char* myreq[1] = { buffer };;
+	char* myreq[1] = { buffer };
 	int i = this->api->UnSubscribeForQuoteRsp(myreq, 1);
 	return i;
 };
@@ -731,7 +746,6 @@ int MdApi::reqQryMulticastInstrument(const dict &req, int reqid)
 	int i = this->api->ReqQryMulticastInstrument(&myreq, reqid);
 	return i;
 };
-
 
 ///-------------------------------------------------------------------------------------
 ///Boost.Python封装
@@ -912,6 +926,8 @@ PYBIND11_MODULE(vnctpmd, m)
 		.def("exit", &MdApi::exit)
 		.def("getTradingDay", &MdApi::getTradingDay)
 		.def("registerFront", &MdApi::registerFront)
+		.def("registerNameServer", &MdApi::registerNameServer)
+		.def("registerFensUserInfo", &MdApi::registerFensUserInfo)
 		.def("subscribeMarketData", &MdApi::subscribeMarketData)
 		.def("unSubscribeMarketData", &MdApi::unSubscribeMarketData)
 		.def("subscribeForQuoteRsp", &MdApi::subscribeForQuoteRsp)

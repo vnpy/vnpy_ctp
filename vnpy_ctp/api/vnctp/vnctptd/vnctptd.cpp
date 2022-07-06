@@ -1,4 +1,4 @@
-// vnctpmd.cpp : 定义 DLL 应用程序的导出函数。
+// vnctptd.cpp : 定义 DLL 应用程序的导出函数。
 //
 
 #include "vnctptd.h"
@@ -795,6 +795,27 @@ void TdApi::OnRspQryDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarket
 	{
 		CThostFtdcDepthMarketDataField *task_data = new CThostFtdcDepthMarketDataField();
 		*task_data = *pDepthMarketData;
+		task.task_data = task_data;
+	}
+	if (pRspInfo)
+	{
+		CThostFtdcRspInfoField *task_error = new CThostFtdcRspInfoField();
+		*task_error = *pRspInfo;
+		task.task_error = task_error;
+	}
+	task.task_id = nRequestID;
+	task.task_last = bIsLast;
+	this->task_queue.push(task);
+};
+
+void TdApi::OnRspQryTraderOffer(CThostFtdcTraderOfferField *pTraderOffer, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
+{
+	Task task = Task();
+	task.task_name = ONRSPQRYTRADEROFFER;
+	if (pTraderOffer)
+	{
+		CThostFtdcTraderOfferField *task_data = new CThostFtdcTraderOfferField();
+		*task_data = *pTraderOffer;
 		task.task_data = task_data;
 	}
 	if (pRspInfo)
@@ -2389,6 +2410,47 @@ void TdApi::OnRspQryCombPromotionParam(CThostFtdcCombPromotionParamField *pCombP
 	this->task_queue.push(task);
 };
 
+void TdApi::OnRspQryRiskSettleInvstPosition(CThostFtdcRiskSettleInvstPositionField *pRiskSettleInvstPosition, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
+{
+	Task task = Task();
+	task.task_name = ONRSPQRYRISKSETTLEINVSTPOSITION;
+	if (pRiskSettleInvstPosition)
+	{
+		CThostFtdcRiskSettleInvstPositionField *task_data = new CThostFtdcRiskSettleInvstPositionField();
+		*task_data = *pRiskSettleInvstPosition;
+		task.task_data = task_data;
+	}
+	if (pRspInfo)
+	{
+		CThostFtdcRspInfoField *task_error = new CThostFtdcRspInfoField();
+		*task_error = *pRspInfo;
+		task.task_error = task_error;
+	}
+	task.task_id = nRequestID;
+	task.task_last = bIsLast;
+	this->task_queue.push(task);
+};
+
+void TdApi::OnRspQryRiskSettleProductStatus(CThostFtdcRiskSettleProductStatusField *pRiskSettleProductStatus, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
+{
+	Task task = Task();
+	task.task_name = ONRSPQRYRISKSETTLEPRODUCTSTATUS;
+	if (pRiskSettleProductStatus)
+	{
+		CThostFtdcRiskSettleProductStatusField *task_data = new CThostFtdcRiskSettleProductStatusField();
+		*task_data = *pRiskSettleProductStatus;
+		task.task_data = task_data;
+	}
+	if (pRspInfo)
+	{
+		CThostFtdcRspInfoField *task_error = new CThostFtdcRspInfoField();
+		*task_error = *pRspInfo;
+		task.task_error = task_error;
+	}
+	task.task_id = nRequestID;
+	task.task_last = bIsLast;
+	this->task_queue.push(task);
+};
 
 ///-------------------------------------------------------------------------------------
 ///工作线程从队列中取出数据，转化为python对象后，进行推送
@@ -2641,6 +2703,12 @@ void TdApi::processTask()
 			case ONRSPQRYDEPTHMARKETDATA:
 			{
 				this->processRspQryDepthMarketData(&task);
+				break;
+			}
+
+			case ONRSPQRYTRADEROFFER:
+			{
+				this->processRspQryTraderOffer(&task);
 				break;
 			}
 
@@ -3165,6 +3233,18 @@ void TdApi::processTask()
 				this->processRspQryCombPromotionParam(&task);
 				break;
 			}
+
+			case ONRSPQRYRISKSETTLEINVSTPOSITION:
+			{
+				this->processRspQryRiskSettleInvstPosition(&task);
+				break;
+			}
+
+			case ONRSPQRYRISKSETTLEPRODUCTSTATUS:
+			{
+				this->processRspQryRiskSettleProductStatus(&task);
+				break;
+			}
             };
         }
     }
@@ -3236,6 +3316,7 @@ void TdApi::processRspUserLogin(Task *task)
 		data["CZCETime"] = toUtf(task_data->CZCETime);
 		data["FFEXTime"] = toUtf(task_data->FFEXTime);
 		data["INETime"] = toUtf(task_data->INETime);
+		data["SysVersion"] = toUtf(task_data->SysVersion);
 		delete task_data;
 	}
 	dict error;
@@ -3826,6 +3907,7 @@ void TdApi::processRspQuoteInsert(Task *task)
 		data["MacAddress"] = toUtf(task_data->MacAddress);
 		data["InstrumentID"] = toUtf(task_data->InstrumentID);
 		data["IPAddress"] = toUtf(task_data->IPAddress);
+		data["ReplaceSysID"] = toUtf(task_data->ReplaceSysID);
 		delete task_data;
 	}
 	dict error;
@@ -4320,6 +4402,8 @@ void TdApi::processRspQryInvestor(Task *task)
 		data["Mobile"] = toUtf(task_data->Mobile);
 		data["CommModelID"] = toUtf(task_data->CommModelID);
 		data["MarginModelID"] = toUtf(task_data->MarginModelID);
+		data["IsOrderFreq"] = task_data->IsOrderFreq;
+		data["IsOpenVolLimit"] = task_data->IsOpenVolLimit;
 		delete task_data;
 	}
 	dict error;
@@ -4478,6 +4562,8 @@ void TdApi::processRspQryProduct(Task *task)
 		data["UnderlyingMultiple"] = task_data->UnderlyingMultiple;
 		data["ProductID"] = toUtf(task_data->ProductID);
 		data["ExchangeProductID"] = toUtf(task_data->ExchangeProductID);
+		data["OpenLimitControlLevel"] = task_data->OpenLimitControlLevel;
+		data["OrderFreqControlLevel"] = task_data->OrderFreqControlLevel;
 		delete task_data;
 	}
 	dict error;
@@ -4599,6 +4685,8 @@ void TdApi::processRspQryDepthMarketData(Task *task)
 		data["ActionDay"] = toUtf(task_data->ActionDay);
 		data["InstrumentID"] = toUtf(task_data->InstrumentID);
 		data["ExchangeInstID"] = toUtf(task_data->ExchangeInstID);
+		data["BandingUpperPrice"] = task_data->BandingUpperPrice;
+		data["BandingLowerPrice"] = task_data->BandingLowerPrice;
 		delete task_data;
 	}
 	dict error;
@@ -4610,6 +4698,46 @@ void TdApi::processRspQryDepthMarketData(Task *task)
 		delete task_error;
 	}
 	this->onRspQryDepthMarketData(data, error, task->task_id, task->task_last);
+};
+
+void TdApi::processRspQryTraderOffer(Task *task)
+{
+	gil_scoped_acquire acquire;
+	dict data;
+	if (task->task_data)
+	{
+		CThostFtdcTraderOfferField *task_data = (CThostFtdcTraderOfferField*)task->task_data;
+		data["ExchangeID"] = toUtf(task_data->ExchangeID);
+		data["TraderID"] = toUtf(task_data->TraderID);
+		data["ParticipantID"] = toUtf(task_data->ParticipantID);
+		data["Password"] = toUtf(task_data->Password);
+		data["InstallID"] = task_data->InstallID;
+		data["OrderLocalID"] = toUtf(task_data->OrderLocalID);
+		data["TraderConnectStatus"] = task_data->TraderConnectStatus;
+		data["ConnectRequestDate"] = toUtf(task_data->ConnectRequestDate);
+		data["ConnectRequestTime"] = toUtf(task_data->ConnectRequestTime);
+		data["LastReportDate"] = toUtf(task_data->LastReportDate);
+		data["LastReportTime"] = toUtf(task_data->LastReportTime);
+		data["ConnectDate"] = toUtf(task_data->ConnectDate);
+		data["ConnectTime"] = toUtf(task_data->ConnectTime);
+		data["StartDate"] = toUtf(task_data->StartDate);
+		data["StartTime"] = toUtf(task_data->StartTime);
+		data["TradingDay"] = toUtf(task_data->TradingDay);
+		data["BrokerID"] = toUtf(task_data->BrokerID);
+		data["MaxTradeID"] = toUtf(task_data->MaxTradeID);
+		data["MaxOrderMessageReference"] = toUtf(task_data->MaxOrderMessageReference);
+		data["OrderCancelAlg"] = task_data->OrderCancelAlg;
+		delete task_data;
+	}
+	dict error;
+	if (task->task_error)
+	{
+		CThostFtdcRspInfoField *task_error = (CThostFtdcRspInfoField*)task->task_error;
+		error["ErrorID"] = task_error->ErrorID;
+		error["ErrorMsg"] = toUtf(task_error->ErrorMsg);
+		delete task_error;
+	}
+	this->onRspQryTraderOffer(data, error, task->task_id, task->task_last);
 };
 
 void TdApi::processRspQrySettlementInfo(Task *task)
@@ -5159,6 +5287,8 @@ void TdApi::processRspQryInstrumentOrderCommRate(Task *task)
 		data["ExchangeID"] = toUtf(task_data->ExchangeID);
 		data["InvestUnitID"] = toUtf(task_data->InvestUnitID);
 		data["InstrumentID"] = toUtf(task_data->InstrumentID);
+		data["OrderCommByTrade"] = task_data->OrderCommByTrade;
+		data["OrderActionCommByTrade"] = task_data->OrderActionCommByTrade;
 		delete task_data;
 	}
 	dict error;
@@ -5530,6 +5660,7 @@ void TdApi::processRspQryQuote(Task *task)
 		data["InstrumentID"] = toUtf(task_data->InstrumentID);
 		data["ExchangeInstID"] = toUtf(task_data->ExchangeInstID);
 		data["IPAddress"] = toUtf(task_data->IPAddress);
+		data["ReplaceSysID"] = toUtf(task_data->ReplaceSysID);
 		delete task_data;
 	}
 	dict error;
@@ -6427,6 +6558,7 @@ void TdApi::processRtnQuote(Task *task)
 		data["InstrumentID"] = toUtf(task_data->InstrumentID);
 		data["ExchangeInstID"] = toUtf(task_data->ExchangeInstID);
 		data["IPAddress"] = toUtf(task_data->IPAddress);
+		data["ReplaceSysID"] = toUtf(task_data->ReplaceSysID);
 		delete task_data;
 	}
 	this->onRtnQuote(data);
@@ -6464,6 +6596,7 @@ void TdApi::processErrRtnQuoteInsert(Task *task)
 		data["MacAddress"] = toUtf(task_data->MacAddress);
 		data["InstrumentID"] = toUtf(task_data->InstrumentID);
 		data["IPAddress"] = toUtf(task_data->IPAddress);
+		data["ReplaceSysID"] = toUtf(task_data->ReplaceSysID);
 		delete task_data;
 	}
 	dict error;
@@ -8500,6 +8633,97 @@ void TdApi::processRspQryCombPromotionParam(Task *task)
 	this->onRspQryCombPromotionParam(data, error, task->task_id, task->task_last);
 };
 
+void TdApi::processRspQryRiskSettleInvstPosition(Task *task)
+{
+	gil_scoped_acquire acquire;
+	dict data;
+	if (task->task_data)
+	{
+		CThostFtdcRiskSettleInvstPositionField *task_data = (CThostFtdcRiskSettleInvstPositionField*)task->task_data;
+		data["InstrumentID"] = toUtf(task_data->InstrumentID);
+		data["BrokerID"] = toUtf(task_data->BrokerID);
+		data["InvestorID"] = toUtf(task_data->InvestorID);
+		data["PosiDirection"] = task_data->PosiDirection;
+		data["HedgeFlag"] = task_data->HedgeFlag;
+		data["PositionDate"] = task_data->PositionDate;
+		data["YdPosition"] = task_data->YdPosition;
+		data["Position"] = task_data->Position;
+		data["LongFrozen"] = task_data->LongFrozen;
+		data["ShortFrozen"] = task_data->ShortFrozen;
+		data["LongFrozenAmount"] = task_data->LongFrozenAmount;
+		data["ShortFrozenAmount"] = task_data->ShortFrozenAmount;
+		data["OpenVolume"] = task_data->OpenVolume;
+		data["CloseVolume"] = task_data->CloseVolume;
+		data["OpenAmount"] = task_data->OpenAmount;
+		data["CloseAmount"] = task_data->CloseAmount;
+		data["PositionCost"] = task_data->PositionCost;
+		data["PreMargin"] = task_data->PreMargin;
+		data["UseMargin"] = task_data->UseMargin;
+		data["FrozenMargin"] = task_data->FrozenMargin;
+		data["FrozenCash"] = task_data->FrozenCash;
+		data["FrozenCommission"] = task_data->FrozenCommission;
+		data["CashIn"] = task_data->CashIn;
+		data["Commission"] = task_data->Commission;
+		data["CloseProfit"] = task_data->CloseProfit;
+		data["PositionProfit"] = task_data->PositionProfit;
+		data["PreSettlementPrice"] = task_data->PreSettlementPrice;
+		data["SettlementPrice"] = task_data->SettlementPrice;
+		data["TradingDay"] = toUtf(task_data->TradingDay);
+		data["SettlementID"] = task_data->SettlementID;
+		data["OpenCost"] = task_data->OpenCost;
+		data["ExchangeMargin"] = task_data->ExchangeMargin;
+		data["CombPosition"] = task_data->CombPosition;
+		data["CombLongFrozen"] = task_data->CombLongFrozen;
+		data["CombShortFrozen"] = task_data->CombShortFrozen;
+		data["CloseProfitByDate"] = task_data->CloseProfitByDate;
+		data["CloseProfitByTrade"] = task_data->CloseProfitByTrade;
+		data["TodayPosition"] = task_data->TodayPosition;
+		data["MarginRateByMoney"] = task_data->MarginRateByMoney;
+		data["MarginRateByVolume"] = task_data->MarginRateByVolume;
+		data["StrikeFrozen"] = task_data->StrikeFrozen;
+		data["StrikeFrozenAmount"] = task_data->StrikeFrozenAmount;
+		data["AbandonFrozen"] = task_data->AbandonFrozen;
+		data["ExchangeID"] = toUtf(task_data->ExchangeID);
+		data["YdStrikeFrozen"] = task_data->YdStrikeFrozen;
+		data["InvestUnitID"] = toUtf(task_data->InvestUnitID);
+		data["PositionCostOffset"] = task_data->PositionCostOffset;
+		data["TasPosition"] = task_data->TasPosition;
+		data["TasPositionCost"] = task_data->TasPositionCost;
+		delete task_data;
+	}
+	dict error;
+	if (task->task_error)
+	{
+		CThostFtdcRspInfoField *task_error = (CThostFtdcRspInfoField*)task->task_error;
+		error["ErrorID"] = task_error->ErrorID;
+		error["ErrorMsg"] = toUtf(task_error->ErrorMsg);
+		delete task_error;
+	}
+	this->onRspQryRiskSettleInvstPosition(data, error, task->task_id, task->task_last);
+};
+
+void TdApi::processRspQryRiskSettleProductStatus(Task *task)
+{
+	gil_scoped_acquire acquire;
+	dict data;
+	if (task->task_data)
+	{
+		CThostFtdcRiskSettleProductStatusField *task_data = (CThostFtdcRiskSettleProductStatusField*)task->task_data;
+		data["ExchangeID"] = toUtf(task_data->ExchangeID);
+		data["ProductID"] = toUtf(task_data->ProductID);
+		data["ProductStatus"] = task_data->ProductStatus;
+		delete task_data;
+	}
+	dict error;
+	if (task->task_error)
+	{
+		CThostFtdcRspInfoField *task_error = (CThostFtdcRspInfoField*)task->task_error;
+		error["ErrorID"] = task_error->ErrorID;
+		error["ErrorMsg"] = toUtf(task_error->ErrorMsg);
+		delete task_error;
+	}
+	this->onRspQryRiskSettleProductStatus(data, error, task->task_id, task->task_last);
+};
 
 ///-------------------------------------------------------------------------------------
 ///主动函数
@@ -8557,6 +8781,21 @@ string TdApi::getApiVersion()
 void TdApi::registerFront(string pszFrontAddress)
 {
     this->api->RegisterFront((char*)pszFrontAddress.c_str());
+};
+
+void TdApi::registerNameServer(string pszNsAddress)
+{
+	this->api->RegisterNameServer((char*)pszNsAddress.c_str());
+};
+
+void TdApi::registerFensUserInfo(const dict &req)
+{
+	CThostFtdcFensUserInfoField myreq = CThostFtdcFensUserInfoField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "BrokerID", myreq.BrokerID);
+	getString(req, "UserID", myreq.UserID);
+	getChar(req, "LoginMode", &myreq.LoginMode);
+	this->api->RegisterFensUserInfo(&myreq);
 };
 
 void TdApi::subscribePrivateTopic(int nType)
@@ -9039,6 +9278,7 @@ int TdApi::reqQuoteInsert(const dict &req, int reqid)
 	getString(req, "MacAddress", myreq.MacAddress);
 	getString(req, "InstrumentID", myreq.InstrumentID);
 	getString(req, "IPAddress", myreq.IPAddress);
+	getString(req, "ReplaceSysID", myreq.ReplaceSysID);
 	int i = this->api->ReqQuoteInsert(&myreq, reqid);
 	return i;
 };
@@ -9324,6 +9564,17 @@ int TdApi::reqQryDepthMarketData(const dict &req, int reqid)
 	getString(req, "ExchangeID", myreq.ExchangeID);
 	getString(req, "InstrumentID", myreq.InstrumentID);
 	int i = this->api->ReqQryDepthMarketData(&myreq, reqid);
+	return i;
+};
+
+int TdApi::reqQryTraderOffer(const dict &req, int reqid)
+{
+	CThostFtdcQryTraderOfferField myreq = CThostFtdcQryTraderOfferField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "ExchangeID", myreq.ExchangeID);
+	getString(req, "ParticipantID", myreq.ParticipantID);
+	getString(req, "TraderID", myreq.TraderID);
+	int i = this->api->ReqQryTraderOffer(&myreq, reqid);
 	return i;
 };
 
@@ -9993,6 +10244,25 @@ int TdApi::reqQryCombPromotionParam(const dict &req, int reqid)
 	return i;
 };
 
+int TdApi::reqQryRiskSettleInvstPosition(const dict &req, int reqid)
+{
+	CThostFtdcQryRiskSettleInvstPositionField myreq = CThostFtdcQryRiskSettleInvstPositionField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "BrokerID", myreq.BrokerID);
+	getString(req, "InvestorID", myreq.InvestorID);
+	getString(req, "InstrumentID", myreq.InstrumentID);
+	int i = this->api->ReqQryRiskSettleInvstPosition(&myreq, reqid);
+	return i;
+};
+
+int TdApi::reqQryRiskSettleProductStatus(const dict &req, int reqid)
+{
+	CThostFtdcQryRiskSettleProductStatusField myreq = CThostFtdcQryRiskSettleProductStatusField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "ProductID", myreq.ProductID);
+	int i = this->api->ReqQryRiskSettleProductStatus(&myreq, reqid);
+	return i;
+};
 
 ///-------------------------------------------------------------------------------------
 ///Boost.Python封装
@@ -10476,6 +10746,18 @@ public:
 		try
 		{
 			PYBIND11_OVERLOAD(void, TdApi, onRspQryDepthMarketData, data, error, reqid, last);
+		}
+		catch (const error_already_set &e)
+		{
+			cout << e.what() << endl;
+		}
+	};
+
+	void onRspQryTraderOffer(const dict &data, const dict &error, int reqid, bool last) override
+	{
+		try
+		{
+			PYBIND11_OVERLOAD(void, TdApi, onRspQryTraderOffer, data, error, reqid, last);
 		}
 		catch (const error_already_set &e)
 		{
@@ -11526,6 +11808,30 @@ public:
 			cout << e.what() << endl;
 		}
 	};
+
+	void onRspQryRiskSettleInvstPosition(const dict &data, const dict &error, int reqid, bool last) override
+	{
+		try
+		{
+			PYBIND11_OVERLOAD(void, TdApi, onRspQryRiskSettleInvstPosition, data, error, reqid, last);
+		}
+		catch (const error_already_set &e)
+		{
+			cout << e.what() << endl;
+		}
+	};
+
+	void onRspQryRiskSettleProductStatus(const dict &data, const dict &error, int reqid, bool last) override
+	{
+		try
+		{
+			PYBIND11_OVERLOAD(void, TdApi, onRspQryRiskSettleProductStatus, data, error, reqid, last);
+		}
+		catch (const error_already_set &e)
+		{
+			cout << e.what() << endl;
+		}
+	};
 };
 
 
@@ -11542,6 +11848,8 @@ PYBIND11_MODULE(vnctptd, m)
         .def("getTradingDay", &TdApi::getTradingDay)
 		.def("getApiVersion", &TdApi::getApiVersion)
         .def("registerFront", &TdApi::registerFront)
+		.def("registerNameServer", &TdApi::registerNameServer)
+		.def("registerFensUserInfo", &TdApi::registerFensUserInfo)
         .def("subscribePublicTopic", &TdApi::subscribePublicTopic)
         .def("subscribePrivateTopic", &TdApi::subscribePrivateTopic)
 
@@ -11585,6 +11893,7 @@ PYBIND11_MODULE(vnctptd, m)
 		.def("reqQryProduct", &TdApi::reqQryProduct)
 		.def("reqQryInstrument", &TdApi::reqQryInstrument)
 		.def("reqQryDepthMarketData", &TdApi::reqQryDepthMarketData)
+		.def("reqQryTraderOffer", &TdApi::reqQryTraderOffer)
 		.def("reqQrySettlementInfo", &TdApi::reqQrySettlementInfo)
 		.def("reqQryTransferBank", &TdApi::reqQryTransferBank)
 		.def("reqQryInvestorPositionDetail", &TdApi::reqQryInvestorPositionDetail)
@@ -11629,6 +11938,8 @@ PYBIND11_MODULE(vnctptd, m)
 		.def("reqQueryBankAccountMoneyByFuture", &TdApi::reqQueryBankAccountMoneyByFuture)
 		.def("reqQryClassifiedInstrument", &TdApi::reqQryClassifiedInstrument)
 		.def("reqQryCombPromotionParam", &TdApi::reqQryCombPromotionParam)
+		.def("reqQryRiskSettleInvstPosition", &TdApi::reqQryRiskSettleInvstPosition)
+		.def("reqQryRiskSettleProductStatus", &TdApi::reqQryRiskSettleProductStatus)
 
 		.def("onFrontConnected", &TdApi::onFrontConnected)
 		.def("onFrontDisconnected", &TdApi::onFrontDisconnected)
@@ -11670,6 +11981,7 @@ PYBIND11_MODULE(vnctptd, m)
 		.def("onRspQryProduct", &TdApi::onRspQryProduct)
 		.def("onRspQryInstrument", &TdApi::onRspQryInstrument)
 		.def("onRspQryDepthMarketData", &TdApi::onRspQryDepthMarketData)
+		.def("onRspQryTraderOffer", &TdApi::onRspQryTraderOffer)
 		.def("onRspQrySettlementInfo", &TdApi::onRspQrySettlementInfo)
 		.def("onRspQryTransferBank", &TdApi::onRspQryTransferBank)
 		.def("onRspQryInvestorPositionDetail", &TdApi::onRspQryInvestorPositionDetail)
@@ -11757,5 +12069,7 @@ PYBIND11_MODULE(vnctptd, m)
 		.def("onRtnChangeAccountByBank", &TdApi::onRtnChangeAccountByBank)
 		.def("onRspQryClassifiedInstrument", &TdApi::onRspQryClassifiedInstrument)
 		.def("onRspQryCombPromotionParam", &TdApi::onRspQryCombPromotionParam)
+		.def("onRspQryRiskSettleInvstPosition", &TdApi::onRspQryRiskSettleInvstPosition)
+		.def("onRspQryRiskSettleProductStatus", &TdApi::onRspQryRiskSettleProductStatus)
 		;
 }

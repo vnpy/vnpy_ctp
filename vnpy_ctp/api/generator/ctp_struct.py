@@ -33,6 +33,7 @@ CThostFtdcRspUserLoginField = {
     "CZCETime": "string",
     "FFEXTime": "string",
     "INETime": "string",
+    "SysVersion": "string",
 }
 
 CThostFtdcUserLogoutField = {
@@ -211,6 +212,8 @@ CThostFtdcProductField = {
     "UnderlyingMultiple": "double",
     "ProductID": "string",
     "ExchangeProductID": "string",
+    "OpenLimitControlLevel": "char",
+    "OrderFreqControlLevel": "char",
 }
 
 CThostFtdcInstrumentField = {
@@ -265,6 +268,7 @@ CThostFtdcTraderField = {
     "Password": "string",
     "InstallCount": "int",
     "BrokerID": "string",
+    "OrderCancelAlg": "char",
 }
 
 CThostFtdcInvestorField = {
@@ -281,6 +285,8 @@ CThostFtdcInvestorField = {
     "Mobile": "string",
     "CommModelID": "string",
     "MarginModelID": "string",
+    "IsOrderFreq": "char",
+    "IsOpenVolLimit": "char",
 }
 
 CThostFtdcTradingCodeField = {
@@ -505,6 +511,8 @@ CThostFtdcDepthMarketDataField = {
     "ActionDay": "string",
     "InstrumentID": "string",
     "ExchangeInstID": "string",
+    "BandingUpperPrice": "double",
+    "BandingLowerPrice": "double",
 }
 
 CThostFtdcInstrumentTradingRightField = {
@@ -562,6 +570,7 @@ CThostFtdcTraderOfferField = {
     "BrokerID": "string",
     "MaxTradeID": "string",
     "MaxOrderMessageReference": "string",
+    "OrderCancelAlg": "char",
 }
 
 CThostFtdcSettlementInfoField = {
@@ -1055,6 +1064,8 @@ CThostFtdcSyncDepositField = {
     "Deposit": "double",
     "IsForce": "int",
     "CurrencyID": "string",
+    "IsFromSopt": "int",
+    "TradingPassword": "string",
 }
 
 CThostFtdcSyncFundMortgageField = {
@@ -1084,6 +1095,8 @@ CThostFtdcSyncingInvestorField = {
     "Mobile": "string",
     "CommModelID": "string",
     "MarginModelID": "string",
+    "IsOrderFreq": "char",
+    "IsOpenVolLimit": "char",
 }
 
 CThostFtdcSyncingTradingCodeField = {
@@ -1974,6 +1987,7 @@ CThostFtdcInputQuoteField = {
     "MacAddress": "string",
     "InstrumentID": "string",
     "IPAddress": "string",
+    "ReplaceSysID": "string",
 }
 
 CThostFtdcInputQuoteActionField = {
@@ -2051,6 +2065,7 @@ CThostFtdcQuoteField = {
     "InstrumentID": "string",
     "ExchangeInstID": "string",
     "IPAddress": "string",
+    "ReplaceSysID": "string",
 }
 
 CThostFtdcQuoteActionField = {
@@ -2476,6 +2491,8 @@ CThostFtdcInstrumentOrderCommRateField = {
     "ExchangeID": "string",
     "InvestUnitID": "string",
     "InstrumentID": "string",
+    "OrderCommByTrade": "double",
+    "OrderActionCommByTrade": "double",
 }
 
 CThostFtdcQryInstrumentOrderCommRateField = {
@@ -2868,6 +2885,11 @@ CThostFtdcMarketDataUpdateTimeField = {
     "InstrumentID": "string",
 }
 
+CThostFtdcMarketDataBandingPriceField = {
+    "BandingUpperPrice": "double",
+    "BandingLowerPrice": "double",
+}
+
 CThostFtdcMarketDataExchangeField = {
     "ExchangeID": "string",
 }
@@ -3000,6 +3022,7 @@ CThostFtdcMDTraderOfferField = {
     "BrokerID": "string",
     "MaxTradeID": "string",
     "MaxOrderMessageReference": "string",
+    "OrderCancelAlg": "char",
 }
 
 CThostFtdcQryMDTraderOfferField = {
@@ -5126,12 +5149,10 @@ CThostFtdcQueryFreqField = {
 }
 
 CThostFtdcAuthForbiddenIPField = {
-    "reserve1": "string",
     "IPAddress": "string",
 }
 
 CThostFtdcQryAuthForbiddenIPField = {
-    "reserve1": "string",
     "IPAddress": "string",
 }
 
@@ -5154,6 +5175,7 @@ CThostFtdcUserSystemInfoField = {
     "ClientLoginTime": "string",
     "ClientAppID": "string",
     "ClientPublicIP": "string",
+    "ClientLoginRemark": "string",
 }
 
 CThostFtdcAuthUserIDField = {
@@ -5189,3 +5211,430 @@ CThostFtdcCombPromotionParamField = {
     "CombHedgeFlag": "string",
     "Xparameter": "double",
 }
+
+CThostFtdcReqUserLoginSCField = {
+    "TradingDay": "string",
+    "BrokerID": "string",
+    "UserID": "string",
+    "Password": "string",
+    "UserProductInfo": "string",
+    "InterfaceProductInfo": "string",
+    "ProtocolInfo": "string",
+    "MacAddress": "string",
+    "OneTimePassword": "string",
+    "ClientIPAddress": "string",
+    "LoginRemark": "string",
+    "ClientIPPort": "int",
+    "AuthCode": "string",
+    "AppID": "string",
+}
+
+CThostFtdcQryRiskSettleInvstPositionField = {
+    "BrokerID": "string",
+    "InvestorID": "string",
+    "InstrumentID": "string",
+}
+
+CThostFtdcQryRiskSettleProductStatusField = {
+    "ProductID": "string",
+}
+
+CThostFtdcRiskSettleInvstPositionField = {
+    "InstrumentID": "string",
+    "BrokerID": "string",
+    "InvestorID": "string",
+    "PosiDirection": "char",
+    "HedgeFlag": "char",
+    "PositionDate": "char",
+    "YdPosition": "int",
+    "Position": "int",
+    "LongFrozen": "int",
+    "ShortFrozen": "int",
+    "LongFrozenAmount": "double",
+    "ShortFrozenAmount": "double",
+    "OpenVolume": "int",
+    "CloseVolume": "int",
+    "OpenAmount": "double",
+    "CloseAmount": "double",
+    "PositionCost": "double",
+    "PreMargin": "double",
+    "UseMargin": "double",
+    "FrozenMargin": "double",
+    "FrozenCash": "double",
+    "FrozenCommission": "double",
+    "CashIn": "double",
+    "Commission": "double",
+    "CloseProfit": "double",
+    "PositionProfit": "double",
+    "PreSettlementPrice": "double",
+    "SettlementPrice": "double",
+    "TradingDay": "string",
+    "SettlementID": "int",
+    "OpenCost": "double",
+    "ExchangeMargin": "double",
+    "CombPosition": "int",
+    "CombLongFrozen": "int",
+    "CombShortFrozen": "int",
+    "CloseProfitByDate": "double",
+    "CloseProfitByTrade": "double",
+    "TodayPosition": "int",
+    "MarginRateByMoney": "double",
+    "MarginRateByVolume": "double",
+    "StrikeFrozen": "int",
+    "StrikeFrozenAmount": "double",
+    "AbandonFrozen": "int",
+    "ExchangeID": "string",
+    "YdStrikeFrozen": "int",
+    "InvestUnitID": "string",
+    "PositionCostOffset": "double",
+    "TasPosition": "int",
+    "TasPositionCost": "double",
+}
+
+CThostFtdcRiskSettleProductStatusField = {
+    "ExchangeID": "string",
+    "ProductID": "string",
+    "ProductStatus": "char",
+}
+
+CThostFtdcSyncDeltaInfoField = {
+    "SyncDeltaSequenceNo": "int",
+    "SyncDeltaStatus": "char",
+    "SyncDescription": "string",
+    "IsOnlyTrdDelta": "int",
+}
+
+CThostFtdcSyncDeltaProductStatusField = {
+    "SyncDeltaSequenceNo": "int",
+    "ExchangeID": "string",
+    "ProductID": "string",
+    "ProductStatus": "char",
+}
+
+CThostFtdcSyncDeltaInvstPosDtlField = {
+    "InstrumentID": "string",
+    "BrokerID": "string",
+    "InvestorID": "string",
+    "HedgeFlag": "char",
+    "Direction": "char",
+    "OpenDate": "string",
+    "TradeID": "string",
+    "Volume": "int",
+    "OpenPrice": "double",
+    "TradingDay": "string",
+    "SettlementID": "int",
+    "TradeType": "char",
+    "CombInstrumentID": "string",
+    "ExchangeID": "string",
+    "CloseProfitByDate": "double",
+    "CloseProfitByTrade": "double",
+    "PositionProfitByDate": "double",
+    "PositionProfitByTrade": "double",
+    "Margin": "double",
+    "ExchMargin": "double",
+    "MarginRateByMoney": "double",
+    "MarginRateByVolume": "double",
+    "LastSettlementPrice": "double",
+    "SettlementPrice": "double",
+    "CloseVolume": "int",
+    "CloseAmount": "double",
+    "TimeFirstVolume": "int",
+    "SpecPosiType": "char",
+    "ActionDirection": "char",
+    "SyncDeltaSequenceNo": "int",
+}
+
+CThostFtdcSyncDeltaInvstPosCombDtlField = {
+    "TradingDay": "string",
+    "OpenDate": "string",
+    "ExchangeID": "string",
+    "SettlementID": "int",
+    "BrokerID": "string",
+    "InvestorID": "string",
+    "ComTradeID": "string",
+    "TradeID": "string",
+    "InstrumentID": "string",
+    "HedgeFlag": "char",
+    "Direction": "char",
+    "TotalAmt": "int",
+    "Margin": "double",
+    "ExchMargin": "double",
+    "MarginRateByMoney": "double",
+    "MarginRateByVolume": "double",
+    "LegID": "int",
+    "LegMultiple": "int",
+    "TradeGroupID": "int",
+    "ActionDirection": "char",
+    "SyncDeltaSequenceNo": "int",
+}
+
+CThostFtdcSyncDeltaTradingAccountField = {
+    "BrokerID": "string",
+    "AccountID": "string",
+    "PreMortgage": "double",
+    "PreCredit": "double",
+    "PreDeposit": "double",
+    "PreBalance": "double",
+    "PreMargin": "double",
+    "InterestBase": "double",
+    "Interest": "double",
+    "Deposit": "double",
+    "Withdraw": "double",
+    "FrozenMargin": "double",
+    "FrozenCash": "double",
+    "FrozenCommission": "double",
+    "CurrMargin": "double",
+    "CashIn": "double",
+    "Commission": "double",
+    "CloseProfit": "double",
+    "PositionProfit": "double",
+    "Balance": "double",
+    "Available": "double",
+    "WithdrawQuota": "double",
+    "Reserve": "double",
+    "TradingDay": "string",
+    "SettlementID": "int",
+    "Credit": "double",
+    "Mortgage": "double",
+    "ExchangeMargin": "double",
+    "DeliveryMargin": "double",
+    "ExchangeDeliveryMargin": "double",
+    "ReserveBalance": "double",
+    "CurrencyID": "string",
+    "PreFundMortgageIn": "double",
+    "PreFundMortgageOut": "double",
+    "FundMortgageIn": "double",
+    "FundMortgageOut": "double",
+    "FundMortgageAvailable": "double",
+    "MortgageableFund": "double",
+    "SpecProductMargin": "double",
+    "SpecProductFrozenMargin": "double",
+    "SpecProductCommission": "double",
+    "SpecProductFrozenCommission": "double",
+    "SpecProductPositionProfit": "double",
+    "SpecProductCloseProfit": "double",
+    "SpecProductPositionProfitByAlg": "double",
+    "SpecProductExchangeMargin": "double",
+    "FrozenSwap": "double",
+    "RemainSwap": "double",
+    "SyncDeltaSequenceNo": "int",
+}
+
+CThostFtdcSyncDeltaInitInvstMarginField = {
+    "BrokerID": "string",
+    "InvestorID": "string",
+    "LastRiskTotalInvstMargin": "double",
+    "LastRiskTotalExchMargin": "double",
+    "ThisSyncInvstMargin": "double",
+    "ThisSyncExchMargin": "double",
+    "RemainRiskInvstMargin": "double",
+    "RemainRiskExchMargin": "double",
+    "LastRiskSpecTotalInvstMargin": "double",
+    "LastRiskSpecTotalExchMargin": "double",
+    "ThisSyncSpecInvstMargin": "double",
+    "ThisSyncSpecExchMargin": "double",
+    "RemainRiskSpecInvstMargin": "double",
+    "RemainRiskSpecExchMargin": "double",
+    "SyncDeltaSequenceNo": "int",
+}
+
+CThostFtdcSyncDeltaDceCombInstrumentField = {
+    "CombInstrumentID": "string",
+    "ExchangeID": "string",
+    "ExchangeInstID": "string",
+    "TradeGroupID": "int",
+    "CombHedgeFlag": "char",
+    "CombinationType": "char",
+    "Direction": "char",
+    "ProductID": "string",
+    "Xparameter": "double",
+    "ActionDirection": "char",
+    "SyncDeltaSequenceNo": "int",
+}
+
+CThostFtdcSyncDeltaInvstMarginRateField = {
+    "InstrumentID": "string",
+    "InvestorRange": "char",
+    "BrokerID": "string",
+    "InvestorID": "string",
+    "HedgeFlag": "char",
+    "LongMarginRatioByMoney": "double",
+    "LongMarginRatioByVolume": "double",
+    "ShortMarginRatioByMoney": "double",
+    "ShortMarginRatioByVolume": "double",
+    "IsRelative": "int",
+    "ActionDirection": "char",
+    "SyncDeltaSequenceNo": "int",
+}
+
+CThostFtdcSyncDeltaExchMarginRateField = {
+    "BrokerID": "string",
+    "InstrumentID": "string",
+    "HedgeFlag": "char",
+    "LongMarginRatioByMoney": "double",
+    "LongMarginRatioByVolume": "double",
+    "ShortMarginRatioByMoney": "double",
+    "ShortMarginRatioByVolume": "double",
+    "ActionDirection": "char",
+    "SyncDeltaSequenceNo": "int",
+}
+
+CThostFtdcSyncDeltaOptExchMarginField = {
+    "BrokerID": "string",
+    "InstrumentID": "string",
+    "SShortMarginRatioByMoney": "double",
+    "SShortMarginRatioByVolume": "double",
+    "HShortMarginRatioByMoney": "double",
+    "HShortMarginRatioByVolume": "double",
+    "AShortMarginRatioByMoney": "double",
+    "AShortMarginRatioByVolume": "double",
+    "MShortMarginRatioByMoney": "double",
+    "MShortMarginRatioByVolume": "double",
+    "ActionDirection": "char",
+    "SyncDeltaSequenceNo": "int",
+}
+
+CThostFtdcSyncDeltaOptInvstMarginField = {
+    "InstrumentID": "string",
+    "InvestorRange": "char",
+    "BrokerID": "string",
+    "InvestorID": "string",
+    "SShortMarginRatioByMoney": "double",
+    "SShortMarginRatioByVolume": "double",
+    "HShortMarginRatioByMoney": "double",
+    "HShortMarginRatioByVolume": "double",
+    "AShortMarginRatioByMoney": "double",
+    "AShortMarginRatioByVolume": "double",
+    "IsRelative": "int",
+    "MShortMarginRatioByMoney": "double",
+    "MShortMarginRatioByVolume": "double",
+    "ActionDirection": "char",
+    "SyncDeltaSequenceNo": "int",
+}
+
+CThostFtdcSyncDeltaInvstMarginRateULField = {
+    "InstrumentID": "string",
+    "InvestorRange": "char",
+    "BrokerID": "string",
+    "InvestorID": "string",
+    "HedgeFlag": "char",
+    "LongMarginRatioByMoney": "double",
+    "LongMarginRatioByVolume": "double",
+    "ShortMarginRatioByMoney": "double",
+    "ShortMarginRatioByVolume": "double",
+    "ActionDirection": "char",
+    "SyncDeltaSequenceNo": "int",
+}
+
+CThostFtdcSyncDeltaOptInvstCommRateField = {
+    "InstrumentID": "string",
+    "InvestorRange": "char",
+    "BrokerID": "string",
+    "InvestorID": "string",
+    "OpenRatioByMoney": "double",
+    "OpenRatioByVolume": "double",
+    "CloseRatioByMoney": "double",
+    "CloseRatioByVolume": "double",
+    "CloseTodayRatioByMoney": "double",
+    "CloseTodayRatioByVolume": "double",
+    "StrikeRatioByMoney": "double",
+    "StrikeRatioByVolume": "double",
+    "ActionDirection": "char",
+    "SyncDeltaSequenceNo": "int",
+}
+
+CThostFtdcSyncDeltaInvstCommRateField = {
+    "InstrumentID": "string",
+    "InvestorRange": "char",
+    "BrokerID": "string",
+    "InvestorID": "string",
+    "OpenRatioByMoney": "double",
+    "OpenRatioByVolume": "double",
+    "CloseRatioByMoney": "double",
+    "CloseRatioByVolume": "double",
+    "CloseTodayRatioByMoney": "double",
+    "CloseTodayRatioByVolume": "double",
+    "ActionDirection": "char",
+    "SyncDeltaSequenceNo": "int",
+}
+
+CThostFtdcSyncDeltaProductExchRateField = {
+    "ProductID": "string",
+    "QuoteCurrencyID": "string",
+    "ExchangeRate": "double",
+    "ActionDirection": "char",
+    "SyncDeltaSequenceNo": "int",
+}
+
+CThostFtdcSyncDeltaDepthMarketDataField = {
+    "TradingDay": "string",
+    "InstrumentID": "string",
+    "ExchangeID": "string",
+    "ExchangeInstID": "string",
+    "LastPrice": "double",
+    "PreSettlementPrice": "double",
+    "PreClosePrice": "double",
+    "PreOpenInterest": "double",
+    "OpenPrice": "double",
+    "HighestPrice": "double",
+    "LowestPrice": "double",
+    "Volume": "int",
+    "Turnover": "double",
+    "OpenInterest": "double",
+    "ClosePrice": "double",
+    "SettlementPrice": "double",
+    "UpperLimitPrice": "double",
+    "LowerLimitPrice": "double",
+    "PreDelta": "double",
+    "CurrDelta": "double",
+    "UpdateTime": "string",
+    "UpdateMillisec": "int",
+    "BidPrice1": "double",
+    "BidVolume1": "int",
+    "AskPrice1": "double",
+    "AskVolume1": "int",
+    "BidPrice2": "double",
+    "BidVolume2": "int",
+    "AskPrice2": "double",
+    "AskVolume2": "int",
+    "BidPrice3": "double",
+    "BidVolume3": "int",
+    "AskPrice3": "double",
+    "AskVolume3": "int",
+    "BidPrice4": "double",
+    "BidVolume4": "int",
+    "AskPrice4": "double",
+    "AskVolume4": "int",
+    "BidPrice5": "double",
+    "BidVolume5": "int",
+    "AskPrice5": "double",
+    "AskVolume5": "int",
+    "AveragePrice": "double",
+    "ActionDay": "string",
+    "BandingUpperPrice": "double",
+    "BandingLowerPrice": "double",
+    "ActionDirection": "char",
+    "SyncDeltaSequenceNo": "int",
+}
+
+CThostFtdcSyncDeltaIndexPriceField = {
+    "BrokerID": "string",
+    "InstrumentID": "string",
+    "ClosePrice": "double",
+    "ActionDirection": "char",
+    "SyncDeltaSequenceNo": "int",
+}
+
+CThostFtdcSyncDeltaEWarrantOffsetField = {
+    "TradingDay": "string",
+    "BrokerID": "string",
+    "InvestorID": "string",
+    "ExchangeID": "string",
+    "InstrumentID": "string",
+    "Direction": "char",
+    "HedgeFlag": "char",
+    "Volume": "int",
+    "ActionDirection": "char",
+    "SyncDeltaSequenceNo": "int",
+}
+

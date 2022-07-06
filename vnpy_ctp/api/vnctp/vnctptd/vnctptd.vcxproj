@@ -94,8 +94,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <TargetExt>.pyd</TargetExt>
-    <IncludePath>C:\Miniconda3\include;$(SolutionDir);$(SolutionDir)..\include;$(SolutionDir)..\include\ctp;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Miniconda3\libs;$(SolutionDir)..\libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\veighna_studio\include;$(SolutionDir);$(SolutionDir)..\include;$(SolutionDir)..\include\ctp;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\veighna_studio\libs;$(SolutionDir)..\libs;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)..\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -168,7 +168,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Miniconda3\libs;C:\GitHub\vnpy\vnpy\api\ctp\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:\veighna_studio\libs;$(SolutionDir)..\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>thostmduserapi_se.lib;thosttraderapi_se.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

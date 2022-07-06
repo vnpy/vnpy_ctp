@@ -478,6 +478,18 @@ void onRspQryDepthMarketData(const dict &data, const dict &error, int reqid, boo
 	}
 };
 
+void onRspQryTraderOffer(const dict &data, const dict &error, int reqid, bool last) override
+{
+	try
+	{
+		PYBIND11_OVERLOAD(void, TdApi, onRspQryTraderOffer, data, error, reqid, last);
+	}
+	catch (const error_already_set &e)
+	{
+		cout << e.what() << endl;
+	}
+};
+
 void onRspQrySettlementInfo(const dict &data, const dict &error, int reqid, bool last) override
 {
 	try
@@ -1515,6 +1527,30 @@ void onRspQryCombPromotionParam(const dict &data, const dict &error, int reqid, 
 	try
 	{
 		PYBIND11_OVERLOAD(void, TdApi, onRspQryCombPromotionParam, data, error, reqid, last);
+	}
+	catch (const error_already_set &e)
+	{
+		cout << e.what() << endl;
+	}
+};
+
+void onRspQryRiskSettleInvstPosition(const dict &data, const dict &error, int reqid, bool last) override
+{
+	try
+	{
+		PYBIND11_OVERLOAD(void, TdApi, onRspQryRiskSettleInvstPosition, data, error, reqid, last);
+	}
+	catch (const error_already_set &e)
+	{
+		cout << e.what() << endl;
+	}
+};
+
+void onRspQryRiskSettleProductStatus(const dict &data, const dict &error, int reqid, bool last) override
+{
+	try
+	{
+		PYBIND11_OVERLOAD(void, TdApi, onRspQryRiskSettleProductStatus, data, error, reqid, last);
 	}
 	catch (const error_already_set &e)
 	{
