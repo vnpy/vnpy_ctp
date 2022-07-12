@@ -38,6 +38,7 @@
 .def("reqQryProduct", &TdApi::reqQryProduct)
 .def("reqQryInstrument", &TdApi::reqQryInstrument)
 .def("reqQryDepthMarketData", &TdApi::reqQryDepthMarketData)
+.def("reqQryTraderOffer", &TdApi::reqQryTraderOffer)
 .def("reqQrySettlementInfo", &TdApi::reqQrySettlementInfo)
 .def("reqQryTransferBank", &TdApi::reqQryTransferBank)
 .def("reqQryInvestorPositionDetail", &TdApi::reqQryInvestorPositionDetail)
@@ -82,6 +83,8 @@
 .def("reqQueryBankAccountMoneyByFuture", &TdApi::reqQueryBankAccountMoneyByFuture)
 .def("reqQryClassifiedInstrument", &TdApi::reqQryClassifiedInstrument)
 .def("reqQryCombPromotionParam", &TdApi::reqQryCombPromotionParam)
+.def("reqQryRiskSettleInvstPosition", &TdApi::reqQryRiskSettleInvstPosition)
+.def("reqQryRiskSettleProductStatus", &TdApi::reqQryRiskSettleProductStatus)
 
 .def("onFrontConnected", &TdApi::onFrontConnected)
 .def("onFrontDisconnected", &TdApi::onFrontDisconnected)
@@ -123,6 +126,7 @@
 .def("onRspQryProduct", &TdApi::onRspQryProduct)
 .def("onRspQryInstrument", &TdApi::onRspQryInstrument)
 .def("onRspQryDepthMarketData", &TdApi::onRspQryDepthMarketData)
+.def("onRspQryTraderOffer", &TdApi::onRspQryTraderOffer)
 .def("onRspQrySettlementInfo", &TdApi::onRspQrySettlementInfo)
 .def("onRspQryTransferBank", &TdApi::onRspQryTransferBank)
 .def("onRspQryInvestorPositionDetail", &TdApi::onRspQryInvestorPositionDetail)
@@ -210,4 +214,6 @@
 .def("onRtnChangeAccountByBank", &TdApi::onRtnChangeAccountByBank)
 .def("onRspQryClassifiedInstrument", &TdApi::onRspQryClassifiedInstrument)
 .def("onRspQryCombPromotionParam", &TdApi::onRspQryCombPromotionParam)
+.def("onRspQryRiskSettleInvstPosition", &TdApi::onRspQryRiskSettleInvstPosition)
+.def("onRspQryRiskSettleProductStatus", &TdApi::onRspQryRiskSettleProductStatus)
 ;

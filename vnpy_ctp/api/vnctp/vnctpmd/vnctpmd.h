@@ -189,6 +189,10 @@ public:
 
 	void registerFront(string pszFrontAddress);
 
+	void registerNameServer(string pszNsAddress);
+
+	void registerFensUserInfo(const dict &req);
+
 	int subscribeMarketData(string instrumentID);
 
 	int unSubscribeMarketData(string instrumentID);

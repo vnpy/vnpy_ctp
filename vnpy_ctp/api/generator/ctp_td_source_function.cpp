@@ -468,6 +468,7 @@ int TdApi::reqQuoteInsert(const dict &req, int reqid)
 	getString(req, "MacAddress", myreq.MacAddress);
 	getString(req, "InstrumentID", myreq.InstrumentID);
 	getString(req, "IPAddress", myreq.IPAddress);
+	getString(req, "ReplaceSysID", myreq.ReplaceSysID);
 	int i = this->api->ReqQuoteInsert(&myreq, reqid);
 	return i;
 };
@@ -753,6 +754,17 @@ int TdApi::reqQryDepthMarketData(const dict &req, int reqid)
 	getString(req, "ExchangeID", myreq.ExchangeID);
 	getString(req, "InstrumentID", myreq.InstrumentID);
 	int i = this->api->ReqQryDepthMarketData(&myreq, reqid);
+	return i;
+};
+
+int TdApi::reqQryTraderOffer(const dict &req, int reqid)
+{
+	CThostFtdcQryTraderOfferField myreq = CThostFtdcQryTraderOfferField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "ExchangeID", myreq.ExchangeID);
+	getString(req, "ParticipantID", myreq.ParticipantID);
+	getString(req, "TraderID", myreq.TraderID);
+	int i = this->api->ReqQryTraderOffer(&myreq, reqid);
 	return i;
 };
 
@@ -1419,6 +1431,26 @@ int TdApi::reqQryCombPromotionParam(const dict &req, int reqid)
 	getString(req, "ExchangeID", myreq.ExchangeID);
 	getString(req, "InstrumentID", myreq.InstrumentID);
 	int i = this->api->ReqQryCombPromotionParam(&myreq, reqid);
+	return i;
+};
+
+int TdApi::reqQryRiskSettleInvstPosition(const dict &req, int reqid)
+{
+	CThostFtdcQryRiskSettleInvstPositionField myreq = CThostFtdcQryRiskSettleInvstPositionField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "BrokerID", myreq.BrokerID);
+	getString(req, "InvestorID", myreq.InvestorID);
+	getString(req, "InstrumentID", myreq.InstrumentID);
+	int i = this->api->ReqQryRiskSettleInvstPosition(&myreq, reqid);
+	return i;
+};
+
+int TdApi::reqQryRiskSettleProductStatus(const dict &req, int reqid)
+{
+	CThostFtdcQryRiskSettleProductStatusField myreq = CThostFtdcQryRiskSettleProductStatusField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "ProductID", myreq.ProductID);
+	int i = this->api->ReqQryRiskSettleProductStatus(&myreq, reqid);
 	return i;
 };
 
