@@ -4752,7 +4752,7 @@ void TdApi::processRspQrySettlementInfo(Task *task)
 		data["BrokerID"] = toUtf(task_data->BrokerID);
 		data["InvestorID"] = toUtf(task_data->InvestorID);
 		data["SequenceNo"] = task_data->SequenceNo;
-		data["Content"] = toUtf(task_data->Content);
+		data["Content"] = pybind11::bytes(task_data->Content);
 		data["AccountID"] = toUtf(task_data->AccountID);
 		data["CurrencyID"] = toUtf(task_data->CurrencyID);
 		delete task_data;
