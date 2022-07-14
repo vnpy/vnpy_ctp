@@ -2,6 +2,7 @@
 
 1. API升级至6.6.7版本
 2. 使用zoneinfo替换pytz库
+3. 调整安装脚本setup.cfg，添加Python版本限制
 
 # 6.5.1.12版本
 
