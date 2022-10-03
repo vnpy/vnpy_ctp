@@ -238,6 +238,10 @@ class CtpGateway(BaseGateway):
         self.query_functions: list = [self.query_account, self.query_position]
         self.event_engine.register(EVENT_TIMER, self.process_timer_event)
 
+    def on_position(self, position: PositionData) -> None:
+        if position.symbol not in self.md_api.subscribed:
+            self.md_api.subscribe(SubscribeRequest(symbol=position.symbol, exchange=position.exchange))
+        super().on_position(position)
 
 class CtpMdApi(MdApi):
     """"""
