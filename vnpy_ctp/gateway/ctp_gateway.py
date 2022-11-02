@@ -644,6 +644,12 @@ class CtpTdApi(TdApi):
             self.order_data.append(data)
             return
 
+        tp: tuple = (data["OrderPriceType"], data["TimeCondition"], data["VolumeCondition"])
+        order_type: OrderType = ORDERTYPE_CTP2VT.get(tp, None)
+        if not order_type:
+            self.gateway.write_log(f"不支持的委托类型，系统委托号：{data['OrderSysID']}")
+            return
+
         symbol: str = data["InstrumentID"]
         contract: ContractData = symbol_contract_map[symbol]
 
@@ -656,13 +662,11 @@ class CtpTdApi(TdApi):
         dt: datetime = datetime.strptime(timestamp, "%Y%m%d %H:%M:%S")
         dt: datetime = dt.replace(tzinfo=CHINA_TZ)
 
-        tp: tuple = (data["OrderPriceType"], data["TimeCondition"], data["VolumeCondition"])
-
         order: OrderData = OrderData(
             symbol=symbol,
             exchange=contract.exchange,
             orderid=orderid,
-            type=ORDERTYPE_CTP2VT[tp],
+            type=order_type,
             direction=DIRECTION_CTP2VT[data["Direction"]],
             offset=OFFSET_CTP2VT[data["CombOffsetFlag"]],
             price=data["LimitPrice"],
