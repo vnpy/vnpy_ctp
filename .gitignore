@@ -18,7 +18,6 @@
 # Compiled Static libraries
 *.lai
 *.la
-*.a
 
 # Executables
 *.exe
@@ -36,3 +35,4 @@ __pycache__/
 .vs/
 x64/
 
+.DS_Store

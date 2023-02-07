@@ -1,11 +1,11 @@
-// vnctptd.cpp : ¶¨Òå DLL Ó¦ÓÃ³ÌÐòµÄµ¼³öº¯Êý¡£
+// vnctptd.cpp : ï¿½ï¿½ï¿½ï¿½ DLL Ó¦ï¿½Ã³ï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //
 
 #include "vnctptd.h"
 
 
 ///-------------------------------------------------------------------------------------
-///C++µÄ»Øµ÷º¯Êý½«Êý¾Ý±£´æµ½¶ÓÁÐÖÐ
+///C++ï¿½Ä»Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý±ï¿½ï¿½æµ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 ///-------------------------------------------------------------------------------------
 
 void TdApi::OnFrontConnected()
@@ -2453,7 +2453,7 @@ void TdApi::OnRspQryRiskSettleProductStatus(CThostFtdcRiskSettleProductStatusFie
 };
 
 ///-------------------------------------------------------------------------------------
-///¹¤×÷Ïß³Ì´Ó¶ÓÁÐÖÐÈ¡³öÊý¾Ý£¬×ª»¯Îªpython¶ÔÏóºó£¬½øÐÐÍÆËÍ
+///ï¿½ï¿½ï¿½ï¿½ï¿½ß³Ì´Ó¶ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½×ªï¿½ï¿½Îªpythonï¿½ï¿½ï¿½ï¿½ó£¬½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 ///-------------------------------------------------------------------------------------
 
 void TdApi::processTask()
@@ -8726,7 +8726,7 @@ void TdApi::processRspQryRiskSettleProductStatus(Task *task)
 };
 
 ///-------------------------------------------------------------------------------------
-///Ö÷¶¯º¯Êý
+///ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 ///-------------------------------------------------------------------------------------
 
 void TdApi::createFtdcTraderApi(string pszFlowPath)
@@ -8838,7 +8838,7 @@ int TdApi::reqUserLogin(const dict &req, int reqid)
 	getString(req, "LoginRemark", myreq.LoginRemark);
 	getInt(req, "ClientIPPort", &myreq.ClientIPPort);
 	getString(req, "ClientIPAddress", myreq.ClientIPAddress);
-	int i = this->api->ReqUserLogin(&myreq, reqid);
+	int i = this->api->ReqUserLogin(&myreq, reqid, 2, "vn");
 	return i;
 };
 
@@ -10265,7 +10265,7 @@ int TdApi::reqQryRiskSettleProductStatus(const dict &req, int reqid)
 };
 
 ///-------------------------------------------------------------------------------------
-///Boost.Python·â×°
+///Boost.Pythonï¿½ï¿½×°
 ///-------------------------------------------------------------------------------------
 
 class PyTdApi : public TdApi

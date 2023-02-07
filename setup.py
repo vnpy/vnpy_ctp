@@ -9,6 +9,9 @@ def get_ext_modules() -> list:
     Linux和Windows需要编译封装接口
     Mac由于缺乏二进制库支持无法使用
     """
+    libraries = ["thostmduserapi_se", "thosttraderapi_se"]
+
+    # Linux
     if platform.system() == "Linux":
         extra_compile_flags = [
             "-std=c++17",
@@ -18,12 +21,24 @@ def get_ext_modules() -> list:
         ]
         extra_link_args = ["-lstdc++"]
         runtime_library_dirs = ["$ORIGIN"]
-
+    # Windows
     elif platform.system() == "Windows":
         extra_compile_flags = ["-O2", "-MT"]
         extra_link_args = []
         runtime_library_dirs = []
+    # Mac
+    elif platform.system() == "Darwin":
+        extra_compile_flags = [
+            "-std=c++11",
+            "-mmacosx-version-min=10.12",
+        ]
+        extra_link_args = [
+            "-mmacosx-version-min=10.12",
+        ]
+        runtime_library_dirs = []
 
+        # Mac下需要增加的三个静态链接库
+        libraries.extend(["ssl", "crypto", "comunicationkey"])
     else:
         return []
 
@@ -32,7 +47,7 @@ def get_ext_modules() -> list:
         sources=["vnpy_ctp/api/vnctp/vnctpmd/vnctpmd.cpp"],
         include_dirs=["vnpy_ctp/api/include", "vnpy_ctp/api/vnctp"],
         library_dirs=["vnpy_ctp/api/libs", "vnpy_ctp/api"],
-        libraries=["thostmduserapi_se", "thosttraderapi_se"],
+        libraries=libraries,
         extra_compile_args=extra_compile_flags,
         extra_link_args=extra_link_args,
         runtime_library_dirs=runtime_library_dirs,
@@ -44,7 +59,7 @@ def get_ext_modules() -> list:
         sources=["vnpy_ctp/api/vnctp/vnctptd/vnctptd.cpp"],
         include_dirs=["vnpy_ctp/api/include", "vnpy_ctp/api/vnctp"],
         library_dirs=["vnpy_ctp/api/libs", "vnpy_ctp/api"],
-        libraries=["thostmduserapi_se", "thosttraderapi_se"],
+        libraries=libraries,
         extra_compile_args=extra_compile_flags,
         extra_link_args=extra_link_args,
         runtime_library_dirs=runtime_library_dirs,
