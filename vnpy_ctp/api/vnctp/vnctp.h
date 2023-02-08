@@ -7,6 +7,10 @@
 #include <condition_variable>
 #include <locale>
 
+#ifdef __APPLE__
+#include <iconv.h>
+#endif
+
 #include "pybind11/pybind11.h"
 
 
@@ -118,29 +122,68 @@ void getString(const pybind11::dict &d, const char *key, string_literal<size> &v
     }
 };
 
+
 //将GBK编码的字符串转换为UTF8
+#ifndef __APPLE__
 inline string toUtf(const string &gb2312)
 {
-#ifdef _MSC_VER
-    const static locale loc("zh-CN");
-#else
-    const static locale loc("zh_CN.GB18030");
-#endif
 
-    vector<wchar_t> wstr(gb2312.size());
-    wchar_t* wstrEnd = nullptr;
-    const char* gbEnd = nullptr;
-    mbstate_t state = {};
-    int res = use_facet<codecvt<wchar_t, char, mbstate_t> >
-        (loc).in(state,
-            gb2312.data(), gb2312.data() + gb2312.size(), gbEnd,
-            wstr.data(), wstr.data() + wstr.size(), wstrEnd);
+    #ifdef _MSC_VER
+        const static locale loc("zh-CN");
+    #else
+        const static locale loc("zh_CN.GB18030");
+    #endif
 
-    if (codecvt_base::ok == res)
-    {
-        wstring_convert<codecvt_utf8<wchar_t>> cutf8;
-        return cutf8.to_bytes(wstring(wstr.data(), wstrEnd));
-    }
+        vector<wchar_t> wstr(gb2312.size());
+        wchar_t* wstrEnd = nullptr;
+        const char* gbEnd = nullptr;
+        mbstate_t state = {};
+        int res = use_facet<codecvt<wchar_t, char, mbstate_t> >
+            (loc).in(state,
+                gb2312.data(), gb2312.data() + gb2312.size(), gbEnd,
+                wstr.data(), wstr.data() + wstr.size(), wstrEnd);
 
-    return string();
+        if (codecvt_base::ok == res)
+        {
+            wstring_convert<codecvt_utf8<wchar_t>> cutf8;
+            return cutf8.to_bytes(wstring(wstr.data(), wstrEnd));
+        }
+
+        return string();
 }
+#else
+iconv_t cd = iconv_open("UTF-8", "GB2312");
+
+int code_convert(char *inbuf, size_t inlen, char *outbuf, size_t outlen) 
+{
+    char **pin = &inbuf;
+    char **pout = &outbuf;
+
+    memset(outbuf, 0, outlen);
+
+    if ((int)iconv(cd, pin, &inlen, pout, &outlen) == -1)
+    {
+        return -1;
+    }
+    *pout = "\0";
+
+    return 0;
+}
+
+inline string toUtf(const string &gb2312)
+{
+    int length = gb2312.size() * 2 + 1;
+    char temp[length];
+
+    int n = code_convert((char*)gb2312.c_str(), gb2312.size(), temp, length);
+
+    if(n == 0)
+    {
+        return temp;
+    }
+    else
+    {
+        return "";
+    }
+}
+#endif
