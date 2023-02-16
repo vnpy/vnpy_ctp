@@ -1,11 +1,11 @@
-// vnctptd.cpp : ï¿½ï¿½ï¿½ï¿½ DLL Ó¦ï¿½Ã³ï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+// vnctptd.cpp : ¶¨Òå DLL Ó¦ÓÃ³ÌÐòµÄµ¼³öº¯Êý¡£
 //
 
 #include "vnctptd.h"
 
 
 ///-------------------------------------------------------------------------------------
-///C++ï¿½Ä»Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý±ï¿½ï¿½æµ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+///C++µÄ»Øµ÷º¯Êý½«Êý¾Ý±£´æµ½¶ÓÁÐÖÐ
 ///-------------------------------------------------------------------------------------
 
 void TdApi::OnFrontConnected()
@@ -2453,7 +2453,7 @@ void TdApi::OnRspQryRiskSettleProductStatus(CThostFtdcRiskSettleProductStatusFie
 };
 
 ///-------------------------------------------------------------------------------------
-///ï¿½ï¿½ï¿½ï¿½ï¿½ß³Ì´Ó¶ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½×ªï¿½ï¿½Îªpythonï¿½ï¿½ï¿½ï¿½ó£¬½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+///¹¤×÷Ïß³Ì´Ó¶ÓÁÐÖÐÈ¡³öÊý¾Ý£¬×ª»¯Îªpython¶ÔÏóºó£¬½øÐÐÍÆËÍ
 ///-------------------------------------------------------------------------------------
 
 void TdApi::processTask()
@@ -8726,7 +8726,7 @@ void TdApi::processRspQryRiskSettleProductStatus(Task *task)
 };
 
 ///-------------------------------------------------------------------------------------
-///ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+///Ö÷¶¯º¯Êý
 ///-------------------------------------------------------------------------------------
 
 void TdApi::createFtdcTraderApi(string pszFlowPath)
@@ -8838,7 +8838,14 @@ int TdApi::reqUserLogin(const dict &req, int reqid)
 	getString(req, "LoginRemark", myreq.LoginRemark);
 	getInt(req, "ClientIPPort", &myreq.ClientIPPort);
 	getString(req, "ClientIPAddress", myreq.ClientIPAddress);
-	int i = this->api->ReqUserLogin(&myreq, reqid, 2, "vn");
+
+	//Mac°æ±¾µÄµÇÂ¼º¯Êý¶àÁËÁ½¸ö²ÎÊý
+	#ifndef __APPLE__
+		int i = this->api->ReqUserLogin(&myreq, reqid);
+	#else
+		int i = this->api->ReqUserLogin(&myreq, reqid, 2, "vn");
+	#endif
+
 	return i;
 };
 
@@ -10265,7 +10272,7 @@ int TdApi::reqQryRiskSettleProductStatus(const dict &req, int reqid)
 };
 
 ///-------------------------------------------------------------------------------------
-///Boost.Pythonï¿½ï¿½×°
+///Boost.Python·â×°
 ///-------------------------------------------------------------------------------------
 
 class PyTdApi : public TdApi

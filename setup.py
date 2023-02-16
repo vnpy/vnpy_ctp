@@ -13,6 +13,7 @@ def get_ext_modules() -> list:
 
     # Linux
     if platform.system() == "Linux":
+        include_dirs = ["vnpy_ctp/api/include", "vnpy_ctp/api/vnctp"]
         extra_compile_flags = [
             "-std=c++17",
             "-O3",
@@ -23,11 +24,13 @@ def get_ext_modules() -> list:
         runtime_library_dirs = ["$ORIGIN"]
     # Windows
     elif platform.system() == "Windows":
+        include_dirs = ["vnpy_ctp/api/include", "vnpy_ctp/api/vnctp"]
         extra_compile_flags = ["-O2", "-MT"]
         extra_link_args = []
         runtime_library_dirs = []
     # Mac
     elif platform.system() == "Darwin":
+        include_dirs = ["vnpy_ctp/api/include/mac", "vnpy_ctp/api/vnctp"]
         extra_compile_flags = [
             "-std=c++11",
             "-mmacosx-version-min=10.12",
@@ -45,7 +48,7 @@ def get_ext_modules() -> list:
     vnctpmd = Extension(
         name="vnpy_ctp.api.vnctpmd",
         sources=["vnpy_ctp/api/vnctp/vnctpmd/vnctpmd.cpp"],
-        include_dirs=["vnpy_ctp/api/include", "vnpy_ctp/api/vnctp"],
+        include_dirs=include_dirs,
         library_dirs=["vnpy_ctp/api/libs", "vnpy_ctp/api"],
         libraries=libraries,
         extra_compile_args=extra_compile_flags,
@@ -57,7 +60,7 @@ def get_ext_modules() -> list:
     vnctptd = Extension(
         name="vnpy_ctp.api.vnctptd",
         sources=["vnpy_ctp/api/vnctp/vnctptd/vnctptd.cpp"],
-        include_dirs=["vnpy_ctp/api/include", "vnpy_ctp/api/vnctp"],
+        include_dirs=include_dirs,
         library_dirs=["vnpy_ctp/api/libs", "vnpy_ctp/api"],
         libraries=libraries,
         extra_compile_args=extra_compile_flags,
