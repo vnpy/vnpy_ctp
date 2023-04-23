@@ -457,7 +457,10 @@ class CtpTdApi(TdApi):
             self.gateway.write_log("交易服务器授权验证成功")
             self.login()
         else:
-            self.auth_failed = True
+            # 如果是授权码错误，则禁止再次发起认证
+            if error['ErrorID'] == 63:
+                self.auth_failed = True
+
             self.gateway.write_error("交易服务器授权验证失败", error)
 
     def onRspUserLogin(self, data: dict, error: dict, reqid: int, last: bool) -> None:
