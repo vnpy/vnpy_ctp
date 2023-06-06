@@ -258,3 +258,19 @@ void processRspQryRiskSettleInvstPosition(Task *task);
 
 void processRspQryRiskSettleProductStatus(Task *task);
 
+void processRspQrySPBMFutureParameter(Task *task);
+
+void processRspQrySPBMOptionParameter(Task *task);
+
+void processRspQrySPBMIntraParameter(Task *task);
+
+void processRspQrySPBMInterParameter(Task *task);
+
+void processRspQrySPBMPortfDefinition(Task *task);
+
+void processRspQrySPBMInvestorPortfDef(Task *task);
+
+void processRspQryInvestorPortfMarginRatio(Task *task);
+
+void processRspQryInvestorProdSPBMDetail(Task *task);
+
