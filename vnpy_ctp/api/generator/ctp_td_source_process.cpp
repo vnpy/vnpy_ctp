@@ -62,6 +62,7 @@ void TdApi::processRspUserLogin(Task *task)
 		data["FFEXTime"] = toUtf(task_data->FFEXTime);
 		data["INETime"] = toUtf(task_data->INETime);
 		data["SysVersion"] = toUtf(task_data->SysVersion);
+		data["GFEXTime"] = toUtf(task_data->GFEXTime);
 		delete task_data;
 	}
 	dict error;
@@ -5468,5 +5469,228 @@ void TdApi::processRspQryRiskSettleProductStatus(Task *task)
 		delete task_error;
 	}
 	this->onRspQryRiskSettleProductStatus(data, error, task->task_id, task->task_last);
+};
+
+void TdApi::processRspQrySPBMFutureParameter(Task *task)
+{
+	gil_scoped_acquire acquire;
+	dict data;
+	if (task->task_data)
+	{
+		CThostFtdcSPBMFutureParameterField *task_data = (CThostFtdcSPBMFutureParameterField*)task->task_data;
+		data["TradingDay"] = toUtf(task_data->TradingDay);
+		data["ExchangeID"] = toUtf(task_data->ExchangeID);
+		data["InstrumentID"] = toUtf(task_data->InstrumentID);
+		data["ProdFamilyCode"] = toUtf(task_data->ProdFamilyCode);
+		data["Cvf"] = task_data->Cvf;
+		data["TimeRange"] = task_data->TimeRange;
+		data["MarginRate"] = task_data->MarginRate;
+		data["LockRateX"] = task_data->LockRateX;
+		data["AddOnRate"] = task_data->AddOnRate;
+		data["PreSettlementPrice"] = task_data->PreSettlementPrice;
+		delete task_data;
+	}
+	dict error;
+	if (task->task_error)
+	{
+		CThostFtdcRspInfoField *task_error = (CThostFtdcRspInfoField*)task->task_error;
+		error["ErrorID"] = task_error->ErrorID;
+		error["ErrorMsg"] = toUtf(task_error->ErrorMsg);
+		delete task_error;
+	}
+	this->onRspQrySPBMFutureParameter(data, error, task->task_id, task->task_last);
+};
+
+void TdApi::processRspQrySPBMOptionParameter(Task *task)
+{
+	gil_scoped_acquire acquire;
+	dict data;
+	if (task->task_data)
+	{
+		CThostFtdcSPBMOptionParameterField *task_data = (CThostFtdcSPBMOptionParameterField*)task->task_data;
+		data["TradingDay"] = toUtf(task_data->TradingDay);
+		data["ExchangeID"] = toUtf(task_data->ExchangeID);
+		data["InstrumentID"] = toUtf(task_data->InstrumentID);
+		data["ProdFamilyCode"] = toUtf(task_data->ProdFamilyCode);
+		data["Cvf"] = task_data->Cvf;
+		data["DownPrice"] = task_data->DownPrice;
+		data["Delta"] = task_data->Delta;
+		data["SlimiDelta"] = task_data->SlimiDelta;
+		data["PreSettlementPrice"] = task_data->PreSettlementPrice;
+		delete task_data;
+	}
+	dict error;
+	if (task->task_error)
+	{
+		CThostFtdcRspInfoField *task_error = (CThostFtdcRspInfoField*)task->task_error;
+		error["ErrorID"] = task_error->ErrorID;
+		error["ErrorMsg"] = toUtf(task_error->ErrorMsg);
+		delete task_error;
+	}
+	this->onRspQrySPBMOptionParameter(data, error, task->task_id, task->task_last);
+};
+
+void TdApi::processRspQrySPBMIntraParameter(Task *task)
+{
+	gil_scoped_acquire acquire;
+	dict data;
+	if (task->task_data)
+	{
+		CThostFtdcSPBMIntraParameterField *task_data = (CThostFtdcSPBMIntraParameterField*)task->task_data;
+		data["TradingDay"] = toUtf(task_data->TradingDay);
+		data["ExchangeID"] = toUtf(task_data->ExchangeID);
+		data["ProdFamilyCode"] = toUtf(task_data->ProdFamilyCode);
+		data["IntraRateY"] = task_data->IntraRateY;
+		delete task_data;
+	}
+	dict error;
+	if (task->task_error)
+	{
+		CThostFtdcRspInfoField *task_error = (CThostFtdcRspInfoField*)task->task_error;
+		error["ErrorID"] = task_error->ErrorID;
+		error["ErrorMsg"] = toUtf(task_error->ErrorMsg);
+		delete task_error;
+	}
+	this->onRspQrySPBMIntraParameter(data, error, task->task_id, task->task_last);
+};
+
+void TdApi::processRspQrySPBMInterParameter(Task *task)
+{
+	gil_scoped_acquire acquire;
+	dict data;
+	if (task->task_data)
+	{
+		CThostFtdcSPBMInterParameterField *task_data = (CThostFtdcSPBMInterParameterField*)task->task_data;
+		data["TradingDay"] = toUtf(task_data->TradingDay);
+		data["ExchangeID"] = toUtf(task_data->ExchangeID);
+		data["SpreadId"] = task_data->SpreadId;
+		data["InterRateZ"] = task_data->InterRateZ;
+		data["Leg1ProdFamilyCode"] = toUtf(task_data->Leg1ProdFamilyCode);
+		data["Leg2ProdFamilyCode"] = toUtf(task_data->Leg2ProdFamilyCode);
+		delete task_data;
+	}
+	dict error;
+	if (task->task_error)
+	{
+		CThostFtdcRspInfoField *task_error = (CThostFtdcRspInfoField*)task->task_error;
+		error["ErrorID"] = task_error->ErrorID;
+		error["ErrorMsg"] = toUtf(task_error->ErrorMsg);
+		delete task_error;
+	}
+	this->onRspQrySPBMInterParameter(data, error, task->task_id, task->task_last);
+};
+
+void TdApi::processRspQrySPBMPortfDefinition(Task *task)
+{
+	gil_scoped_acquire acquire;
+	dict data;
+	if (task->task_data)
+	{
+		CThostFtdcSPBMPortfDefinitionField *task_data = (CThostFtdcSPBMPortfDefinitionField*)task->task_data;
+		data["ExchangeID"] = toUtf(task_data->ExchangeID);
+		data["PortfolioDefID"] = task_data->PortfolioDefID;
+		data["ProdFamilyCode"] = toUtf(task_data->ProdFamilyCode);
+		data["IsSPBM"] = task_data->IsSPBM;
+		delete task_data;
+	}
+	dict error;
+	if (task->task_error)
+	{
+		CThostFtdcRspInfoField *task_error = (CThostFtdcRspInfoField*)task->task_error;
+		error["ErrorID"] = task_error->ErrorID;
+		error["ErrorMsg"] = toUtf(task_error->ErrorMsg);
+		delete task_error;
+	}
+	this->onRspQrySPBMPortfDefinition(data, error, task->task_id, task->task_last);
+};
+
+void TdApi::processRspQrySPBMInvestorPortfDef(Task *task)
+{
+	gil_scoped_acquire acquire;
+	dict data;
+	if (task->task_data)
+	{
+		CThostFtdcSPBMInvestorPortfDefField *task_data = (CThostFtdcSPBMInvestorPortfDefField*)task->task_data;
+		data["ExchangeID"] = toUtf(task_data->ExchangeID);
+		data["BrokerID"] = toUtf(task_data->BrokerID);
+		data["InvestorID"] = toUtf(task_data->InvestorID);
+		data["PortfolioDefID"] = task_data->PortfolioDefID;
+		delete task_data;
+	}
+	dict error;
+	if (task->task_error)
+	{
+		CThostFtdcRspInfoField *task_error = (CThostFtdcRspInfoField*)task->task_error;
+		error["ErrorID"] = task_error->ErrorID;
+		error["ErrorMsg"] = toUtf(task_error->ErrorMsg);
+		delete task_error;
+	}
+	this->onRspQrySPBMInvestorPortfDef(data, error, task->task_id, task->task_last);
+};
+
+void TdApi::processRspQryInvestorPortfMarginRatio(Task *task)
+{
+	gil_scoped_acquire acquire;
+	dict data;
+	if (task->task_data)
+	{
+		CThostFtdcInvestorPortfMarginRatioField *task_data = (CThostFtdcInvestorPortfMarginRatioField*)task->task_data;
+		data["InvestorRange"] = task_data->InvestorRange;
+		data["BrokerID"] = toUtf(task_data->BrokerID);
+		data["InvestorID"] = toUtf(task_data->InvestorID);
+		data["ExchangeID"] = toUtf(task_data->ExchangeID);
+		data["MarginRatio"] = task_data->MarginRatio;
+		delete task_data;
+	}
+	dict error;
+	if (task->task_error)
+	{
+		CThostFtdcRspInfoField *task_error = (CThostFtdcRspInfoField*)task->task_error;
+		error["ErrorID"] = task_error->ErrorID;
+		error["ErrorMsg"] = toUtf(task_error->ErrorMsg);
+		delete task_error;
+	}
+	this->onRspQryInvestorPortfMarginRatio(data, error, task->task_id, task->task_last);
+};
+
+void TdApi::processRspQryInvestorProdSPBMDetail(Task *task)
+{
+	gil_scoped_acquire acquire;
+	dict data;
+	if (task->task_data)
+	{
+		CThostFtdcInvestorProdSPBMDetailField *task_data = (CThostFtdcInvestorProdSPBMDetailField*)task->task_data;
+		data["ExchangeID"] = toUtf(task_data->ExchangeID);
+		data["BrokerID"] = toUtf(task_data->BrokerID);
+		data["InvestorID"] = toUtf(task_data->InvestorID);
+		data["ProdFamilyCode"] = toUtf(task_data->ProdFamilyCode);
+		data["IntraInstrMargin"] = task_data->IntraInstrMargin;
+		data["BCollectingMargin"] = task_data->BCollectingMargin;
+		data["SCollectingMargin"] = task_data->SCollectingMargin;
+		data["IntraProdMargin"] = task_data->IntraProdMargin;
+		data["NetMargin"] = task_data->NetMargin;
+		data["InterProdMargin"] = task_data->InterProdMargin;
+		data["SingleMargin"] = task_data->SingleMargin;
+		data["AddOnMargin"] = task_data->AddOnMargin;
+		data["DeliveryMargin"] = task_data->DeliveryMargin;
+		data["CallOptionMinRisk"] = task_data->CallOptionMinRisk;
+		data["PutOptionMinRisk"] = task_data->PutOptionMinRisk;
+		data["OptionMinRisk"] = task_data->OptionMinRisk;
+		data["OptionValueOffset"] = task_data->OptionValueOffset;
+		data["OptionRoyalty"] = task_data->OptionRoyalty;
+		data["RealOptionValueOffset"] = task_data->RealOptionValueOffset;
+		data["Margin"] = task_data->Margin;
+		data["ExchMargin"] = task_data->ExchMargin;
+		delete task_data;
+	}
+	dict error;
+	if (task->task_error)
+	{
+		CThostFtdcRspInfoField *task_error = (CThostFtdcRspInfoField*)task->task_error;
+		error["ErrorID"] = task_error->ErrorID;
+		error["ErrorMsg"] = toUtf(task_error->ErrorMsg);
+		delete task_error;
+	}
+	this->onRspQryInvestorProdSPBMDetail(data, error, task->task_id, task->task_last);
 };
 

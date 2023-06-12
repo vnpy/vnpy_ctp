@@ -1454,3 +1454,91 @@ int TdApi::reqQryRiskSettleProductStatus(const dict &req, int reqid)
 	return i;
 };
 
+int TdApi::reqQrySPBMFutureParameter(const dict &req, int reqid)
+{
+	CThostFtdcQrySPBMFutureParameterField myreq = CThostFtdcQrySPBMFutureParameterField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "ExchangeID", myreq.ExchangeID);
+	getString(req, "InstrumentID", myreq.InstrumentID);
+	getString(req, "ProdFamilyCode", myreq.ProdFamilyCode);
+	int i = this->api->ReqQrySPBMFutureParameter(&myreq, reqid);
+	return i;
+};
+
+int TdApi::reqQrySPBMOptionParameter(const dict &req, int reqid)
+{
+	CThostFtdcQrySPBMOptionParameterField myreq = CThostFtdcQrySPBMOptionParameterField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "ExchangeID", myreq.ExchangeID);
+	getString(req, "InstrumentID", myreq.InstrumentID);
+	getString(req, "ProdFamilyCode", myreq.ProdFamilyCode);
+	int i = this->api->ReqQrySPBMOptionParameter(&myreq, reqid);
+	return i;
+};
+
+int TdApi::reqQrySPBMIntraParameter(const dict &req, int reqid)
+{
+	CThostFtdcQrySPBMIntraParameterField myreq = CThostFtdcQrySPBMIntraParameterField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "ExchangeID", myreq.ExchangeID);
+	getString(req, "ProdFamilyCode", myreq.ProdFamilyCode);
+	int i = this->api->ReqQrySPBMIntraParameter(&myreq, reqid);
+	return i;
+};
+
+int TdApi::reqQrySPBMInterParameter(const dict &req, int reqid)
+{
+	CThostFtdcQrySPBMInterParameterField myreq = CThostFtdcQrySPBMInterParameterField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "ExchangeID", myreq.ExchangeID);
+	getString(req, "Leg1ProdFamilyCode", myreq.Leg1ProdFamilyCode);
+	getString(req, "Leg2ProdFamilyCode", myreq.Leg2ProdFamilyCode);
+	int i = this->api->ReqQrySPBMInterParameter(&myreq, reqid);
+	return i;
+};
+
+int TdApi::reqQrySPBMPortfDefinition(const dict &req, int reqid)
+{
+	CThostFtdcQrySPBMPortfDefinitionField myreq = CThostFtdcQrySPBMPortfDefinitionField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "ExchangeID", myreq.ExchangeID);
+	getInt(req, "PortfolioDefID", &myreq.PortfolioDefID);
+	getString(req, "ProdFamilyCode", myreq.ProdFamilyCode);
+	int i = this->api->ReqQrySPBMPortfDefinition(&myreq, reqid);
+	return i;
+};
+
+int TdApi::reqQrySPBMInvestorPortfDef(const dict &req, int reqid)
+{
+	CThostFtdcQrySPBMInvestorPortfDefField myreq = CThostFtdcQrySPBMInvestorPortfDefField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "ExchangeID", myreq.ExchangeID);
+	getString(req, "BrokerID", myreq.BrokerID);
+	getString(req, "InvestorID", myreq.InvestorID);
+	int i = this->api->ReqQrySPBMInvestorPortfDef(&myreq, reqid);
+	return i;
+};
+
+int TdApi::reqQryInvestorPortfMarginRatio(const dict &req, int reqid)
+{
+	CThostFtdcQryInvestorPortfMarginRatioField myreq = CThostFtdcQryInvestorPortfMarginRatioField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "BrokerID", myreq.BrokerID);
+	getString(req, "InvestorID", myreq.InvestorID);
+	getString(req, "ExchangeID", myreq.ExchangeID);
+	int i = this->api->ReqQryInvestorPortfMarginRatio(&myreq, reqid);
+	return i;
+};
+
+int TdApi::reqQryInvestorProdSPBMDetail(const dict &req, int reqid)
+{
+	CThostFtdcQryInvestorProdSPBMDetailField myreq = CThostFtdcQryInvestorProdSPBMDetailField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "ExchangeID", myreq.ExchangeID);
+	getString(req, "BrokerID", myreq.BrokerID);
+	getString(req, "InvestorID", myreq.InvestorID);
+	getString(req, "ProdFamilyCode", myreq.ProdFamilyCode);
+	int i = this->api->ReqQryInvestorProdSPBMDetail(&myreq, reqid);
+	return i;
+};
+

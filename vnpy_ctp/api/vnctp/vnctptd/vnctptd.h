@@ -141,6 +141,14 @@ using namespace pybind11;
 #define ONRSPQRYCOMBPROMOTIONPARAM 127
 #define ONRSPQRYRISKSETTLEINVSTPOSITION 128
 #define ONRSPQRYRISKSETTLEPRODUCTSTATUS 129
+#define ONRSPQRYSPBMFUTUREPARAMETER 130
+#define ONRSPQRYSPBMOPTIONPARAMETER 131
+#define ONRSPQRYSPBMINTRAPARAMETER 132
+#define ONRSPQRYSPBMINTERPARAMETER 133
+#define ONRSPQRYSPBMPORTFDEFINITION 134
+#define ONRSPQRYSPBMINVESTORPORTFDEF 135
+#define ONRSPQRYINVESTORPORTFMARGINRATIO 136
+#define ONRSPQRYINVESTORPRODSPBMDETAIL 137
 
 ///-------------------------------------------------------------------------------------
 ///C++ SPI的回调函数方法实现
@@ -569,6 +577,30 @@ public:
 	///风险结算产品查询响应
 	virtual void OnRspQryRiskSettleProductStatus(CThostFtdcRiskSettleProductStatusField *pRiskSettleProductStatus, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
+	///SPBM期货合约参数查询响应
+	virtual void OnRspQrySPBMFutureParameter(CThostFtdcSPBMFutureParameterField* pSPBMFutureParameter, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+
+	///SPBM期权合约参数查询响应
+	virtual void OnRspQrySPBMOptionParameter(CThostFtdcSPBMOptionParameterField* pSPBMOptionParameter, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+
+	///SPBM品种内对锁仓折扣参数查询响应
+	virtual void OnRspQrySPBMIntraParameter(CThostFtdcSPBMIntraParameterField* pSPBMIntraParameter, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+
+	///SPBM跨品种抵扣参数查询响应
+	virtual void OnRspQrySPBMInterParameter(CThostFtdcSPBMInterParameterField* pSPBMInterParameter, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+
+	///SPBM组合保证金套餐查询响应
+	virtual void OnRspQrySPBMPortfDefinition(CThostFtdcSPBMPortfDefinitionField* pSPBMPortfDefinition, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+
+	///投资者SPBM套餐选择查询响应
+	virtual void OnRspQrySPBMInvestorPortfDef(CThostFtdcSPBMInvestorPortfDefField* pSPBMInvestorPortfDef, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+
+	///投资者新型组合保证金系数查询响应
+	virtual void OnRspQryInvestorPortfMarginRatio(CThostFtdcInvestorPortfMarginRatioField* pInvestorPortfMarginRatio, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+
+	///投资者产品SPBM明细查询响应
+	virtual void OnRspQryInvestorProdSPBMDetail(CThostFtdcInvestorProdSPBMDetailField* pInvestorProdSPBMDetail, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+
     //-------------------------------------------------------------------------------------
     //task：任务
     //-------------------------------------------------------------------------------------
@@ -833,6 +865,22 @@ public:
 	void processRspQryRiskSettleInvstPosition(Task *task);
 
 	void processRspQryRiskSettleProductStatus(Task *task);
+
+	void processRspQrySPBMFutureParameter(Task* task);
+
+	void processRspQrySPBMOptionParameter(Task* task);
+
+	void processRspQrySPBMIntraParameter(Task* task);
+
+	void processRspQrySPBMInterParameter(Task* task);
+
+	void processRspQrySPBMPortfDefinition(Task* task);
+
+	void processRspQrySPBMInvestorPortfDef(Task* task);
+
+	void processRspQryInvestorPortfMarginRatio(Task* task);
+
+	void processRspQryInvestorProdSPBMDetail(Task* task);
 
     //-------------------------------------------------------------------------------------
     //data：回调函数的数据字典
@@ -1102,6 +1150,22 @@ public:
 
 	virtual void onRspQryRiskSettleProductStatus(const dict &data, const dict &error, int reqid, bool last) {};
 
+	virtual void onRspQrySPBMFutureParameter(const dict& data, const dict& error, int reqid, bool last) {};
+
+	virtual void onRspQrySPBMOptionParameter(const dict& data, const dict& error, int reqid, bool last) {};
+
+	virtual void onRspQrySPBMIntraParameter(const dict& data, const dict& error, int reqid, bool last) {};
+
+	virtual void onRspQrySPBMInterParameter(const dict& data, const dict& error, int reqid, bool last) {};
+
+	virtual void onRspQrySPBMPortfDefinition(const dict& data, const dict& error, int reqid, bool last) {};
+
+	virtual void onRspQrySPBMInvestorPortfDef(const dict& data, const dict& error, int reqid, bool last) {};
+
+	virtual void onRspQryInvestorPortfMarginRatio(const dict& data, const dict& error, int reqid, bool last) {};
+
+	virtual void onRspQryInvestorProdSPBMDetail(const dict& data, const dict& error, int reqid, bool last) {};
+
     //-------------------------------------------------------------------------------------
     //req:主动函数的请求字典
     //-------------------------------------------------------------------------------------
@@ -1303,4 +1367,20 @@ public:
 	int reqQryRiskSettleInvstPosition(const dict &req, int reqid);
 
 	int reqQryRiskSettleProductStatus(const dict &req, int reqid);
+
+	int reqQrySPBMFutureParameter(const dict& req, int reqid);
+
+	int reqQrySPBMOptionParameter(const dict& req, int reqid);
+
+	int reqQrySPBMIntraParameter(const dict& req, int reqid);
+
+	int reqQrySPBMInterParameter(const dict& req, int reqid);
+
+	int reqQrySPBMPortfDefinition(const dict& req, int reqid);
+
+	int reqQrySPBMInvestorPortfDef(const dict& req, int reqid);
+
+	int reqQryInvestorPortfMarginRatio(const dict& req, int reqid);
+
+	int reqQryInvestorProdSPBMDetail(const dict& req, int reqid);
 };
