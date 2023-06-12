@@ -669,9 +669,9 @@ typedef char TThostFtdcProductClassType;
 #define THOST_FTDC_APC_Futures '3'
 ///可交易期权(含期权组合和期权单一合约)
 #define THOST_FTDC_APC_Options '4'
-///可下单组合（目前包含DCE和ZCE的期货组合）
+///可下单套利组合
 #define THOST_FTDC_APC_TradingComb '5'
-///可申请的组合（dce可以申请的组合合约 包含dce可以交易的合约）
+///可申请的组合（可以申请的组合合约 包含可以交易的合约）
 #define THOST_FTDC_APC_UnTradingComb '6'
 ///所有可以交易合约
 #define THOST_FTDC_APC_AllTrading '7'
@@ -763,9 +763,9 @@ typedef char TThostFtdcRatioAttrType;
 #define THOST_FTDC_HF_Hedge '3'
 ///做市商
 #define THOST_FTDC_HF_MarketMaker '5'
-///第一腿投机第二腿套保 大商所专用
+///第一腿投机第二腿套保
 #define THOST_FTDC_HF_SpecHedge '6'
-///第一腿套保第二腿投机  大商所专用
+///第一腿套保第二腿投机
 #define THOST_FTDC_HF_HedgeSpec '7'
 
 typedef char TThostFtdcHedgeFlagType;
@@ -6874,5 +6874,44 @@ typedef char TThostFtdcOrderFreqControlLevelType;
 #define THOST_FTDC_EBL_True '1'
 
 typedef char TThostFtdcEnumBoolType;
+
+/////////////////////////////////////////////////////////////////////////
+///TFtdcTimeRangeType是一个期货合约阶段标识类型
+/////////////////////////////////////////////////////////////////////////
+///一般月份
+#define THOST_FTDC_ETR_USUAL '1'
+///交割月前一个月上半月
+#define THOST_FTDC_ETR_FNSP '2'
+///交割月前一个月下半月
+#define THOST_FTDC_ETR_BNSP '3'
+///交割月份
+#define THOST_FTDC_ETR_SPOT '4'
+
+typedef char TThostFtdcTimeRangeType;
+
+/////////////////////////////////////////////////////////////////////////
+///TFtdcDeltaType是一个Delta类型类型
+/////////////////////////////////////////////////////////////////////////
+typedef double TThostFtdcDeltaType;
+
+/////////////////////////////////////////////////////////////////////////
+///TFtdcSpreadIdType是一个抵扣组优先级类型
+/////////////////////////////////////////////////////////////////////////
+typedef int TThostFtdcSpreadIdType;
+
+/////////////////////////////////////////////////////////////////////////
+///TFtdcPortfolioType是一个新型组保算法类型
+/////////////////////////////////////////////////////////////////////////
+///不使用新型组保算法
+#define THOST_FTDC_EPF_None '0'
+///SPBM算法
+#define THOST_FTDC_EPF_SPBM '1'
+
+typedef char TThostFtdcPortfolioType;
+
+/////////////////////////////////////////////////////////////////////////
+///TFtdcPortfolioDefIDType是一个SPBM组合套餐ID类型
+/////////////////////////////////////////////////////////////////////////
+typedef int TThostFtdcPortfolioDefIDType;
 
 #endif
