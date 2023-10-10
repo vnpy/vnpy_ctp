@@ -655,6 +655,11 @@ class CtpTdApi(TdApi):
         order_ref: str = data["OrderRef"]
         orderid: str = f"{frontid}_{sessionid}_{order_ref}"
 
+        status: Status = STATUS_CTP2VT.get(data["OrderStatus"], None)
+        if not status:
+            self.gateway.write_log(f"收到不支持的委托状态，委托号：{orderid}")
+            return
+
         timestamp: str = f"{data['InsertDate']} {data['InsertTime']}"
         dt: datetime = datetime.strptime(timestamp, "%Y%m%d %H:%M:%S")
         dt: datetime = dt.replace(tzinfo=CHINA_TZ)
@@ -675,7 +680,7 @@ class CtpTdApi(TdApi):
             price=data["LimitPrice"],
             volume=data["VolumeTotalOriginal"],
             traded=data["VolumeTraded"],
-            status=STATUS_CTP2VT[data["OrderStatus"]],
+            status=status,
             datetime=dt,
             gateway_name=self.gateway_name
         )
