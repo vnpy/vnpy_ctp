@@ -770,8 +770,7 @@ class CtpTdApi(TdApi):
         ctp_req: dict = {
             "UserID": self.userid,
             "Password": self.password,
-            "BrokerID": self.brokerid,
-            "AppID": self.appid
+            "BrokerID": self.brokerid
         }
 
         self.reqid += 1
