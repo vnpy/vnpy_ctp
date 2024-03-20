@@ -274,3 +274,35 @@ virtual void onRspQryInvestorPortfMarginRatio(const dict &data, const dict &erro
 
 virtual void onRspQryInvestorProdSPBMDetail(const dict &data, const dict &error, int reqid, bool last) {};
 
+virtual void onRspQryInvestorCommoditySPMMMargin(const dict &data, const dict &error, int reqid, bool last) {};
+
+virtual void onRspQryInvestorCommodityGroupSPMMMargin(const dict &data, const dict &error, int reqid, bool last) {};
+
+virtual void onRspQrySPMMInstParam(const dict &data, const dict &error, int reqid, bool last) {};
+
+virtual void onRspQrySPMMProductParam(const dict &data, const dict &error, int reqid, bool last) {};
+
+virtual void onRspQrySPBMAddonInterParameter(const dict &data, const dict &error, int reqid, bool last) {};
+
+virtual void onRspQryRCAMSCombProductInfo(const dict &data, const dict &error, int reqid, bool last) {};
+
+virtual void onRspQryRCAMSInstrParameter(const dict &data, const dict &error, int reqid, bool last) {};
+
+virtual void onRspQryRCAMSIntraParameter(const dict &data, const dict &error, int reqid, bool last) {};
+
+virtual void onRspQryRCAMSInterParameter(const dict &data, const dict &error, int reqid, bool last) {};
+
+virtual void onRspQryRCAMSShortOptAdjustParam(const dict &data, const dict &error, int reqid, bool last) {};
+
+virtual void onRspQryRCAMSInvestorCombPosition(const dict &data, const dict &error, int reqid, bool last) {};
+
+virtual void onRspQryInvestorProdRCAMSMargin(const dict &data, const dict &error, int reqid, bool last) {};
+
+virtual void onRspQryRULEInstrParameter(const dict &data, const dict &error, int reqid, bool last) {};
+
+virtual void onRspQryRULEIntraParameter(const dict &data, const dict &error, int reqid, bool last) {};
+
+virtual void onRspQryRULEInterParameter(const dict &data, const dict &error, int reqid, bool last) {};
+
+virtual void onRspQryInvestorProdRULEMargin(const dict &data, const dict &error, int reqid, bool last) {};
+
