@@ -274,3 +274,35 @@ void processRspQryInvestorPortfMarginRatio(Task *task);
 
 void processRspQryInvestorProdSPBMDetail(Task *task);
 
+void processRspQryInvestorCommoditySPMMMargin(Task *task);
+
+void processRspQryInvestorCommodityGroupSPMMMargin(Task *task);
+
+void processRspQrySPMMInstParam(Task *task);
+
+void processRspQrySPMMProductParam(Task *task);
+
+void processRspQrySPBMAddprocessInterParameter(Task *task);
+
+void processRspQryRCAMSCombProductInfo(Task *task);
+
+void processRspQryRCAMSInstrParameter(Task *task);
+
+void processRspQryRCAMSIntraParameter(Task *task);
+
+void processRspQryRCAMSInterParameter(Task *task);
+
+void processRspQryRCAMSShortOptAdjustParam(Task *task);
+
+void processRspQryRCAMSInvestorCombPosition(Task *task);
+
+void processRspQryInvestorProdRCAMSMargin(Task *task);
+
+void processRspQryRULEInstrParameter(Task *task);
+
+void processRspQryRULEIntraParameter(Task *task);
+
+void processRspQryRULEInterParameter(Task *task);
+
+void processRspQryInvestorProdRULEMargin(Task *task);
+

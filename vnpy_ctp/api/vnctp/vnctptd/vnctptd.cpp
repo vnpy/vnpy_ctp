@@ -2620,6 +2620,342 @@ void TdApi::OnRspQryInvestorProdSPBMDetail(CThostFtdcInvestorProdSPBMDetailField
 	this->task_queue.push(task);
 };
 
+void TdApi::OnRspQryInvestorCommoditySPMMMargin(CThostFtdcInvestorCommoditySPMMMarginField* pInvestorCommoditySPMMMargin, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast)
+{
+	Task task = Task();
+	task.task_name = ONRSPQRYINVESTORCOMMODITYSPMMMARGIN;
+	if (pInvestorCommoditySPMMMargin)
+	{
+		CThostFtdcInvestorCommoditySPMMMarginField* task_data = new CThostFtdcInvestorCommoditySPMMMarginField();
+		*task_data = *pInvestorCommoditySPMMMargin;
+		task.task_data = task_data;
+	}
+	if (pRspInfo)
+	{
+		CThostFtdcRspInfoField* task_error = new CThostFtdcRspInfoField();
+		*task_error = *pRspInfo;
+		task.task_error = task_error;
+	}
+	task.task_id = nRequestID;
+	task.task_last = bIsLast;
+	this->task_queue.push(task);
+};
+
+void TdApi::OnRspQryInvestorCommodityGroupSPMMMargin(CThostFtdcInvestorCommodityGroupSPMMMarginField* pInvestorCommodityGroupSPMMMargin, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast)
+{
+	Task task = Task();
+	task.task_name = ONRSPQRYINVESTORCOMMODITYGROUPSPMMMARGIN;
+	if (pInvestorCommodityGroupSPMMMargin)
+	{
+		CThostFtdcInvestorCommodityGroupSPMMMarginField* task_data = new CThostFtdcInvestorCommodityGroupSPMMMarginField();
+		*task_data = *pInvestorCommodityGroupSPMMMargin;
+		task.task_data = task_data;
+	}
+	if (pRspInfo)
+	{
+		CThostFtdcRspInfoField* task_error = new CThostFtdcRspInfoField();
+		*task_error = *pRspInfo;
+		task.task_error = task_error;
+	}
+	task.task_id = nRequestID;
+	task.task_last = bIsLast;
+	this->task_queue.push(task);
+};
+
+void TdApi::OnRspQrySPMMInstParam(CThostFtdcSPMMInstParamField* pSPMMInstParam, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast)
+{
+	Task task = Task();
+	task.task_name = ONRSPQRYSPMMINSTPARAM;
+	if (pSPMMInstParam)
+	{
+		CThostFtdcSPMMInstParamField* task_data = new CThostFtdcSPMMInstParamField();
+		*task_data = *pSPMMInstParam;
+		task.task_data = task_data;
+	}
+	if (pRspInfo)
+	{
+		CThostFtdcRspInfoField* task_error = new CThostFtdcRspInfoField();
+		*task_error = *pRspInfo;
+		task.task_error = task_error;
+	}
+	task.task_id = nRequestID;
+	task.task_last = bIsLast;
+	this->task_queue.push(task);
+};
+
+void TdApi::OnRspQrySPMMProductParam(CThostFtdcSPMMProductParamField* pSPMMProductParam, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast)
+{
+	Task task = Task();
+	task.task_name = ONRSPQRYSPMMPRODUCTPARAM;
+	if (pSPMMProductParam)
+	{
+		CThostFtdcSPMMProductParamField* task_data = new CThostFtdcSPMMProductParamField();
+		*task_data = *pSPMMProductParam;
+		task.task_data = task_data;
+	}
+	if (pRspInfo)
+	{
+		CThostFtdcRspInfoField* task_error = new CThostFtdcRspInfoField();
+		*task_error = *pRspInfo;
+		task.task_error = task_error;
+	}
+	task.task_id = nRequestID;
+	task.task_last = bIsLast;
+	this->task_queue.push(task);
+};
+
+void TdApi::OnRspQrySPBMAddOnInterParameter(CThostFtdcSPBMAddOnInterParameterField* pSPBMAddOnInterParameter, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast)
+{
+	Task task = Task();
+	task.task_name = ONRSPQRYSPBMADDONINTERPARAMETER;
+	if (pSPBMAddOnInterParameter)
+	{
+		CThostFtdcSPBMAddOnInterParameterField* task_data = new CThostFtdcSPBMAddOnInterParameterField();
+		*task_data = *pSPBMAddOnInterParameter;
+		task.task_data = task_data;
+	}
+	if (pRspInfo)
+	{
+		CThostFtdcRspInfoField* task_error = new CThostFtdcRspInfoField();
+		*task_error = *pRspInfo;
+		task.task_error = task_error;
+	}
+	task.task_id = nRequestID;
+	task.task_last = bIsLast;
+	this->task_queue.push(task);
+};
+
+void TdApi::OnRspQryRCAMSCombProductInfo(CThostFtdcRCAMSCombProductInfoField* pRCAMSCombProductInfo, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast)
+{
+	Task task = Task();
+	task.task_name = ONRSPQRYRCAMSCOMBPRODUCTINFO;
+	if (pRCAMSCombProductInfo)
+	{
+		CThostFtdcRCAMSCombProductInfoField* task_data = new CThostFtdcRCAMSCombProductInfoField();
+		*task_data = *pRCAMSCombProductInfo;
+		task.task_data = task_data;
+	}
+	if (pRspInfo)
+	{
+		CThostFtdcRspInfoField* task_error = new CThostFtdcRspInfoField();
+		*task_error = *pRspInfo;
+		task.task_error = task_error;
+	}
+	task.task_id = nRequestID;
+	task.task_last = bIsLast;
+	this->task_queue.push(task);
+};
+
+void TdApi::OnRspQryRCAMSInstrParameter(CThostFtdcRCAMSInstrParameterField* pRCAMSInstrParameter, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast)
+{
+	Task task = Task();
+	task.task_name = ONRSPQRYRCAMSINSTRPARAMETER;
+	if (pRCAMSInstrParameter)
+	{
+		CThostFtdcRCAMSInstrParameterField* task_data = new CThostFtdcRCAMSInstrParameterField();
+		*task_data = *pRCAMSInstrParameter;
+		task.task_data = task_data;
+	}
+	if (pRspInfo)
+	{
+		CThostFtdcRspInfoField* task_error = new CThostFtdcRspInfoField();
+		*task_error = *pRspInfo;
+		task.task_error = task_error;
+	}
+	task.task_id = nRequestID;
+	task.task_last = bIsLast;
+	this->task_queue.push(task);
+};
+
+void TdApi::OnRspQryRCAMSIntraParameter(CThostFtdcRCAMSIntraParameterField* pRCAMSIntraParameter, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast)
+{
+	Task task = Task();
+	task.task_name = ONRSPQRYRCAMSINTRAPARAMETER;
+	if (pRCAMSIntraParameter)
+	{
+		CThostFtdcRCAMSIntraParameterField* task_data = new CThostFtdcRCAMSIntraParameterField();
+		*task_data = *pRCAMSIntraParameter;
+		task.task_data = task_data;
+	}
+	if (pRspInfo)
+	{
+		CThostFtdcRspInfoField* task_error = new CThostFtdcRspInfoField();
+		*task_error = *pRspInfo;
+		task.task_error = task_error;
+	}
+	task.task_id = nRequestID;
+	task.task_last = bIsLast;
+	this->task_queue.push(task);
+};
+
+void TdApi::OnRspQryRCAMSInterParameter(CThostFtdcRCAMSInterParameterField* pRCAMSInterParameter, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast)
+{
+	Task task = Task();
+	task.task_name = ONRSPQRYRCAMSINTERPARAMETER;
+	if (pRCAMSInterParameter)
+	{
+		CThostFtdcRCAMSInterParameterField* task_data = new CThostFtdcRCAMSInterParameterField();
+		*task_data = *pRCAMSInterParameter;
+		task.task_data = task_data;
+	}
+	if (pRspInfo)
+	{
+		CThostFtdcRspInfoField* task_error = new CThostFtdcRspInfoField();
+		*task_error = *pRspInfo;
+		task.task_error = task_error;
+	}
+	task.task_id = nRequestID;
+	task.task_last = bIsLast;
+	this->task_queue.push(task);
+};
+
+void TdApi::OnRspQryRCAMSShortOptAdjustParam(CThostFtdcRCAMSShortOptAdjustParamField* pRCAMSShortOptAdjustParam, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast)
+{
+	Task task = Task();
+	task.task_name = ONRSPQRYRCAMSSHORTOPTADJUSTPARAM;
+	if (pRCAMSShortOptAdjustParam)
+	{
+		CThostFtdcRCAMSShortOptAdjustParamField* task_data = new CThostFtdcRCAMSShortOptAdjustParamField();
+		*task_data = *pRCAMSShortOptAdjustParam;
+		task.task_data = task_data;
+	}
+	if (pRspInfo)
+	{
+		CThostFtdcRspInfoField* task_error = new CThostFtdcRspInfoField();
+		*task_error = *pRspInfo;
+		task.task_error = task_error;
+	}
+	task.task_id = nRequestID;
+	task.task_last = bIsLast;
+	this->task_queue.push(task);
+};
+
+void TdApi::OnRspQryRCAMSInvestorCombPosition(CThostFtdcRCAMSInvestorCombPositionField* pRCAMSInvestorCombPosition, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast)
+{
+	Task task = Task();
+	task.task_name = ONRSPQRYRCAMSINVESTORCOMBPOSITION;
+	if (pRCAMSInvestorCombPosition)
+	{
+		CThostFtdcRCAMSInvestorCombPositionField* task_data = new CThostFtdcRCAMSInvestorCombPositionField();
+		*task_data = *pRCAMSInvestorCombPosition;
+		task.task_data = task_data;
+	}
+	if (pRspInfo)
+	{
+		CThostFtdcRspInfoField* task_error = new CThostFtdcRspInfoField();
+		*task_error = *pRspInfo;
+		task.task_error = task_error;
+	}
+	task.task_id = nRequestID;
+	task.task_last = bIsLast;
+	this->task_queue.push(task);
+};
+
+void TdApi::OnRspQryInvestorProdRCAMSMargin(CThostFtdcInvestorProdRCAMSMarginField* pInvestorProdRCAMSMargin, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast)
+{
+	Task task = Task();
+	task.task_name = ONRSPQRYINVESTORPRODRCAMSMARGIN;
+	if (pInvestorProdRCAMSMargin)
+	{
+		CThostFtdcInvestorProdRCAMSMarginField* task_data = new CThostFtdcInvestorProdRCAMSMarginField();
+		*task_data = *pInvestorProdRCAMSMargin;
+		task.task_data = task_data;
+	}
+	if (pRspInfo)
+	{
+		CThostFtdcRspInfoField* task_error = new CThostFtdcRspInfoField();
+		*task_error = *pRspInfo;
+		task.task_error = task_error;
+	}
+	task.task_id = nRequestID;
+	task.task_last = bIsLast;
+	this->task_queue.push(task);
+};
+
+void TdApi::OnRspQryRULEInstrParameter(CThostFtdcRULEInstrParameterField* pRULEInstrParameter, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast)
+{
+	Task task = Task();
+	task.task_name = ONRSPQRYRULEINSTRPARAMETER;
+	if (pRULEInstrParameter)
+	{
+		CThostFtdcRULEInstrParameterField* task_data = new CThostFtdcRULEInstrParameterField();
+		*task_data = *pRULEInstrParameter;
+		task.task_data = task_data;
+	}
+	if (pRspInfo)
+	{
+		CThostFtdcRspInfoField* task_error = new CThostFtdcRspInfoField();
+		*task_error = *pRspInfo;
+		task.task_error = task_error;
+	}
+	task.task_id = nRequestID;
+	task.task_last = bIsLast;
+	this->task_queue.push(task);
+};
+
+void TdApi::OnRspQryRULEIntraParameter(CThostFtdcRULEIntraParameterField* pRULEIntraParameter, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast)
+{
+	Task task = Task();
+	task.task_name = ONRSPQRYRULEINTRAPARAMETER;
+	if (pRULEIntraParameter)
+	{
+		CThostFtdcRULEIntraParameterField* task_data = new CThostFtdcRULEIntraParameterField();
+		*task_data = *pRULEIntraParameter;
+		task.task_data = task_data;
+	}
+	if (pRspInfo)
+	{
+		CThostFtdcRspInfoField* task_error = new CThostFtdcRspInfoField();
+		*task_error = *pRspInfo;
+		task.task_error = task_error;
+	}
+	task.task_id = nRequestID;
+	task.task_last = bIsLast;
+	this->task_queue.push(task);
+};
+
+void TdApi::OnRspQryRULEInterParameter(CThostFtdcRULEInterParameterField* pRULEInterParameter, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast)
+{
+	Task task = Task();
+	task.task_name = ONRSPQRYRULEINTERPARAMETER;
+	if (pRULEInterParameter)
+	{
+		CThostFtdcRULEInterParameterField* task_data = new CThostFtdcRULEInterParameterField();
+		*task_data = *pRULEInterParameter;
+		task.task_data = task_data;
+	}
+	if (pRspInfo)
+	{
+		CThostFtdcRspInfoField* task_error = new CThostFtdcRspInfoField();
+		*task_error = *pRspInfo;
+		task.task_error = task_error;
+	}
+	task.task_id = nRequestID;
+	task.task_last = bIsLast;
+	this->task_queue.push(task);
+};
+
+void TdApi::OnRspQryInvestorProdRULEMargin(CThostFtdcInvestorProdRULEMarginField* pInvestorProdRULEMargin, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast)
+{
+	Task task = Task();
+	task.task_name = ONRSPQRYINVESTORPRODRULEMARGIN;
+	if (pInvestorProdRULEMargin)
+	{
+		CThostFtdcInvestorProdRULEMarginField* task_data = new CThostFtdcInvestorProdRULEMarginField();
+		*task_data = *pInvestorProdRULEMargin;
+		task.task_data = task_data;
+	}
+	if (pRspInfo)
+	{
+		CThostFtdcRspInfoField* task_error = new CThostFtdcRspInfoField();
+		*task_error = *pRspInfo;
+		task.task_error = task_error;
+	}
+	task.task_id = nRequestID;
+	task.task_last = bIsLast;
+	this->task_queue.push(task);
+};
+
 ///-------------------------------------------------------------------------------------
 ///工作线程从队列中取出数据，转化为python对象后，进行推送
 ///-------------------------------------------------------------------------------------
@@ -3461,6 +3797,102 @@ void TdApi::processTask()
 				break;
 			}
 
+			case ONRSPQRYINVESTORCOMMODITYSPMMMARGIN:
+			{
+				this->processRspQryInvestorCommoditySPMMMargin(&task);
+				break;
+			}
+
+			case ONRSPQRYINVESTORCOMMODITYGROUPSPMMMARGIN:
+			{
+				this->processRspQryInvestorCommodityGroupSPMMMargin(&task);
+				break;
+			}
+
+			case ONRSPQRYSPMMINSTPARAM:
+			{
+				this->processRspQrySPMMInstParam(&task);
+				break;
+			}
+
+			case ONRSPQRYSPMMPRODUCTPARAM:
+			{
+				this->processRspQrySPMMProductParam(&task);
+				break;
+			}
+
+			case ONRSPQRYSPBMADDONINTERPARAMETER:
+			{
+				this->processRspQrySPBMAddprocessInterParameter(&task);
+				break;
+			}
+
+			case ONRSPQRYRCAMSCOMBPRODUCTINFO:
+			{
+				this->processRspQryRCAMSCombProductInfo(&task);
+				break;
+			}
+
+			case ONRSPQRYRCAMSINSTRPARAMETER:
+			{
+				this->processRspQryRCAMSInstrParameter(&task);
+				break;
+			}
+
+			case ONRSPQRYRCAMSINTRAPARAMETER:
+			{
+				this->processRspQryRCAMSIntraParameter(&task);
+				break;
+			}
+
+			case ONRSPQRYRCAMSINTERPARAMETER:
+			{
+				this->processRspQryRCAMSInterParameter(&task);
+				break;
+			}
+
+			case ONRSPQRYRCAMSSHORTOPTADJUSTPARAM:
+			{
+				this->processRspQryRCAMSShortOptAdjustParam(&task);
+				break;
+			}
+
+			case ONRSPQRYRCAMSINVESTORCOMBPOSITION:
+			{
+				this->processRspQryRCAMSInvestorCombPosition(&task);
+				break;
+			}
+
+			case ONRSPQRYINVESTORPRODRCAMSMARGIN:
+			{
+				this->processRspQryInvestorProdRCAMSMargin(&task);
+				break;
+			}
+
+			case ONRSPQRYRULEINSTRPARAMETER:
+			{
+				this->processRspQryRULEInstrParameter(&task);
+				break;
+			}
+
+			case ONRSPQRYRULEINTRAPARAMETER:
+			{
+				this->processRspQryRULEIntraParameter(&task);
+				break;
+			}
+
+			case ONRSPQRYRULEINTERPARAMETER:
+			{
+				this->processRspQryRULEInterParameter(&task);
+				break;
+			}
+
+			case ONRSPQRYINVESTORPRODRULEMARGIN:
+			{
+				this->processRspQryInvestorProdRULEMargin(&task);
+				break;
+			}
+
             };
         }
     }
@@ -4125,6 +4557,7 @@ void TdApi::processRspQuoteInsert(Task *task)
 		data["InstrumentID"] = toUtf(task_data->InstrumentID);
 		data["IPAddress"] = toUtf(task_data->IPAddress);
 		data["ReplaceSysID"] = toUtf(task_data->ReplaceSysID);
+		data["TimeCondition"] = task_data->TimeCondition;
 		delete task_data;
 	}
 	dict error;
@@ -5878,6 +6311,7 @@ void TdApi::processRspQryQuote(Task *task)
 		data["ExchangeInstID"] = toUtf(task_data->ExchangeInstID);
 		data["IPAddress"] = toUtf(task_data->IPAddress);
 		data["ReplaceSysID"] = toUtf(task_data->ReplaceSysID);
+		data["TimeCondition"] = task_data->TimeCondition;
 		delete task_data;
 	}
 	dict error;
@@ -6776,6 +7210,7 @@ void TdApi::processRtnQuote(Task *task)
 		data["ExchangeInstID"] = toUtf(task_data->ExchangeInstID);
 		data["IPAddress"] = toUtf(task_data->IPAddress);
 		data["ReplaceSysID"] = toUtf(task_data->ReplaceSysID);
+		data["TimeCondition"] = task_data->TimeCondition;
 		delete task_data;
 	}
 	this->onRtnQuote(data);
@@ -6814,6 +7249,7 @@ void TdApi::processErrRtnQuoteInsert(Task *task)
 		data["InstrumentID"] = toUtf(task_data->InstrumentID);
 		data["IPAddress"] = toUtf(task_data->IPAddress);
 		data["ReplaceSysID"] = toUtf(task_data->ReplaceSysID);
+		data["TimeCondition"] = task_data->TimeCondition;
 		delete task_data;
 	}
 	dict error;
@@ -8959,6 +9395,7 @@ void TdApi::processRspQrySPBMFutureParameter(Task* task)
 		data["LockRateX"] = task_data->LockRateX;
 		data["AddOnRate"] = task_data->AddOnRate;
 		data["PreSettlementPrice"] = task_data->PreSettlementPrice;
+		data["AddOnLockRateX2"] = task_data->AddOnLockRateX2;
 		delete task_data;
 	}
 	dict error;
@@ -9012,6 +9449,7 @@ void TdApi::processRspQrySPBMIntraParameter(Task* task)
 		data["ExchangeID"] = toUtf(task_data->ExchangeID);
 		data["ProdFamilyCode"] = toUtf(task_data->ProdFamilyCode);
 		data["IntraRateY"] = task_data->IntraRateY;
+		data["AddOnIntraRateY2"] = task_data->AddOnIntraRateY2;
 		delete task_data;
 	}
 	dict error;
@@ -9163,6 +9601,505 @@ void TdApi::processRspQryInvestorProdSPBMDetail(Task* task)
 		delete task_error;
 	}
 	this->onRspQryInvestorProdSPBMDetail(data, error, task->task_id, task->task_last);
+};
+
+void TdApi::processRspQryInvestorCommoditySPMMMargin(Task* task)
+{
+	gil_scoped_acquire acquire;
+	dict data;
+	if (task->task_data)
+	{
+		CThostFtdcInvestorCommoditySPMMMarginField* task_data = (CThostFtdcInvestorCommoditySPMMMarginField*)task->task_data;
+		data["ExchangeID"] = toUtf(task_data->ExchangeID);
+		data["BrokerID"] = toUtf(task_data->BrokerID);
+		data["InvestorID"] = toUtf(task_data->InvestorID);
+		data["CommodityID"] = toUtf(task_data->CommodityID);
+		data["MarginBeforeDiscount"] = task_data->MarginBeforeDiscount;
+		data["MarginNoDiscount"] = task_data->MarginNoDiscount;
+		data["LongPosRisk"] = task_data->LongPosRisk;
+		data["LongOpenFrozenRisk"] = task_data->LongOpenFrozenRisk;
+		data["LongCloseFrozenRisk"] = task_data->LongCloseFrozenRisk;
+		data["ShortPosRisk"] = task_data->ShortPosRisk;
+		data["ShortOpenFrozenRisk"] = task_data->ShortOpenFrozenRisk;
+		data["ShortCloseFrozenRisk"] = task_data->ShortCloseFrozenRisk;
+		data["IntraCommodityRate"] = task_data->IntraCommodityRate;
+		data["OptionDiscountRate"] = task_data->OptionDiscountRate;
+		data["PosDiscount"] = task_data->PosDiscount;
+		data["OpenFrozenDiscount"] = task_data->OpenFrozenDiscount;
+		data["NetRisk"] = task_data->NetRisk;
+		data["CloseFrozenMargin"] = task_data->CloseFrozenMargin;
+		data["FrozenCommission"] = task_data->FrozenCommission;
+		data["Commission"] = task_data->Commission;
+		data["FrozenCash"] = task_data->FrozenCash;
+		data["CashIn"] = task_data->CashIn;
+		data["StrikeFrozenMargin"] = task_data->StrikeFrozenMargin;
+		delete task_data;
+	}
+	dict error;
+	if (task->task_error)
+	{
+		CThostFtdcRspInfoField* task_error = (CThostFtdcRspInfoField*)task->task_error;
+		error["ErrorID"] = task_error->ErrorID;
+		error["ErrorMsg"] = toUtf(task_error->ErrorMsg);
+		delete task_error;
+	}
+	this->onRspQryInvestorCommoditySPMMMargin(data, error, task->task_id, task->task_last);
+};
+
+void TdApi::processRspQryInvestorCommodityGroupSPMMMargin(Task* task)
+{
+	gil_scoped_acquire acquire;
+	dict data;
+	if (task->task_data)
+	{
+		CThostFtdcInvestorCommodityGroupSPMMMarginField* task_data = (CThostFtdcInvestorCommodityGroupSPMMMarginField*)task->task_data;
+		data["ExchangeID"] = toUtf(task_data->ExchangeID);
+		data["BrokerID"] = toUtf(task_data->BrokerID);
+		data["InvestorID"] = toUtf(task_data->InvestorID);
+		data["CommodityGroupID"] = toUtf(task_data->CommodityGroupID);
+		data["MarginBeforeDiscount"] = task_data->MarginBeforeDiscount;
+		data["MarginNoDiscount"] = task_data->MarginNoDiscount;
+		data["LongRisk"] = task_data->LongRisk;
+		data["ShortRisk"] = task_data->ShortRisk;
+		data["CloseFrozenMargin"] = task_data->CloseFrozenMargin;
+		data["InterCommodityRate"] = task_data->InterCommodityRate;
+		data["MiniMarginRatio"] = task_data->MiniMarginRatio;
+		data["AdjustRatio"] = task_data->AdjustRatio;
+		data["IntraCommodityDiscount"] = task_data->IntraCommodityDiscount;
+		data["InterCommodityDiscount"] = task_data->InterCommodityDiscount;
+		data["ExchMargin"] = task_data->ExchMargin;
+		data["InvestorMargin"] = task_data->InvestorMargin;
+		data["FrozenCommission"] = task_data->FrozenCommission;
+		data["Commission"] = task_data->Commission;
+		data["FrozenCash"] = task_data->FrozenCash;
+		data["CashIn"] = task_data->CashIn;
+		data["StrikeFrozenMargin"] = task_data->StrikeFrozenMargin;
+		delete task_data;
+	}
+	dict error;
+	if (task->task_error)
+	{
+		CThostFtdcRspInfoField* task_error = (CThostFtdcRspInfoField*)task->task_error;
+		error["ErrorID"] = task_error->ErrorID;
+		error["ErrorMsg"] = toUtf(task_error->ErrorMsg);
+		delete task_error;
+	}
+	this->onRspQryInvestorCommodityGroupSPMMMargin(data, error, task->task_id, task->task_last);
+};
+
+void TdApi::processRspQrySPMMInstParam(Task* task)
+{
+	gil_scoped_acquire acquire;
+	dict data;
+	if (task->task_data)
+	{
+		CThostFtdcSPMMInstParamField* task_data = (CThostFtdcSPMMInstParamField*)task->task_data;
+		data["ExchangeID"] = toUtf(task_data->ExchangeID);
+		data["InstrumentID"] = toUtf(task_data->InstrumentID);
+		data["InstMarginCalID"] = task_data->InstMarginCalID;
+		data["CommodityID"] = toUtf(task_data->CommodityID);
+		data["CommodityGroupID"] = toUtf(task_data->CommodityGroupID);
+		delete task_data;
+	}
+	dict error;
+	if (task->task_error)
+	{
+		CThostFtdcRspInfoField* task_error = (CThostFtdcRspInfoField*)task->task_error;
+		error["ErrorID"] = task_error->ErrorID;
+		error["ErrorMsg"] = toUtf(task_error->ErrorMsg);
+		delete task_error;
+	}
+	this->onRspQrySPMMInstParam(data, error, task->task_id, task->task_last);
+};
+
+void TdApi::processRspQrySPMMProductParam(Task* task)
+{
+	gil_scoped_acquire acquire;
+	dict data;
+	if (task->task_data)
+	{
+		CThostFtdcSPMMProductParamField* task_data = (CThostFtdcSPMMProductParamField*)task->task_data;
+		data["ExchangeID"] = toUtf(task_data->ExchangeID);
+		data["ProductID"] = toUtf(task_data->ProductID);
+		data["CommodityID"] = toUtf(task_data->CommodityID);
+		data["CommodityGroupID"] = toUtf(task_data->CommodityGroupID);
+		delete task_data;
+	}
+	dict error;
+	if (task->task_error)
+	{
+		CThostFtdcRspInfoField* task_error = (CThostFtdcRspInfoField*)task->task_error;
+		error["ErrorID"] = task_error->ErrorID;
+		error["ErrorMsg"] = toUtf(task_error->ErrorMsg);
+		delete task_error;
+	}
+	this->onRspQrySPMMProductParam(data, error, task->task_id, task->task_last);
+};
+
+void TdApi::processRspQrySPBMAddprocessInterParameter(Task* task)
+{
+	gil_scoped_acquire acquire;
+	dict data;
+	if (task->task_data)
+	{
+		CThostFtdcSPBMAddOnInterParameterField* task_data = (CThostFtdcSPBMAddOnInterParameterField*)task->task_data;
+		data["TradingDay"] = toUtf(task_data->TradingDay);
+		data["ExchangeID"] = toUtf(task_data->ExchangeID);
+		data["SpreadId"] = task_data->SpreadId;
+		data["AddOnInterRateZ2"] = task_data->AddOnInterRateZ2;
+		data["Leg1ProdFamilyCode"] = toUtf(task_data->Leg1ProdFamilyCode);
+		data["Leg2ProdFamilyCode"] = toUtf(task_data->Leg2ProdFamilyCode);
+		delete task_data;
+	}
+	dict error;
+	if (task->task_error)
+	{
+		CThostFtdcRspInfoField* task_error = (CThostFtdcRspInfoField*)task->task_error;
+		error["ErrorID"] = task_error->ErrorID;
+		error["ErrorMsg"] = toUtf(task_error->ErrorMsg);
+		delete task_error;
+	}
+	this->onRspQrySPBMAddonInterParameter(data, error, task->task_id, task->task_last);
+};
+
+void TdApi::processRspQryRCAMSCombProductInfo(Task* task)
+{
+	gil_scoped_acquire acquire;
+	dict data;
+	if (task->task_data)
+	{
+		CThostFtdcRCAMSCombProductInfoField* task_data = (CThostFtdcRCAMSCombProductInfoField*)task->task_data;
+		data["TradingDay"] = toUtf(task_data->TradingDay);
+		data["ExchangeID"] = toUtf(task_data->ExchangeID);
+		data["ProductID"] = toUtf(task_data->ProductID);
+		data["CombProductID"] = toUtf(task_data->CombProductID);
+		data["ProductGroupID"] = toUtf(task_data->ProductGroupID);
+		delete task_data;
+	}
+	dict error;
+	if (task->task_error)
+	{
+		CThostFtdcRspInfoField* task_error = (CThostFtdcRspInfoField*)task->task_error;
+		error["ErrorID"] = task_error->ErrorID;
+		error["ErrorMsg"] = toUtf(task_error->ErrorMsg);
+		delete task_error;
+	}
+	this->onRspQryRCAMSCombProductInfo(data, error, task->task_id, task->task_last);
+};
+
+void TdApi::processRspQryRCAMSInstrParameter(Task* task)
+{
+	gil_scoped_acquire acquire;
+	dict data;
+	if (task->task_data)
+	{
+		CThostFtdcRCAMSInstrParameterField* task_data = (CThostFtdcRCAMSInstrParameterField*)task->task_data;
+		data["TradingDay"] = toUtf(task_data->TradingDay);
+		data["ExchangeID"] = toUtf(task_data->ExchangeID);
+		data["ProductID"] = toUtf(task_data->ProductID);
+		data["HedgeRate"] = task_data->HedgeRate;
+		delete task_data;
+	}
+	dict error;
+	if (task->task_error)
+	{
+		CThostFtdcRspInfoField* task_error = (CThostFtdcRspInfoField*)task->task_error;
+		error["ErrorID"] = task_error->ErrorID;
+		error["ErrorMsg"] = toUtf(task_error->ErrorMsg);
+		delete task_error;
+	}
+	this->onRspQryRCAMSInstrParameter(data, error, task->task_id, task->task_last);
+};
+
+void TdApi::processRspQryRCAMSIntraParameter(Task* task)
+{
+	gil_scoped_acquire acquire;
+	dict data;
+	if (task->task_data)
+	{
+		CThostFtdcRCAMSIntraParameterField* task_data = (CThostFtdcRCAMSIntraParameterField*)task->task_data;
+		data["TradingDay"] = toUtf(task_data->TradingDay);
+		data["ExchangeID"] = toUtf(task_data->ExchangeID);
+		data["CombProductID"] = toUtf(task_data->CombProductID);
+		data["HedgeRate"] = task_data->HedgeRate;
+		delete task_data;
+	}
+	dict error;
+	if (task->task_error)
+	{
+		CThostFtdcRspInfoField* task_error = (CThostFtdcRspInfoField*)task->task_error;
+		error["ErrorID"] = task_error->ErrorID;
+		error["ErrorMsg"] = toUtf(task_error->ErrorMsg);
+		delete task_error;
+	}
+	this->onRspQryRCAMSIntraParameter(data, error, task->task_id, task->task_last);
+};
+
+void TdApi::processRspQryRCAMSInterParameter(Task* task)
+{
+	gil_scoped_acquire acquire;
+	dict data;
+	if (task->task_data)
+	{
+		CThostFtdcRCAMSInterParameterField* task_data = (CThostFtdcRCAMSInterParameterField*)task->task_data;
+		data["TradingDay"] = toUtf(task_data->TradingDay);
+		data["ExchangeID"] = toUtf(task_data->ExchangeID);
+		data["ProductGroupID"] = toUtf(task_data->ProductGroupID);
+		data["Priority"] = task_data->Priority;
+		data["CreditRate"] = task_data->CreditRate;
+		data["CombProduct1"] = toUtf(task_data->CombProduct1);
+		data["CombProduct2"] = toUtf(task_data->CombProduct2);
+		delete task_data;
+	}
+	dict error;
+	if (task->task_error)
+	{
+		CThostFtdcRspInfoField* task_error = (CThostFtdcRspInfoField*)task->task_error;
+		error["ErrorID"] = task_error->ErrorID;
+		error["ErrorMsg"] = toUtf(task_error->ErrorMsg);
+		delete task_error;
+	}
+	this->onRspQryRCAMSInterParameter(data, error, task->task_id, task->task_last);
+};
+
+void TdApi::processRspQryRCAMSShortOptAdjustParam(Task* task)
+{
+	gil_scoped_acquire acquire;
+	dict data;
+	if (task->task_data)
+	{
+		CThostFtdcRCAMSShortOptAdjustParamField* task_data = (CThostFtdcRCAMSShortOptAdjustParamField*)task->task_data;
+		data["TradingDay"] = toUtf(task_data->TradingDay);
+		data["ExchangeID"] = toUtf(task_data->ExchangeID);
+		data["CombProductID"] = toUtf(task_data->CombProductID);
+		data["HedgeFlag"] = task_data->HedgeFlag;
+		data["AdjustValue"] = task_data->AdjustValue;
+		delete task_data;
+	}
+	dict error;
+	if (task->task_error)
+	{
+		CThostFtdcRspInfoField* task_error = (CThostFtdcRspInfoField*)task->task_error;
+		error["ErrorID"] = task_error->ErrorID;
+		error["ErrorMsg"] = toUtf(task_error->ErrorMsg);
+		delete task_error;
+	}
+	this->onRspQryRCAMSShortOptAdjustParam(data, error, task->task_id, task->task_last);
+};
+
+void TdApi::processRspQryRCAMSInvestorCombPosition(Task* task)
+{
+	gil_scoped_acquire acquire;
+	dict data;
+	if (task->task_data)
+	{
+		CThostFtdcRCAMSInvestorCombPositionField* task_data = (CThostFtdcRCAMSInvestorCombPositionField*)task->task_data;
+		data["ExchangeID"] = toUtf(task_data->ExchangeID);
+		data["BrokerID"] = toUtf(task_data->BrokerID);
+		data["InvestorID"] = toUtf(task_data->InvestorID);
+		data["InstrumentID"] = toUtf(task_data->InstrumentID);
+		data["HedgeFlag"] = task_data->HedgeFlag;
+		data["PosiDirection"] = task_data->PosiDirection;
+		data["CombInstrumentID"] = toUtf(task_data->CombInstrumentID);
+		data["LegID"] = task_data->LegID;
+		data["ExchangeInstID"] = toUtf(task_data->ExchangeInstID);
+		data["TotalAmt"] = task_data->TotalAmt;
+		data["ExchMargin"] = task_data->ExchMargin;
+		data["Margin"] = task_data->Margin;
+		delete task_data;
+	}
+	dict error;
+	if (task->task_error)
+	{
+		CThostFtdcRspInfoField* task_error = (CThostFtdcRspInfoField*)task->task_error;
+		error["ErrorID"] = task_error->ErrorID;
+		error["ErrorMsg"] = toUtf(task_error->ErrorMsg);
+		delete task_error;
+	}
+	this->onRspQryRCAMSInvestorCombPosition(data, error, task->task_id, task->task_last);
+};
+
+void TdApi::processRspQryInvestorProdRCAMSMargin(Task* task)
+{
+	gil_scoped_acquire acquire;
+	dict data;
+	if (task->task_data)
+	{
+		CThostFtdcInvestorProdRCAMSMarginField* task_data = (CThostFtdcInvestorProdRCAMSMarginField*)task->task_data;
+		data["ExchangeID"] = toUtf(task_data->ExchangeID);
+		data["BrokerID"] = toUtf(task_data->BrokerID);
+		data["InvestorID"] = toUtf(task_data->InvestorID);
+		data["CombProductID"] = toUtf(task_data->CombProductID);
+		data["HedgeFlag"] = task_data->HedgeFlag;
+		data["ProductGroupID"] = toUtf(task_data->ProductGroupID);
+		data["RiskBeforeDiscount"] = task_data->RiskBeforeDiscount;
+		data["IntraInstrRisk"] = task_data->IntraInstrRisk;
+		data["BPosRisk"] = task_data->BPosRisk;
+		data["SPosRisk"] = task_data->SPosRisk;
+		data["IntraProdRisk"] = task_data->IntraProdRisk;
+		data["NetRisk"] = task_data->NetRisk;
+		data["InterProdRisk"] = task_data->InterProdRisk;
+		data["ShortOptRiskAdj"] = task_data->ShortOptRiskAdj;
+		data["OptionRoyalty"] = task_data->OptionRoyalty;
+		data["MMSACloseFrozenMargin"] = task_data->MMSACloseFrozenMargin;
+		data["CloseCombFrozenMargin"] = task_data->CloseCombFrozenMargin;
+		data["CloseFrozenMargin"] = task_data->CloseFrozenMargin;
+		data["MMSAOpenFrozenMargin"] = task_data->MMSAOpenFrozenMargin;
+		data["DeliveryOpenFrozenMargin"] = task_data->DeliveryOpenFrozenMargin;
+		data["OpenFrozenMargin"] = task_data->OpenFrozenMargin;
+		data["UseFrozenMargin"] = task_data->UseFrozenMargin;
+		data["MMSAExchMargin"] = task_data->MMSAExchMargin;
+		data["DeliveryExchMargin"] = task_data->DeliveryExchMargin;
+		data["CombExchMargin"] = task_data->CombExchMargin;
+		data["ExchMargin"] = task_data->ExchMargin;
+		data["UseMargin"] = task_data->UseMargin;
+		delete task_data;
+	}
+	dict error;
+	if (task->task_error)
+	{
+		CThostFtdcRspInfoField* task_error = (CThostFtdcRspInfoField*)task->task_error;
+		error["ErrorID"] = task_error->ErrorID;
+		error["ErrorMsg"] = toUtf(task_error->ErrorMsg);
+		delete task_error;
+	}
+	this->onRspQryInvestorProdRCAMSMargin(data, error, task->task_id, task->task_last);
+};
+
+void TdApi::processRspQryRULEInstrParameter(Task* task)
+{
+	gil_scoped_acquire acquire;
+	dict data;
+	if (task->task_data)
+	{
+		CThostFtdcRULEInstrParameterField* task_data = (CThostFtdcRULEInstrParameterField*)task->task_data;
+		data["TradingDay"] = toUtf(task_data->TradingDay);
+		data["ExchangeID"] = toUtf(task_data->ExchangeID);
+		data["InstrumentID"] = toUtf(task_data->InstrumentID);
+		data["InstrumentClass"] = task_data->InstrumentClass;
+		data["StdInstrumentID"] = toUtf(task_data->StdInstrumentID);
+		data["BSpecRatio"] = task_data->BSpecRatio;
+		data["SSpecRatio"] = task_data->SSpecRatio;
+		data["BHedgeRatio"] = task_data->BHedgeRatio;
+		data["SHedgeRatio"] = task_data->SHedgeRatio;
+		data["BAddOnMargin"] = task_data->BAddOnMargin;
+		data["SAddOnMargin"] = task_data->SAddOnMargin;
+		data["CommodityGroupID"] = task_data->CommodityGroupID;
+		delete task_data;
+	}
+	dict error;
+	if (task->task_error)
+	{
+		CThostFtdcRspInfoField* task_error = (CThostFtdcRspInfoField*)task->task_error;
+		error["ErrorID"] = task_error->ErrorID;
+		error["ErrorMsg"] = toUtf(task_error->ErrorMsg);
+		delete task_error;
+	}
+	this->onRspQryRULEInstrParameter(data, error, task->task_id, task->task_last);
+};
+
+void TdApi::processRspQryRULEIntraParameter(Task* task)
+{
+	gil_scoped_acquire acquire;
+	dict data;
+	if (task->task_data)
+	{
+		CThostFtdcRULEIntraParameterField* task_data = (CThostFtdcRULEIntraParameterField*)task->task_data;
+		data["TradingDay"] = toUtf(task_data->TradingDay);
+		data["ExchangeID"] = toUtf(task_data->ExchangeID);
+		data["ProdFamilyCode"] = toUtf(task_data->ProdFamilyCode);
+		data["StdInstrumentID"] = toUtf(task_data->StdInstrumentID);
+		data["StdInstrMargin"] = task_data->StdInstrMargin;
+		data["UsualIntraRate"] = task_data->UsualIntraRate;
+		data["DeliveryIntraRate"] = task_data->DeliveryIntraRate;
+		delete task_data;
+	}
+	dict error;
+	if (task->task_error)
+	{
+		CThostFtdcRspInfoField* task_error = (CThostFtdcRspInfoField*)task->task_error;
+		error["ErrorID"] = task_error->ErrorID;
+		error["ErrorMsg"] = toUtf(task_error->ErrorMsg);
+		delete task_error;
+	}
+	this->onRspQryRULEIntraParameter(data, error, task->task_id, task->task_last);
+};
+
+void TdApi::processRspQryRULEInterParameter(Task* task)
+{
+	gil_scoped_acquire acquire;
+	dict data;
+	if (task->task_data)
+	{
+		CThostFtdcRULEInterParameterField* task_data = (CThostFtdcRULEInterParameterField*)task->task_data;
+		data["TradingDay"] = toUtf(task_data->TradingDay);
+		data["ExchangeID"] = toUtf(task_data->ExchangeID);
+		data["SpreadId"] = task_data->SpreadId;
+		data["InterRate"] = task_data->InterRate;
+		data["Leg1ProdFamilyCode"] = toUtf(task_data->Leg1ProdFamilyCode);
+		data["Leg2ProdFamilyCode"] = toUtf(task_data->Leg2ProdFamilyCode);
+		data["Leg1PropFactor"] = task_data->Leg1PropFactor;
+		data["Leg2PropFactor"] = task_data->Leg2PropFactor;
+		data["CommodityGroupID"] = task_data->CommodityGroupID;
+		data["CommodityGroupName"] = toUtf(task_data->CommodityGroupName);
+		delete task_data;
+	}
+	dict error;
+	if (task->task_error)
+	{
+		CThostFtdcRspInfoField* task_error = (CThostFtdcRspInfoField*)task->task_error;
+		error["ErrorID"] = task_error->ErrorID;
+		error["ErrorMsg"] = toUtf(task_error->ErrorMsg);
+		delete task_error;
+	}
+	this->onRspQryRULEInterParameter(data, error, task->task_id, task->task_last);
+};
+
+void TdApi::processRspQryInvestorProdRULEMargin(Task* task)
+{
+	gil_scoped_acquire acquire;
+	dict data;
+	if (task->task_data)
+	{
+		CThostFtdcInvestorProdRULEMarginField* task_data = (CThostFtdcInvestorProdRULEMarginField*)task->task_data;
+		data["ExchangeID"] = toUtf(task_data->ExchangeID);
+		data["BrokerID"] = toUtf(task_data->BrokerID);
+		data["InvestorID"] = toUtf(task_data->InvestorID);
+		data["ProdFamilyCode"] = toUtf(task_data->ProdFamilyCode);
+		data["InstrumentClass"] = task_data->InstrumentClass;
+		data["CommodityGroupID"] = task_data->CommodityGroupID;
+		data["BStdPosition"] = task_data->BStdPosition;
+		data["SStdPosition"] = task_data->SStdPosition;
+		data["BStdOpenFrozen"] = task_data->BStdOpenFrozen;
+		data["SStdOpenFrozen"] = task_data->SStdOpenFrozen;
+		data["BStdCloseFrozen"] = task_data->BStdCloseFrozen;
+		data["SStdCloseFrozen"] = task_data->SStdCloseFrozen;
+		data["IntraProdStdPosition"] = task_data->IntraProdStdPosition;
+		data["NetStdPosition"] = task_data->NetStdPosition;
+		data["InterProdStdPosition"] = task_data->InterProdStdPosition;
+		data["SingleStdPosition"] = task_data->SingleStdPosition;
+		data["IntraProdMargin"] = task_data->IntraProdMargin;
+		data["InterProdMargin"] = task_data->InterProdMargin;
+		data["SingleMargin"] = task_data->SingleMargin;
+		data["NonCombMargin"] = task_data->NonCombMargin;
+		data["AddOnMargin"] = task_data->AddOnMargin;
+		data["ExchMargin"] = task_data->ExchMargin;
+		data["AddOnFrozenMargin"] = task_data->AddOnFrozenMargin;
+		data["OpenFrozenMargin"] = task_data->OpenFrozenMargin;
+		data["CloseFrozenMargin"] = task_data->CloseFrozenMargin;
+		data["Margin"] = task_data->Margin;
+		data["FrozenMargin"] = task_data->FrozenMargin;
+		delete task_data;
+	}
+	dict error;
+	if (task->task_error)
+	{
+		CThostFtdcRspInfoField* task_error = (CThostFtdcRspInfoField*)task->task_error;
+		error["ErrorID"] = task_error->ErrorID;
+		error["ErrorMsg"] = toUtf(task_error->ErrorMsg);
+		delete task_error;
+	}
+	this->onRspQryInvestorProdRULEMargin(data, error, task->task_id, task->task_last);
 };
 
 ///-------------------------------------------------------------------------------------
@@ -9726,6 +10663,7 @@ int TdApi::reqQuoteInsert(const dict &req, int reqid)
 	getString(req, "InstrumentID", myreq.InstrumentID);
 	getString(req, "IPAddress", myreq.IPAddress);
 	getString(req, "ReplaceSysID", myreq.ReplaceSysID);
+	getChar(req, "TimeCondition", &myreq.TimeCondition);
 	int i = this->api->ReqQuoteInsert(&myreq, reqid);
 	return i;
 };
@@ -10796,6 +11734,175 @@ int TdApi::reqQryInvestorProdSPBMDetail(const dict& req, int reqid)
 	getString(req, "InvestorID", myreq.InvestorID);
 	getString(req, "ProdFamilyCode", myreq.ProdFamilyCode);
 	int i = this->api->ReqQryInvestorProdSPBMDetail(&myreq, reqid);
+	return i;
+};
+
+int TdApi::reqQryInvestorCommoditySPMMMargin(const dict& req, int reqid)
+{
+	CThostFtdcQryInvestorCommoditySPMMMarginField myreq = CThostFtdcQryInvestorCommoditySPMMMarginField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "BrokerID", myreq.BrokerID);
+	getString(req, "InvestorID", myreq.InvestorID);
+	getString(req, "CommodityID", myreq.CommodityID);
+	int i = this->api->ReqQryInvestorCommoditySPMMMargin(&myreq, reqid);
+	return i;
+};
+
+int TdApi::reqQryInvestorCommodityGroupSPMMMargin(const dict& req, int reqid)
+{
+	CThostFtdcQryInvestorCommodityGroupSPMMMarginField myreq = CThostFtdcQryInvestorCommodityGroupSPMMMarginField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "BrokerID", myreq.BrokerID);
+	getString(req, "InvestorID", myreq.InvestorID);
+	getString(req, "CommodityGroupID", myreq.CommodityGroupID);
+	int i = this->api->ReqQryInvestorCommodityGroupSPMMMargin(&myreq, reqid);
+	return i;
+};
+
+int TdApi::reqQrySPMMInstParam(const dict& req, int reqid)
+{
+	CThostFtdcQrySPMMInstParamField myreq = CThostFtdcQrySPMMInstParamField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "InstrumentID", myreq.InstrumentID);
+	int i = this->api->ReqQrySPMMInstParam(&myreq, reqid);
+	return i;
+};
+
+int TdApi::reqQrySPMMProductParam(const dict& req, int reqid)
+{
+	CThostFtdcQrySPMMProductParamField myreq = CThostFtdcQrySPMMProductParamField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "ProductID", myreq.ProductID);
+	int i = this->api->ReqQrySPMMProductParam(&myreq, reqid);
+	return i;
+};
+
+int TdApi::reqQrySPBMAddOnInterParameter(const dict& req, int reqid)
+{
+	CThostFtdcQrySPBMAddOnInterParameterField myreq = CThostFtdcQrySPBMAddOnInterParameterField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "ExchangeID", myreq.ExchangeID);
+	getString(req, "Leg1ProdFamilyCode", myreq.Leg1ProdFamilyCode);
+	getString(req, "Leg2ProdFamilyCode", myreq.Leg2ProdFamilyCode);
+	int i = this->api->ReqQrySPBMAddOnInterParameter(&myreq, reqid);
+	return i;
+};
+
+int TdApi::reqQryRCAMSCombProductInfo(const dict& req, int reqid)
+{
+	CThostFtdcQryRCAMSCombProductInfoField myreq = CThostFtdcQryRCAMSCombProductInfoField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "ProductID", myreq.ProductID);
+	getString(req, "CombProductID", myreq.CombProductID);
+	getString(req, "ProductGroupID", myreq.ProductGroupID);
+	int i = this->api->ReqQryRCAMSCombProductInfo(&myreq, reqid);
+	return i;
+};
+
+int TdApi::reqQryRCAMSInstrParameter(const dict& req, int reqid)
+{
+	CThostFtdcQryRCAMSInstrParameterField myreq = CThostFtdcQryRCAMSInstrParameterField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "ProductID", myreq.ProductID);
+	int i = this->api->ReqQryRCAMSInstrParameter(&myreq, reqid);
+	return i;
+};
+
+int TdApi::reqQryRCAMSIntraParameter(const dict& req, int reqid)
+{
+	CThostFtdcQryRCAMSIntraParameterField myreq = CThostFtdcQryRCAMSIntraParameterField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "CombProductID", myreq.CombProductID);
+	int i = this->api->ReqQryRCAMSIntraParameter(&myreq, reqid);
+	return i;
+};
+
+int TdApi::reqQryRCAMSInterParameter(const dict& req, int reqid)
+{
+	CThostFtdcQryRCAMSInterParameterField myreq = CThostFtdcQryRCAMSInterParameterField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "ProductGroupID", myreq.ProductGroupID);
+	getString(req, "CombProduct1", myreq.CombProduct1);
+	getString(req, "CombProduct2", myreq.CombProduct2);
+	int i = this->api->ReqQryRCAMSInterParameter(&myreq, reqid);
+	return i;
+};
+
+int TdApi::reqQryRCAMSShortOptAdjustParam(const dict& req, int reqid)
+{
+	CThostFtdcQryRCAMSShortOptAdjustParamField myreq = CThostFtdcQryRCAMSShortOptAdjustParamField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "CombProductID", myreq.CombProductID);
+	int i = this->api->ReqQryRCAMSShortOptAdjustParam(&myreq, reqid);
+	return i;
+};
+
+int TdApi::reqQryRCAMSInvestorCombPosition(const dict& req, int reqid)
+{
+	CThostFtdcQryRCAMSInvestorCombPositionField myreq = CThostFtdcQryRCAMSInvestorCombPositionField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "BrokerID", myreq.BrokerID);
+	getString(req, "InvestorID", myreq.InvestorID);
+	getString(req, "InstrumentID", myreq.InstrumentID);
+	getString(req, "CombInstrumentID", myreq.CombInstrumentID);
+	int i = this->api->ReqQryRCAMSInvestorCombPosition(&myreq, reqid);
+	return i;
+};
+
+int TdApi::reqQryInvestorProdRCAMSMargin(const dict& req, int reqid)
+{
+	CThostFtdcQryInvestorProdRCAMSMarginField myreq = CThostFtdcQryInvestorProdRCAMSMarginField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "BrokerID", myreq.BrokerID);
+	getString(req, "InvestorID", myreq.InvestorID);
+	getString(req, "CombProductID", myreq.CombProductID);
+	getString(req, "ProductGroupID", myreq.ProductGroupID);
+	int i = this->api->ReqQryInvestorProdRCAMSMargin(&myreq, reqid);
+	return i;
+};
+
+int TdApi::reqQryRULEInstrParameter(const dict& req, int reqid)
+{
+	CThostFtdcQryRULEInstrParameterField myreq = CThostFtdcQryRULEInstrParameterField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "ExchangeID", myreq.ExchangeID);
+	getString(req, "InstrumentID", myreq.InstrumentID);
+	int i = this->api->ReqQryRULEInstrParameter(&myreq, reqid);
+	return i;
+};
+
+int TdApi::reqQryRULEIntraParameter(const dict& req, int reqid)
+{
+	CThostFtdcQryRULEIntraParameterField myreq = CThostFtdcQryRULEIntraParameterField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "ExchangeID", myreq.ExchangeID);
+	getString(req, "ProdFamilyCode", myreq.ProdFamilyCode);
+	int i = this->api->ReqQryRULEIntraParameter(&myreq, reqid);
+	return i;
+};
+
+int TdApi::reqQryRULEInterParameter(const dict& req, int reqid)
+{
+	CThostFtdcQryRULEInterParameterField myreq = CThostFtdcQryRULEInterParameterField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "ExchangeID", myreq.ExchangeID);
+	getString(req, "Leg1ProdFamilyCode", myreq.Leg1ProdFamilyCode);
+	getString(req, "Leg2ProdFamilyCode", myreq.Leg2ProdFamilyCode);
+	getInt(req, "CommodityGroupID", &myreq.CommodityGroupID);
+	int i = this->api->ReqQryRULEInterParameter(&myreq, reqid);
+	return i;
+};
+
+int TdApi::reqQryInvestorProdRULEMargin(const dict& req, int reqid)
+{
+	CThostFtdcQryInvestorProdRULEMarginField myreq = CThostFtdcQryInvestorProdRULEMarginField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "ExchangeID", myreq.ExchangeID);
+	getString(req, "BrokerID", myreq.BrokerID);
+	getString(req, "InvestorID", myreq.InvestorID);
+	getString(req, "ProdFamilyCode", myreq.ProdFamilyCode);
+	getInt(req, "CommodityGroupID", &myreq.CommodityGroupID);
+	int i = this->api->ReqQryInvestorProdRULEMargin(&myreq, reqid);
 	return i;
 };
 
@@ -12463,6 +13570,199 @@ public:
 			cout << e.what() << endl;
 		}
 	};
+
+	void onRspQryInvestorCommoditySPMMMargin(const dict& data, const dict& error, int reqid, bool last) override
+	{
+		try
+		{
+			PYBIND11_OVERLOAD(void, TdApi, onRspQryInvestorCommoditySPMMMargin, data, error, reqid, last);
+		}
+		catch (const error_already_set& e)
+		{
+			cout << e.what() << endl;
+		}
+	};
+
+	void onRspQryInvestorCommodityGroupSPMMMargin(const dict& data, const dict& error, int reqid, bool last) override
+	{
+		try
+		{
+			PYBIND11_OVERLOAD(void, TdApi, onRspQryInvestorCommodityGroupSPMMMargin, data, error, reqid, last);
+		}
+		catch (const error_already_set& e)
+		{
+			cout << e.what() << endl;
+		}
+	};
+
+	void onRspQrySPMMInstParam(const dict& data, const dict& error, int reqid, bool last) override
+	{
+		try
+		{
+			PYBIND11_OVERLOAD(void, TdApi, onRspQrySPMMInstParam, data, error, reqid, last);
+		}
+		catch (const error_already_set& e)
+		{
+			cout << e.what() << endl;
+		}
+	};
+
+	void onRspQrySPMMProductParam(const dict& data, const dict& error, int reqid, bool last) override
+	{
+		try
+		{
+			PYBIND11_OVERLOAD(void, TdApi, onRspQrySPMMProductParam, data, error, reqid, last);
+		}
+		catch (const error_already_set& e)
+		{
+			cout << e.what() << endl;
+		}
+	};
+
+	void onRspQrySPBMAddonInterParameter(const dict& data, const dict& error, int reqid, bool last) override
+	{
+		try
+		{
+			PYBIND11_OVERLOAD(void, TdApi, onRspQrySPBMAddonInterParameter, data, error, reqid, last);
+		}
+		catch (const error_already_set& e)
+		{
+			cout << e.what() << endl;
+		}
+	};
+
+	void onRspQryRCAMSCombProductInfo(const dict& data, const dict& error, int reqid, bool last) override
+	{
+		try
+		{
+			PYBIND11_OVERLOAD(void, TdApi, onRspQryRCAMSCombProductInfo, data, error, reqid, last);
+		}
+		catch (const error_already_set& e)
+		{
+			cout << e.what() << endl;
+		}
+	};
+
+	void onRspQryRCAMSInstrParameter(const dict& data, const dict& error, int reqid, bool last) override
+	{
+		try
+		{
+			PYBIND11_OVERLOAD(void, TdApi, onRspQryRCAMSInstrParameter, data, error, reqid, last);
+		}
+		catch (const error_already_set& e)
+		{
+			cout << e.what() << endl;
+		}
+	};
+
+	void onRspQryRCAMSIntraParameter(const dict& data, const dict& error, int reqid, bool last) override
+	{
+		try
+		{
+			PYBIND11_OVERLOAD(void, TdApi, onRspQryRCAMSIntraParameter, data, error, reqid, last);
+		}
+		catch (const error_already_set& e)
+		{
+			cout << e.what() << endl;
+		}
+	};
+
+	void onRspQryRCAMSInterParameter(const dict& data, const dict& error, int reqid, bool last) override
+	{
+		try
+		{
+			PYBIND11_OVERLOAD(void, TdApi, onRspQryRCAMSInterParameter, data, error, reqid, last);
+		}
+		catch (const error_already_set& e)
+		{
+			cout << e.what() << endl;
+		}
+	};
+
+	void onRspQryRCAMSShortOptAdjustParam(const dict& data, const dict& error, int reqid, bool last) override
+	{
+		try
+		{
+			PYBIND11_OVERLOAD(void, TdApi, onRspQryRCAMSShortOptAdjustParam, data, error, reqid, last);
+		}
+		catch (const error_already_set& e)
+		{
+			cout << e.what() << endl;
+		}
+	};
+
+	void onRspQryRCAMSInvestorCombPosition(const dict& data, const dict& error, int reqid, bool last) override
+	{
+		try
+		{
+			PYBIND11_OVERLOAD(void, TdApi, onRspQryRCAMSInvestorCombPosition, data, error, reqid, last);
+		}
+		catch (const error_already_set& e)
+		{
+			cout << e.what() << endl;
+		}
+	};
+
+	void onRspQryInvestorProdRCAMSMargin(const dict& data, const dict& error, int reqid, bool last) override
+	{
+		try
+		{
+			PYBIND11_OVERLOAD(void, TdApi, onRspQryInvestorProdRCAMSMargin, data, error, reqid, last);
+		}
+		catch (const error_already_set& e)
+		{
+			cout << e.what() << endl;
+		}
+	};
+
+	void onRspQryRULEInstrParameter(const dict& data, const dict& error, int reqid, bool last) override
+	{
+		try
+		{
+			PYBIND11_OVERLOAD(void, TdApi, onRspQryRULEInstrParameter, data, error, reqid, last);
+		}
+		catch (const error_already_set& e)
+		{
+			cout << e.what() << endl;
+		}
+	};
+
+	void onRspQryRULEIntraParameter(const dict& data, const dict& error, int reqid, bool last) override
+	{
+		try
+		{
+			PYBIND11_OVERLOAD(void, TdApi, onRspQryRULEIntraParameter, data, error, reqid, last);
+		}
+		catch (const error_already_set& e)
+		{
+			cout << e.what() << endl;
+		}
+	};
+
+	void onRspQryRULEInterParameter(const dict& data, const dict& error, int reqid, bool last) override
+	{
+		try
+		{
+			PYBIND11_OVERLOAD(void, TdApi, onRspQryRULEInterParameter, data, error, reqid, last);
+		}
+		catch (const error_already_set& e)
+		{
+			cout << e.what() << endl;
+		}
+	};
+
+	void onRspQryInvestorProdRULEMargin(const dict& data, const dict& error, int reqid, bool last) override
+	{
+		try
+		{
+			PYBIND11_OVERLOAD(void, TdApi, onRspQryInvestorProdRULEMargin, data, error, reqid, last);
+		}
+		catch (const error_already_set& e)
+		{
+			cout << e.what() << endl;
+		}
+	};
+
 };
 
 
@@ -12579,6 +13879,22 @@ PYBIND11_MODULE(vnctptd, m)
 		.def("reqQrySPBMInvestorPortfDef", &TdApi::reqQrySPBMInvestorPortfDef)
 		.def("reqQryInvestorPortfMarginRatio", &TdApi::reqQryInvestorPortfMarginRatio)
 		.def("reqQryInvestorProdSPBMDetail", &TdApi::reqQryInvestorProdSPBMDetail)
+		.def("reqQryInvestorCommoditySPMMMargin", &TdApi::reqQryInvestorCommoditySPMMMargin)
+		.def("reqQryInvestorCommodityGroupSPMMMargin", &TdApi::reqQryInvestorCommodityGroupSPMMMargin)
+		.def("reqQrySPMMInstParam", &TdApi::reqQrySPMMInstParam)
+		.def("reqQrySPMMProductParam", &TdApi::reqQrySPMMProductParam)
+		.def("reqQrySPBMAddOnInterParameter", &TdApi::reqQrySPBMAddOnInterParameter)
+		.def("reqQryRCAMSCombProductInfo", &TdApi::reqQryRCAMSCombProductInfo)
+		.def("reqQryRCAMSInstrParameter", &TdApi::reqQryRCAMSInstrParameter)
+		.def("reqQryRCAMSIntraParameter", &TdApi::reqQryRCAMSIntraParameter)
+		.def("reqQryRCAMSInterParameter", &TdApi::reqQryRCAMSInterParameter)
+		.def("reqQryRCAMSShortOptAdjustParam", &TdApi::reqQryRCAMSShortOptAdjustParam)
+		.def("reqQryRCAMSInvestorCombPosition", &TdApi::reqQryRCAMSInvestorCombPosition)
+		.def("reqQryInvestorProdRCAMSMargin", &TdApi::reqQryInvestorProdRCAMSMargin)
+		.def("reqQryRULEInstrParameter", &TdApi::reqQryRULEInstrParameter)
+		.def("reqQryRULEIntraParameter", &TdApi::reqQryRULEIntraParameter)
+		.def("reqQryRULEInterParameter", &TdApi::reqQryRULEInterParameter)
+		.def("reqQryInvestorProdRULEMargin", &TdApi::reqQryInvestorProdRULEMargin)
 
 		.def("onFrontConnected", &TdApi::onFrontConnected)
 		.def("onFrontDisconnected", &TdApi::onFrontDisconnected)
@@ -12718,5 +14034,21 @@ PYBIND11_MODULE(vnctptd, m)
 		.def("onRspQrySPBMInvestorPortfDef", &TdApi::onRspQrySPBMInvestorPortfDef)
 		.def("onRspQryInvestorPortfMarginRatio", &TdApi::onRspQryInvestorPortfMarginRatio)
 		.def("onRspQryInvestorProdSPBMDetail", &TdApi::onRspQryInvestorProdSPBMDetail)
+		.def("onRspQryInvestorCommoditySPMMMargin", &TdApi::onRspQryInvestorCommoditySPMMMargin)
+		.def("onRspQryInvestorCommodityGroupSPMMMargin", &TdApi::onRspQryInvestorCommodityGroupSPMMMargin)
+		.def("onRspQrySPMMInstParam", &TdApi::onRspQrySPMMInstParam)
+		.def("onRspQrySPMMProductParam", &TdApi::onRspQrySPMMProductParam)
+		.def("onRspQrySPBMAddonInterParameter", &TdApi::onRspQrySPBMAddonInterParameter)
+		.def("onRspQryRCAMSCombProductInfo", &TdApi::onRspQryRCAMSCombProductInfo)
+		.def("onRspQryRCAMSInstrParameter", &TdApi::onRspQryRCAMSInstrParameter)
+		.def("onRspQryRCAMSIntraParameter", &TdApi::onRspQryRCAMSIntraParameter)
+		.def("onRspQryRCAMSInterParameter", &TdApi::onRspQryRCAMSInterParameter)
+		.def("onRspQryRCAMSShortOptAdjustParam", &TdApi::onRspQryRCAMSShortOptAdjustParam)
+		.def("onRspQryRCAMSInvestorCombPosition", &TdApi::onRspQryRCAMSInvestorCombPosition)
+		.def("onRspQryInvestorProdRCAMSMargin", &TdApi::onRspQryInvestorProdRCAMSMargin)
+		.def("onRspQryRULEInstrParameter", &TdApi::onRspQryRULEInstrParameter)
+		.def("onRspQryRULEIntraParameter", &TdApi::onRspQryRULEIntraParameter)
+		.def("onRspQryRULEInterParameter", &TdApi::onRspQryRULEInterParameter)
+		.def("onRspQryInvestorProdRULEMargin", &TdApi::onRspQryInvestorProdRULEMargin)
 		;
 }

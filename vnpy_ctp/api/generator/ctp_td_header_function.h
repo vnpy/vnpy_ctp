@@ -188,3 +188,35 @@ int reqQryInvestorPortfMarginRatio(const dict &req, int reqid);
 
 int reqQryInvestorProdSPBMDetail(const dict &req, int reqid);
 
+int reqQryInvestorCommoditySPMMMargin(const dict &req, int reqid);
+
+int reqQryInvestorCommodityGroupSPMMMargin(const dict &req, int reqid);
+
+int reqQrySPMMInstParam(const dict &req, int reqid);
+
+int reqQrySPMMProductParam(const dict &req, int reqid);
+
+int reqQrySPBMAddOnInterParameter(const dict &req, int reqid);
+
+int reqQryRCAMSCombProductInfo(const dict &req, int reqid);
+
+int reqQryRCAMSInstrParameter(const dict &req, int reqid);
+
+int reqQryRCAMSIntraParameter(const dict &req, int reqid);
+
+int reqQryRCAMSInterParameter(const dict &req, int reqid);
+
+int reqQryRCAMSShortOptAdjustParam(const dict &req, int reqid);
+
+int reqQryRCAMSInvestorCombPosition(const dict &req, int reqid);
+
+int reqQryInvestorProdRCAMSMargin(const dict &req, int reqid);
+
+int reqQryRULEInstrParameter(const dict &req, int reqid);
+
+int reqQryRULEIntraParameter(const dict &req, int reqid);
+
+int reqQryRULEInterParameter(const dict &req, int reqid);
+
+int reqQryInvestorProdRULEMargin(const dict &req, int reqid);
+

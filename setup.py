@@ -33,7 +33,7 @@ def get_ext_modules() -> list:
     # Mac
     elif platform.system() == "Darwin":
         include_dirs = ["vnpy_ctp/api/include/mac", "vnpy_ctp/api/vnctp"]
-        library_dirs=["vnpy_ctp/api/libs", "vnpy_ctp/api"]
+        library_dirs = ["vnpy_ctp/api/libs", "vnpy_ctp/api"]
         extra_compile_flags = [
             "-std=c++11",
             "-mmacosx-version-min=10.12",
