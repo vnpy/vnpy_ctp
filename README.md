@@ -5,15 +5,15 @@
 </p>
 
 <p align="center">
-    <img src ="https://img.shields.io/badge/version-6.6.9.1-blueviolet.svg"/>
+    <img src ="https://img.shields.io/badge/version-6.7.2.0-blueviolet.svg"/>
     <img src ="https://img.shields.io/badge/platform-windows|linux|macos-yellow.svg"/>
-    <img src ="https://img.shields.io/badge/python-3.8|3.9|3.10|3.11|3.12-blue.svg" />
+    <img src ="https://img.shields.io/badge/python-3.10|3.11|3.12-blue.svg" />
     <img src ="https://img.shields.io/github/license/vnpy/vnpy.svg?color=orange"/>
 </p>
 
 ## 说明
 
-基于CTP期货版的6.6.9接口封装开发，接口中自带的是【穿透式实盘环境】的dll文件。
+基于CTP期货版的6.7.2接口封装开发，接口中自带的是【穿透式实盘环境】的dll文件。
 
 ## 安装
 
