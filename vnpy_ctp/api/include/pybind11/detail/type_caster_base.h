@@ -486,10 +486,8 @@ PYBIND11_NOINLINE handle get_object_handle(const void *ptr, const detail::type_i
 inline PyThreadState *get_thread_state_unchecked() {
 #if defined(PYPY_VERSION)
     return PyThreadState_GET();
-#elif PY_VERSION_HEX < 0x030D0000
-    return _PyThreadState_UncheckedGet();
 #else
-    return PyThreadState_GetUnchecked();
+    return _PyThreadState_UncheckedGet();
 #endif
 }
 
@@ -788,7 +786,7 @@ public:
         std::string tname = rtti_type ? rtti_type->name() : cast_type.name();
         detail::clean_type_id(tname);
         std::string msg = "Unregistered type : " + tname;
-        set_error(PyExc_TypeError, msg.c_str());
+        PyErr_SetString(PyExc_TypeError, msg.c_str());
         return {nullptr, nullptr};
     }
 
