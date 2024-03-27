@@ -10216,12 +10216,7 @@ int TdApi::reqUserLogin(const dict &req, int reqid)
 	getInt(req, "ClientIPPort", &myreq.ClientIPPort);
 	getString(req, "ClientIPAddress", myreq.ClientIPAddress);
 
-	//Mac版本的登录函数多了两个参数
-	#ifndef __APPLE__
-		int i = this->api->ReqUserLogin(&myreq, reqid);
-	#else
-		int i = this->api->ReqUserLogin(&myreq, reqid, 2, "vn");
-	#endif
+	int i = this->api->ReqUserLogin(&myreq, reqid);
 
 	return i;
 };
