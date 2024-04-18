@@ -75,7 +75,7 @@ git clone https://github.com/vnpy/vnpy_ctp.git
 
 cd vnpy_ctp
 
-pip3 intsall -e .
+pip3 install -e .
 ```
 
 相关注意事项如下：
