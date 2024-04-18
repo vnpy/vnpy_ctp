@@ -33,8 +33,8 @@ def get_ext_modules() -> list:
         runtime_library_dirs = []
     # Mac
     elif platform.system() == "Darwin":
-        include_dirs = ["vnpy_ctp/api/include", "vnpy_ctp/api/vnctp"]
-        library_dirs = ["vnpy_ctp/api/libs", "vnpy_ctp/api"]
+        include_dirs = ["vnpy_ctp/api/include/mac", "vnpy_ctp/api/vnctp"]
+        library_dirs = ["vnpy_ctp/api/libs"]
         extra_compile_flags = [
             "-std=c++11",
             "-mmacosx-version-min=10.12",
@@ -43,7 +43,7 @@ def get_ext_modules() -> list:
             "-mmacosx-version-min=10.12",
         ]
 
-        framework_path = Path(__file__).parent.joinpath("vnpy_ctp", "api")
+        framework_path = Path(__file__).parent.joinpath("vnpy_ctp", "api", "libs")
         runtime_library_dirs = [str(framework_path)]
     else:
         return []
