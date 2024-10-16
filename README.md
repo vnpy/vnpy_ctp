@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-    <img src ="https://img.shields.io/badge/version-6.7.2.0-blueviolet.svg"/>
+    <img src ="https://img.shields.io/badge/version-6.7.7.0-blueviolet.svg"/>
     <img src ="https://img.shields.io/badge/platform-windows|linux|macos-yellow.svg"/>
     <img src ="https://img.shields.io/badge/python-3.10|3.11|3.12-blue.svg" />
     <img src ="https://img.shields.io/github/license/vnpy/vnpy.svg?color=orange"/>
@@ -13,7 +13,7 @@
 
 ## 说明
 
-基于CTP期货版的6.7.2接口封装开发，接口中自带的是【穿透式实盘环境】的dll文件。
+基于CTP期货版的6.7.7接口封装开发，接口中自带的是【穿透式实盘环境】的dll文件。
 
 ## 安装
 
@@ -66,7 +66,7 @@ if __name__ == "__main__":
 
 ## Mac系统支持
 
-由于6.7.2版本CTP的Mac系统API项目结构发生了较大变化，改为了使用framework目录的结构，因此无法再直接从PyPI下载预编译好的wheel二进制包进行安装。
+由于6.7.7版本CTP的Mac系统API项目结构发生了较大变化，改为了使用framework目录的结构，因此无法再直接从PyPI下载预编译好的wheel二进制包进行安装。
 
 用户需要克隆（或下载）本仓库的源代码到本地后自行编译安装，具体命令如下：
 
