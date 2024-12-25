@@ -429,6 +429,8 @@ typedef char TThostFtdcTraderConnectStatusType;
 #define THOST_FTDC_FC_SyncOTP 'E'
 ///删除未知单
 #define THOST_FTDC_FC_DeleteOrder 'F'
+///退出紧急状态
+#define THOST_FTDC_FC_ExitEmergency 'G'
 
 typedef char TThostFtdcFunctionCodeType;
 
@@ -873,8 +875,14 @@ typedef char TThostFtdcOffsetFlagType;
 #define THOST_FTDC_FCC_Other '6'
 ///自然人临近交割
 #define THOST_FTDC_FCC_PersonDeliv '7'
-///风控强平不验证资金
+///本地强平资金不足忽略敞口
 #define THOST_FTDC_FCC_Notverifycapital '8'
+///本地强平资金不足
+#define THOST_FTDC_FCC_LocalLackDeposit '9'
+///本地强平违规持仓忽略敞口
+#define THOST_FTDC_FCC_LocalViolationNocheck 'a'
+///本地强平违规持仓
+#define THOST_FTDC_FCC_LocalViolation 'b'
 
 typedef char TThostFtdcForceCloseReasonType;
 
@@ -1061,6 +1069,8 @@ typedef char TThostFtdcPriceSourceType;
 #define THOST_FTDC_IS_AuctionMatch '5'
 ///收盘
 #define THOST_FTDC_IS_Closed '6'
+///交易业务处理
+#define THOST_FTDC_IS_TransactionProcessing '7'
 
 typedef char TThostFtdcInstrumentStatusType;
 
@@ -1539,6 +1549,8 @@ typedef char TThostFtdcSystemParamIDType;
 #define THOST_FTDC_TPID_LoginFailMaxNumForIP 'U'
 ///密码有效期
 #define THOST_FTDC_TPID_PasswordPeriod 'V'
+///历史密码重复限制次数
+#define THOST_FTDC_TPID_PwdHistoryCmp 'X'
 
 typedef char TThostFtdcTradeParamIDType;
 
@@ -2586,6 +2598,8 @@ typedef char TThostFtdcClearbarchIDType[6];
 #define THOST_FTDC_UET_Transfer '8'
 ///其他
 #define THOST_FTDC_UET_Other '9'
+///修改资金密码
+#define THOST_FTDC_UET_UpdateTradingAccountPassword 'a'
 
 typedef char TThostFtdcUserEventTypeType;
 
@@ -6567,6 +6581,11 @@ typedef char TThostFtdcWeakPasswordSourceType;
 typedef char TThostFtdcRandomStringType[17];
 
 /////////////////////////////////////////////////////////////////////////
+///TFtdcOrderMemoType是一个报单回显字段类型
+/////////////////////////////////////////////////////////////////////////
+typedef char TThostFtdcOrderMemoType[13];
+
+/////////////////////////////////////////////////////////////////////////
 ///TFtdcOptSelfCloseFlagType是一个期权行权的头寸是否自对冲类型
 /////////////////////////////////////////////////////////////////////////
 ///自对冲期权仓位
@@ -7064,5 +7083,19 @@ typedef double TThostFtdcStdPositionType;
 #define THOST_FTDC_PCF_PositionChange '2'
 
 typedef char TThostFtdcProdChangeFlagType;
+
+/////////////////////////////////////////////////////////////////////////
+///TFtdcPwdRcdSrcType是一个历史密码来源类型
+/////////////////////////////////////////////////////////////////////////
+///来源于Sync初始化数据
+#define THOST_FTDC_PRS_Init '0'
+///来源于实时上场数据
+#define THOST_FTDC_PRS_Sync '1'
+///来源于用户修改
+#define THOST_FTDC_PRS_UserUpd '2'
+///来源于超户修改，很可能来自主席同步数据
+#define THOST_FTDC_PRS_SuperUserUpd '3'
+
+typedef char TThostFtdcPwdRcdSrcType;
 
 #endif

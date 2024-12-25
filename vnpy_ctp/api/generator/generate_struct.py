@@ -69,6 +69,7 @@ class StructGenerator:
 
     def process_member(self, line: str):
         """处理成员"""
+        line = line.replace(' ', '\t')
         words = line.split("\t")
         words = [word for word in words if word]
 

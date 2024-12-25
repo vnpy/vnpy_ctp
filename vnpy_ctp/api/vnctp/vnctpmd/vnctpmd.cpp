@@ -8,6 +8,7 @@
 ///C++的回调函数将数据保存到队列中
 ///-------------------------------------------------------------------------------------
 
+
 void MdApi::OnFrontConnected()
 {
 	Task task = Task();
@@ -31,7 +32,7 @@ void MdApi::OnHeartBeatWarning(int nTimeLapse)
 	this->task_queue.push(task);
 };
 
-void MdApi::OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
+void MdApi::OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
 	Task task = Task();
 	task.task_name = ONRSPUSERLOGIN;
@@ -52,7 +53,7 @@ void MdApi::OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin, CThostFtd
 	this->task_queue.push(task);
 };
 
-void MdApi::OnRspUserLogout(CThostFtdcUserLogoutField *pUserLogout, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
+void MdApi::OnRspUserLogout(CThostFtdcUserLogoutField *pUserLogout, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
 	Task task = Task();
 	task.task_name = ONRSPUSERLOGOUT;
@@ -73,7 +74,7 @@ void MdApi::OnRspUserLogout(CThostFtdcUserLogoutField *pUserLogout, CThostFtdcRs
 	this->task_queue.push(task);
 };
 
-void MdApi::OnRspQryMulticastInstrument(CThostFtdcMulticastInstrumentField *pMulticastInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
+void MdApi::OnRspQryMulticastInstrument(CThostFtdcMulticastInstrumentField *pMulticastInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
 	Task task = Task();
 	task.task_name = ONRSPQRYMULTICASTINSTRUMENT;
@@ -94,7 +95,7 @@ void MdApi::OnRspQryMulticastInstrument(CThostFtdcMulticastInstrumentField *pMul
 	this->task_queue.push(task);
 };
 
-void MdApi::OnRspError(CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
+void MdApi::OnRspError(CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
 	Task task = Task();
 	task.task_name = ONRSPERROR;
@@ -109,7 +110,7 @@ void MdApi::OnRspError(CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bI
 	this->task_queue.push(task);
 };
 
-void MdApi::OnRspSubMarketData(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
+void MdApi::OnRspSubMarketData(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSUBMARKETDATA;
@@ -130,7 +131,7 @@ void MdApi::OnRspSubMarketData(CThostFtdcSpecificInstrumentField *pSpecificInstr
 	this->task_queue.push(task);
 };
 
-void MdApi::OnRspUnSubMarketData(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
+void MdApi::OnRspUnSubMarketData(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
 	Task task = Task();
 	task.task_name = ONRSPUNSUBMARKETDATA;
@@ -151,7 +152,7 @@ void MdApi::OnRspUnSubMarketData(CThostFtdcSpecificInstrumentField *pSpecificIns
 	this->task_queue.push(task);
 };
 
-void MdApi::OnRspSubForQuoteRsp(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
+void MdApi::OnRspSubForQuoteRsp(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
 	Task task = Task();
 	task.task_name = ONRSPSUBFORQUOTERSP;
@@ -172,7 +173,7 @@ void MdApi::OnRspSubForQuoteRsp(CThostFtdcSpecificInstrumentField *pSpecificInst
 	this->task_queue.push(task);
 };
 
-void MdApi::OnRspUnSubForQuoteRsp(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
+void MdApi::OnRspUnSubForQuoteRsp(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
 	Task task = Task();
 	task.task_name = ONRSPUNSUBFORQUOTERSP;
@@ -193,7 +194,7 @@ void MdApi::OnRspUnSubForQuoteRsp(CThostFtdcSpecificInstrumentField *pSpecificIn
 	this->task_queue.push(task);
 };
 
-void MdApi::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData)
+void MdApi::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData) 
 {
 	Task task = Task();
 	task.task_name = ONRTNDEPTHMARKETDATA;
@@ -206,7 +207,7 @@ void MdApi::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketDat
 	this->task_queue.push(task);
 };
 
-void MdApi::OnRtnForQuoteRsp(CThostFtdcForQuoteRspField *pForQuoteRsp)
+void MdApi::OnRtnForQuoteRsp(CThostFtdcForQuoteRspField *pForQuoteRsp) 
 {
 	Task task = Task();
 	task.task_name = ONRTNFORQUOTERSP;
@@ -218,6 +219,8 @@ void MdApi::OnRtnForQuoteRsp(CThostFtdcForQuoteRspField *pForQuoteRsp)
 	}
 	this->task_queue.push(task);
 };
+
+
 
 ///-------------------------------------------------------------------------------------
 ///工作线程从队列中取出数据，转化为python对象后，进行推送
@@ -233,83 +236,86 @@ void MdApi::processTask()
             
             switch (task.task_name)
             {
+			
 			case ONFRONTCONNECTED:
 			{
 				this->processFrontConnected(&task);
 				break;
 			}
-
+			
 			case ONFRONTDISCONNECTED:
 			{
 				this->processFrontDisconnected(&task);
 				break;
 			}
-
+			
 			case ONHEARTBEATWARNING:
 			{
 				this->processHeartBeatWarning(&task);
 				break;
 			}
-
+			
 			case ONRSPUSERLOGIN:
 			{
 				this->processRspUserLogin(&task);
 				break;
 			}
-
+			
 			case ONRSPUSERLOGOUT:
 			{
 				this->processRspUserLogout(&task);
 				break;
 			}
-
+			
 			case ONRSPQRYMULTICASTINSTRUMENT:
 			{
 				this->processRspQryMulticastInstrument(&task);
 				break;
 			}
-
+			
 			case ONRSPERROR:
 			{
 				this->processRspError(&task);
 				break;
 			}
-
+			
 			case ONRSPSUBMARKETDATA:
 			{
 				this->processRspSubMarketData(&task);
 				break;
 			}
-
+			
 			case ONRSPUNSUBMARKETDATA:
 			{
 				this->processRspUnSubMarketData(&task);
 				break;
 			}
-
+			
 			case ONRSPSUBFORQUOTERSP:
 			{
 				this->processRspSubForQuoteRsp(&task);
 				break;
 			}
-
+			
 			case ONRSPUNSUBFORQUOTERSP:
 			{
 				this->processRspUnSubForQuoteRsp(&task);
 				break;
 			}
-
+			
 			case ONRTNDEPTHMARKETDATA:
 			{
 				this->processRtnDepthMarketData(&task);
 				break;
 			}
-
+			
 			case ONRTNFORQUOTERSP:
 			{
 				this->processRtnForQuoteRsp(&task);
 				break;
 			}
+			
+			
             };
         }
     }
@@ -317,6 +323,7 @@ void MdApi::processTask()
     {
     }
 };
+
 
 void MdApi::processFrontConnected(Task *task)
 {
@@ -601,6 +608,8 @@ void MdApi::processRtnForQuoteRsp(Task *task)
 	this->onRtnForQuoteRsp(data);
 };
 
+
+
 ///-------------------------------------------------------------------------------------
 ///主动函数
 ///-------------------------------------------------------------------------------------
@@ -706,6 +715,7 @@ int MdApi::unSubscribeForQuoteRsp(string instrumentID)
 	return i;
 };
 
+
 int MdApi::reqUserLogin(const dict &req, int reqid)
 {
 	CThostFtdcReqUserLoginField myreq = CThostFtdcReqUserLoginField();
@@ -748,6 +758,8 @@ int MdApi::reqQryMulticastInstrument(const dict &req, int reqid)
 	return i;
 };
 
+
+
 ///-------------------------------------------------------------------------------------
 ///Boost.Python封装
 ///-------------------------------------------------------------------------------------
@@ -757,6 +769,7 @@ class PyMdApi: public MdApi
 public:
 	using MdApi::MdApi;
 
+	
 	void onFrontConnected() override
 	{
 		try
@@ -768,7 +781,7 @@ public:
 			cout << e.what() << endl;
 		}
 	};
-
+	
 	void onFrontDisconnected(int reqid) override
 	{
 		try
@@ -780,7 +793,7 @@ public:
 			cout << e.what() << endl;
 		}
 	};
-
+	
 	void onHeartBeatWarning(int reqid) override
 	{
 		try
@@ -792,7 +805,7 @@ public:
 			cout << e.what() << endl;
 		}
 	};
-
+	
 	void onRspUserLogin(const dict &data, const dict &error, int reqid, bool last) override
 	{
 		try
@@ -804,7 +817,7 @@ public:
 			cout << e.what() << endl;
 		}
 	};
-
+	
 	void onRspUserLogout(const dict &data, const dict &error, int reqid, bool last) override
 	{
 		try
@@ -816,7 +829,7 @@ public:
 			cout << e.what() << endl;
 		}
 	};
-
+	
 	void onRspQryMulticastInstrument(const dict &data, const dict &error, int reqid, bool last) override
 	{
 		try
@@ -828,7 +841,7 @@ public:
 			cout << e.what() << endl;
 		}
 	};
-
+	
 	void onRspError(const dict &error, int reqid, bool last) override
 	{
 		try
@@ -840,7 +853,7 @@ public:
 			cout << e.what() << endl;
 		}
 	};
-
+	
 	void onRspSubMarketData(const dict &data, const dict &error, int reqid, bool last) override
 	{
 		try
@@ -852,7 +865,7 @@ public:
 			cout << e.what() << endl;
 		}
 	};
-
+	
 	void onRspUnSubMarketData(const dict &data, const dict &error, int reqid, bool last) override
 	{
 		try
@@ -864,7 +877,7 @@ public:
 			cout << e.what() << endl;
 		}
 	};
-
+	
 	void onRspSubForQuoteRsp(const dict &data, const dict &error, int reqid, bool last) override
 	{
 		try
@@ -876,7 +889,7 @@ public:
 			cout << e.what() << endl;
 		}
 	};
-
+	
 	void onRspUnSubForQuoteRsp(const dict &data, const dict &error, int reqid, bool last) override
 	{
 		try
@@ -888,7 +901,7 @@ public:
 			cout << e.what() << endl;
 		}
 	};
-
+	
 	void onRtnDepthMarketData(const dict &data) override
 	{
 		try
@@ -900,7 +913,7 @@ public:
 			cout << e.what() << endl;
 		}
 	};
-
+	
 	void onRtnForQuoteRsp(const dict &data) override
 	{
 		try
@@ -912,6 +925,8 @@ public:
 			cout << e.what() << endl;
 		}
 	};
+	
+	
 };
 
 
@@ -933,10 +948,11 @@ PYBIND11_MODULE(vnctpmd, m)
 		.def("unSubscribeMarketData", &MdApi::unSubscribeMarketData)
 		.def("subscribeForQuoteRsp", &MdApi::subscribeForQuoteRsp)
 		.def("unSubscribeForQuoteRsp", &MdApi::unSubscribeForQuoteRsp)
+		
 		.def("reqUserLogin", &MdApi::reqUserLogin)
 		.def("reqUserLogout", &MdApi::reqUserLogout)
 		.def("reqQryMulticastInstrument", &MdApi::reqQryMulticastInstrument)
-
+		
 		.def("onFrontConnected", &MdApi::onFrontConnected)
 		.def("onFrontDisconnected", &MdApi::onFrontDisconnected)
 		.def("onHeartBeatWarning", &MdApi::onHeartBeatWarning)
@@ -951,4 +967,5 @@ PYBIND11_MODULE(vnctpmd, m)
 		.def("onRtnDepthMarketData", &MdApi::onRtnDepthMarketData)
 		.def("onRtnForQuoteRsp", &MdApi::onRtnForQuoteRsp)
 		;
+		
 }
