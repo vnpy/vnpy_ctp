@@ -167,22 +167,30 @@ class CtpGateway(BaseGateway):
         appid: str = setting["产品名称"]
         auth_code: str = setting["授权编码"]
 
-        if (
-            (not td_address.startswith("tcp://"))
-            and (not td_address.startswith("ssl://"))
-            and (not td_address.startswith("socks"))
-        ):
-            td_address = "tcp://" + td_address
+        # 扩展交易服务器地址
+        td_addresses = expand_domain_template(td_address)
+        # 扩展行情服务器地址
+        md_addresses = expand_domain_template(md_address)
 
-        if (
-            (not md_address.startswith("tcp://"))
-            and (not md_address.startswith("ssl://"))
-            and (not md_address.startswith("socks"))
-        ):
-            md_address = "tcp://" + md_address
+        # 添加TCP前缀
+        for i, addr in enumerate(td_addresses):
+            if (
+                (not addr.startswith("tcp://"))
+                and (not addr.startswith("ssl://"))
+                and (not addr.startswith("socks"))
+            ):
+                td_addresses[i] = "tcp://" + addr
 
-        self.td_api.connect(td_address, userid, password, brokerid, auth_code, appid)
-        self.md_api.connect(md_address, userid, password, brokerid)
+        for i, addr in enumerate(md_addresses):
+            if (
+                (not addr.startswith("tcp://"))
+                and (not addr.startswith("ssl://"))
+                and (not addr.startswith("socks"))
+            ):
+                md_addresses[i] = "tcp://" + addr
+
+        self.td_api.connect(td_addresses, userid, password, brokerid, auth_code, appid)
+        self.md_api.connect(md_addresses, userid, password, brokerid)
 
         self.init_query()
 
@@ -359,7 +367,7 @@ class CtpMdApi(MdApi):
 
         self.gateway.on_tick(tick)
 
-    def connect(self, address: str, userid: str, password: str, brokerid: str) -> None:
+    def connect(self, addresses: list[str], userid: str, password: str, brokerid: str) -> None:
         """连接服务器"""
         self.userid = userid
         self.password = password
@@ -370,7 +378,10 @@ class CtpMdApi(MdApi):
             path: Path = get_folder_path(self.gateway_name.lower())
             self.createFtdcMdApi((str(path) + "\\Md").encode("GBK"))
 
-            self.registerFront(address)
+            # 注册多个行情服务器地址，底层使用第一个正常连接
+            for address in addresses:
+                self.registerFront(address)
+
             self.init()
 
             self.connect_status = True
@@ -720,7 +731,7 @@ class CtpTdApi(TdApi):
 
     def connect(
         self,
-        address: str,
+        addresses: list[str],
         userid: str,
         password: str,
         brokerid: str,
@@ -741,7 +752,10 @@ class CtpTdApi(TdApi):
             self.subscribePrivateTopic(0)
             self.subscribePublicTopic(0)
 
-            self.registerFront(address)
+            # 注册多个交易服务器地址
+            for address in addresses:
+                self.registerFront(address)
+
             self.init()
 
             self.connect_status = True
@@ -872,3 +886,41 @@ def adjust_price(price: float) -> float:
     if price == MAX_FLOAT:
         price = 0
     return price
+
+def expand_domain_template(address: str) -> list[str]:
+    """将域名模板扩展为实际地址列表
+    支持以下格式：
+    1. 单个地址: tcp://127.0.0.1:8888
+    2. 逗号分隔: tcp://127.0.0.1:8888,tcp://127.0.0.2:8888
+    3. 范围模板: ctp1-front{1,3/5,8,10/18}.citicsf.com
+    """
+    import re
+
+    # 使用正则表达式匹配范围模板 {1,3/5,8,10/18}
+    pattern = r'{([0-9,/]+)}'
+    match = re.search(pattern, address)
+
+    if match:
+        template = address
+        ranges_str = match.group(1)  # 提取括号内的内容
+
+        # 解析范围并收集所有数字
+        numbers = set()
+        for part in ranges_str.split(','):
+            if '/' in part:
+                start, end = map(int, part.split('/'))
+                numbers.update(range(start, end + 1))
+            else:
+                numbers.add(int(part))
+
+        # 替换模板中的整个匹配部分（包括花括号）
+        addresses = [template.replace(match.group(0), str(i)) for i in sorted(numbers)]
+        return addresses
+
+    # 处理逗号分隔的地址列表
+    elif "," in address:
+        return [addr.strip() for addr in address.split(",")]
+
+    # 处理单个地址
+    else:
+        return [address]
