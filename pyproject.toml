@@ -24,7 +24,8 @@ classifiers = [
     "Natural Language :: Chinese (Simplified)"
 ]
 dependencies = [
-    "importlib_metadata"
+    "importlib_metadata",
+    "pybind11>=2.9.0"
 ]
 
 [project.urls]
@@ -37,7 +38,7 @@ requires = [
     "ninja>=1.8.2",
     "wheel>=0.38.0",
     "setuptools>=42.0.0",
-    "pybind11>=2.9.0",
+    "pybind11>=2.13.6",
 ]
 build-backend = "mesonpy"
 
@@ -58,4 +59,4 @@ include-package-data = true
 setup = ["--buildtype=release", "--vsenv"]
 
 [tool.mesonpy.args]
-compile = ["-utf8", "-DPYBIND11_USE_SMART_HOLDER_AS_DEFAULT", "-Iext/pybind11/include/"] 
+compile = ["-utf8", "-DPYBIND11_USE_SMART_HOLDER_AS_DEFAULT"] 
