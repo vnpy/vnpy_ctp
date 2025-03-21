@@ -218,5 +218,34 @@ endif
 install_subdir('vnpy_ctp/api/include', install_dir: py.get_install_dir() / 'vnpy_ctp/api')
 install_subdir('vnpy_ctp/api/libs', install_dir: py.get_install_dir() / 'vnpy_ctp/api')
 
-# Generate an empty __init__.py file if it doesn't exist
-meson.add_install_script('meson_post_install.py') 
+# Create the required directory structure and __init__.py files
+# This replaces functionality from meson_post_install.py
+api_install_dir = py.get_install_dir() / 'vnpy_ctp/api'
+vnctp_install_dir = api_install_dir / 'vnctp'
+vnctpmd_install_dir = vnctp_install_dir / 'vnctpmd'
+vnctptd_install_dir = vnctp_install_dir / 'vnctptd'
+
+# Create __init__.py files for each directory
+foreach dir_path : [api_install_dir, vnctp_install_dir, vnctpmd_install_dir, vnctptd_install_dir]
+  meson.add_install_script('python3', '-c', 
+    'import os; os.makedirs("' + dir_path + '", exist_ok=True); open("' + dir_path / '__init__.py' + '", "w").close()')
+endforeach
+
+# Copy vnctp.h file to required locations
+vnctp_h = meson.current_source_dir() / 'vnpy_ctp/api/vnctp/vnctp.h'
+foreach target_dir : [vnctp_install_dir, vnctpmd_install_dir, vnctptd_install_dir]
+  meson.add_install_script('python3', '-c', 
+    'import os, shutil; os.makedirs("' + target_dir + '", exist_ok=True); ' +
+    'shutil.copy("' + vnctp_h + '", "' + target_dir / 'vnctp.h' + '") if os.path.exists("' + vnctp_h + '") else print("Warning: Could not find source vnctp.h at ' + vnctp_h + '")')
+endforeach
+
+# Copy DLL files on Windows if they exist
+if host_system == 'windows'
+  foreach dll_file : ['thostmduserapi_se.dll', 'thosttraderapi_se.dll']
+    meson.add_install_script('python3', '-c',
+      'import os, shutil; ' +
+      'src_paths = ["' + meson.current_source_dir() / 'vnpy_ctp/api' / dll_file + '", "' + meson.current_source_dir() / 'vnpy_ctp/api/libs' / dll_file + '"]; ' +
+      'dest_path = "' + api_install_dir / dll_file + '"; ' +
+      'any(shutil.copy(src, dest_path) for src in src_paths if os.path.exists(src)) or print("Warning: Could not find DLL ' + dll_file + ' for copying")')
+  endforeach
+endif 
