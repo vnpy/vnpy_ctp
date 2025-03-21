@@ -165,13 +165,12 @@ if host_system == 'windows'
   vnctpmd_dir = meson.current_source_dir() / 'vnpy_ctp/api/vnctp/vnctpmd'
   vnctptd_dir = meson.current_source_dir() / 'vnpy_ctp/api/vnctp/vnctptd'
   
-  # Create symlinks instead of copy on Windows
+  # Create directories if they don't exist
   run_command('cmd', '/c', 'mkdir', '-p', vnctpmd_dir.split(':')[1], check: false)
   run_command('cmd', '/c', 'mkdir', '-p', vnctptd_dir.split(':')[1], check: false)
   
-  # First try to directly copy the file to the target directories
-  run_command('cmd', '/c', 'copy', vnctp_h.split(':')[1], vnctpmd_dir.split(':')[1], check: false)
-  run_command('cmd', '/c', 'copy', vnctp_h.split(':')[1], vnctptd_dir.split(':')[1], check: false)
+  # No longer copy vnctp.h - we'll use the main file instead
+  # Instead, we'll update include paths for both modules
 endif
 
 # Build vnctpmd extension
@@ -179,6 +178,7 @@ py.extension_module('vnctpmd',
   sources: [vnctpmd_src],
   dependencies: [py_dep],
   link_args: lib_link_args,
+  include_directories: include_directories('vnpy_ctp/api/vnctp'), # Add the main vnctp directory as include path
   install: true,
   subdir: 'vnpy_ctp/api',
 )
@@ -188,6 +188,7 @@ py.extension_module('vnctptd',
   sources: [vnctptd_src],
   dependencies: [py_dep],
   link_args: lib_link_args,
+  include_directories: include_directories('vnpy_ctp/api/vnctp'), # Add the main vnctp directory as include path
   install: true,
   subdir: 'vnpy_ctp/api',
 )
