@@ -3,12 +3,8 @@ name = "vnpy_ctp"
 version = "6.7.2.1"
 description = "CTP gateway for vn.py quant trading framework."
 readme = "README.md"
-requires-python = ">=3.10"
 license = {text = "MIT"}
-authors = [
-    {name = "Xiaoyou Chen", email = "xiaoyou.chen@mail.vnpy.com"}
-]
-keywords = ["quant", "quantitative", "investment", "trading", "algotrading", "ctp"]
+authors = [{name = "Xiaoyou Chen", email = "xiaoyou.chen@mail.vnpy.com"}]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Operating System :: Microsoft :: Windows",
@@ -23,21 +19,22 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Natural Language :: Chinese (Simplified)"
 ]
-dependencies = [
-    "importlib_metadata",
-    "pybind11>=2.9.0"
-]
+requires-python = ">=3.10"
+dependencies = ["pybind11>=2.9.0"]
+keywords = ["quant", "quantitative", "investment", "trading", "algotrading", "ctp"]
 
 [project.urls]
 "Homepage" = "https://www.vnpy.com"
-"Repository" = "https://github.com/vnpy/vnpy_ctp"
+"Documentation" = "https://www.vnpy.com/docs"
+"Changes" = "https://github.com/vnpy/vnpy_ctp/blob/master/CHANGELOG.md"
+"Source" = "https://github.com/vnpy/vnpy_ctp/"
+"Forum" = "https://www.vnpy.com/forum"
 
 [build-system]
 requires = [
-    "meson-python>=0.13.1",
-    "ninja>=1.8.2",
-    "wheel>=0.38.0",
-    "setuptools>=42.0.0",
+    "meson-python>=0.17.1",
+    "ninja>=1.11.1",
+    "wheel>=0.45.1",
     "pybind11>=2.13.6",
 ]
 build-backend = "mesonpy"
@@ -60,3 +57,31 @@ setup = ["--buildtype=release", "--vsenv"]
 
 [tool.mesonpy.args]
 compile = ["-utf8", "-DPYBIND11_USE_SMART_HOLDER_AS_DEFAULT"] 
+
+[tool.ruff]
+target-version = "py310"
+output-format = "full"
+
+[tool.ruff.lint]
+select = [
+    "B",  # flake8-bugbear
+    "E",  # pycodestyle error
+    "F",  # pyflakes
+    "UP",  # pyupgrade
+    "W",  # pycodestyle warning
+]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+strict_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
