@@ -1,7 +1,17 @@
 import platform
-from pathlib import Path
 
 from setuptools import Extension, setup
+from setuptools.command.build_ext import build_ext
+
+
+class CustomBuildExt(build_ext):
+    """修改@rpath路径"""
+    def build_extensions(self):
+        for ext in self.extensions:
+            ext.extra_link_args = ext.extra_link_args or []
+            # 设置 @rpath 为 @loader_path
+            ext.extra_link_args.append('-Wl,-rpath,@loader_path')
+        super().build_extensions()
 
 
 def get_ext_modules() -> list:
@@ -42,9 +52,7 @@ def get_ext_modules() -> list:
         extra_link_args = [
             "-mmacosx-version-min=10.12",
         ]
-
-        framework_path = Path(__file__).parent.joinpath("vnpy_ctp", "api", "libs")
-        runtime_library_dirs = [str(framework_path)]
+        runtime_library_dirs = []
     else:
         return []
 
@@ -74,5 +82,8 @@ def get_ext_modules() -> list:
 
     return [vnctptd, vnctpmd]
 
-    
-setup(ext_modules=get_ext_modules())
+
+setup(
+    ext_modules=get_ext_modules(),
+    cmdclass={"build_ext": CustomBuildExt}
+)
