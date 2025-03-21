@@ -1,3 +1,3 @@
-from .vnctpmd import MdApi
-from .vnctptd import TdApi
-from .ctp_constant import *
+from .vnctpmd import MdApi      # noqa
+from .vnctptd import TdApi      # noqa
+from .ctp_constant import *     # noqa

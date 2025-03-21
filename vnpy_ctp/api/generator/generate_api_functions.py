@@ -30,7 +30,7 @@ class ApiGenerator:
 
     def run(self) -> None:
         """运行生成"""
-        self.f_cpp = open(self.filename, "r")
+        self.f_cpp = open(self.filename)
 
         for line in self.f_cpp:
             self.process_line(line)
@@ -206,7 +206,7 @@ class ApiGenerator:
 
                 args = []
 
-                for field, type_ in d.items():
+                for _, type_ in d.items():
                     if type_ == "int":
                         args.append("task->task_id")
                     elif type_ == "bool":
@@ -291,7 +291,7 @@ class ApiGenerator:
 
                 args = []
                 bind_args = ["void", self.class_name, on_name]
-                for field, type_ in d.items():
+                for _, type_ in d.items():
                     if type_ == "int":
                         args.append("int reqid")
                         bind_args.append("reqid")
