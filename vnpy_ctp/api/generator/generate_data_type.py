@@ -11,12 +11,12 @@ TYPE_CPP2PY = {
 class DataTypeGenerator:
     """DataType生成器"""
 
-    def __init__(self, filename: str, prefix: str):
+    def __init__(self, filename: str, prefix: str) -> None:
         """Constructor"""
-        self.filename = filename
-        self.prefix = prefix
+        self.filename: str = filename
+        self.prefix: str = prefix
 
-    def run(self):
+    def run(self) -> None:
         """主函数"""
         self.f_cpp = open(self.filename, "r")
         self.f_define = open(f"{self.prefix}_constant.py", "w")
@@ -31,7 +31,7 @@ class DataTypeGenerator:
 
         print("DataType生成完毕")
 
-    def process_line(self, line: str):
+    def process_line(self, line: str) -> None:
         """处理每行"""
         line = line.replace("\n", "")
         line = line.replace(";", "")
@@ -41,7 +41,7 @@ class DataTypeGenerator:
         elif line.startswith("typedef"):
             self.process_typedef(line)
 
-    def process_define(self, line: str):
+    def process_define(self, line: str) -> None:
         """处理常量定义"""
         words = line.split(" ")
         words = [word for word in words if word]
@@ -54,7 +54,7 @@ class DataTypeGenerator:
         new_line = f"{name} = {value}\n"
         self.f_define.write(new_line)
 
-    def process_typedef(self, line: str):
+    def process_typedef(self, line: str) -> None:
         """处理类型定义"""
         words = line.split(" ")
         words = [word for word in words if word != " "]
