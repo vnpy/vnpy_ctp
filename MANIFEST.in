@@ -1,1 +1,6 @@
 recursive-include vnpy_ctp *.dll *.so *.pyd *.h *.cpp *.lib *.a
+include meson.build
+include meson_post_install.py
+include vnpy_ctp/api/meson.build
+include pyproject.toml
+include README.md
