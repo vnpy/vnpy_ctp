@@ -33,7 +33,7 @@ keywords = ["quant", "quantitative", "investment", "trading", "algotrading", "ct
 [build-system]
 requires = [
     "meson-python>=0.17.1",
-    "meson>=1.11.1",
+    "meson>=1.7.0",
     "pybind11>=2.13.6",
 ]
 build-backend = "mesonpy"
