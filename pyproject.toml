@@ -47,5 +47,19 @@ documentation = "https://www.vnpy.com/docs/cn/gateway.html#ctp"
 changelog = "https://github.com/vnpy/vnpy_ctp/blob/master/CHANGELOG.md"
 
 # 定义构建参数
-[tool.meson-python.args]
-setup = ['--vsenv']  # 用于Windows构建 
+[tool.mesonpy]
+args = ['--vsenv']  # 用于Windows构建
+
+# 包含所有必要的文件类型
+[tool.mesonpy.distribution]
+include = [
+    "**/*.dll",
+    "**/*.so",
+    "**/*.pyd",
+    "**/*.h",
+    "**/*.cpp",
+    "**/*.lib",
+    "**/*.a"
+]
+# 确保所有包含的文件被正确安装
+preserve-path = true 
