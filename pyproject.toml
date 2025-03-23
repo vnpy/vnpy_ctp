@@ -1,10 +1,30 @@
+[build-system]
+# 构建系统的最低依赖
+requires = [
+    "meson-python>=0.13.1",
+    "meson>=1.2.1",
+    "pybind11>=2.10.0",
+]
+# 使用meson-python作为构建后端
+build-backend = "mesonpy"
+
 [project]
+# 项目基本信息
 name = "vnpy_ctp"
 version = "6.7.2.1"
 description = "CTP gateway for vn.py quant trading framework."
 readme = "README.md"
+authors = [
+    {name = "Xiaoyou Chen", email = "xiaoyou.chen@mail.vnpy.com"},
+]
 license = {text = "MIT"}
-authors = [{name = "Xiaoyou Chen", email = "xiaoyou.chen@mail.vnpy.com"}]
+requires-python = ">=3.10"
+# 项目依赖
+dependencies = [
+    "importlib_metadata",
+    "pybind11>=2.9.0",
+]
+# 项目分类
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Operating System :: Microsoft :: Windows",
@@ -17,72 +37,15 @@ classifiers = [
     "Topic :: Office/Business :: Financial :: Investment",
     "Programming Language :: Python :: Implementation :: CPython",
     "License :: OSI Approved :: MIT License",
-    "Natural Language :: Chinese (Simplified)"
+    "Natural Language :: Chinese (Simplified)",
 ]
-requires-python = ">=3.10"
-dependencies = ["pybind11>=2.9.0"]
-keywords = ["quant", "quantitative", "investment", "trading", "algotrading", "ctp"]
 
 [project.urls]
-"Homepage" = "https://www.vnpy.com"
-"Documentation" = "https://www.vnpy.com/docs"
-"Changes" = "https://github.com/vnpy/vnpy_ctp/blob/master/CHANGELOG.md"
-"Source" = "https://github.com/vnpy/vnpy_ctp/"
-"Forum" = "https://www.vnpy.com/forum"
+homepage = "https://www.vnpy.com"
+repository = "https://github.com/vnpy/vnpy_ctp"
+documentation = "https://www.vnpy.com/docs/cn/gateway.html#ctp"
+changelog = "https://github.com/vnpy/vnpy_ctp/blob/master/CHANGELOG.md"
 
-[build-system]
-requires = [
-    "meson-python>=0.17.1",
-    "ninja>=1.11.1",
-    "wheel>=0.45.1",
-    "pybind11>=2.13.6",
-]
-build-backend = "mesonpy"
-
-[tool.mesonpy]
-limited-api = false
-# Keeping C++ extensions fully visible for debugging purposes
-compile-args = []
-# Skip dist process to avoid Git issues
-skip-dist = true
-skip-sdist = true
-
-[tool.mesonpy.module]
-packages = ["vnpy_ctp"]
-include-package-data = true
-
-[tool.mesonpy.meson-args]
-# Pass additional arguments to meson setup
-setup = ["--buildtype=release", "--vsenv"]
-
-[tool.mesonpy.args]
-compile = ["-utf8", "-DPYBIND11_USE_SMART_HOLDER_AS_DEFAULT"] 
-
-[tool.ruff]
-target-version = "py310"
-output-format = "full"
-
-[tool.ruff.lint]
-select = [
-    "B",  # flake8-bugbear
-    "E",  # pycodestyle error
-    "F",  # pyflakes
-    "UP",  # pyupgrade
-    "W",  # pycodestyle warning
-]
-ignore = ["E501"]
-
-[tool.mypy]
-python_version = "3.10"
-warn_return_any = true
-warn_unused_configs = true
-disallow_untyped_defs = true
-disallow_incomplete_defs = true
-check_untyped_defs = true
-disallow_untyped_decorators = true
-no_implicit_optional = true
-strict_optional = true
-warn_redundant_casts = true
-warn_unused_ignores = true
-warn_no_return = true
-ignore_missing_imports = true
+# 定义构建参数
+[tool.meson-python.args]
+setup = ['--vsenv']  # 用于Windows构建 
