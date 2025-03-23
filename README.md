@@ -25,7 +25,6 @@
 pip install vnpy_ctp
 ```
 
-
 或者下载源代码后，解压后在cmd中运行：
 
 ```
@@ -33,6 +32,12 @@ pip install .
 ```
 
 使用源代码安装时需要进行C++编译，因此在执行上述命令之前请确保已经安装了【Visual Studio（Windows）】、【GCC（Linux）】、【XCode（Mac）】编译器。
+
+如果需要以**开发模式**安装到当前Python环境，可以使用下述命令：
+
+```
+pip install -e . --no-build-isolation --config-settings=build-dir=.\vnpy_ctp\api
+```
 
 ## 使用
 
