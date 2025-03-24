@@ -17,7 +17,8 @@ py = import('python').find_installation(pure: false)
 py_dep = py.dependency()
 
 # 获取pybind11路径（替换原来的依赖方式）
-pybind11_include_dir = run_command('python', '-c', 'import pybind11; print(pybind11.get_include())', check: true).stdout().strip()
+python_cmd = host_machine.system() == 'windows' ? 'python' : 'python3'
+pybind11_include_dir = run_command(python_cmd, '-c', 'import pybind11; print(pybind11.get_include())', check: true).stdout().strip()
 message('使用pybind11路径: ' + pybind11_include_dir)
 
 # 获取编译器信息
@@ -33,6 +34,14 @@ include_dirs = include_directories(
   'vnpy_ctp/api/vnctp',
   pybind11_include_dir,  # 添加pybind11包的路径
 )
+
+# 初始化库变量
+thostmduserapi_lib = []
+thosttraderapi_lib = []
+
+# 初始化其他编译选项
+extra_link_args = []
+install_rpath_value = ''
 
 # 设置Windows特定编译选项
 if host_machine.system() == 'windows'
@@ -50,6 +59,27 @@ if host_machine.system() == 'windows'
   thosttraderapi_lib = cpp.find_library('thosttraderapi_se', 
                                        dirs: [lib_dir, api_dir],
                                        required: true)
+# 设置Linux特定编译选项
+elif host_machine.system() == 'linux'
+  # Linux编译器设置 - 使用内置选项而不是直接使用编译标志
+  add_project_arguments('-Wno-delete-incomplete', '-Wno-sign-compare', language : 'cpp')
+  
+  # 设置库目录
+  api_dir = meson.current_source_dir() / 'vnpy_ctp/api'
+  
+  # 定义CTP库
+  thostmduserapi_lib = cpp.find_library('thostmduserapi_se', 
+                                       dirs: [api_dir],
+                                       required: true)
+  thosttraderapi_lib = cpp.find_library('thosttraderapi_se', 
+                                       dirs: [api_dir],
+                                       required: true)
+  
+  # Linux特定链接参数
+  extra_link_args = ['-lstdc++']
+  
+  # Linux特定安装路径
+  install_rpath_value = '$ORIGIN'
 endif
 
 # 创建MD模块扩展
@@ -58,6 +88,8 @@ md_module = py.extension_module(
   sources: ['vnpy_ctp/api/vnctp/vnctpmd/vnctpmd.cpp'],
   include_directories: include_dirs,
   dependencies: [py_dep, thostmduserapi_lib],
+  link_args: extra_link_args,
+  install_rpath: install_rpath_value,
   install: true,
   subdir: 'vnpy_ctp/api'
 )
@@ -68,6 +100,8 @@ td_module = py.extension_module(
   sources: ['vnpy_ctp/api/vnctp/vnctptd/vnctptd.cpp'],
   include_directories: include_dirs,
   dependencies: [py_dep, thosttraderapi_lib],
+  link_args: extra_link_args,
+  install_rpath: install_rpath_value,
   install: true,
   subdir: 'vnpy_ctp/api'
 )
@@ -90,12 +124,23 @@ foreach file : python_files
 endforeach
 
 # 安装API动态库文件
-api_libs = [
-  'vnpy_ctp/api/thostmduserapi_se.dll',
-  'vnpy_ctp/api/thosttraderapi_se.dll',
-]
+if host_machine.system() == 'windows'
+  api_libs = [
+    'vnpy_ctp/api/thostmduserapi_se.dll',
+    'vnpy_ctp/api/thosttraderapi_se.dll',
+  ]
+elif host_machine.system() == 'linux'
+  api_libs = [
+    'vnpy_ctp/api/libthostmduserapi_se.so',
+    'vnpy_ctp/api/libthosttraderapi_se.so',
+  ]
+else
+  api_libs = []
+endif
 
-install_data(
-  api_libs,
-  install_dir: py.get_install_dir() / 'vnpy_ctp/api'
-) 
+if api_libs.length() > 0
+  install_data(
+    api_libs,
+    install_dir: py.get_install_dir() / 'vnpy_ctp/api'
+  )
+endif 
