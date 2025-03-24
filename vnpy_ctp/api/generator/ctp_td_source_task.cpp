@@ -2946,3 +2946,24 @@ void TdApi::OnRspQryInvestorProdRULEMargin(CThostFtdcInvestorProdRULEMarginField
 	this->task_queue.push(task);
 };
 
+void TdApi::OnRspQryInvestorPortfSetting(CThostFtdcInvestorPortfSettingField *pInvestorPortfSetting, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
+{
+	Task task = Task();
+	task.task_name = ONRSPQRYINVESTORPORTFSETTING;
+	if (pInvestorPortfSetting)
+	{
+		CThostFtdcInvestorPortfSettingField *task_data = new CThostFtdcInvestorPortfSettingField();
+		*task_data = *pInvestorPortfSetting;
+		task.task_data = task_data;
+	}
+	if (pRspInfo)
+	{
+		CThostFtdcRspInfoField *task_error = new CThostFtdcRspInfoField();
+		*task_error = *pRspInfo;
+		task.task_error = task_error;
+	}
+	task.task_id = nRequestID;
+	task.task_last = bIsLast;
+	this->task_queue.push(task);
+};
+

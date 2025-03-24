@@ -12486,11 +12486,11 @@ struct CThostFtdcQryInvestorPortfSettingField
 struct CThostFtdcFrontInfoField
 {
 	///前置地址
-	TThostFtdcAddressType  FrontAddr;
+	TThostFtdcAddressType	FrontAddr;
 	///查询频率
-	TThostFtdcQueryFreqType QryFreq;
+	TThostFtdcQueryFreqType	QryFreq;
 	///FTD频率
-	TThostFtdcQueryFreqType FTDPkgFreq;
+	TThostFtdcQueryFreqType	FTDPkgFreq;
 };
 
 #endif

@@ -306,3 +306,5 @@ void processRspQryRULEInterParameter(Task *task);
 
 void processRspQryInvestorProdRULEMargin(Task *task);
 
+void processRspQryInvestorPortfSetting(Task *task);
+

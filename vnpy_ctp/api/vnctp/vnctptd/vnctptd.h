@@ -165,6 +165,7 @@ using namespace pybind11;
 #define ONRSPQRYRULEINTRAPARAMETER 151
 #define ONRSPQRYRULEINTERPARAMETER 152
 #define ONRSPQRYINVESTORPRODRULEMARGIN 153
+#define ONRSPQRYINVESTORPORTFSETTING 154
 
 ///-------------------------------------------------------------------------------------
 ///C++ SPI的回调函数方法实现
@@ -195,9 +196,10 @@ public:
     //-------------------------------------------------------------------------------------
     //API回调函数
     //-------------------------------------------------------------------------------------
+
 	///当客户端与交易后台建立起通信连接时（还未登录前），该方法被调用。
 	virtual void OnFrontConnected();
-
+	
 	///当客户端与交易后台通信连接断开时，该方法被调用。当发生这个情况后，API会自动重新连接，客户端可不做处理。
 	///@param nReason 错误原因
 	///        0x1001 网络读失败
@@ -206,14 +208,14 @@ public:
 	///        0x2002 发送心跳失败
 	///        0x2003 收到错误报文
 	virtual void OnFrontDisconnected(int nReason);
-
+		
 	///心跳超时警告。当长时间未收到报文时，该方法被调用。
 	///@param nTimeLapse 距离上次接收报文的时间
 	virtual void OnHeartBeatWarning(int nTimeLapse);
-
+	
 	///客户端认证响应
 	virtual void OnRspAuthenticate(CThostFtdcRspAuthenticateField *pRspAuthenticateField, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
-
+	
 
 	///登录请求响应
 	virtual void OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
@@ -594,77 +596,79 @@ public:
 	virtual void OnRspQryRiskSettleProductStatus(CThostFtdcRiskSettleProductStatusField *pRiskSettleProductStatus, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
 	///SPBM期货合约参数查询响应
-	virtual void OnRspQrySPBMFutureParameter(CThostFtdcSPBMFutureParameterField* pSPBMFutureParameter, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+	virtual void OnRspQrySPBMFutureParameter(CThostFtdcSPBMFutureParameterField *pSPBMFutureParameter, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
 	///SPBM期权合约参数查询响应
-	virtual void OnRspQrySPBMOptionParameter(CThostFtdcSPBMOptionParameterField* pSPBMOptionParameter, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+	virtual void OnRspQrySPBMOptionParameter(CThostFtdcSPBMOptionParameterField *pSPBMOptionParameter, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
 	///SPBM品种内对锁仓折扣参数查询响应
-	virtual void OnRspQrySPBMIntraParameter(CThostFtdcSPBMIntraParameterField* pSPBMIntraParameter, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+	virtual void OnRspQrySPBMIntraParameter(CThostFtdcSPBMIntraParameterField *pSPBMIntraParameter, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
 	///SPBM跨品种抵扣参数查询响应
-	virtual void OnRspQrySPBMInterParameter(CThostFtdcSPBMInterParameterField* pSPBMInterParameter, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+	virtual void OnRspQrySPBMInterParameter(CThostFtdcSPBMInterParameterField *pSPBMInterParameter, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
 	///SPBM组合保证金套餐查询响应
-	virtual void OnRspQrySPBMPortfDefinition(CThostFtdcSPBMPortfDefinitionField* pSPBMPortfDefinition, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+	virtual void OnRspQrySPBMPortfDefinition(CThostFtdcSPBMPortfDefinitionField *pSPBMPortfDefinition, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
 	///投资者SPBM套餐选择查询响应
-	virtual void OnRspQrySPBMInvestorPortfDef(CThostFtdcSPBMInvestorPortfDefField* pSPBMInvestorPortfDef, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+	virtual void OnRspQrySPBMInvestorPortfDef(CThostFtdcSPBMInvestorPortfDefField *pSPBMInvestorPortfDef, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
 	///投资者新型组合保证金系数查询响应
-	virtual void OnRspQryInvestorPortfMarginRatio(CThostFtdcInvestorPortfMarginRatioField* pInvestorPortfMarginRatio, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+	virtual void OnRspQryInvestorPortfMarginRatio(CThostFtdcInvestorPortfMarginRatioField *pInvestorPortfMarginRatio, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
 	///投资者产品SPBM明细查询响应
-	virtual void OnRspQryInvestorProdSPBMDetail(CThostFtdcInvestorProdSPBMDetailField* pInvestorProdSPBMDetail, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
-
+	virtual void OnRspQryInvestorProdSPBMDetail(CThostFtdcInvestorProdSPBMDetailField *pInvestorProdSPBMDetail, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
 	///投资者商品组SPMM记录查询响应
-	virtual void OnRspQryInvestorCommoditySPMMMargin(CThostFtdcInvestorCommoditySPMMMarginField* pInvestorCommoditySPMMMargin, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+	virtual void OnRspQryInvestorCommoditySPMMMargin(CThostFtdcInvestorCommoditySPMMMarginField *pInvestorCommoditySPMMMargin, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
 	///投资者商品群SPMM记录查询响应
-	virtual void OnRspQryInvestorCommodityGroupSPMMMargin(CThostFtdcInvestorCommodityGroupSPMMMarginField* pInvestorCommodityGroupSPMMMargin, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+	virtual void OnRspQryInvestorCommodityGroupSPMMMargin(CThostFtdcInvestorCommodityGroupSPMMMarginField *pInvestorCommodityGroupSPMMMargin, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
 	///SPMM合约参数查询响应
-	virtual void OnRspQrySPMMInstParam(CThostFtdcSPMMInstParamField* pSPMMInstParam, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+	virtual void OnRspQrySPMMInstParam(CThostFtdcSPMMInstParamField *pSPMMInstParam, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
 	///SPMM产品参数查询响应
-	virtual void OnRspQrySPMMProductParam(CThostFtdcSPMMProductParamField* pSPMMProductParam, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+	virtual void OnRspQrySPMMProductParam(CThostFtdcSPMMProductParamField *pSPMMProductParam, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
 	///SPBM附加跨品种抵扣参数查询响应
-	virtual void OnRspQrySPBMAddOnInterParameter(CThostFtdcSPBMAddOnInterParameterField* pSPBMAddOnInterParameter, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+	virtual void OnRspQrySPBMAddOnInterParameter(CThostFtdcSPBMAddOnInterParameterField *pSPBMAddOnInterParameter, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
 	///RCAMS产品组合信息查询响应
-	virtual void OnRspQryRCAMSCombProductInfo(CThostFtdcRCAMSCombProductInfoField* pRCAMSCombProductInfo, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+	virtual void OnRspQryRCAMSCombProductInfo(CThostFtdcRCAMSCombProductInfoField *pRCAMSCombProductInfo, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
 	///RCAMS同合约风险对冲参数查询响应
-	virtual void OnRspQryRCAMSInstrParameter(CThostFtdcRCAMSInstrParameterField* pRCAMSInstrParameter, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+	virtual void OnRspQryRCAMSInstrParameter(CThostFtdcRCAMSInstrParameterField *pRCAMSInstrParameter, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
 	///RCAMS品种内风险对冲参数查询响应
-	virtual void OnRspQryRCAMSIntraParameter(CThostFtdcRCAMSIntraParameterField* pRCAMSIntraParameter, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+	virtual void OnRspQryRCAMSIntraParameter(CThostFtdcRCAMSIntraParameterField *pRCAMSIntraParameter, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
 	///RCAMS跨品种风险折抵参数查询响应
-	virtual void OnRspQryRCAMSInterParameter(CThostFtdcRCAMSInterParameterField* pRCAMSInterParameter, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+	virtual void OnRspQryRCAMSInterParameter(CThostFtdcRCAMSInterParameterField *pRCAMSInterParameter, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
 	///RCAMS空头期权风险调整参数查询响应
-	virtual void OnRspQryRCAMSShortOptAdjustParam(CThostFtdcRCAMSShortOptAdjustParamField* pRCAMSShortOptAdjustParam, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+	virtual void OnRspQryRCAMSShortOptAdjustParam(CThostFtdcRCAMSShortOptAdjustParamField *pRCAMSShortOptAdjustParam, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
 	///RCAMS策略组合持仓查询响应
-	virtual void OnRspQryRCAMSInvestorCombPosition(CThostFtdcRCAMSInvestorCombPositionField* pRCAMSInvestorCombPosition, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+	virtual void OnRspQryRCAMSInvestorCombPosition(CThostFtdcRCAMSInvestorCombPositionField *pRCAMSInvestorCombPosition, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
 	///投资者品种RCAMS保证金查询响应
-	virtual void OnRspQryInvestorProdRCAMSMargin(CThostFtdcInvestorProdRCAMSMarginField* pInvestorProdRCAMSMargin, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+	virtual void OnRspQryInvestorProdRCAMSMargin(CThostFtdcInvestorProdRCAMSMarginField *pInvestorProdRCAMSMargin, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
 	///RULE合约保证金参数查询响应
-	virtual void OnRspQryRULEInstrParameter(CThostFtdcRULEInstrParameterField* pRULEInstrParameter, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+	virtual void OnRspQryRULEInstrParameter(CThostFtdcRULEInstrParameterField *pRULEInstrParameter, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
 	///RULE品种内对锁仓折扣参数查询响应
-	virtual void OnRspQryRULEIntraParameter(CThostFtdcRULEIntraParameterField* pRULEIntraParameter, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+	virtual void OnRspQryRULEIntraParameter(CThostFtdcRULEIntraParameterField *pRULEIntraParameter, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
 	///RULE跨品种抵扣参数查询响应
-	virtual void OnRspQryRULEInterParameter(CThostFtdcRULEInterParameterField* pRULEInterParameter, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+	virtual void OnRspQryRULEInterParameter(CThostFtdcRULEInterParameterField *pRULEInterParameter, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
 	///投资者产品RULE保证金查询响应
-	virtual void OnRspQryInvestorProdRULEMargin(CThostFtdcInvestorProdRULEMarginField* pInvestorProdRULEMargin, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+	virtual void OnRspQryInvestorProdRULEMargin(CThostFtdcInvestorProdRULEMarginField *pInvestorProdRULEMargin, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+
+	///投资者投资者新组保设置查询响应
+	virtual void OnRspQryInvestorPortfSetting(CThostFtdcInvestorPortfSettingField *pInvestorPortfSetting, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
     //-------------------------------------------------------------------------------------
     //task：任务
@@ -931,53 +935,55 @@ public:
 
 	void processRspQryRiskSettleProductStatus(Task *task);
 
-	void processRspQrySPBMFutureParameter(Task* task);
+	void processRspQrySPBMFutureParameter(Task *task);
 
-	void processRspQrySPBMOptionParameter(Task* task);
+	void processRspQrySPBMOptionParameter(Task *task);
 
-	void processRspQrySPBMIntraParameter(Task* task);
+	void processRspQrySPBMIntraParameter(Task *task);
 
-	void processRspQrySPBMInterParameter(Task* task);
+	void processRspQrySPBMInterParameter(Task *task);
 
-	void processRspQrySPBMPortfDefinition(Task* task);
+	void processRspQrySPBMPortfDefinition(Task *task);
 
-	void processRspQrySPBMInvestorPortfDef(Task* task);
+	void processRspQrySPBMInvestorPortfDef(Task *task);
 
-	void processRspQryInvestorPortfMarginRatio(Task* task);
+	void processRspQryInvestorPortfMarginRatio(Task *task);
 
-	void processRspQryInvestorProdSPBMDetail(Task* task);
+	void processRspQryInvestorProdSPBMDetail(Task *task);
 
-	void processRspQryInvestorCommoditySPMMMargin(Task* task);
+	void processRspQryInvestorCommoditySPMMMargin(Task *task);
 
-	void processRspQryInvestorCommodityGroupSPMMMargin(Task* task);
+	void processRspQryInvestorCommodityGroupSPMMMargin(Task *task);
 
-	void processRspQrySPMMInstParam(Task* task);
+	void processRspQrySPMMInstParam(Task *task);
 
-	void processRspQrySPMMProductParam(Task* task);
+	void processRspQrySPMMProductParam(Task *task);
 
-	void processRspQrySPBMAddprocessInterParameter(Task* task);
+	void processRspQrySPBMAddprocessInterParameter(Task *task);
 
-	void processRspQryRCAMSCombProductInfo(Task* task);
+	void processRspQryRCAMSCombProductInfo(Task *task);
 
-	void processRspQryRCAMSInstrParameter(Task* task);
+	void processRspQryRCAMSInstrParameter(Task *task);
 
-	void processRspQryRCAMSIntraParameter(Task* task);
+	void processRspQryRCAMSIntraParameter(Task *task);
 
-	void processRspQryRCAMSInterParameter(Task* task);
+	void processRspQryRCAMSInterParameter(Task *task);
 
-	void processRspQryRCAMSShortOptAdjustParam(Task* task);
+	void processRspQryRCAMSShortOptAdjustParam(Task *task);
 
-	void processRspQryRCAMSInvestorCombPosition(Task* task);
+	void processRspQryRCAMSInvestorCombPosition(Task *task);
 
-	void processRspQryInvestorProdRCAMSMargin(Task* task);
+	void processRspQryInvestorProdRCAMSMargin(Task *task);
 
-	void processRspQryRULEInstrParameter(Task* task);
+	void processRspQryRULEInstrParameter(Task *task);
 
-	void processRspQryRULEIntraParameter(Task* task);
+	void processRspQryRULEIntraParameter(Task *task);
 
-	void processRspQryRULEInterParameter(Task* task);
+	void processRspQryRULEInterParameter(Task *task);
 
-	void processRspQryInvestorProdRULEMargin(Task* task);
+	void processRspQryInvestorProdRULEMargin(Task *task);
+
+	void processRspQryInvestorPortfSetting(Task *task);
 
     //-------------------------------------------------------------------------------------
     //data：回调函数的数据字典
@@ -1247,53 +1253,55 @@ public:
 
 	virtual void onRspQryRiskSettleProductStatus(const dict &data, const dict &error, int reqid, bool last) {};
 
-	virtual void onRspQrySPBMFutureParameter(const dict& data, const dict& error, int reqid, bool last) {};
+	virtual void onRspQrySPBMFutureParameter(const dict &data, const dict &error, int reqid, bool last) {};
 
-	virtual void onRspQrySPBMOptionParameter(const dict& data, const dict& error, int reqid, bool last) {};
+	virtual void onRspQrySPBMOptionParameter(const dict &data, const dict &error, int reqid, bool last) {};
 
-	virtual void onRspQrySPBMIntraParameter(const dict& data, const dict& error, int reqid, bool last) {};
+	virtual void onRspQrySPBMIntraParameter(const dict &data, const dict &error, int reqid, bool last) {};
 
-	virtual void onRspQrySPBMInterParameter(const dict& data, const dict& error, int reqid, bool last) {};
+	virtual void onRspQrySPBMInterParameter(const dict &data, const dict &error, int reqid, bool last) {};
 
-	virtual void onRspQrySPBMPortfDefinition(const dict& data, const dict& error, int reqid, bool last) {};
+	virtual void onRspQrySPBMPortfDefinition(const dict &data, const dict &error, int reqid, bool last) {};
 
-	virtual void onRspQrySPBMInvestorPortfDef(const dict& data, const dict& error, int reqid, bool last) {};
+	virtual void onRspQrySPBMInvestorPortfDef(const dict &data, const dict &error, int reqid, bool last) {};
 
-	virtual void onRspQryInvestorPortfMarginRatio(const dict& data, const dict& error, int reqid, bool last) {};
+	virtual void onRspQryInvestorPortfMarginRatio(const dict &data, const dict &error, int reqid, bool last) {};
 
-	virtual void onRspQryInvestorProdSPBMDetail(const dict& data, const dict& error, int reqid, bool last) {};
+	virtual void onRspQryInvestorProdSPBMDetail(const dict &data, const dict &error, int reqid, bool last) {};
 
-	virtual void onRspQryInvestorCommoditySPMMMargin(const dict& data, const dict& error, int reqid, bool last) {};
+	virtual void onRspQryInvestorCommoditySPMMMargin(const dict &data, const dict &error, int reqid, bool last) {};
 
-	virtual void onRspQryInvestorCommodityGroupSPMMMargin(const dict& data, const dict& error, int reqid, bool last) {};
+	virtual void onRspQryInvestorCommodityGroupSPMMMargin(const dict &data, const dict &error, int reqid, bool last) {};
 
-	virtual void onRspQrySPMMInstParam(const dict& data, const dict& error, int reqid, bool last) {};
+	virtual void onRspQrySPMMInstParam(const dict &data, const dict &error, int reqid, bool last) {};
 
-	virtual void onRspQrySPMMProductParam(const dict& data, const dict& error, int reqid, bool last) {};
+	virtual void onRspQrySPMMProductParam(const dict &data, const dict &error, int reqid, bool last) {};
 
-	virtual void onRspQrySPBMAddonInterParameter(const dict& data, const dict& error, int reqid, bool last) {};
+	virtual void onRspQrySPBMAddonInterParameter(const dict &data, const dict &error, int reqid, bool last) {};
 
-	virtual void onRspQryRCAMSCombProductInfo(const dict& data, const dict& error, int reqid, bool last) {};
+	virtual void onRspQryRCAMSCombProductInfo(const dict &data, const dict &error, int reqid, bool last) {};
 
-	virtual void onRspQryRCAMSInstrParameter(const dict& data, const dict& error, int reqid, bool last) {};
+	virtual void onRspQryRCAMSInstrParameter(const dict &data, const dict &error, int reqid, bool last) {};
 
-	virtual void onRspQryRCAMSIntraParameter(const dict& data, const dict& error, int reqid, bool last) {};
+	virtual void onRspQryRCAMSIntraParameter(const dict &data, const dict &error, int reqid, bool last) {};
 
-	virtual void onRspQryRCAMSInterParameter(const dict& data, const dict& error, int reqid, bool last) {};
+	virtual void onRspQryRCAMSInterParameter(const dict &data, const dict &error, int reqid, bool last) {};
 
-	virtual void onRspQryRCAMSShortOptAdjustParam(const dict& data, const dict& error, int reqid, bool last) {};
+	virtual void onRspQryRCAMSShortOptAdjustParam(const dict &data, const dict &error, int reqid, bool last) {};
 
-	virtual void onRspQryRCAMSInvestorCombPosition(const dict& data, const dict& error, int reqid, bool last) {};
+	virtual void onRspQryRCAMSInvestorCombPosition(const dict &data, const dict &error, int reqid, bool last) {};
 
-	virtual void onRspQryInvestorProdRCAMSMargin(const dict& data, const dict& error, int reqid, bool last) {};
+	virtual void onRspQryInvestorProdRCAMSMargin(const dict &data, const dict &error, int reqid, bool last) {};
 
-	virtual void onRspQryRULEInstrParameter(const dict& data, const dict& error, int reqid, bool last) {};
+	virtual void onRspQryRULEInstrParameter(const dict &data, const dict &error, int reqid, bool last) {};
 
-	virtual void onRspQryRULEIntraParameter(const dict& data, const dict& error, int reqid, bool last) {};
+	virtual void onRspQryRULEIntraParameter(const dict &data, const dict &error, int reqid, bool last) {};
 
-	virtual void onRspQryRULEInterParameter(const dict& data, const dict& error, int reqid, bool last) {};
+	virtual void onRspQryRULEInterParameter(const dict &data, const dict &error, int reqid, bool last) {};
 
-	virtual void onRspQryInvestorProdRULEMargin(const dict& data, const dict& error, int reqid, bool last) {};
+	virtual void onRspQryInvestorProdRULEMargin(const dict &data, const dict &error, int reqid, bool last) {};
+
+	virtual void onRspQryInvestorPortfSetting(const dict &data, const dict &error, int reqid, bool last) {};
 
     //-------------------------------------------------------------------------------------
     //req:主动函数的请求字典
@@ -1497,52 +1505,53 @@ public:
 
 	int reqQryRiskSettleProductStatus(const dict &req, int reqid);
 
-	int reqQrySPBMFutureParameter(const dict& req, int reqid);
+	int reqQrySPBMFutureParameter(const dict &req, int reqid);
 
-	int reqQrySPBMOptionParameter(const dict& req, int reqid);
+	int reqQrySPBMOptionParameter(const dict &req, int reqid);
 
-	int reqQrySPBMIntraParameter(const dict& req, int reqid);
+	int reqQrySPBMIntraParameter(const dict &req, int reqid);
 
-	int reqQrySPBMInterParameter(const dict& req, int reqid);
+	int reqQrySPBMInterParameter(const dict &req, int reqid);
 
-	int reqQrySPBMPortfDefinition(const dict& req, int reqid);
+	int reqQrySPBMPortfDefinition(const dict &req, int reqid);
 
-	int reqQrySPBMInvestorPortfDef(const dict& req, int reqid);
+	int reqQrySPBMInvestorPortfDef(const dict &req, int reqid);
 
-	int reqQryInvestorPortfMarginRatio(const dict& req, int reqid);
+	int reqQryInvestorPortfMarginRatio(const dict &req, int reqid);
 
-	int reqQryInvestorProdSPBMDetail(const dict& req, int reqid);
+	int reqQryInvestorProdSPBMDetail(const dict &req, int reqid);
 
-	int reqQryInvestorCommoditySPMMMargin(const dict& req, int reqid);
+	int reqQryInvestorCommoditySPMMMargin(const dict &req, int reqid);
 
-	int reqQryInvestorCommodityGroupSPMMMargin(const dict& req, int reqid);
+	int reqQryInvestorCommodityGroupSPMMMargin(const dict &req, int reqid);
 
-	int reqQrySPMMInstParam(const dict& req, int reqid);
+	int reqQrySPMMInstParam(const dict &req, int reqid);
 
-	int reqQrySPMMProductParam(const dict& req, int reqid);
+	int reqQrySPMMProductParam(const dict &req, int reqid);
 
-	int reqQrySPBMAddOnInterParameter(const dict& req, int reqid);
+	int reqQrySPBMAddOnInterParameter(const dict &req, int reqid);
 
-	int reqQryRCAMSCombProductInfo(const dict& req, int reqid);
+	int reqQryRCAMSCombProductInfo(const dict &req, int reqid);
 
-	int reqQryRCAMSInstrParameter(const dict& req, int reqid);
+	int reqQryRCAMSInstrParameter(const dict &req, int reqid);
 
-	int reqQryRCAMSIntraParameter(const dict& req, int reqid);
+	int reqQryRCAMSIntraParameter(const dict &req, int reqid);
 
-	int reqQryRCAMSInterParameter(const dict& req, int reqid);
+	int reqQryRCAMSInterParameter(const dict &req, int reqid);
 
-	int reqQryRCAMSShortOptAdjustParam(const dict& req, int reqid);
+	int reqQryRCAMSShortOptAdjustParam(const dict &req, int reqid);
 
-	int reqQryRCAMSInvestorCombPosition(const dict& req, int reqid);
+	int reqQryRCAMSInvestorCombPosition(const dict &req, int reqid);
 
-	int reqQryInvestorProdRCAMSMargin(const dict& req, int reqid);
+	int reqQryInvestorProdRCAMSMargin(const dict &req, int reqid);
 
-	int reqQryRULEInstrParameter(const dict& req, int reqid);
+	int reqQryRULEInstrParameter(const dict &req, int reqid);
 
-	int reqQryRULEIntraParameter(const dict& req, int reqid);
+	int reqQryRULEIntraParameter(const dict &req, int reqid);
 
-	int reqQryRULEInterParameter(const dict& req, int reqid);
+	int reqQryRULEInterParameter(const dict &req, int reqid);
 
-	int reqQryInvestorProdRULEMargin(const dict& req, int reqid);
+	int reqQryInvestorProdRULEMargin(const dict &req, int reqid);
 
+	int reqQryInvestorPortfSetting(const dict &req, int reqid);
 };

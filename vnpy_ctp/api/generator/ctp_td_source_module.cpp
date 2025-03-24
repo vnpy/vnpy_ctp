@@ -109,6 +109,7 @@
 .def("reqQryRULEIntraParameter", &TdApi::reqQryRULEIntraParameter)
 .def("reqQryRULEInterParameter", &TdApi::reqQryRULEInterParameter)
 .def("reqQryInvestorProdRULEMargin", &TdApi::reqQryInvestorProdRULEMargin)
+.def("reqQryInvestorPortfSetting", &TdApi::reqQryInvestorPortfSetting)
 
 .def("onFrontConnected", &TdApi::onFrontConnected)
 .def("onFrontDisconnected", &TdApi::onFrontDisconnected)
@@ -264,4 +265,5 @@
 .def("onRspQryRULEIntraParameter", &TdApi::onRspQryRULEIntraParameter)
 .def("onRspQryRULEInterParameter", &TdApi::onRspQryRULEInterParameter)
 .def("onRspQryInvestorProdRULEMargin", &TdApi::onRspQryInvestorProdRULEMargin)
+.def("onRspQryInvestorPortfSetting", &TdApi::onRspQryInvestorPortfSetting)
 ;

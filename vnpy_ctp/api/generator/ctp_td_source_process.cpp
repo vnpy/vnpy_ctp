@@ -252,6 +252,8 @@ void TdApi::processRspOrderInsert(Task *task)
 		data["MacAddress"] = toUtf(task_data->MacAddress);
 		data["InstrumentID"] = toUtf(task_data->InstrumentID);
 		data["IPAddress"] = toUtf(task_data->IPAddress);
+		data["OrderMemo"] = toUtf(task_data->OrderMemo);
+		data["SessionReqSeq"] = task_data->SessionReqSeq;
 		delete task_data;
 	}
 	dict error;
@@ -392,6 +394,8 @@ void TdApi::processRspOrderAction(Task *task)
 		data["MacAddress"] = toUtf(task_data->MacAddress);
 		data["InstrumentID"] = toUtf(task_data->InstrumentID);
 		data["IPAddress"] = toUtf(task_data->IPAddress);
+		data["OrderMemo"] = toUtf(task_data->OrderMemo);
+		data["SessionReqSeq"] = task_data->SessionReqSeq;
 		delete task_data;
 	}
 	dict error;
@@ -655,6 +659,8 @@ void TdApi::processRspQuoteInsert(Task *task)
 		data["IPAddress"] = toUtf(task_data->IPAddress);
 		data["ReplaceSysID"] = toUtf(task_data->ReplaceSysID);
 		data["TimeCondition"] = task_data->TimeCondition;
+		data["OrderMemo"] = toUtf(task_data->OrderMemo);
+		data["SessionReqSeq"] = task_data->SessionReqSeq;
 		delete task_data;
 	}
 	dict error;
@@ -693,6 +699,8 @@ void TdApi::processRspQuoteAction(Task *task)
 		data["MacAddress"] = toUtf(task_data->MacAddress);
 		data["InstrumentID"] = toUtf(task_data->InstrumentID);
 		data["IPAddress"] = toUtf(task_data->IPAddress);
+		data["OrderMemo"] = toUtf(task_data->OrderMemo);
+		data["SessionReqSeq"] = task_data->SessionReqSeq;
 		delete task_data;
 	}
 	dict error;
@@ -924,6 +932,8 @@ void TdApi::processRspQryOrder(Task *task)
 		data["InstrumentID"] = toUtf(task_data->InstrumentID);
 		data["ExchangeInstID"] = toUtf(task_data->ExchangeInstID);
 		data["IPAddress"] = toUtf(task_data->IPAddress);
+		data["OrderMemo"] = toUtf(task_data->OrderMemo);
+		data["SessionReqSeq"] = task_data->SessionReqSeq;
 		delete task_data;
 	}
 	dict error;
@@ -2409,6 +2419,8 @@ void TdApi::processRspQryQuote(Task *task)
 		data["IPAddress"] = toUtf(task_data->IPAddress);
 		data["ReplaceSysID"] = toUtf(task_data->ReplaceSysID);
 		data["TimeCondition"] = task_data->TimeCondition;
+		data["OrderMemo"] = toUtf(task_data->OrderMemo);
+		data["SessionReqSeq"] = task_data->SessionReqSeq;
 		delete task_data;
 	}
 	dict error;
@@ -2765,6 +2777,8 @@ void TdApi::processRtnOrder(Task *task)
 		data["InstrumentID"] = toUtf(task_data->InstrumentID);
 		data["ExchangeInstID"] = toUtf(task_data->ExchangeInstID);
 		data["IPAddress"] = toUtf(task_data->IPAddress);
+		data["OrderMemo"] = toUtf(task_data->OrderMemo);
+		data["SessionReqSeq"] = task_data->SessionReqSeq;
 		delete task_data;
 	}
 	this->onRtnOrder(data);
@@ -2854,6 +2868,8 @@ void TdApi::processErrRtnOrderInsert(Task *task)
 		data["MacAddress"] = toUtf(task_data->MacAddress);
 		data["InstrumentID"] = toUtf(task_data->InstrumentID);
 		data["IPAddress"] = toUtf(task_data->IPAddress);
+		data["OrderMemo"] = toUtf(task_data->OrderMemo);
+		data["SessionReqSeq"] = task_data->SessionReqSeq;
 		delete task_data;
 	}
 	dict error;
@@ -2905,6 +2921,8 @@ void TdApi::processErrRtnOrderAction(Task *task)
 		data["MacAddress"] = toUtf(task_data->MacAddress);
 		data["InstrumentID"] = toUtf(task_data->InstrumentID);
 		data["IPAddress"] = toUtf(task_data->IPAddress);
+		data["OrderMemo"] = toUtf(task_data->OrderMemo);
+		data["SessionReqSeq"] = task_data->SessionReqSeq;
 		delete task_data;
 	}
 	dict error;
@@ -3308,6 +3326,8 @@ void TdApi::processRtnQuote(Task *task)
 		data["IPAddress"] = toUtf(task_data->IPAddress);
 		data["ReplaceSysID"] = toUtf(task_data->ReplaceSysID);
 		data["TimeCondition"] = task_data->TimeCondition;
+		data["OrderMemo"] = toUtf(task_data->OrderMemo);
+		data["SessionReqSeq"] = task_data->SessionReqSeq;
 		delete task_data;
 	}
 	this->onRtnQuote(data);
@@ -3347,6 +3367,8 @@ void TdApi::processErrRtnQuoteInsert(Task *task)
 		data["IPAddress"] = toUtf(task_data->IPAddress);
 		data["ReplaceSysID"] = toUtf(task_data->ReplaceSysID);
 		data["TimeCondition"] = task_data->TimeCondition;
+		data["OrderMemo"] = toUtf(task_data->OrderMemo);
+		data["SessionReqSeq"] = task_data->SessionReqSeq;
 		delete task_data;
 	}
 	dict error;
@@ -3396,6 +3418,8 @@ void TdApi::processErrRtnQuoteAction(Task *task)
 		data["MacAddress"] = toUtf(task_data->MacAddress);
 		data["InstrumentID"] = toUtf(task_data->InstrumentID);
 		data["IPAddress"] = toUtf(task_data->IPAddress);
+		data["OrderMemo"] = toUtf(task_data->OrderMemo);
+		data["SessionReqSeq"] = task_data->SessionReqSeq;
 		delete task_data;
 	}
 	dict error;
@@ -5646,6 +5670,7 @@ void TdApi::processRspQryInvestorPortfMarginRatio(Task *task)
 		data["InvestorID"] = toUtf(task_data->InvestorID);
 		data["ExchangeID"] = toUtf(task_data->ExchangeID);
 		data["MarginRatio"] = task_data->MarginRatio;
+		data["ProductGroupID"] = toUtf(task_data->ProductGroupID);
 		delete task_data;
 	}
 	dict error;
@@ -6197,5 +6222,30 @@ void TdApi::processRspQryInvestorProdRULEMargin(Task *task)
 		delete task_error;
 	}
 	this->onRspQryInvestorProdRULEMargin(data, error, task->task_id, task->task_last);
+};
+
+void TdApi::processRspQryInvestorPortfSetting(Task *task)
+{
+	gil_scoped_acquire acquire;
+	dict data;
+	if (task->task_data)
+	{
+		CThostFtdcInvestorPortfSettingField *task_data = (CThostFtdcInvestorPortfSettingField*)task->task_data;
+		data["ExchangeID"] = toUtf(task_data->ExchangeID);
+		data["BrokerID"] = toUtf(task_data->BrokerID);
+		data["InvestorID"] = toUtf(task_data->InvestorID);
+		data["HedgeFlag"] = task_data->HedgeFlag;
+		data["UsePortf"] = task_data->UsePortf;
+		delete task_data;
+	}
+	dict error;
+	if (task->task_error)
+	{
+		CThostFtdcRspInfoField *task_error = (CThostFtdcRspInfoField*)task->task_error;
+		error["ErrorID"] = task_error->ErrorID;
+		error["ErrorMsg"] = toUtf(task_error->ErrorMsg);
+		delete task_error;
+	}
+	this->onRspQryInvestorPortfSetting(data, error, task->task_id, task->task_last);
 };
 

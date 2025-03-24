@@ -1846,3 +1846,15 @@ void onRspQryInvestorProdRULEMargin(const dict &data, const dict &error, int req
 	}
 };
 
+void onRspQryInvestorPortfSetting(const dict &data, const dict &error, int reqid, bool last) override
+{
+	try
+	{
+		PYBIND11_OVERLOAD(void, TdApi, onRspQryInvestorPortfSetting, data, error, reqid, last);
+	}
+	catch (const error_already_set &e)
+	{
+		cout << e.what() << endl;
+	}
+};
+

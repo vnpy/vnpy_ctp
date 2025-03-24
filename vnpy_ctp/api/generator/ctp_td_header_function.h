@@ -220,3 +220,5 @@ int reqQryRULEInterParameter(const dict &req, int reqid);
 
 int reqQryInvestorProdRULEMargin(const dict &req, int reqid);
 
+int reqQryInvestorPortfSetting(const dict &req, int reqid);
+

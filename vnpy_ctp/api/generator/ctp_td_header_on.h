@@ -306,3 +306,5 @@ virtual void onRspQryRULEInterParameter(const dict &data, const dict &error, int
 
 virtual void onRspQryInvestorProdRULEMargin(const dict &data, const dict &error, int reqid, bool last) {};
 
+virtual void onRspQryInvestorPortfSetting(const dict &data, const dict &error, int reqid, bool last) {};
+

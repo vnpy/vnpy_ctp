@@ -199,6 +199,8 @@ int TdApi::reqOrderInsert(const dict &req, int reqid)
 	getString(req, "MacAddress", myreq.MacAddress);
 	getString(req, "InstrumentID", myreq.InstrumentID);
 	getString(req, "IPAddress", myreq.IPAddress);
+	getString(req, "OrderMemo", myreq.OrderMemo);
+	getInt(req, "SessionReqSeq", &myreq.SessionReqSeq);
 	int i = this->api->ReqOrderInsert(&myreq, reqid);
 	return i;
 };
@@ -303,6 +305,8 @@ int TdApi::reqOrderAction(const dict &req, int reqid)
 	getString(req, "MacAddress", myreq.MacAddress);
 	getString(req, "InstrumentID", myreq.InstrumentID);
 	getString(req, "IPAddress", myreq.IPAddress);
+	getString(req, "OrderMemo", myreq.OrderMemo);
+	getInt(req, "SessionReqSeq", &myreq.SessionReqSeq);
 	int i = this->api->ReqOrderAction(&myreq, reqid);
 	return i;
 };
@@ -470,6 +474,8 @@ int TdApi::reqQuoteInsert(const dict &req, int reqid)
 	getString(req, "IPAddress", myreq.IPAddress);
 	getString(req, "ReplaceSysID", myreq.ReplaceSysID);
 	getChar(req, "TimeCondition", &myreq.TimeCondition);
+	getString(req, "OrderMemo", myreq.OrderMemo);
+	getInt(req, "SessionReqSeq", &myreq.SessionReqSeq);
 	int i = this->api->ReqQuoteInsert(&myreq, reqid);
 	return i;
 };
@@ -496,6 +502,8 @@ int TdApi::reqQuoteAction(const dict &req, int reqid)
 	getString(req, "MacAddress", myreq.MacAddress);
 	getString(req, "InstrumentID", myreq.InstrumentID);
 	getString(req, "IPAddress", myreq.IPAddress);
+	getString(req, "OrderMemo", myreq.OrderMemo);
+	getInt(req, "SessionReqSeq", &myreq.SessionReqSeq);
 	int i = this->api->ReqQuoteAction(&myreq, reqid);
 	return i;
 };
@@ -754,6 +762,7 @@ int TdApi::reqQryDepthMarketData(const dict &req, int reqid)
 	getString(req, "reserve1", myreq.reserve1);
 	getString(req, "ExchangeID", myreq.ExchangeID);
 	getString(req, "InstrumentID", myreq.InstrumentID);
+	getChar(req, "ProductClass", &myreq.ProductClass);
 	int i = this->api->ReqQryDepthMarketData(&myreq, reqid);
 	return i;
 };
@@ -1527,6 +1536,7 @@ int TdApi::reqQryInvestorPortfMarginRatio(const dict &req, int reqid)
 	getString(req, "BrokerID", myreq.BrokerID);
 	getString(req, "InvestorID", myreq.InvestorID);
 	getString(req, "ExchangeID", myreq.ExchangeID);
+	getString(req, "ProductGroupID", myreq.ProductGroupID);
 	int i = this->api->ReqQryInvestorPortfMarginRatio(&myreq, reqid);
 	return i;
 };
@@ -1709,6 +1719,17 @@ int TdApi::reqQryInvestorProdRULEMargin(const dict &req, int reqid)
 	getString(req, "ProdFamilyCode", myreq.ProdFamilyCode);
 	getInt(req, "CommodityGroupID", &myreq.CommodityGroupID);
 	int i = this->api->ReqQryInvestorProdRULEMargin(&myreq, reqid);
+	return i;
+};
+
+int TdApi::reqQryInvestorPortfSetting(const dict &req, int reqid)
+{
+	CThostFtdcQryInvestorPortfSettingField myreq = CThostFtdcQryInvestorPortfSettingField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "ExchangeID", myreq.ExchangeID);
+	getString(req, "BrokerID", myreq.BrokerID);
+	getString(req, "InvestorID", myreq.InvestorID);
+	int i = this->api->ReqQryInvestorPortfSetting(&myreq, reqid);
 	return i;
 };
 

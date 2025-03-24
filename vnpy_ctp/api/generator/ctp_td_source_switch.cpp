@@ -922,3 +922,9 @@ case ONRSPQRYINVESTORPRODRULEMARGIN:
 	break;
 }
 
+case ONRSPQRYINVESTORPORTFSETTING:
+{
+	this->processRspQryInvestorPortfSetting(&task);
+	break;
+}
+

@@ -738,6 +738,8 @@ CThostFtdcInputOrderField = {
     "MacAddress": "string",
     "InstrumentID": "string",
     "IPAddress": "string",
+    "OrderMemo": "string",
+    "SessionReqSeq": "int",
 }
 
 CThostFtdcOrderField = {
@@ -807,6 +809,8 @@ CThostFtdcOrderField = {
     "InstrumentID": "string",
     "ExchangeInstID": "string",
     "IPAddress": "string",
+    "OrderMemo": "string",
+    "SessionReqSeq": "int",
 }
 
 CThostFtdcExchangeOrderField = {
@@ -889,6 +893,8 @@ CThostFtdcInputOrderActionField = {
     "MacAddress": "string",
     "InstrumentID": "string",
     "IPAddress": "string",
+    "OrderMemo": "string",
+    "SessionReqSeq": "int",
 }
 
 CThostFtdcOrderActionField = {
@@ -923,6 +929,8 @@ CThostFtdcOrderActionField = {
     "MacAddress": "string",
     "InstrumentID": "string",
     "IPAddress": "string",
+    "OrderMemo": "string",
+    "SessionReqSeq": "int",
 }
 
 CThostFtdcExchangeOrderActionField = {
@@ -1069,6 +1077,7 @@ CThostFtdcSyncDepositField = {
     "CurrencyID": "string",
     "IsFromSopt": "int",
     "TradingPassword": "string",
+    "IsSecAgentTranfer": "int",
 }
 
 CThostFtdcSyncFundMortgageField = {
@@ -1425,6 +1434,7 @@ CThostFtdcQryDepthMarketDataField = {
     "reserve1": "string",
     "ExchangeID": "string",
     "InstrumentID": "string",
+    "ProductClass": "char",
 }
 
 CThostFtdcQryBrokerUserField = {
@@ -1992,6 +2002,8 @@ CThostFtdcInputQuoteField = {
     "IPAddress": "string",
     "ReplaceSysID": "string",
     "TimeCondition": "char",
+    "OrderMemo": "string",
+    "SessionReqSeq": "int",
 }
 
 CThostFtdcInputQuoteActionField = {
@@ -2013,6 +2025,8 @@ CThostFtdcInputQuoteActionField = {
     "MacAddress": "string",
     "InstrumentID": "string",
     "IPAddress": "string",
+    "OrderMemo": "string",
+    "SessionReqSeq": "int",
 }
 
 CThostFtdcQuoteField = {
@@ -2071,6 +2085,8 @@ CThostFtdcQuoteField = {
     "IPAddress": "string",
     "ReplaceSysID": "string",
     "TimeCondition": "char",
+    "OrderMemo": "string",
+    "SessionReqSeq": "int",
 }
 
 CThostFtdcQuoteActionField = {
@@ -2103,6 +2119,8 @@ CThostFtdcQuoteActionField = {
     "MacAddress": "string",
     "InstrumentID": "string",
     "IPAddress": "string",
+    "OrderMemo": "string",
+    "SessionReqSeq": "int",
 }
 
 CThostFtdcQryQuoteField = {
@@ -3406,6 +3424,8 @@ CThostFtdcErrOrderField = {
     "MacAddress": "string",
     "InstrumentID": "string",
     "IPAddress": "string",
+    "OrderMemo": "string",
+    "SessionReqSeq": "int",
 }
 
 CThostFtdcErrorConditionalOrderField = {
@@ -3518,6 +3538,8 @@ CThostFtdcErrOrderActionField = {
     "ErrorMsg": "string",
     "InstrumentID": "string",
     "IPAddress": "string",
+    "OrderMemo": "string",
+    "SessionReqSeq": "int",
 }
 
 CThostFtdcQryExchangeSequenceField = {
@@ -5154,6 +5176,7 @@ CThostFtdcDepartmentUserField = {
 
 CThostFtdcQueryFreqField = {
     "QueryFreq": "int",
+    "FTDPkgFreq": "int",
 }
 
 CThostFtdcAuthForbiddenIPField = {
@@ -5220,7 +5243,7 @@ CThostFtdcCombPromotionParamField = {
     "Xparameter": "double",
 }
 
-CThostFtdcReqUserLoginSCField = {
+CThostFtdcReqUserLoginSMField = {
     "TradingDay": "string",
     "BrokerID": "string",
     "UserID": "string",
@@ -5230,11 +5253,14 @@ CThostFtdcReqUserLoginSCField = {
     "ProtocolInfo": "string",
     "MacAddress": "string",
     "OneTimePassword": "string",
-    "ClientIPAddress": "string",
+    "reserve1": "string",
     "LoginRemark": "string",
     "ClientIPPort": "int",
+    "ClientIPAddress": "string",
+    "BrokerName": "string",
     "AuthCode": "string",
     "AppID": "string",
+    "PIN": "string",
 }
 
 CThostFtdcQryRiskSettleInvstPositionField = {
@@ -5736,6 +5762,7 @@ CThostFtdcInvestorPortfMarginRatioField = {
     "InvestorID": "string",
     "ExchangeID": "string",
     "MarginRatio": "double",
+    "ProductGroupID": "string",
 }
 
 CThostFtdcQrySPBMPortfDefinitionField = {
@@ -5754,6 +5781,7 @@ CThostFtdcQryInvestorPortfMarginRatioField = {
     "BrokerID": "string",
     "InvestorID": "string",
     "ExchangeID": "string",
+    "ProductGroupID": "string",
 }
 
 CThostFtdcInvestorProdSPBMDetailField = {
@@ -6411,5 +6439,35 @@ CThostFtdcSyncDeltaRULEInterParameterField = {
     "CommodityGroupName": "string",
     "ActionDirection": "char",
     "SyncDeltaSequenceNo": "int",
+}
+
+CThostFtdcExitEmergencyField = {
+    "BrokerID": "string",
+}
+
+CThostFtdcInvestorPortfMarginModelField = {
+    "BrokerID": "string",
+    "InvestorID": "string",
+    "MarginModelID": "string",
+}
+
+CThostFtdcInvestorPortfSettingField = {
+    "ExchangeID": "string",
+    "BrokerID": "string",
+    "InvestorID": "string",
+    "HedgeFlag": "char",
+    "UsePortf": "int",
+}
+
+CThostFtdcQryInvestorPortfSettingField = {
+    "ExchangeID": "string",
+    "BrokerID": "string",
+    "InvestorID": "string",
+}
+
+CThostFtdcFrontInfoField = {
+    "FrontAddr": "string",
+    "QryFreq": "int",
+    "FTDPkgFreq": "int",
 }
 
