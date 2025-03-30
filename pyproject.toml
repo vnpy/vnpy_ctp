@@ -49,8 +49,10 @@ include = [
     "**/*.h",
     "**/*.cpp",
     "**/*.lib",
-    "**/*.a"
+    "**/*.a",
+    "**/*.framework/**",  # 添加Mac框架文件夹支持
 ]
+
 preserve-path = true 
 
 [tool.ruff]
