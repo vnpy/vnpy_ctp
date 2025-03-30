@@ -95,4 +95,3 @@ pip3 install -e .
 * vnpy_ctp/api/libs/thosttraderapi_se.framework/Versions/A/thosttraderapi_se
 
 以上两个文件由于本身是二进制格式，并不能正常打开，但不影响添加到系统信任名单。
-
