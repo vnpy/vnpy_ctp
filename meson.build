@@ -16,8 +16,9 @@ fs = import('fs')
 py = import('python').find_installation(pure: false)
 py_dep = py.dependency()
 
-# 获取pybind11路径（替换原来的依赖方式）
-pybind11_include_dir = run_command('python', '-c', 'import pybind11; print(pybind11.get_include())', check: true).stdout().strip()
+# 获取pybind11路径（根据操作系统决定使用python还是python3）
+python_cmd = host_machine.system() == 'windows' ? 'python' : 'python3'
+pybind11_include_dir = run_command(python_cmd, '-c', 'import pybind11; print(pybind11.get_include())', check: true).stdout().strip()
 message('使用pybind11路径: ' + pybind11_include_dir)
 
 # 获取编译器信息

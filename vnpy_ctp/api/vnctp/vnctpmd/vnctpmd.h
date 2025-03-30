@@ -44,7 +44,7 @@ public:
 	{
 	};
 
-	~MdApi()
+	virtual ~MdApi()
 	{
 		if (this->active)
 		{

@@ -185,7 +185,7 @@ public:
     {
     };
 
-    ~TdApi()
+    virtual ~TdApi()
     {
         if (this->active)
         {
