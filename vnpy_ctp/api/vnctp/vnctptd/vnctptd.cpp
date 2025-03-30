@@ -10293,6 +10293,14 @@ int TdApi::reqUserLogin(const dict &req, int reqid)
 	getInt(req, "ClientIPPort", &myreq.ClientIPPort);
 	getString(req, "ClientIPAddress", myreq.ClientIPAddress);
 	int i = this->api->ReqUserLogin(&myreq, reqid);
+
+	//MacÌØÊâ´¦Àí
+	#ifndef __APPLE__
+		int i = this->api->ReqUserLogin(&myreq, reqid);
+	#else
+		int i = this->api->ReqUserLogin(&myreq, reqid, 2, "vn");
+	#endif
+
 	return i;
 };
 
