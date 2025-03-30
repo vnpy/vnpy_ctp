@@ -71,7 +71,7 @@ if __name__ == "__main__":
 
 ## Mac系统支持
 
-由于6.7.2版本CTP的Mac系统API项目结构发生了较大变化，改为了使用framework目录的结构，因此无法再直接从PyPI下载预编译好的wheel二进制包进行安装。
+由于新版本CTP的Mac系统API项目结构发生了较大变化，改为了使用framework目录的结构，因此无法再直接从PyPI下载预编译好的wheel二进制包进行安装。
 
 用户需要克隆（或下载）本仓库的源代码到本地后自行编译安装，具体命令如下：
 
@@ -80,18 +80,9 @@ git clone https://github.com/vnpy/vnpy_ctp.git
 
 cd vnpy_ctp
 
-pip3 install -e .
+pip3 install .
 ```
 
 相关注意事项如下：
 
 源码编译需要依赖XCode开发工具中的C++编译器，请务必先安装好。
-
-编译过程中，会指定克隆到本地的源码目录中的framework文件夹路径，为API运行时动态库的加载路径。因此后续运行时，*该源码目录不能删除，也不能移动位置，否则会导致动态库加载找不到的报错*。
-
-由于当前新版本Mac系统的安全机制，编译完成后需要在【访达】中找到下述两个动态库文件，分别手动打开一次后添加到操作系统信任名单，才能在启动Python时成功加载：
-
-* vnpy_ctp/api/libs/thostmduserapi_se.framework/Versions/A/thostmduserapi_se
-* vnpy_ctp/api/libs/thosttraderapi_se.framework/Versions/A/thosttraderapi_se
-
-以上两个文件由于本身是二进制格式，并不能正常打开，但不影响添加到系统信任名单。
