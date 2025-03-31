@@ -25,7 +25,7 @@ jobs:
     - name: Type check with mypy
       run: |
         # Run mypy type checking based on pyproject.toml configuration
-        mypy vnpy_sqlite
+        mypy vnpy_ctp
     - name: Build packages with uv
       run: |
         # Build source distribution and wheel distribution
