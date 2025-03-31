@@ -29,4 +29,4 @@ jobs:
     - name: Build packages with uv
       run: |
         # Build source distribution and wheel distribution
-        uv build
+        uv build --sdist
