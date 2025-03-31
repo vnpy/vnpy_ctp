@@ -14,6 +14,7 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Topic :: Office/Business :: Financial :: Investment",
     "Programming Language :: Python :: Implementation :: CPython",
     "License :: OSI Approved :: MIT License",
@@ -49,8 +50,10 @@ include = [
     "**/*.h",
     "**/*.cpp",
     "**/*.lib",
-    "**/*.a"
+    "**/*.a",
+    "**/*.framework/**",  # 添加Mac框架文件夹支持
 ]
+
 preserve-path = true 
 
 [tool.ruff]
