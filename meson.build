@@ -118,7 +118,10 @@ else  # Linux
     '-Wno-sign-compare',
   ]
   
-  extra_link_args = ['-lstdc++']
+  extra_link_args = [
+    '-lstdc++',
+    '-Wl,-rpath,$ORIGIN',  # 添加rpath设置，使库能在运行时找到同目录下的动态库
+  ]
   
   # 设置库目录
   lib_dir = meson.current_source_dir() / 'vnpy_ctp/api'
