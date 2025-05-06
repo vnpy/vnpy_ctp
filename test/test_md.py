@@ -1,6 +1,6 @@
 import time
 from threading import Condition
-from typing import Generator
+from collections.abc import Generator
 
 import pytest
 
