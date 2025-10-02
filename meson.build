@@ -120,7 +120,6 @@ else  # Linux
   
   extra_link_args = [
     '-lstdc++',
-    '-Wl,-rpath,$ORIGIN',  # 添加rpath设置，使库能在运行时找到同目录下的动态库
   ]
   
   # 设置库目录
@@ -147,10 +146,15 @@ md_module = py.extension_module(
   'vnctpmd',
   sources: ['vnpy_ctp/api/vnctp/vnctpmd/vnctpmd.cpp'],
   include_directories: include_dirs,
-  dependencies: [py_dep, thostmduserapi_lib],
+  dependencies: [py_dep],
   cpp_args: extra_cpp_args,
-  link_args: extra_link_args,
+  link_args: extra_link_args + [
+    '-L' + (meson.current_source_dir() / 'vnpy_ctp/api'),
+    '-lthostmduserapi_se',
+    '-Wl,-rpath,$ORIGIN'
+  ],
   install: true,
+  install_rpath: '$ORIGIN',
   subdir: 'vnpy_ctp/api'
 )
 
@@ -159,10 +163,15 @@ td_module = py.extension_module(
   'vnctptd',
   sources: ['vnpy_ctp/api/vnctp/vnctptd/vnctptd.cpp'],
   include_directories: include_dirs,
-  dependencies: [py_dep, thosttraderapi_lib],
+  dependencies: [py_dep],
   cpp_args: extra_cpp_args,
-  link_args: extra_link_args,
+  link_args: extra_link_args + [
+    '-L' + (meson.current_source_dir() / 'vnpy_ctp/api'),
+    '-lthosttraderapi_se',
+    '-Wl,-rpath,$ORIGIN'
+  ],
   install: true,
+  install_rpath: '$ORIGIN',
   subdir: 'vnpy_ctp/api'
 )
 
