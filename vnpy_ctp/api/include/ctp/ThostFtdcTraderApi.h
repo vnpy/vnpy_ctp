@@ -145,6 +145,9 @@ public:
 	///请求查询合约手续费率响应
 	virtual void OnRspQryInstrumentCommissionRate(CThostFtdcInstrumentCommissionRateField *pInstrumentCommissionRate, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {};
 
+	///请求查询用户会话响应
+	virtual void OnRspQryUserSession(CThostFtdcUserSessionField *pUserSession, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {};
+
 	///请求查询交易所响应
 	virtual void OnRspQryExchange(CThostFtdcExchangeField *pExchange, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {};
 
@@ -499,8 +502,32 @@ public:
 	///投资者产品RULE保证金查询响应
 	virtual void OnRspQryInvestorProdRULEMargin(CThostFtdcInvestorProdRULEMarginField *pInvestorProdRULEMargin, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {};
 
-	///投资者投资者新组保设置查询响应
+	///投资者新型组合保证金开关查询响应
 	virtual void OnRspQryInvestorPortfSetting(CThostFtdcInvestorPortfSettingField *pInvestorPortfSetting, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {};
+
+	///投资者申报费阶梯收取记录查询响应
+	virtual void OnRspQryInvestorInfoCommRec(CThostFtdcInvestorInfoCommRecField *pInvestorInfoCommRec, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {};
+
+	///组合腿信息查询响应
+	virtual void OnRspQryCombLeg(CThostFtdcCombLegField *pCombLeg, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {};
+
+	///对冲设置请求响应
+	virtual void OnRspOffsetSetting(CThostFtdcInputOffsetSettingField *pInputOffsetSetting, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {};
+
+	///对冲设置撤销请求响应
+	virtual void OnRspCancelOffsetSetting(CThostFtdcInputOffsetSettingField *pInputOffsetSetting, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {};
+
+	///对冲设置通知
+	virtual void OnRtnOffsetSetting(CThostFtdcOffsetSettingField *pOffsetSetting) {};
+
+	///对冲设置错误回报
+	virtual void OnErrRtnOffsetSetting(CThostFtdcInputOffsetSettingField *pInputOffsetSetting, CThostFtdcRspInfoField *pRspInfo) {};
+
+	///对冲设置撤销错误回报
+	virtual void OnErrRtnCancelOffsetSetting(CThostFtdcCancelOffsetSettingField *pCancelOffsetSetting, CThostFtdcRspInfoField *pRspInfo) {};
+
+	///投资者对冲设置查询响应
+	virtual void OnRspQryOffsetSetting(CThostFtdcOffsetSettingField *pOffsetSetting, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {};
 };
 
 class TRADER_API_EXPORT CThostFtdcTraderApi
@@ -508,8 +535,9 @@ class TRADER_API_EXPORT CThostFtdcTraderApi
 public:
 	///创建TraderApi
 	///@param pszFlowPath 存贮订阅信息文件的目录，默认为当前目录
+	///@param bIsProductionMode true:使用生产版本的API  false:使用测评版本的API
 	///@return 创建出的UserApi
-	static CThostFtdcTraderApi *CreateFtdcTraderApi(const char *pszFlowPath = "");
+	static CThostFtdcTraderApi *CreateFtdcTraderApi(const char *pszFlowPath = "", bool bIsProductionMode = true);
 	
 	///获取API的版本信息
 	///@retrun 获取到的版本号
@@ -586,6 +614,10 @@ public:
 	///上报用户终端信息，用于中继服务器操作员登录模式
 	///操作员登录后，可以多次调用该接口上报客户信息
 	virtual int SubmitUserSystemInfo(CThostFtdcUserSystemInfoField *pUserSystemInfo) = 0;
+	///注册用户终端信息，用于中继服务器多连接模式.用于微信小程序等应用上报信息.
+	virtual int RegisterWechatUserSystemInfo(CThostFtdcWechatUserSystemInfoField *pUserSystemInfo) = 0;
+	///上报用户终端信息，用于中继服务器操作员登录模式.用于微信小程序等应用上报信息.
+	virtual int SubmitWechatUserSystemInfo(CThostFtdcWechatUserSystemInfoField *pUserSystemInfo) = 0;
 
 	///用户登录请求
 	virtual int ReqUserLogin(CThostFtdcReqUserLoginField *pReqUserLoginField, int nRequestID) = 0;
@@ -691,6 +723,9 @@ public:
 
 	///请求查询合约手续费率
 	virtual int ReqQryInstrumentCommissionRate(CThostFtdcQryInstrumentCommissionRateField *pQryInstrumentCommissionRate, int nRequestID) = 0;
+
+	///请求查询用户会话
+	virtual int ReqQryUserSession(CThostFtdcQryUserSessionField *pQryUserSession, int nRequestID) = 0;
 
 	///请求查询交易所
 	virtual int ReqQryExchange(CThostFtdcQryExchangeField *pQryExchange, int nRequestID) = 0;
@@ -917,8 +952,23 @@ public:
 	///投资者产品RULE保证金查询
 	virtual int ReqQryInvestorProdRULEMargin(CThostFtdcQryInvestorProdRULEMarginField *pQryInvestorProdRULEMargin, int nRequestID) = 0;
 
-	///投资者投资者新组保设置查询
+	///投资者新型组合保证金开关查询
 	virtual int ReqQryInvestorPortfSetting(CThostFtdcQryInvestorPortfSettingField *pQryInvestorPortfSetting, int nRequestID) = 0;
+
+	///投资者申报费阶梯收取记录查询
+	virtual int ReqQryInvestorInfoCommRec(CThostFtdcQryInvestorInfoCommRecField *pQryInvestorInfoCommRec, int nRequestID) = 0;
+
+	///组合腿信息查询
+	virtual int ReqQryCombLeg(CThostFtdcQryCombLegField *pQryCombLeg, int nRequestID) = 0;
+
+	///对冲设置请求
+	virtual int ReqOffsetSetting(CThostFtdcInputOffsetSettingField *pInputOffsetSetting, int nRequestID) = 0;
+
+	///对冲设置撤销请求
+	virtual int ReqCancelOffsetSetting(CThostFtdcInputOffsetSettingField *pInputOffsetSetting, int nRequestID) = 0;
+
+	///投资者对冲设置查询
+	virtual int ReqQryOffsetSetting(CThostFtdcQryOffsetSettingField *pQryOffsetSetting, int nRequestID) = 0;
 protected:
 	~CThostFtdcTraderApi(){};
 };
