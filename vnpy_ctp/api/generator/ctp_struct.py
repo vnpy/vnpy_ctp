@@ -35,6 +35,10 @@ CThostFtdcRspUserLoginField = {
     "INETime": "string",
     "SysVersion": "string",
     "GFEXTime": "string",
+    "LoginDRIdentityID": "int",
+    "UserDRIdentityID": "int",
+    "LastLoginTime": "string",
+    "ReserveInfo": "string",
 }
 
 CThostFtdcUserLogoutField = {
@@ -379,6 +383,7 @@ CThostFtdcTradingAccountField = {
     "BizType": "char",
     "FrozenSwap": "double",
     "RemainSwap": "double",
+    "OptionValue": "double",
 }
 
 CThostFtdcInvestorPositionField = {
@@ -432,6 +437,7 @@ CThostFtdcInvestorPositionField = {
     "TasPosition": "int",
     "TasPositionCost": "double",
     "InstrumentID": "string",
+    "OptionValue": "double",
 }
 
 CThostFtdcInstrumentMarginRateField = {
@@ -1175,6 +1181,7 @@ CThostFtdcSyncingTradingAccountField = {
     "SpecProductExchangeMargin": "double",
     "FrozenSwap": "double",
     "RemainSwap": "double",
+    "OptionValue": "double",
 }
 
 CThostFtdcSyncingInvestorPositionField = {
@@ -5451,6 +5458,7 @@ CThostFtdcSyncDeltaTradingAccountField = {
     "SpecProductExchangeMargin": "double",
     "FrozenSwap": "double",
     "RemainSwap": "double",
+    "OptionValue": "double",
     "SyncDeltaSequenceNo": "int",
 }
 
@@ -6441,6 +6449,298 @@ CThostFtdcSyncDeltaRULEInterParameterField = {
     "SyncDeltaSequenceNo": "int",
 }
 
+CThostFtdcIpAddrParamField = {
+    "BrokerID": "string",
+    "Address": "string",
+    "DRIdentityID": "int",
+    "DRIdentityName": "string",
+    "AddrSrvMode": "char",
+    "AddrVer": "char",
+    "AddrNo": "int",
+    "AddrName": "string",
+    "IsSM": "int",
+    "IsLocalAddr": "int",
+    "Remark": "string",
+    "Site": "string",
+    "NetOperator": "string",
+}
+
+CThostFtdcQryIpAddrParamField = {
+    "BrokerID": "string",
+}
+
+CThostFtdcTGIpAddrParamField = {
+    "BrokerID": "string",
+    "UserID": "string",
+    "Address": "string",
+    "DRIdentityID": "int",
+    "DRIdentityName": "string",
+    "AddrSrvMode": "char",
+    "AddrVer": "char",
+    "AddrNo": "int",
+    "AddrName": "string",
+    "IsSM": "int",
+    "IsLocalAddr": "int",
+    "Remark": "string",
+    "Site": "string",
+    "NetOperator": "string",
+}
+
+CThostFtdcQryTGIpAddrParamField = {
+    "BrokerID": "string",
+    "UserID": "string",
+    "AppID": "string",
+}
+
+CThostFtdcTGSessionQryStatusField = {
+    "LastQryFreq": "int",
+    "QryStatus": "char",
+}
+
+CThostFtdcLocalAddrConfigField = {
+    "BrokerID": "string",
+    "PeerAddr": "string",
+    "NetMask": "string",
+    "DRIdentityID": "int",
+    "LocalAddress": "string",
+}
+
+CThostFtdcQryLocalAddrConfigField = {
+    "BrokerID": "string",
+}
+
+CThostFtdcReqQueryBankAccountBySecField = {
+    "TradeCode": "string",
+    "BankID": "string",
+    "BankBranchID": "string",
+    "BrokerID": "string",
+    "BrokerBranchID": "string",
+    "TradeDate": "string",
+    "TradeTime": "string",
+    "BankSerial": "string",
+    "TradingDay": "string",
+    "PlateSerial": "int",
+    "LastFragment": "char",
+    "SessionID": "int",
+    "CustomerName": "string",
+    "IdCardType": "char",
+    "IdentifiedCardNo": "string",
+    "CustType": "char",
+    "BankAccount": "string",
+    "BankPassWord": "string",
+    "AccountID": "string",
+    "Password": "string",
+    "FutureSerial": "int",
+    "InstallID": "int",
+    "UserID": "string",
+    "VerifyCertNoFlag": "char",
+    "CurrencyID": "string",
+    "Digest": "string",
+    "BankAccType": "char",
+    "DeviceID": "string",
+    "BankSecuAccType": "char",
+    "BrokerIDByBank": "string",
+    "BankSecuAcc": "string",
+    "BankPwdFlag": "char",
+    "SecuPwdFlag": "char",
+    "OperNo": "string",
+    "RequestID": "int",
+    "TID": "int",
+    "LongCustomerName": "string",
+    "DRIdentityID": "int",
+    "SecFutureSerial": "int",
+}
+
+CThostFtdcRspQueryBankAccountBySecField = {
+    "TradeCode": "string",
+    "BankID": "string",
+    "BankBranchID": "string",
+    "BrokerID": "string",
+    "BrokerBranchID": "string",
+    "TradeDate": "string",
+    "TradeTime": "string",
+    "BankSerial": "string",
+    "TradingDay": "string",
+    "PlateSerial": "int",
+    "LastFragment": "char",
+    "SessionID": "int",
+    "CustomerName": "string",
+    "IdCardType": "char",
+    "IdentifiedCardNo": "string",
+    "CustType": "char",
+    "BankAccount": "string",
+    "BankPassWord": "string",
+    "AccountID": "string",
+    "Password": "string",
+    "FutureSerial": "int",
+    "InstallID": "int",
+    "UserID": "string",
+    "VerifyCertNoFlag": "char",
+    "CurrencyID": "string",
+    "Digest": "string",
+    "BankAccType": "char",
+    "DeviceID": "string",
+    "BankSecuAccType": "char",
+    "BrokerIDByBank": "string",
+    "BankSecuAcc": "string",
+    "BankPwdFlag": "char",
+    "SecuPwdFlag": "char",
+    "OperNo": "string",
+    "RequestID": "int",
+    "TID": "int",
+    "BankUseAmount": "double",
+    "BankFetchAmount": "double",
+    "LongCustomerName": "string",
+    "DRIdentityID": "int",
+    "SecFutureSerial": "int",
+}
+
+CThostFtdcReqTransferBySecField = {
+    "TradeCode": "string",
+    "BankID": "string",
+    "BankBranchID": "string",
+    "BrokerID": "string",
+    "BrokerBranchID": "string",
+    "TradeDate": "string",
+    "TradeTime": "string",
+    "BankSerial": "string",
+    "TradingDay": "string",
+    "PlateSerial": "int",
+    "LastFragment": "char",
+    "SessionID": "int",
+    "CustomerName": "string",
+    "IdCardType": "char",
+    "IdentifiedCardNo": "string",
+    "CustType": "char",
+    "BankAccount": "string",
+    "BankPassWord": "string",
+    "AccountID": "string",
+    "Password": "string",
+    "InstallID": "int",
+    "FutureSerial": "int",
+    "UserID": "string",
+    "VerifyCertNoFlag": "char",
+    "CurrencyID": "string",
+    "TradeAmount": "double",
+    "FutureFetchAmount": "double",
+    "FeePayFlag": "char",
+    "CustFee": "double",
+    "BrokerFee": "double",
+    "Message": "string",
+    "Digest": "string",
+    "BankAccType": "char",
+    "DeviceID": "string",
+    "BankSecuAccType": "char",
+    "BrokerIDByBank": "string",
+    "BankSecuAcc": "string",
+    "BankPwdFlag": "char",
+    "SecuPwdFlag": "char",
+    "OperNo": "string",
+    "RequestID": "int",
+    "TID": "int",
+    "TransferStatus": "char",
+    "LongCustomerName": "string",
+    "DRIdentityID": "int",
+    "SecFutureSerial": "int",
+}
+
+CThostFtdcRspTransferBySecField = {
+    "TradeCode": "string",
+    "BankID": "string",
+    "BankBranchID": "string",
+    "BrokerID": "string",
+    "BrokerBranchID": "string",
+    "TradeDate": "string",
+    "TradeTime": "string",
+    "BankSerial": "string",
+    "TradingDay": "string",
+    "PlateSerial": "int",
+    "LastFragment": "char",
+    "SessionID": "int",
+    "CustomerName": "string",
+    "IdCardType": "char",
+    "IdentifiedCardNo": "string",
+    "CustType": "char",
+    "BankAccount": "string",
+    "BankPassWord": "string",
+    "AccountID": "string",
+    "Password": "string",
+    "InstallID": "int",
+    "FutureSerial": "int",
+    "UserID": "string",
+    "VerifyCertNoFlag": "char",
+    "CurrencyID": "string",
+    "TradeAmount": "double",
+    "FutureFetchAmount": "double",
+    "FeePayFlag": "char",
+    "CustFee": "double",
+    "BrokerFee": "double",
+    "Message": "string",
+    "Digest": "string",
+    "BankAccType": "char",
+    "DeviceID": "string",
+    "BankSecuAccType": "char",
+    "BrokerIDByBank": "string",
+    "BankSecuAcc": "string",
+    "BankPwdFlag": "char",
+    "SecuPwdFlag": "char",
+    "OperNo": "string",
+    "RequestID": "int",
+    "TID": "int",
+    "TransferStatus": "char",
+    "ErrorID": "int",
+    "ErrorMsg": "string",
+    "LongCustomerName": "string",
+    "DRIdentityID": "int",
+    "SecFutureSerial": "int",
+}
+
+CThostFtdcNotifyQueryFutureAccountBySecField = {
+    "TradeCode": "string",
+    "BankID": "string",
+    "BankBranchID": "string",
+    "BrokerID": "string",
+    "BrokerBranchID": "string",
+    "TradeDate": "string",
+    "TradeTime": "string",
+    "BankSerial": "string",
+    "TradingDay": "string",
+    "PlateSerial": "int",
+    "LastFragment": "char",
+    "SessionID": "int",
+    "CustomerName": "string",
+    "IdCardType": "char",
+    "IdentifiedCardNo": "string",
+    "CustType": "char",
+    "BankAccount": "string",
+    "BankPassWord": "string",
+    "AccountID": "string",
+    "Password": "string",
+    "FutureSerial": "int",
+    "InstallID": "int",
+    "UserID": "string",
+    "VerifyCertNoFlag": "char",
+    "CurrencyID": "string",
+    "Digest": "string",
+    "BankAccType": "char",
+    "DeviceID": "string",
+    "BankSecuAccType": "char",
+    "BrokerIDByBank": "string",
+    "BankSecuAcc": "string",
+    "BankPwdFlag": "char",
+    "SecuPwdFlag": "char",
+    "OperNo": "string",
+    "RequestID": "int",
+    "TID": "int",
+    "BankUseAmount": "double",
+    "BankFetchAmount": "double",
+    "ErrorID": "int",
+    "ErrorMsg": "string",
+    "LongCustomerName": "string",
+    "DRIdentityID": "int",
+    "SecFutureSerial": "int",
+}
+
 CThostFtdcExitEmergencyField = {
     "BrokerID": "string",
 }
@@ -6463,6 +6763,202 @@ CThostFtdcQryInvestorPortfSettingField = {
     "ExchangeID": "string",
     "BrokerID": "string",
     "InvestorID": "string",
+}
+
+CThostFtdcUserPasswordUpdateFromSecField = {
+    "BrokerID": "string",
+    "UserID": "string",
+    "OldPassword": "string",
+    "NewPassword": "string",
+    "FromSec": "int",
+}
+
+CThostFtdcSettlementInfoConfirmFromSecField = {
+    "BrokerID": "string",
+    "InvestorID": "string",
+    "ConfirmDate": "string",
+    "ConfirmTime": "string",
+    "FromSec": "int",
+}
+
+CThostFtdcTradingAccountPasswordUpdateFromSecField = {
+    "BrokerID": "string",
+    "AccountID": "string",
+    "OldPassword": "string",
+    "NewPassword": "string",
+    "CurrencyID": "string",
+    "FromSec": "int",
+}
+
+CThostFtdcRiskForbiddenRightField = {
+    "BrokerID": "string",
+    "InvestorID": "string",
+    "InstrumentID": "string",
+    "UserID": "string",
+}
+
+CThostFtdcInvestorInfoCommRecField = {
+    "ExchangeID": "string",
+    "BrokerID": "string",
+    "InvestorID": "string",
+    "InstrumentID": "string",
+    "OrderCount": "int",
+    "OrderActionCount": "int",
+    "ForQuoteCnt": "int",
+    "InfoComm": "double",
+    "IsOptSeries": "int",
+    "ProductID": "string",
+    "InfoCnt": "int",
+}
+
+CThostFtdcQryInvestorInfoCommRecField = {
+    "InvestorID": "string",
+    "InstrumentID": "string",
+    "BrokerID": "string",
+}
+
+CThostFtdcCombLegField = {
+    "CombInstrumentID": "string",
+    "LegID": "int",
+    "LegInstrumentID": "string",
+    "Direction": "char",
+    "LegMultiple": "int",
+    "ImplyLevel": "int",
+}
+
+CThostFtdcQryCombLegField = {
+    "LegInstrumentID": "string",
+}
+
+CThostFtdcInputOffsetSettingField = {
+    "BrokerID": "string",
+    "InvestorID": "string",
+    "InstrumentID": "string",
+    "UnderlyingInstrID": "string",
+    "ProductID": "string",
+    "OffsetType": "char",
+    "Volume": "int",
+    "IsOffset": "int",
+    "RequestID": "int",
+    "UserID": "string",
+    "ExchangeID": "string",
+    "IPAddress": "string",
+    "MacAddress": "string",
+}
+
+CThostFtdcOffsetSettingField = {
+    "BrokerID": "string",
+    "InvestorID": "string",
+    "InstrumentID": "string",
+    "UnderlyingInstrID": "string",
+    "ProductID": "string",
+    "OffsetType": "char",
+    "Volume": "int",
+    "IsOffset": "int",
+    "RequestID": "int",
+    "UserID": "string",
+    "ExchangeID": "string",
+    "IPAddress": "string",
+    "MacAddress": "string",
+    "ExchangeInstID": "string",
+    "ExchangeSerialNo": "string",
+    "ExchangeProductID": "string",
+    "ParticipantID": "string",
+    "ClientID": "string",
+    "TraderID": "string",
+    "InstallID": "int",
+    "OrderSubmitStatus": "char",
+    "TradingDay": "string",
+    "SettlementID": "int",
+    "InsertDate": "string",
+    "InsertTime": "string",
+    "CancelTime": "string",
+    "ExecResult": "char",
+    "SequenceNo": "int",
+    "FrontID": "int",
+    "SessionID": "int",
+    "StatusMsg": "string",
+    "ActiveUserID": "string",
+    "BrokerOffsetSettingSeq": "int",
+    "ApplySrc": "char",
+}
+
+CThostFtdcCancelOffsetSettingField = {
+    "BrokerID": "string",
+    "InvestorID": "string",
+    "InstrumentID": "string",
+    "UnderlyingInstrID": "string",
+    "ProductID": "string",
+    "OffsetType": "char",
+    "Volume": "int",
+    "IsOffset": "int",
+    "RequestID": "int",
+    "UserID": "string",
+    "ExchangeID": "string",
+    "IPAddress": "string",
+    "MacAddress": "string",
+    "ExchangeInstID": "string",
+    "ExchangeSerialNo": "string",
+    "ExchangeProductID": "string",
+    "TraderID": "string",
+    "InstallID": "int",
+    "ParticipantID": "string",
+    "ClientID": "string",
+    "OrderActionStatus": "char",
+    "StatusMsg": "string",
+    "ActionLocalID": "string",
+    "ActionDate": "string",
+    "ActionTime": "string",
+}
+
+CThostFtdcQryOffsetSettingField = {
+    "BrokerID": "string",
+    "InvestorID": "string",
+    "ProductID": "string",
+    "OffsetType": "char",
+}
+
+CThostFtdcAddrAppIDRelationField = {
+    "BrokerID": "string",
+    "Address": "string",
+    "DRIdentityID": "int",
+    "AppID": "string",
+}
+
+CThostFtdcQryAddrAppIDRelationField = {
+    "BrokerID": "string",
+}
+
+CThostFtdcWechatUserSystemInfoField = {
+    "BrokerID": "string",
+    "UserID": "string",
+    "WechatCltSysInfoLen": "int",
+    "WechatCltSysInfo": "string",
+    "ClientIPPort": "int",
+    "ClientLoginTime": "string",
+    "ClientAppID": "string",
+    "ClientPublicIP": "string",
+    "ClientLoginRemark": "string",
+}
+
+CThostFtdcInvestorReserveInfoField = {
+    "BrokerID": "string",
+    "UserID": "string",
+    "ReserveInfo": "string",
+}
+
+CThostFtdcQryInvestorDepartmentFlatField = {
+    "BrokerID": "string",
+}
+
+CThostFtdcInvestorDepartmentFlatField = {
+    "BrokerID": "string",
+    "InvestorID": "string",
+    "DepartmentID": "string",
+}
+
+CThostFtdcQryDepartmentUserField = {
+    "BrokerID": "string",
 }
 
 CThostFtdcFrontInfoField = {

@@ -719,6 +719,18 @@ int TdApi::reqQryInstrumentCommissionRate(const dict &req, int reqid)
 	return i;
 };
 
+int TdApi::reqQryUserSession(const dict &req, int reqid)
+{
+	CThostFtdcQryUserSessionField myreq = CThostFtdcQryUserSessionField();
+	memset(&myreq, 0, sizeof(myreq));
+	getInt(req, "FrontID", &myreq.FrontID);
+	getInt(req, "SessionID", &myreq.SessionID);
+	getString(req, "BrokerID", myreq.BrokerID);
+	getString(req, "UserID", myreq.UserID);
+	int i = this->api->ReqQryUserSession(&myreq, reqid);
+	return i;
+};
+
 int TdApi::reqQryExchange(const dict &req, int reqid)
 {
 	CThostFtdcQryExchangeField myreq = CThostFtdcQryExchangeField();
@@ -1730,6 +1742,80 @@ int TdApi::reqQryInvestorPortfSetting(const dict &req, int reqid)
 	getString(req, "BrokerID", myreq.BrokerID);
 	getString(req, "InvestorID", myreq.InvestorID);
 	int i = this->api->ReqQryInvestorPortfSetting(&myreq, reqid);
+	return i;
+};
+
+int TdApi::reqQryInvestorInfoCommRec(const dict &req, int reqid)
+{
+	CThostFtdcQryInvestorInfoCommRecField myreq = CThostFtdcQryInvestorInfoCommRecField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "InvestorID", myreq.InvestorID);
+	getString(req, "InstrumentID", myreq.InstrumentID);
+	getString(req, "BrokerID", myreq.BrokerID);
+	int i = this->api->ReqQryInvestorInfoCommRec(&myreq, reqid);
+	return i;
+};
+
+int TdApi::reqQryCombLeg(const dict &req, int reqid)
+{
+	CThostFtdcQryCombLegField myreq = CThostFtdcQryCombLegField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "LegInstrumentID", myreq.LegInstrumentID);
+	int i = this->api->ReqQryCombLeg(&myreq, reqid);
+	return i;
+};
+
+int TdApi::reqOffsetSetting(const dict &req, int reqid)
+{
+	CThostFtdcInputOffsetSettingField myreq = CThostFtdcInputOffsetSettingField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "BrokerID", myreq.BrokerID);
+	getString(req, "InvestorID", myreq.InvestorID);
+	getString(req, "InstrumentID", myreq.InstrumentID);
+	getString(req, "UnderlyingInstrID", myreq.UnderlyingInstrID);
+	getString(req, "ProductID", myreq.ProductID);
+	getChar(req, "OffsetType", &myreq.OffsetType);
+	getInt(req, "Volume", &myreq.Volume);
+	getInt(req, "IsOffset", &myreq.IsOffset);
+	getInt(req, "RequestID", &myreq.RequestID);
+	getString(req, "UserID", myreq.UserID);
+	getString(req, "ExchangeID", myreq.ExchangeID);
+	getString(req, "IPAddress", myreq.IPAddress);
+	getString(req, "MacAddress", myreq.MacAddress);
+	int i = this->api->ReqOffsetSetting(&myreq, reqid);
+	return i;
+};
+
+int TdApi::reqCancelOffsetSetting(const dict &req, int reqid)
+{
+	CThostFtdcInputOffsetSettingField myreq = CThostFtdcInputOffsetSettingField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "BrokerID", myreq.BrokerID);
+	getString(req, "InvestorID", myreq.InvestorID);
+	getString(req, "InstrumentID", myreq.InstrumentID);
+	getString(req, "UnderlyingInstrID", myreq.UnderlyingInstrID);
+	getString(req, "ProductID", myreq.ProductID);
+	getChar(req, "OffsetType", &myreq.OffsetType);
+	getInt(req, "Volume", &myreq.Volume);
+	getInt(req, "IsOffset", &myreq.IsOffset);
+	getInt(req, "RequestID", &myreq.RequestID);
+	getString(req, "UserID", myreq.UserID);
+	getString(req, "ExchangeID", myreq.ExchangeID);
+	getString(req, "IPAddress", myreq.IPAddress);
+	getString(req, "MacAddress", myreq.MacAddress);
+	int i = this->api->ReqCancelOffsetSetting(&myreq, reqid);
+	return i;
+};
+
+int TdApi::reqQryOffsetSetting(const dict &req, int reqid)
+{
+	CThostFtdcQryOffsetSettingField myreq = CThostFtdcQryOffsetSettingField();
+	memset(&myreq, 0, sizeof(myreq));
+	getString(req, "BrokerID", myreq.BrokerID);
+	getString(req, "InvestorID", myreq.InvestorID);
+	getString(req, "ProductID", myreq.ProductID);
+	getChar(req, "OffsetType", &myreq.OffsetType);
+	int i = this->api->ReqQryOffsetSetting(&myreq, reqid);
 	return i;
 };
 

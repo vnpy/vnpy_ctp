@@ -358,6 +358,10 @@ void MdApi::processRspUserLogin(Task *task)
 		data["INETime"] = toUtf(task_data->INETime);
 		data["SysVersion"] = toUtf(task_data->SysVersion);
 		data["GFEXTime"] = toUtf(task_data->GFEXTime);
+		data["LoginDRIdentityID"] = task_data->LoginDRIdentityID;
+		data["UserDRIdentityID"] = task_data->UserDRIdentityID;
+		data["LastLoginTime"] = toUtf(task_data->LastLoginTime);
+		data["ReserveInfo"] = toUtf(task_data->ReserveInfo);
 		delete task_data;
 	}
 	dict error;
@@ -605,9 +609,9 @@ void MdApi::processRtnForQuoteRsp(Task *task)
 ///Ö÷¶¯º¯Êý
 ///-------------------------------------------------------------------------------------
 
-void MdApi::createFtdcMdApi(string pszFlowPath)
+void MdApi::createFtdcMdApi(string pszFlowPath, bool bIsProductionMode)
 {
-	this->api = CThostFtdcMdApi::CreateFtdcMdApi(pszFlowPath.c_str());
+	this->api = CThostFtdcMdApi::CreateFtdcMdApi(pszFlowPath.c_str(), false, false, bIsProductionMode);
 	this->api->RegisterSpi(this);
 };
 

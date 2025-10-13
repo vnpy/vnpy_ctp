@@ -47,125 +47,134 @@ using namespace pybind11;
 #define ONRSPQRYTRADINGCODE 33
 #define ONRSPQRYINSTRUMENTMARGINRATE 34
 #define ONRSPQRYINSTRUMENTCOMMISSIONRATE 35
-#define ONRSPQRYEXCHANGE 36
-#define ONRSPQRYPRODUCT 37
-#define ONRSPQRYINSTRUMENT 38
-#define ONRSPQRYDEPTHMARKETDATA 39
-#define ONRSPQRYTRADEROFFER 40
-#define ONRSPQRYSETTLEMENTINFO 41
-#define ONRSPQRYTRANSFERBANK 42
-#define ONRSPQRYINVESTORPOSITIONDETAIL 43
-#define ONRSPQRYNOTICE 44
-#define ONRSPQRYSETTLEMENTINFOCONFIRM 45
-#define ONRSPQRYINVESTORPOSITIONCOMBINEDETAIL 46
-#define ONRSPQRYCFMMCTRADINGACCOUNTKEY 47
-#define ONRSPQRYEWARRANTOFFSET 48
-#define ONRSPQRYINVESTORPRODUCTGROUPMARGIN 49
-#define ONRSPQRYEXCHANGEMARGINRATE 50
-#define ONRSPQRYEXCHANGEMARGINRATEADJUST 51
-#define ONRSPQRYEXCHANGERATE 52
-#define ONRSPQRYSECAGENTACIDMAP 53
-#define ONRSPQRYPRODUCTEXCHRATE 54
-#define ONRSPQRYPRODUCTGROUP 55
-#define ONRSPQRYMMINSTRUMENTCOMMISSIONRATE 56
-#define ONRSPQRYMMOPTIONINSTRCOMMRATE 57
-#define ONRSPQRYINSTRUMENTORDERCOMMRATE 58
-#define ONRSPQRYSECAGENTTRADINGACCOUNT 59
-#define ONRSPQRYSECAGENTCHECKMODE 60
-#define ONRSPQRYSECAGENTTRADEINFO 61
-#define ONRSPQRYOPTIONINSTRTRADECOST 62
-#define ONRSPQRYOPTIONINSTRCOMMRATE 63
-#define ONRSPQRYEXECORDER 64
-#define ONRSPQRYFORQUOTE 65
-#define ONRSPQRYQUOTE 66
-#define ONRSPQRYOPTIONSELFCLOSE 67
-#define ONRSPQRYINVESTUNIT 68
-#define ONRSPQRYCOMBINSTRUMENTGUARD 69
-#define ONRSPQRYCOMBACTION 70
-#define ONRSPQRYTRANSFERSERIAL 71
-#define ONRSPQRYACCOUNTREGISTER 72
-#define ONRSPERROR 73
-#define ONRTNORDER 74
-#define ONRTNTRADE 75
-#define ONERRRTNORDERINSERT 76
-#define ONERRRTNORDERACTION 77
-#define ONRTNINSTRUMENTSTATUS 78
-#define ONRTNBULLETIN 79
-#define ONRTNTRADINGNOTICE 80
-#define ONRTNERRORCONDITIONALORDER 81
-#define ONRTNEXECORDER 82
-#define ONERRRTNEXECORDERINSERT 83
-#define ONERRRTNEXECORDERACTION 84
-#define ONERRRTNFORQUOTEINSERT 85
-#define ONRTNQUOTE 86
-#define ONERRRTNQUOTEINSERT 87
-#define ONERRRTNQUOTEACTION 88
-#define ONRTNFORQUOTERSP 89
-#define ONRTNCFMMCTRADINGACCOUNTTOKEN 90
-#define ONERRRTNBATCHORDERACTION 91
-#define ONRTNOPTIONSELFCLOSE 92
-#define ONERRRTNOPTIONSELFCLOSEINSERT 93
-#define ONERRRTNOPTIONSELFCLOSEACTION 94
-#define ONRTNCOMBACTION 95
-#define ONERRRTNCOMBACTIONINSERT 96
-#define ONRSPQRYCONTRACTBANK 97
-#define ONRSPQRYPARKEDORDER 98
-#define ONRSPQRYPARKEDORDERACTION 99
-#define ONRSPQRYTRADINGNOTICE 100
-#define ONRSPQRYBROKERTRADINGPARAMS 101
-#define ONRSPQRYBROKERTRADINGALGOS 102
-#define ONRSPQUERYCFMMCTRADINGACCOUNTTOKEN 103
-#define ONRTNFROMBANKTOFUTUREBYBANK 104
-#define ONRTNFROMFUTURETOBANKBYBANK 105
-#define ONRTNREPEALFROMBANKTOFUTUREBYBANK 106
-#define ONRTNREPEALFROMFUTURETOBANKBYBANK 107
-#define ONRTNFROMBANKTOFUTUREBYFUTURE 108
-#define ONRTNFROMFUTURETOBANKBYFUTURE 109
-#define ONRTNREPEALFROMBANKTOFUTUREBYFUTUREMANUAL 110
-#define ONRTNREPEALFROMFUTURETOBANKBYFUTUREMANUAL 111
-#define ONRTNQUERYBANKBALANCEBYFUTURE 112
-#define ONERRRTNBANKTOFUTUREBYFUTURE 113
-#define ONERRRTNFUTURETOBANKBYFUTURE 114
-#define ONERRRTNREPEALBANKTOFUTUREBYFUTUREMANUAL 115
-#define ONERRRTNREPEALFUTURETOBANKBYFUTUREMANUAL 116
-#define ONERRRTNQUERYBANKBALANCEBYFUTURE 117
-#define ONRTNREPEALFROMBANKTOFUTUREBYFUTURE 118
-#define ONRTNREPEALFROMFUTURETOBANKBYFUTURE 119
-#define ONRSPFROMBANKTOFUTUREBYFUTURE 120
-#define ONRSPFROMFUTURETOBANKBYFUTURE 121
-#define ONRSPQUERYBANKACCOUNTMONEYBYFUTURE 122
-#define ONRTNOPENACCOUNTBYBANK 123
-#define ONRTNCANCELACCOUNTBYBANK 124
-#define ONRTNCHANGEACCOUNTBYBANK 125
-#define ONRSPQRYCLASSIFIEDINSTRUMENT 126
-#define ONRSPQRYCOMBPROMOTIONPARAM 127
-#define ONRSPQRYRISKSETTLEINVSTPOSITION 128
-#define ONRSPQRYRISKSETTLEPRODUCTSTATUS 129
-#define ONRSPQRYSPBMFUTUREPARAMETER 130
-#define ONRSPQRYSPBMOPTIONPARAMETER 131
-#define ONRSPQRYSPBMINTRAPARAMETER 132
-#define ONRSPQRYSPBMINTERPARAMETER 133
-#define ONRSPQRYSPBMPORTFDEFINITION 134
-#define ONRSPQRYSPBMINVESTORPORTFDEF 135
-#define ONRSPQRYINVESTORPORTFMARGINRATIO 136
-#define ONRSPQRYINVESTORPRODSPBMDETAIL 137
-#define ONRSPQRYINVESTORCOMMODITYSPMMMARGIN 138
-#define ONRSPQRYINVESTORCOMMODITYGROUPSPMMMARGIN 139
-#define ONRSPQRYSPMMINSTPARAM 140
-#define ONRSPQRYSPMMPRODUCTPARAM 141
-#define ONRSPQRYSPBMADDONINTERPARAMETER 142
-#define ONRSPQRYRCAMSCOMBPRODUCTINFO 143
-#define ONRSPQRYRCAMSINSTRPARAMETER 144
-#define ONRSPQRYRCAMSINTRAPARAMETER 145
-#define ONRSPQRYRCAMSINTERPARAMETER 146
-#define ONRSPQRYRCAMSSHORTOPTADJUSTPARAM 147
-#define ONRSPQRYRCAMSINVESTORCOMBPOSITION 148
-#define ONRSPQRYINVESTORPRODRCAMSMARGIN 149
-#define ONRSPQRYRULEINSTRPARAMETER 150
-#define ONRSPQRYRULEINTRAPARAMETER 151
-#define ONRSPQRYRULEINTERPARAMETER 152
-#define ONRSPQRYINVESTORPRODRULEMARGIN 153
-#define ONRSPQRYINVESTORPORTFSETTING 154
+#define ONRSPQRYUSERSESSION 36
+#define ONRSPQRYEXCHANGE 37
+#define ONRSPQRYPRODUCT 38
+#define ONRSPQRYINSTRUMENT 39
+#define ONRSPQRYDEPTHMARKETDATA 40
+#define ONRSPQRYTRADEROFFER 41
+#define ONRSPQRYSETTLEMENTINFO 42
+#define ONRSPQRYTRANSFERBANK 43
+#define ONRSPQRYINVESTORPOSITIONDETAIL 44
+#define ONRSPQRYNOTICE 45
+#define ONRSPQRYSETTLEMENTINFOCONFIRM 46
+#define ONRSPQRYINVESTORPOSITIONCOMBINEDETAIL 47
+#define ONRSPQRYCFMMCTRADINGACCOUNTKEY 48
+#define ONRSPQRYEWARRANTOFFSET 49
+#define ONRSPQRYINVESTORPRODUCTGROUPMARGIN 50
+#define ONRSPQRYEXCHANGEMARGINRATE 51
+#define ONRSPQRYEXCHANGEMARGINRATEADJUST 52
+#define ONRSPQRYEXCHANGERATE 53
+#define ONRSPQRYSECAGENTACIDMAP 54
+#define ONRSPQRYPRODUCTEXCHRATE 55
+#define ONRSPQRYPRODUCTGROUP 56
+#define ONRSPQRYMMINSTRUMENTCOMMISSIONRATE 57
+#define ONRSPQRYMMOPTIONINSTRCOMMRATE 58
+#define ONRSPQRYINSTRUMENTORDERCOMMRATE 59
+#define ONRSPQRYSECAGENTTRADINGACCOUNT 60
+#define ONRSPQRYSECAGENTCHECKMODE 61
+#define ONRSPQRYSECAGENTTRADEINFO 62
+#define ONRSPQRYOPTIONINSTRTRADECOST 63
+#define ONRSPQRYOPTIONINSTRCOMMRATE 64
+#define ONRSPQRYEXECORDER 65
+#define ONRSPQRYFORQUOTE 66
+#define ONRSPQRYQUOTE 67
+#define ONRSPQRYOPTIONSELFCLOSE 68
+#define ONRSPQRYINVESTUNIT 69
+#define ONRSPQRYCOMBINSTRUMENTGUARD 70
+#define ONRSPQRYCOMBACTION 71
+#define ONRSPQRYTRANSFERSERIAL 72
+#define ONRSPQRYACCOUNTREGISTER 73
+#define ONRSPERROR 74
+#define ONRTNORDER 75
+#define ONRTNTRADE 76
+#define ONERRRTNORDERINSERT 77
+#define ONERRRTNORDERACTION 78
+#define ONRTNINSTRUMENTSTATUS 79
+#define ONRTNBULLETIN 80
+#define ONRTNTRADINGNOTICE 81
+#define ONRTNERRORCONDITIONALORDER 82
+#define ONRTNEXECORDER 83
+#define ONERRRTNEXECORDERINSERT 84
+#define ONERRRTNEXECORDERACTION 85
+#define ONERRRTNFORQUOTEINSERT 86
+#define ONRTNQUOTE 87
+#define ONERRRTNQUOTEINSERT 88
+#define ONERRRTNQUOTEACTION 89
+#define ONRTNFORQUOTERSP 90
+#define ONRTNCFMMCTRADINGACCOUNTTOKEN 91
+#define ONERRRTNBATCHORDERACTION 92
+#define ONRTNOPTIONSELFCLOSE 93
+#define ONERRRTNOPTIONSELFCLOSEINSERT 94
+#define ONERRRTNOPTIONSELFCLOSEACTION 95
+#define ONRTNCOMBACTION 96
+#define ONERRRTNCOMBACTIONINSERT 97
+#define ONRSPQRYCONTRACTBANK 98
+#define ONRSPQRYPARKEDORDER 99
+#define ONRSPQRYPARKEDORDERACTION 100
+#define ONRSPQRYTRADINGNOTICE 101
+#define ONRSPQRYBROKERTRADINGPARAMS 102
+#define ONRSPQRYBROKERTRADINGALGOS 103
+#define ONRSPQUERYCFMMCTRADINGACCOUNTTOKEN 104
+#define ONRTNFROMBANKTOFUTUREBYBANK 105
+#define ONRTNFROMFUTURETOBANKBYBANK 106
+#define ONRTNREPEALFROMBANKTOFUTUREBYBANK 107
+#define ONRTNREPEALFROMFUTURETOBANKBYBANK 108
+#define ONRTNFROMBANKTOFUTUREBYFUTURE 109
+#define ONRTNFROMFUTURETOBANKBYFUTURE 110
+#define ONRTNREPEALFROMBANKTOFUTUREBYFUTUREMANUAL 111
+#define ONRTNREPEALFROMFUTURETOBANKBYFUTUREMANUAL 112
+#define ONRTNQUERYBANKBALANCEBYFUTURE 113
+#define ONERRRTNBANKTOFUTUREBYFUTURE 114
+#define ONERRRTNFUTURETOBANKBYFUTURE 115
+#define ONERRRTNREPEALBANKTOFUTUREBYFUTUREMANUAL 116
+#define ONERRRTNREPEALFUTURETOBANKBYFUTUREMANUAL 117
+#define ONERRRTNQUERYBANKBALANCEBYFUTURE 118
+#define ONRTNREPEALFROMBANKTOFUTUREBYFUTURE 119
+#define ONRTNREPEALFROMFUTURETOBANKBYFUTURE 120
+#define ONRSPFROMBANKTOFUTUREBYFUTURE 121
+#define ONRSPFROMFUTURETOBANKBYFUTURE 122
+#define ONRSPQUERYBANKACCOUNTMONEYBYFUTURE 123
+#define ONRTNOPENACCOUNTBYBANK 124
+#define ONRTNCANCELACCOUNTBYBANK 125
+#define ONRTNCHANGEACCOUNTBYBANK 126
+#define ONRSPQRYCLASSIFIEDINSTRUMENT 127
+#define ONRSPQRYCOMBPROMOTIONPARAM 128
+#define ONRSPQRYRISKSETTLEINVSTPOSITION 129
+#define ONRSPQRYRISKSETTLEPRODUCTSTATUS 130
+#define ONRSPQRYSPBMFUTUREPARAMETER 131
+#define ONRSPQRYSPBMOPTIONPARAMETER 132
+#define ONRSPQRYSPBMINTRAPARAMETER 133
+#define ONRSPQRYSPBMINTERPARAMETER 134
+#define ONRSPQRYSPBMPORTFDEFINITION 135
+#define ONRSPQRYSPBMINVESTORPORTFDEF 136
+#define ONRSPQRYINVESTORPORTFMARGINRATIO 137
+#define ONRSPQRYINVESTORPRODSPBMDETAIL 138
+#define ONRSPQRYINVESTORCOMMODITYSPMMMARGIN 139
+#define ONRSPQRYINVESTORCOMMODITYGROUPSPMMMARGIN 140
+#define ONRSPQRYSPMMINSTPARAM 141
+#define ONRSPQRYSPMMPRODUCTPARAM 142
+#define ONRSPQRYSPBMADDONINTERPARAMETER 143
+#define ONRSPQRYRCAMSCOMBPRODUCTINFO 144
+#define ONRSPQRYRCAMSINSTRPARAMETER 145
+#define ONRSPQRYRCAMSINTRAPARAMETER 146
+#define ONRSPQRYRCAMSINTERPARAMETER 147
+#define ONRSPQRYRCAMSSHORTOPTADJUSTPARAM 148
+#define ONRSPQRYRCAMSINVESTORCOMBPOSITION 149
+#define ONRSPQRYINVESTORPRODRCAMSMARGIN 150
+#define ONRSPQRYRULEINSTRPARAMETER 151
+#define ONRSPQRYRULEINTRAPARAMETER 152
+#define ONRSPQRYRULEINTERPARAMETER 153
+#define ONRSPQRYINVESTORPRODRULEMARGIN 154
+#define ONRSPQRYINVESTORPORTFSETTING 155
+#define ONRSPQRYINVESTORINFOCOMMREC 156
+#define ONRSPQRYCOMBLEG 157
+#define ONRSPOFFSETSETTING 158
+#define ONRSPCANCELOFFSETSETTING 159
+#define ONRTNOFFSETSETTING 160
+#define ONERRRTNOFFSETSETTING 161
+#define ONERRRTNCANCELOFFSETSETTING 162
+#define ONRSPQRYOFFSETSETTING 163
 
 ///-------------------------------------------------------------------------------------
 ///C++ SPI的回调函数方法实现
@@ -312,6 +321,9 @@ public:
 
 	///请求查询合约手续费率响应
 	virtual void OnRspQryInstrumentCommissionRate(CThostFtdcInstrumentCommissionRateField *pInstrumentCommissionRate, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+
+	///请求查询用户会话响应
+	virtual void OnRspQryUserSession(CThostFtdcUserSessionField* pUserSession, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
 
 	///请求查询交易所响应
 	virtual void OnRspQryExchange(CThostFtdcExchangeField *pExchange, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
@@ -667,9 +679,32 @@ public:
 	///投资者产品RULE保证金查询响应
 	virtual void OnRspQryInvestorProdRULEMargin(CThostFtdcInvestorProdRULEMarginField *pInvestorProdRULEMargin, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-	///投资者投资者新组保设置查询响应
-	virtual void OnRspQryInvestorPortfSetting(CThostFtdcInvestorPortfSettingField *pInvestorPortfSetting, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+	///投资者新型组合保证金开关查询响应
+	virtual void OnRspQryInvestorPortfSetting(CThostFtdcInvestorPortfSettingField* pInvestorPortfSetting, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
 
+	///投资者申报费阶梯收取记录查询响应
+	virtual void OnRspQryInvestorInfoCommRec(CThostFtdcInvestorInfoCommRecField* pInvestorInfoCommRec, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+
+	///组合腿信息查询响应
+	virtual void OnRspQryCombLeg(CThostFtdcCombLegField* pCombLeg, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+
+	///对冲设置请求响应
+	virtual void OnRspOffsetSetting(CThostFtdcInputOffsetSettingField* pInputOffsetSetting, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+
+	///对冲设置撤销请求响应
+	virtual void OnRspCancelOffsetSetting(CThostFtdcInputOffsetSettingField* pInputOffsetSetting, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+
+	///对冲设置通知
+	virtual void OnRtnOffsetSetting(CThostFtdcOffsetSettingField* pOffsetSetting);
+
+	///对冲设置错误回报
+	virtual void OnErrRtnOffsetSetting(CThostFtdcInputOffsetSettingField* pInputOffsetSetting, CThostFtdcRspInfoField* pRspInfo);
+
+	///对冲设置撤销错误回报
+	virtual void OnErrRtnCancelOffsetSetting(CThostFtdcCancelOffsetSettingField* pCancelOffsetSetting, CThostFtdcRspInfoField* pRspInfo);
+
+	///投资者对冲设置查询响应
+	virtual void OnRspQryOffsetSetting(CThostFtdcOffsetSettingField* pOffsetSetting, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
     //-------------------------------------------------------------------------------------
     //task：任务
     //-------------------------------------------------------------------------------------
@@ -746,6 +781,8 @@ public:
 	void processRspQryInstrumentMarginRate(Task *task);
 
 	void processRspQryInstrumentCommissionRate(Task *task);
+
+	void processRspQryUserSession(Task* task);
 
 	void processRspQryExchange(Task *task);
 
@@ -985,6 +1022,22 @@ public:
 
 	void processRspQryInvestorPortfSetting(Task *task);
 
+	void processRspQryInvestorInfoCommRec(Task* task);
+
+	void processRspQryCombLeg(Task* task);
+
+	void processRspOffsetSetting(Task* task);
+
+	void processRspCancelOffsetSetting(Task* task);
+
+	void processRtnOffsetSetting(Task* task);
+
+	void processErrRtnOffsetSetting(Task* task);
+
+	void processErrRtnCancelOffsetSetting(Task* task);
+
+	void processRspQryOffsetSetting(Task* task);
+
     //-------------------------------------------------------------------------------------
     //data：回调函数的数据字典
     //error：回调函数的错误字典
@@ -1064,6 +1117,8 @@ public:
 	virtual void onRspQryInstrumentMarginRate(const dict &data, const dict &error, int reqid, bool last) {};
 
 	virtual void onRspQryInstrumentCommissionRate(const dict &data, const dict &error, int reqid, bool last) {};
+
+	virtual void onRspQryUserSession(const dict& data, const dict& error, int reqid, bool last) {};
 
 	virtual void onRspQryExchange(const dict &data, const dict &error, int reqid, bool last) {};
 
@@ -1303,11 +1358,27 @@ public:
 
 	virtual void onRspQryInvestorPortfSetting(const dict &data, const dict &error, int reqid, bool last) {};
 
+	virtual void onRspQryInvestorInfoCommRec(const dict& data, const dict& error, int reqid, bool last) {};
+
+	virtual void onRspQryCombLeg(const dict& data, const dict& error, int reqid, bool last) {};
+
+	virtual void onRspOffsetSetting(const dict& data, const dict& error, int reqid, bool last) {};
+
+	virtual void onRspCancelOffsetSetting(const dict& data, const dict& error, int reqid, bool last) {};
+
+	virtual void onRtnOffsetSetting(const dict& data) {};
+
+	virtual void onErrRtnOffsetSetting(const dict& data, const dict& error) {};
+
+	virtual void onErrRtnCancelOffsetSetting(const dict& data, const dict& error) {};
+
+	virtual void onRspQryOffsetSetting(const dict& data, const dict& error, int reqid, bool last) {};
+
     //-------------------------------------------------------------------------------------
     //req:主动函数的请求字典
     //-------------------------------------------------------------------------------------
 
-    void createFtdcTraderApi(string pszFlowPath = "");
+    void createFtdcTraderApi(string pszFlowPath = "", bool bIsProductionMode = true);
 
     void release();
 
@@ -1321,6 +1392,8 @@ public:
 
 	string getApiVersion();
 
+	dict getFrontInfo();
+
     void registerFront(string pszFrontAddress);
 
 	void registerNameServer(string pszNsAddress);
@@ -1330,6 +1403,14 @@ public:
     void subscribePrivateTopic(int nType);
 
     void subscribePublicTopic(int nType);
+
+	int registerUserSystemInfo(const dict& req);
+
+	int submitUserSystemInfo(const dict& req);
+
+	int registerWechatUserSystemInfo(const dict& req);
+
+	int submitWechatUserSystemInfo(const dict& req);
 
 	int reqAuthenticate(const dict &req, int reqid);
 
@@ -1402,6 +1483,8 @@ public:
 	int reqQryInstrumentMarginRate(const dict &req, int reqid);
 
 	int reqQryInstrumentCommissionRate(const dict &req, int reqid);
+
+	int reqQryUserSession(const dict& req, int reqid);
 
 	int reqQryExchange(const dict &req, int reqid);
 
@@ -1554,4 +1637,14 @@ public:
 	int reqQryInvestorProdRULEMargin(const dict &req, int reqid);
 
 	int reqQryInvestorPortfSetting(const dict &req, int reqid);
+
+	int reqQryInvestorInfoCommRec(const dict& req, int reqid);
+
+	int reqQryCombLeg(const dict& req, int reqid);
+
+	int reqOffsetSetting(const dict& req, int reqid);
+
+	int reqCancelOffsetSetting(const dict& req, int reqid);
+
+	int reqQryOffsetSetting(const dict& req, int reqid);
 };

@@ -430,6 +430,18 @@ void onRspQryInstrumentCommissionRate(const dict &data, const dict &error, int r
 	}
 };
 
+void onRspQryUserSession(const dict &data, const dict &error, int reqid, bool last) override
+{
+	try
+	{
+		PYBIND11_OVERLOAD(void, TdApi, onRspQryUserSession, data, error, reqid, last);
+	}
+	catch (const error_already_set &e)
+	{
+		cout << e.what() << endl;
+	}
+};
+
 void onRspQryExchange(const dict &data, const dict &error, int reqid, bool last) override
 {
 	try
@@ -1851,6 +1863,102 @@ void onRspQryInvestorPortfSetting(const dict &data, const dict &error, int reqid
 	try
 	{
 		PYBIND11_OVERLOAD(void, TdApi, onRspQryInvestorPortfSetting, data, error, reqid, last);
+	}
+	catch (const error_already_set &e)
+	{
+		cout << e.what() << endl;
+	}
+};
+
+void onRspQryInvestorInfoCommRec(const dict &data, const dict &error, int reqid, bool last) override
+{
+	try
+	{
+		PYBIND11_OVERLOAD(void, TdApi, onRspQryInvestorInfoCommRec, data, error, reqid, last);
+	}
+	catch (const error_already_set &e)
+	{
+		cout << e.what() << endl;
+	}
+};
+
+void onRspQryCombLeg(const dict &data, const dict &error, int reqid, bool last) override
+{
+	try
+	{
+		PYBIND11_OVERLOAD(void, TdApi, onRspQryCombLeg, data, error, reqid, last);
+	}
+	catch (const error_already_set &e)
+	{
+		cout << e.what() << endl;
+	}
+};
+
+void onRspOffsetSetting(const dict &data, const dict &error, int reqid, bool last) override
+{
+	try
+	{
+		PYBIND11_OVERLOAD(void, TdApi, onRspOffsetSetting, data, error, reqid, last);
+	}
+	catch (const error_already_set &e)
+	{
+		cout << e.what() << endl;
+	}
+};
+
+void onRspCancelOffsetSetting(const dict &data, const dict &error, int reqid, bool last) override
+{
+	try
+	{
+		PYBIND11_OVERLOAD(void, TdApi, onRspCancelOffsetSetting, data, error, reqid, last);
+	}
+	catch (const error_already_set &e)
+	{
+		cout << e.what() << endl;
+	}
+};
+
+void onRtnOffsetSetting(const dict &data) override
+{
+	try
+	{
+		PYBIND11_OVERLOAD(void, TdApi, onRtnOffsetSetting, data);
+	}
+	catch (const error_already_set &e)
+	{
+		cout << e.what() << endl;
+	}
+};
+
+void onErrRtnOffsetSetting(const dict &data, const dict &error) override
+{
+	try
+	{
+		PYBIND11_OVERLOAD(void, TdApi, onErrRtnOffsetSetting, data, error);
+	}
+	catch (const error_already_set &e)
+	{
+		cout << e.what() << endl;
+	}
+};
+
+void onErrRtnCancelOffsetSetting(const dict &data, const dict &error) override
+{
+	try
+	{
+		PYBIND11_OVERLOAD(void, TdApi, onErrRtnCancelOffsetSetting, data, error);
+	}
+	catch (const error_already_set &e)
+	{
+		cout << e.what() << endl;
+	}
+};
+
+void onRspQryOffsetSetting(const dict &data, const dict &error, int reqid, bool last) override
+{
+	try
+	{
+		PYBIND11_OVERLOAD(void, TdApi, onRspQryOffsetSetting, data, error, reqid, last);
 	}
 	catch (const error_already_set &e)
 	{

@@ -214,6 +214,12 @@ case ONRSPQRYINSTRUMENTCOMMISSIONRATE:
 	break;
 }
 
+case ONRSPQRYUSERSESSION:
+{
+	this->processRspQryUserSession(&task);
+	break;
+}
+
 case ONRSPQRYEXCHANGE:
 {
 	this->processRspQryExchange(&task);
@@ -925,6 +931,54 @@ case ONRSPQRYINVESTORPRODRULEMARGIN:
 case ONRSPQRYINVESTORPORTFSETTING:
 {
 	this->processRspQryInvestorPortfSetting(&task);
+	break;
+}
+
+case ONRSPQRYINVESTORINFOCOMMREC:
+{
+	this->processRspQryInvestorInfoCommRec(&task);
+	break;
+}
+
+case ONRSPQRYCOMBLEG:
+{
+	this->processRspQryCombLeg(&task);
+	break;
+}
+
+case ONRSPOFFSETSETTING:
+{
+	this->processRspOffsetSetting(&task);
+	break;
+}
+
+case ONRSPCANCELOFFSETSETTING:
+{
+	this->processRspCancelOffsetSetting(&task);
+	break;
+}
+
+case ONRTNOFFSETSETTING:
+{
+	this->processRtnOffsetSetting(&task);
+	break;
+}
+
+case ONERRRTNOFFSETSETTING:
+{
+	this->processErrRtnOffsetSetting(&task);
+	break;
+}
+
+case ONERRRTNCANCELOFFSETSETTING:
+{
+	this->processErrRtnCancelOffsetSetting(&task);
+	break;
+}
+
+case ONRSPQRYOFFSETSETTING:
+{
+	this->processRspQryOffsetSetting(&task);
 	break;
 }
 
