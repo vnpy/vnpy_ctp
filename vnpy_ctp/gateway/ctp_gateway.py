@@ -145,7 +145,8 @@ class CtpGateway(BaseGateway):
         "交易服务器": "",
         "行情服务器": "",
         "产品名称": "",
-        "授权编码": ""
+        "授权编码": "",
+        "生产环境": ["是", "否"]
     }
 
     exchanges: list[str] = list(EXCHANGE_CTP2VT.values())
@@ -168,6 +169,7 @@ class CtpGateway(BaseGateway):
         md_address: str = setting["行情服务器"]
         appid: str = setting["产品名称"]
         auth_code: str = setting["授权编码"]
+        production_mode: bool = setting["生产环境"] == "是"
 
         if (
             (not td_address.startswith("tcp://"))
@@ -183,8 +185,8 @@ class CtpGateway(BaseGateway):
         ):
             md_address = "tcp://" + md_address
 
-        self.td_api.connect(td_address, userid, password, brokerid, auth_code, appid)
-        self.md_api.connect(md_address, userid, password, brokerid)
+        self.td_api.connect(td_address, userid, password, brokerid, auth_code, appid, production_mode)
+        self.md_api.connect(md_address, userid, password, brokerid, production_mode)
 
         self.init_query()
 
@@ -361,7 +363,14 @@ class CtpMdApi(MdApi):
 
         self.gateway.on_tick(tick)
 
-    def connect(self, address: str, userid: str, password: str, brokerid: str) -> None:
+    def connect(
+        self,
+        address: str,
+        userid: str,
+        password: str,
+        brokerid: str,
+        production_mode: bool
+    ) -> None:
         """连接服务器"""
         self.userid = userid
         self.password = password
@@ -370,7 +379,7 @@ class CtpMdApi(MdApi):
         # 禁止重复发起连接，会导致异常崩溃
         if not self.connect_status:
             path: Path = get_folder_path(self.gateway_name.lower())
-            self.createFtdcMdApi((str(path) + "\\Md").encode("GBK"))
+            self.createFtdcMdApi((str(path) + "\\Md").encode("GBK"), production_mode)
 
             self.registerFront(address)
             self.init()
@@ -727,7 +736,8 @@ class CtpTdApi(TdApi):
         password: str,
         brokerid: str,
         auth_code: str,
-        appid: str
+        appid: str,
+        production_mode: bool
     ) -> None:
         """连接服务器"""
         self.userid = userid
@@ -738,7 +748,7 @@ class CtpTdApi(TdApi):
 
         if not self.connect_status:
             path: Path = get_folder_path(self.gateway_name.lower())
-            self.createFtdcTraderApi((str(path) + "\\Td").encode("GBK"))
+            self.createFtdcTraderApi((str(path) + "\\Td").encode("GBK"), production_mode)
 
             self.subscribePrivateTopic(0)
             self.subscribePublicTopic(0)

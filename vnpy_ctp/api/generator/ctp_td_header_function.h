@@ -70,6 +70,8 @@ int reqQryInstrumentMarginRate(const dict &req, int reqid);
 
 int reqQryInstrumentCommissionRate(const dict &req, int reqid);
 
+int reqQryUserSession(const dict &req, int reqid);
+
 int reqQryExchange(const dict &req, int reqid);
 
 int reqQryProduct(const dict &req, int reqid);
@@ -221,4 +223,14 @@ int reqQryRULEInterParameter(const dict &req, int reqid);
 int reqQryInvestorProdRULEMargin(const dict &req, int reqid);
 
 int reqQryInvestorPortfSetting(const dict &req, int reqid);
+
+int reqQryInvestorInfoCommRec(const dict &req, int reqid);
+
+int reqQryCombLeg(const dict &req, int reqid);
+
+int reqOffsetSetting(const dict &req, int reqid);
+
+int reqCancelOffsetSetting(const dict &req, int reqid);
+
+int reqQryOffsetSetting(const dict &req, int reqid);
 

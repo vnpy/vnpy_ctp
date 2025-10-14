@@ -70,6 +70,8 @@ void processRspQryInstrumentMarginRate(Task *task);
 
 void processRspQryInstrumentCommissionRate(Task *task);
 
+void processRspQryUserSession(Task *task);
+
 void processRspQryExchange(Task *task);
 
 void processRspQryProduct(Task *task);
@@ -307,4 +309,20 @@ void processRspQryRULEInterParameter(Task *task);
 void processRspQryInvestorProdRULEMargin(Task *task);
 
 void processRspQryInvestorPortfSetting(Task *task);
+
+void processRspQryInvestorInfoCommRec(Task *task);
+
+void processRspQryCombLeg(Task *task);
+
+void processRspOffsetSetting(Task *task);
+
+void processRspCancelOffsetSetting(Task *task);
+
+void processRtnOffsetSetting(Task *task);
+
+void processErrRtnOffsetSetting(Task *task);
+
+void processErrRtnCancelOffsetSetting(Task *task);
+
+void processRspQryOffsetSetting(Task *task);
 

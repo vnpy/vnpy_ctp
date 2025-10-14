@@ -82,9 +82,10 @@ class MD_API_EXPORT CThostFtdcMdApi
 public:
 	///创建MdApi
 	///@param pszFlowPath 存贮订阅信息文件的目录，默认为当前目录
+	///@param bIsProductionMode true:使用生产版本的API  false:使用测评版本API
 	///@return 创建出的UserApi
 	///modify for udp marketdata
-	static CThostFtdcMdApi *CreateFtdcMdApi(const char *pszFlowPath = "", const bool bIsUsingUdp=false, const bool bIsMulticast=false);
+	static CThostFtdcMdApi *CreateFtdcMdApi(const char *pszFlowPath = "", const bool bIsUsingUdp=false, const bool bIsMulticast=false, bool bIsProductionMode=true);
 	
 	///获取API的版本信息
 	///@retrun 获取到的版本号
