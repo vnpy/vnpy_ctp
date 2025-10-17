@@ -149,7 +149,7 @@ md_module = py.extension_module(
   dependencies: [py_dep],
   cpp_args: extra_cpp_args,
   link_args: extra_link_args + [
-    '-L' + (meson.current_source_dir() / 'vnpy_ctp/api'),
+    '-L' + lib_dir,
     '-lthostmduserapi_se',
     '-Wl,-rpath,$ORIGIN'
   ],
@@ -166,7 +166,7 @@ td_module = py.extension_module(
   dependencies: [py_dep],
   cpp_args: extra_cpp_args,
   link_args: extra_link_args + [
-    '-L' + (meson.current_source_dir() / 'vnpy_ctp/api'),
+    '-L' + lib_dir,
     '-lthosttraderapi_se',
     '-Wl,-rpath,$ORIGIN'
   ],

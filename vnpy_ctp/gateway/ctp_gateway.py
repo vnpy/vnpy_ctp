@@ -146,7 +146,7 @@ class CtpGateway(BaseGateway):
         "行情服务器": "",
         "产品名称": "",
         "授权编码": "",
-        "生产环境": ["是", "否"]
+        "柜台环境": ["实盘", "测试"]
     }
 
     exchanges: list[str] = list(EXCHANGE_CTP2VT.values())
@@ -169,7 +169,7 @@ class CtpGateway(BaseGateway):
         md_address: str = setting["行情服务器"]
         appid: str = setting["产品名称"]
         auth_code: str = setting["授权编码"]
-        production_mode: bool = setting["生产环境"] == "是"
+        production_mode: bool = setting["柜台环境"] == "实盘"
 
         if (
             (not td_address.startswith("tcp://"))
