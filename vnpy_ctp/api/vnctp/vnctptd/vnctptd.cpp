@@ -1,11 +1,11 @@
-// vnctptd.cpp : ∂®“Â DLL ”¶”√≥Ã–Úµƒµº≥ˆ∫Ø ˝°£
+// vnctptd.cpp : ÂÆö‰πâ DLL Â∫îÁî®Á®ãÂ∫èÁöÑÂØºÂá∫ÂáΩÊï∞„ÄÇ
 //
 
 #include "vnctptd.h"
 
 
 ///-------------------------------------------------------------------------------------
-///C++µƒªÿµ˜∫Ø ˝Ω´ ˝æ›±£¥ÊµΩ∂”¡–÷–
+///C++ÁöÑÂõûË∞ÉÂáΩÊï∞Â∞ÜÊï∞ÊçÆ‰øùÂ≠òÂà∞ÈòüÂàó‰∏≠
 ///-------------------------------------------------------------------------------------
 
 void TdApi::OnFrontConnected()
@@ -3155,7 +3155,7 @@ void TdApi::OnRspQryOffsetSetting(CThostFtdcOffsetSettingField* pOffsetSetting, 
 };
 
 ///-------------------------------------------------------------------------------------
-///π§◊˜œﬂ≥Ã¥”∂”¡–÷–»°≥ˆ ˝æ›£¨◊™ªØŒ™python∂‘œÛ∫Û£¨Ω¯––Õ∆ÀÕ
+///Â∑•‰ΩúÁ∫øÁ®ã‰ªéÈòüÂàó‰∏≠ÂèñÂá∫Êï∞ÊçÆÔºåËΩ¨Âåñ‰∏∫pythonÂØπË±°ÂêéÔºåËøõË°åÊé®ÈÄÅ
 ///-------------------------------------------------------------------------------------
 
 void TdApi::processTask()
@@ -10752,7 +10752,7 @@ void TdApi::processRspQryOffsetSetting(Task* task)
 };
 
 ///-------------------------------------------------------------------------------------
-///÷˜∂Ø∫Ø ˝
+///‰∏ªÂä®ÂáΩÊï∞
 ///-------------------------------------------------------------------------------------
 
 void TdApi::createFtdcTraderApi(string pszFlowPath, bool bIsProductionMode)
@@ -10947,7 +10947,7 @@ int TdApi::reqUserLogin(const dict &req, int reqid)
 	getInt(req, "ClientIPPort", &myreq.ClientIPPort);
 	getString(req, "ClientIPAddress", myreq.ClientIPAddress);
 
-	//MacÃÿ ‚¥¶¿Ì
+	//MacÁâπÊÆäÂ§ÑÁêÜ
 	#ifndef __APPLE__
 		int i = this->api->ReqUserLogin(&myreq, reqid);
 	#else
@@ -12745,7 +12745,7 @@ int TdApi::reqQryOffsetSetting(const dict& req, int reqid)
 };
 
 ///-------------------------------------------------------------------------------------
-///pybind11∑‚◊∞
+///pybind11Â∞ÅË£Ö
 ///-------------------------------------------------------------------------------------
 
 class PyTdApi : public TdApi
