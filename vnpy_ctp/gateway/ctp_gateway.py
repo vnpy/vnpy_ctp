@@ -138,7 +138,7 @@ class CtpGateway(BaseGateway):
 
     default_name: str = "CTP"
 
-    default_setting: dict[str, str] = {
+    default_setting: dict[str, str | list[str]] = {
         "用户名": "",
         "密码": "",
         "经纪商代码": "",
