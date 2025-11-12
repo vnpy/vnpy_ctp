@@ -148,6 +148,7 @@ class CtpGateway(BaseGateway):
         "授权编码": "",
         "柜台环境": ["实盘", "测试"],
         "登录超时": "0",                # 单位是秒，默认为0，代表永不超时
+        "连接名": "",                  # 留空代表使用 gateway_name 名称
     }
 
     exchanges: list[str] = list(EXCHANGE_CTP2VT.values())
@@ -178,6 +179,11 @@ class CtpGateway(BaseGateway):
         auth_code: str = setting["授权编码"]
         production_mode: bool = setting["柜台环境"] == "实盘"
         login_timeout: int = int(setting["登录超时"])
+        conn_name: str = setting["连接名"]
+
+        if conn_name == "":
+            # 若连接名为空，则使用 gateway_name
+            conn_name = self.gateway_name
 
         if (
             (not td_address.startswith("tcp://"))
@@ -193,8 +199,8 @@ class CtpGateway(BaseGateway):
         ):
             md_address = "tcp://" + md_address
 
-        self.td_api.connect(td_address, userid, password, brokerid, auth_code, appid, production_mode)
-        self.md_api.connect(md_address, userid, password, brokerid, production_mode)
+        self.td_api.connect(td_address, userid, password, brokerid, auth_code, appid, production_mode, conn_name)
+        self.md_api.connect(md_address, userid, password, brokerid, production_mode, conn_name)
 
         self.init_query()
 
@@ -408,7 +414,8 @@ class CtpMdApi(MdApi):
         userid: str,
         password: str,
         brokerid: str,
-        production_mode: bool
+        production_mode: bool,
+        conn_name: str,
     ) -> None:
         """连接服务器"""
         self.userid = userid
@@ -417,8 +424,8 @@ class CtpMdApi(MdApi):
 
         # 禁止重复发起连接，会导致异常崩溃
         if not self.connect_status:
-            path: Path = get_folder_path(self.gateway_name.lower())
-            self.createFtdcMdApi((str(path) + "\\Md").encode("GBK"), production_mode)
+            path: Path = get_folder_path(conn_name)
+            self.createFtdcMdApi((str(path) + "/Md").encode("GBK"), production_mode)
 
             self.registerFront(address)
             self.init()
@@ -781,7 +788,8 @@ class CtpTdApi(TdApi):
         brokerid: str,
         auth_code: str,
         appid: str,
-        production_mode: bool
+        production_mode: bool,
+        conn_name: str,
     ) -> None:
         """连接服务器"""
         self.userid = userid
@@ -791,8 +799,8 @@ class CtpTdApi(TdApi):
         self.appid = appid
 
         if not self.connect_status:
-            path: Path = get_folder_path(self.gateway_name.lower())
-            self.createFtdcTraderApi((str(path) + "\\Td").encode("GBK"), production_mode)
+            path: Path = get_folder_path(conn_name)
+            self.createFtdcTraderApi((str(path) + "/Td").encode("GBK"), production_mode)
 
             self.subscribePrivateTopic(0)
             self.subscribePublicTopic(0)
