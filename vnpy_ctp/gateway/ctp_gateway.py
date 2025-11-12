@@ -162,6 +162,11 @@ class CtpGateway(BaseGateway):
 
     def connect(self, setting: dict) -> None:
         """连接交易接口"""
+        if self.td_api.login_status:
+            self.write_log("CTP接口已连接，将断开和重新连接")
+
+        self.close()
+
         userid: str = setting["用户名"]
         password: str = setting["密码"]
         brokerid: str = setting["经纪商代码"]
@@ -212,6 +217,10 @@ class CtpGateway(BaseGateway):
 
     def close(self) -> None:
         """关闭接口"""
+        if self.td_api.login_status:
+            self.write_log("已登出")
+
+        self.event_engine.unregister(EVENT_TIMER, self.process_timer_event)
         self.td_api.close()
         self.md_api.close()
 
@@ -250,7 +259,6 @@ class CtpMdApi(MdApi):
         super().__init__()
 
         self.gateway: CtpGateway = gateway
-        self.gateway_name: str = gateway.gateway_name
 
         self.reqid: int = 0
 
@@ -263,6 +271,10 @@ class CtpMdApi(MdApi):
         self.brokerid: str = ""
 
         self.current_date: str = datetime.now().strftime("%Y%m%d")
+
+    @property
+    def gateway_name(self):
+        return self.gateway.gateway_name
 
     def onFrontConnected(self) -> None:
         """服务器连接成功回报"""
@@ -404,9 +416,11 @@ class CtpMdApi(MdApi):
         self.subscribed.add(req.symbol)
 
     def close(self) -> None:
-        """关闭连接"""
-        if self.connect_status:
-            self.exit()
+        """关闭连接，并重置状态"""
+        self.exit()
+        self.connect_status = False
+        self.login_status = False
+        self.subscribed.clear()
 
     def update_date(self) -> None:
         """更新当前日期"""
@@ -421,7 +435,6 @@ class CtpTdApi(TdApi):
         super().__init__()
 
         self.gateway: CtpGateway = gateway
-        self.gateway_name: str = gateway.gateway_name
 
         self.reqid: int = 0
         self.order_ref: int = 0
@@ -445,6 +458,10 @@ class CtpTdApi(TdApi):
         self.trade_data: list[dict] = []
         self.positions: dict[str, PositionData] = {}
         self.sysid_orderid_map: dict[str, str] = {}
+
+    @property
+    def gateway_name(self):
+        return self.gateway.gateway_name
 
     def onFrontConnected(self) -> None:
         """服务器连接成功回报"""
@@ -525,7 +542,7 @@ class CtpTdApi(TdApi):
         self.gateway.write_log("结算信息确认成功")
 
         # 由于流控，单次查询可能失败，通过while循环持续尝试，直到成功发出请求
-        while True:
+        while self.login_status:
             self.reqid += 1
             n: int = self.reqQryInstrument({}, self.reqid)
 
@@ -791,6 +808,9 @@ class CtpTdApi(TdApi):
 
     def send_order(self, req: OrderRequest) -> str:
         """委托下单"""
+        if not self.connect_status:
+            return ""
+
         if req.offset not in OFFSET_VT2CTP:
             self.gateway.write_log("请选择开平方向")
             return ""
@@ -839,6 +859,9 @@ class CtpTdApi(TdApi):
 
     def cancel_order(self, req: CancelRequest) -> None:
         """委托撤单"""
+        if not self.connect_status:
+            return
+
         frontid, sessionid, order_ref = req.orderid.split("_")
 
         ctp_req: dict = {
@@ -857,11 +880,17 @@ class CtpTdApi(TdApi):
 
     def query_account(self) -> None:
         """查询资金"""
+        if not self.connect_status:
+            return
+
         self.reqid += 1
         self.reqQryTradingAccount({}, self.reqid)
 
     def query_position(self) -> None:
         """查询持仓"""
+        if not self.connect_status:
+            return
+
         if not symbol_contract_map:
             return
 
@@ -874,9 +903,20 @@ class CtpTdApi(TdApi):
         self.reqQryInvestorPosition(ctp_req, self.reqid)
 
     def close(self) -> None:
-        """关闭连接"""
-        if self.connect_status:
-            self.exit()
+        """关闭连接，并重置状态"""
+        self.exit()
+        self.connect_status = False
+        self.login_status = False
+        self.auth_status = False
+        self.login_failed = False
+        self.auth_failed = False
+        self.contract_inited = False
+        self.frontid = 0
+        self.sessionid = 0
+        self.order_data.clear()
+        self.trade_data.clear()
+        self.positions.clear()
+        self.sysid_orderid_map.clear()
 
 
 def adjust_price(price: float) -> float:

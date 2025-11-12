@@ -10768,7 +10768,10 @@ void TdApi::release()
 
 void TdApi::init()
 {
+	if (this->active)
+        return;
     this->active = true;
+	this->task_queue.reset();
     this->task_thread = thread(&TdApi::processTask, this);
 
     this->api->Init();
@@ -10782,6 +10785,8 @@ int TdApi::join()
 
 int TdApi::exit()
 {
+	if (!this->active)
+        return 0;
     this->active = false;
     this->task_queue.terminate();
     this->task_thread.join();
