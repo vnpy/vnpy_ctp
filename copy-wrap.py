@@ -1,4 +1,4 @@
-import shutil, sys, os
+import shutil, sys, os # noqa
 try:
     if os.path.isdir(sys.argv[1]):
         shutil.copytree(sys.argv[1], sys.argv[2], dirs_exist_ok=True)

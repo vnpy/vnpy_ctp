@@ -264,7 +264,7 @@ class CtpGateway(BaseGateway):
         self.query_functions: list = [self.query_account, self.query_position]
         self.event_engine.register(EVENT_TIMER, self.process_timer_event)
 
-    def _login_timeout_check(self, event: Event):
+    def _login_timeout_check(self, event: Event) -> None:
         if self.login_timeout_count > 0:
             self.login_timeout_count -= 1
 
@@ -306,7 +306,7 @@ class CtpMdApi(MdApi):
         self.current_date: str = datetime.now().strftime("%Y%m%d")
 
     @property
-    def gateway_name(self):
+    def gateway_name(self) -> str:
         return self.gateway.gateway_name
 
     def onFrontConnected(self) -> None:
@@ -494,7 +494,7 @@ class CtpTdApi(TdApi):
         self.sysid_orderid_map: dict[str, str] = {}
 
     @property
-    def gateway_name(self):
+    def gateway_name(self) -> str:
         return self.gateway.gateway_name
 
     def onFrontConnected(self) -> None:
