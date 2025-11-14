@@ -700,6 +700,9 @@ class CtpTdApi(TdApi):
 
         self.sysid_orderid_map[data["OrderSysID"]] = orderid
 
+        if data["OrderStatus"] == THOST_FTDC_OST_Canceled and data["StatusMsg"] != "已撤单":
+            self.gateway.write_log(f"交易委托 {orderid} 被撤，错误信息{data['StatusMsg']}")
+
     def onRtnTrade(self, data: dict) -> None:
         """成交数据推送"""
         if not self.contract_inited:
