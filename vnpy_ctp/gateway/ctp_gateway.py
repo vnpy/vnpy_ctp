@@ -700,8 +700,13 @@ class CtpTdApi(TdApi):
 
         self.sysid_orderid_map[data["OrderSysID"]] = orderid
 
-        if data["OrderStatus"] == THOST_FTDC_OST_Canceled and data["StatusMsg"] != "已撤单":
-            self.gateway.write_log(f"交易委托 {orderid} 被撤，错误信息{data['StatusMsg']}")
+        # 特殊情况撤单（非交易时段、资金不足等）的日志输出
+        if (
+            data["OrderStatus"] == THOST_FTDC_OST_Canceled
+            and data["StatusMsg"] != "已撤单"       # 正常撤单
+        ):
+            status_msg: str = data["StatusMsg"]
+            self.gateway.write_log(f"委托 {orderid} 状态更新，{status_msg}")
 
     def onRtnTrade(self, data: dict) -> None:
         """成交数据推送"""
