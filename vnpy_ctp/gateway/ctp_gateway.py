@@ -138,7 +138,7 @@ class CtpGateway(BaseGateway):
 
     default_name: str = "CTP"
 
-    default_setting: dict[str, str | list[str]] = {
+    default_setting: dict[str, str | list[str]] = {  # type: ignore[assignment]
         "用户名": "",
         "密码": "",
         "经纪商代码": "",
@@ -149,7 +149,7 @@ class CtpGateway(BaseGateway):
         "柜台环境": ["实盘", "测试"]
     }
 
-    exchanges: list[str] = list(EXCHANGE_CTP2VT.values())
+    exchanges: list[Exchange] = list(EXCHANGE_CTP2VT.values())
 
     def __init__(self, event_engine: EventEngine, gateway_name: str) -> None:
         """构造函数"""
@@ -304,7 +304,7 @@ class CtpMdApi(MdApi):
 
         # 过滤还没有收到合约数据前的行情推送
         symbol: str = data["InstrumentID"]
-        contract: ContractData = symbol_contract_map.get(symbol, None)
+        contract: ContractData | None = symbol_contract_map.get(symbol, None)
         if not contract:
             return
 
@@ -541,12 +541,12 @@ class CtpTdApi(TdApi):
 
         # 必须已经收到了合约信息后才能处理
         symbol: str = data["InstrumentID"]
-        contract: ContractData = symbol_contract_map.get(symbol, None)
+        contract: ContractData | None = symbol_contract_map.get(symbol, None)
 
         if contract:
             # 获取之前缓存的持仓数据缓存
             key: str = f"{data['InstrumentID'], data['PosiDirection']}"
-            position: PositionData = self.positions.get(key, None)
+            position: PositionData | None = self.positions.get(key, None)
             if not position:
                 position = PositionData(
                     symbol=data["InstrumentID"],
@@ -565,7 +565,7 @@ class CtpTdApi(TdApi):
                 position.yd_volume = data["Position"] - data["TodayPosition"]
 
             # 获取合约的乘数信息
-            size: int = contract.size
+            size: float = contract.size
 
             # 计算之前已有仓位的持仓总成本
             cost: float = position.price * position.volume * size
@@ -608,7 +608,7 @@ class CtpTdApi(TdApi):
 
     def onRspQryInstrument(self, data: dict, error: dict, reqid: int, last: bool) -> None:
         """合约查询回报"""
-        product: Product = PRODUCT_CTP2VT.get(data["ProductClass"], None)
+        product: Product | None = PRODUCT_CTP2VT.get(data["ProductClass"], None)
         if product:
             contract: ContractData = ContractData(
                 symbol=data["InstrumentID"],
@@ -667,7 +667,7 @@ class CtpTdApi(TdApi):
         order_ref: str = data["OrderRef"]
         orderid: str = f"{frontid}_{sessionid}_{order_ref}"
 
-        status: Status = STATUS_CTP2VT.get(data["OrderStatus"], None)
+        status: Status | None = STATUS_CTP2VT.get(data["OrderStatus"], None)
         if not status:
             self.gateway.write_log(f"收到不支持的委托状态，委托号：{orderid}")
             return
@@ -677,7 +677,7 @@ class CtpTdApi(TdApi):
         dt = dt.replace(tzinfo=CHINA_TZ)
 
         tp: tuple = (data["OrderPriceType"], data["TimeCondition"], data["VolumeCondition"])
-        order_type: OrderType = ORDERTYPE_CTP2VT.get(tp, None)
+        order_type: OrderType | None = ORDERTYPE_CTP2VT.get(tp, None)
         if not order_type:
             self.gateway.write_log(f"收到不支持的委托类型，委托号：{orderid}")
             return
@@ -843,7 +843,7 @@ class CtpTdApi(TdApi):
         order: OrderData = req.create_order_data(orderid, self.gateway_name)
         self.gateway.on_order(order)
 
-        return order.vt_orderid     # type: ignore
+        return order.vt_orderid
 
     def cancel_order(self, req: CancelRequest) -> None:
         """委托撤单"""
