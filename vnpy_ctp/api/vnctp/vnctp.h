@@ -70,6 +70,16 @@ public:
         _terminate = true;
         cond_.notify_all();					//通知正在等待的线程
     }
+
+    void reset()
+    {
+        // 重置，使其可以被复用，注意需要_terminate为true时才会重置
+        if (!_terminate)
+            return;
+        queue_ = {};
+        cond_.notify_all();
+        _terminate = false;
+    }
 };
 
 

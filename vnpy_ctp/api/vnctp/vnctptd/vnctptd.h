@@ -184,10 +184,10 @@ using namespace pybind11;
 class TdApi : public CThostFtdcTraderSpi
 {
 private:
-	CThostFtdcTraderApi* api;            //API对象
-    thread task_thread;                    //工作线程指针（向python中推送数据）
-    TaskQueue task_queue;                //任务队列
-    bool active = false;                //工作状态
+	CThostFtdcTraderApi* api = nullptr;    	//API对象
+    thread task_thread;                    	//工作线程指针（向python中推送数据）
+    TaskQueue task_queue;                	//任务队列
+    bool active = false;                	//工作状态
 
 public:
     TdApi()

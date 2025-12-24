@@ -146,7 +146,9 @@ class CtpGateway(BaseGateway):
         "行情服务器": "",
         "产品名称": "",
         "授权编码": "",
-        "柜台环境": ["实盘", "测试"]
+        "柜台环境": ["实盘", "测试"],
+        "登录超时": "0",                # 单位是秒，默认为0，代表永不超时
+        "连接名": "",                  # 留空代表使用 gateway_name 名称
     }
 
     exchanges: list[Exchange] = list(EXCHANGE_CTP2VT.values())
@@ -159,9 +161,15 @@ class CtpGateway(BaseGateway):
         self.md_api: CtpMdApi = CtpMdApi(self)
 
         self.count: int = 0
+        self.login_timeout_count: int = 0
 
     def connect(self, setting: dict) -> None:
         """连接交易接口"""
+        if self.td_api.login_status:
+            self.write_log("CTP接口已连接，将断开和重新连接")
+
+        self.close()
+
         userid: str = setting["用户名"]
         password: str = setting["密码"]
         brokerid: str = setting["经纪商代码"]
@@ -170,6 +178,12 @@ class CtpGateway(BaseGateway):
         appid: str = setting["产品名称"]
         auth_code: str = setting["授权编码"]
         production_mode: bool = setting["柜台环境"] == "实盘"
+        login_timeout: int = int(setting["登录超时"])
+        conn_name: str = setting["连接名"]
+
+        if conn_name == "":
+            # 若连接名为空，则使用 gateway_name
+            conn_name = self.gateway_name
 
         if (
             (not td_address.startswith("tcp://"))
@@ -185,10 +199,15 @@ class CtpGateway(BaseGateway):
         ):
             md_address = "tcp://" + md_address
 
-        self.td_api.connect(td_address, userid, password, brokerid, auth_code, appid, production_mode)
-        self.md_api.connect(md_address, userid, password, brokerid, production_mode)
+        self.td_api.connect(td_address, userid, password, brokerid, auth_code, appid, production_mode, conn_name)
+        self.md_api.connect(md_address, userid, password, brokerid, production_mode, conn_name)
 
         self.init_query()
+
+        if login_timeout > 0:
+            # 如果登录等待超时大于0，则超时检查
+            self.login_timeout_count = login_timeout
+            self.event_engine.register(EVENT_TIMER, self._login_timeout_check)
 
     def subscribe(self, req: SubscribeRequest) -> None:
         """订阅行情"""
@@ -212,6 +231,10 @@ class CtpGateway(BaseGateway):
 
     def close(self) -> None:
         """关闭接口"""
+        if self.td_api.login_status:
+            self.write_log("已登出")
+
+        self.event_engine.unregister(EVENT_TIMER, self.process_timer_event)
         self.td_api.close()
         self.md_api.close()
 
@@ -241,6 +264,25 @@ class CtpGateway(BaseGateway):
         self.query_functions: list = [self.query_account, self.query_position]
         self.event_engine.register(EVENT_TIMER, self.process_timer_event)
 
+    def _login_timeout_check(self, event: Event) -> None:
+        if self.login_timeout_count > 0:
+            self.login_timeout_count -= 1
+
+        elif self.login_timeout_count <= 0:
+            # 登录超时，自动关闭接口
+            self.event_engine.unregister(EVENT_TIMER, self._login_timeout_check)
+            self.write_log("交易登录超时，请检查网络连接和服务器地址是否正确")
+            self.close()
+
+        if self.td_api.login_failed or self.td_api.auth_failed:
+            # 如果是登录失败或授权失败，则自动关闭接口
+            self.event_engine.unregister(EVENT_TIMER, self._login_timeout_check)
+            self.close()
+
+        if self.td_api.login_status:
+            # 登录成功
+            self.event_engine.unregister(EVENT_TIMER, self._login_timeout_check)
+
 
 class CtpMdApi(MdApi):
     """"""
@@ -250,7 +292,6 @@ class CtpMdApi(MdApi):
         super().__init__()
 
         self.gateway: CtpGateway = gateway
-        self.gateway_name: str = gateway.gateway_name
 
         self.reqid: int = 0
 
@@ -263,6 +304,10 @@ class CtpMdApi(MdApi):
         self.brokerid: str = ""
 
         self.current_date: str = datetime.now().strftime("%Y%m%d")
+
+    @property
+    def gateway_name(self) -> str:
+        return self.gateway.gateway_name
 
     def onFrontConnected(self) -> None:
         """服务器连接成功回报"""
@@ -369,7 +414,8 @@ class CtpMdApi(MdApi):
         userid: str,
         password: str,
         brokerid: str,
-        production_mode: bool
+        production_mode: bool,
+        conn_name: str,
     ) -> None:
         """连接服务器"""
         self.userid = userid
@@ -378,8 +424,8 @@ class CtpMdApi(MdApi):
 
         # 禁止重复发起连接，会导致异常崩溃
         if not self.connect_status:
-            path: Path = get_folder_path(self.gateway_name.lower())
-            self.createFtdcMdApi((str(path) + "\\Md").encode("GBK"), production_mode)
+            path: Path = get_folder_path(conn_name)
+            self.createFtdcMdApi((str(path) + "/Md").encode("GBK"), production_mode)
 
             self.registerFront(address)
             self.init()
@@ -404,9 +450,11 @@ class CtpMdApi(MdApi):
         self.subscribed.add(req.symbol)
 
     def close(self) -> None:
-        """关闭连接"""
-        if self.connect_status:
-            self.exit()
+        """关闭连接，并重置状态"""
+        self.exit()
+        self.connect_status = False
+        self.login_status = False
+        self.subscribed.clear()
 
     def update_date(self) -> None:
         """更新当前日期"""
@@ -421,7 +469,6 @@ class CtpTdApi(TdApi):
         super().__init__()
 
         self.gateway: CtpGateway = gateway
-        self.gateway_name: str = gateway.gateway_name
 
         self.reqid: int = 0
         self.order_ref: int = 0
@@ -445,6 +492,10 @@ class CtpTdApi(TdApi):
         self.trade_data: list[dict] = []
         self.positions: dict[str, PositionData] = {}
         self.sysid_orderid_map: dict[str, str] = {}
+
+    @property
+    def gateway_name(self) -> str:
+        return self.gateway.gateway_name
 
     def onFrontConnected(self) -> None:
         """服务器连接成功回报"""
@@ -525,7 +576,7 @@ class CtpTdApi(TdApi):
         self.gateway.write_log("结算信息确认成功")
 
         # 由于流控，单次查询可能失败，通过while循环持续尝试，直到成功发出请求
-        while True:
+        while self.login_status:
             self.reqid += 1
             n: int = self.reqQryInstrument({}, self.reqid)
 
@@ -745,7 +796,8 @@ class CtpTdApi(TdApi):
         brokerid: str,
         auth_code: str,
         appid: str,
-        production_mode: bool
+        production_mode: bool,
+        conn_name: str,
     ) -> None:
         """连接服务器"""
         self.userid = userid
@@ -755,8 +807,8 @@ class CtpTdApi(TdApi):
         self.appid = appid
 
         if not self.connect_status:
-            path: Path = get_folder_path(self.gateway_name.lower())
-            self.createFtdcTraderApi((str(path) + "\\Td").encode("GBK"), production_mode)
+            path: Path = get_folder_path(conn_name)
+            self.createFtdcTraderApi((str(path) + "/Td").encode("GBK"), production_mode)
 
             self.subscribePrivateTopic(0)
             self.subscribePublicTopic(0)
@@ -799,6 +851,9 @@ class CtpTdApi(TdApi):
 
     def send_order(self, req: OrderRequest) -> str:
         """委托下单"""
+        if not self.connect_status:
+            return ""
+
         if req.offset not in OFFSET_VT2CTP:
             self.gateway.write_log("请选择开平方向")
             return ""
@@ -847,6 +902,9 @@ class CtpTdApi(TdApi):
 
     def cancel_order(self, req: CancelRequest) -> None:
         """委托撤单"""
+        if not self.connect_status:
+            return
+
         frontid, sessionid, order_ref = req.orderid.split("_")
 
         ctp_req: dict = {
@@ -865,11 +923,17 @@ class CtpTdApi(TdApi):
 
     def query_account(self) -> None:
         """查询资金"""
+        if not self.connect_status:
+            return
+
         self.reqid += 1
         self.reqQryTradingAccount({}, self.reqid)
 
     def query_position(self) -> None:
         """查询持仓"""
+        if not self.connect_status:
+            return
+
         if not symbol_contract_map:
             return
 
@@ -882,9 +946,20 @@ class CtpTdApi(TdApi):
         self.reqQryInvestorPosition(ctp_req, self.reqid)
 
     def close(self) -> None:
-        """关闭连接"""
-        if self.connect_status:
-            self.exit()
+        """关闭连接，并重置状态"""
+        self.exit()
+        self.connect_status = False
+        self.login_status = False
+        self.auth_status = False
+        self.login_failed = False
+        self.auth_failed = False
+        self.contract_inited = False
+        self.frontid = 0
+        self.sessionid = 0
+        self.order_data.clear()
+        self.trade_data.clear()
+        self.positions.clear()
+        self.sysid_orderid_map.clear()
 
 
 def adjust_price(price: float) -> float:
