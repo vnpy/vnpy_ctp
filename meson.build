@@ -57,7 +57,7 @@ if host_machine.system() == 'windows'
     'vnpy_ctp/api/vnctp',
     pybind11_include_dir,
   )
-  
+
   # 定义CTP库
   thostmduserapi_lib = cpp.find_library('thostmduserapi_se', 
                                        dirs: [lib_dir, api_dir],
@@ -65,7 +65,7 @@ if host_machine.system() == 'windows'
   thosttraderapi_lib = cpp.find_library('thosttraderapi_se', 
                                        dirs: [lib_dir, api_dir],
                                        required: true)
-                                       
+
 # 设置Mac特定编译选项
 elif host_machine.system() == 'darwin'
   # Mac编译器设置
@@ -205,15 +205,17 @@ if host_machine.system() == 'windows'
   )
 elif host_machine.system() == 'darwin'
   # 安装Mac Framework文件夹
-  install_subdir(
+  api_libs = [
     'vnpy_ctp/api/thostmduserapi_se.framework',
-    install_dir: py.get_install_dir() / 'vnpy_ctp/api'
-  )
-  
-  install_subdir(
-    'vnpy_ctp/api/thosttraderapi_se.framework',
-    install_dir: py.get_install_dir() / 'vnpy_ctp/api'
-  )
+    'vnpy_ctp/api/thosttraderapi_se.framework'
+  ]
+  foreach lib : api_libs
+    py.install_subdir(
+      lib,
+      install_dir: py.get_install_dir() / 'vnpy_ctp/api'
+    )
+  endforeach
+
 else  # Linux
   api_libs = [
     'vnpy_ctp/api/libthostmduserapi_se.so',
@@ -225,3 +227,8 @@ else  # Linux
     install_dir: py.get_install_dir() / 'vnpy_ctp/api'
   )
 endif
+
+# 复制依赖的动态库文件到build目录，此时可编辑模式能找到dll
+foreach lib : api_libs
+  run_command(python_cmd, meson.current_source_dir() / 'copy-wrap.py', meson.current_source_dir() /  lib, meson.project_build_root(), check: true)
+endforeach
