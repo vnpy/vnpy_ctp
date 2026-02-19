@@ -682,6 +682,7 @@ public:
 	///投资者新型组合保证金开关查询响应
 	virtual void OnRspQryInvestorPortfSetting(CThostFtdcInvestorPortfSettingField* pInvestorPortfSetting, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
 
+#if !defined(__APPLE__)
 	///投资者申报费阶梯收取记录查询响应
 	virtual void OnRspQryInvestorInfoCommRec(CThostFtdcInvestorInfoCommRecField* pInvestorInfoCommRec, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
 
@@ -705,6 +706,7 @@ public:
 
 	///投资者对冲设置查询响应
 	virtual void OnRspQryOffsetSetting(CThostFtdcOffsetSettingField* pOffsetSetting, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast);
+#endif
     //-------------------------------------------------------------------------------------
     //task：任务
     //-------------------------------------------------------------------------------------

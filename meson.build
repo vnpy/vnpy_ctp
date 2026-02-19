@@ -16,9 +16,8 @@ fs = import('fs')
 py = import('python').find_installation(pure: false)
 py_dep = py.dependency()
 
-# 获取pybind11路径
-python_cmd = host_machine.system() == 'windows' ? 'python' : 'python3'
-pybind11_include_dir = run_command(python_cmd, '-c', 'import pybind11; print(pybind11.get_include())', check: true).stdout().strip()
+# 获取pybind11路径（使用当前Meson识别的Python解释器）
+pybind11_include_dir = run_command(py, '-c', 'import pybind11; print(pybind11.get_include())', check: true).stdout().strip()
 message('使用pybind11路径: ' + pybind11_include_dir)
 
 # 获取编译器信息
@@ -33,6 +32,10 @@ thostmduserapi_lib = []
 thosttraderapi_lib = []
 extra_cpp_args = []
 extra_link_args = []
+md_link_args = []
+td_link_args = []
+install_rpath_value = '$ORIGIN'
+build_rpath_value = '$ORIGIN'
 
 # 初始化库变量
 thostmduserapi_lib = []
@@ -40,7 +43,6 @@ thosttraderapi_lib = []
 
 # 初始化其他编译选项
 extra_link_args = []
-install_rpath_value = ''
 
 # 设置Windows特定编译选项
 if host_machine.system() == 'windows'
@@ -55,7 +57,6 @@ if host_machine.system() == 'windows'
   include_dirs = include_directories(
     'vnpy_ctp/api/include',
     'vnpy_ctp/api/vnctp',
-    pybind11_include_dir,
   )
   
   # 定义CTP库
@@ -77,36 +78,29 @@ elif host_machine.system() == 'darwin'
   # 设置链接参数，包括@rpath到@loader_path的修改
   extra_link_args = [
     '-mmacosx-version-min=10.12',
-    '-Wl,-rpath,@loader_path',
   ]
   
   # 设置库目录
-  lib_dir = meson.current_source_dir() / 'vnpy_ctp/api/libs'
+  lib_dir = meson.current_source_dir() / 'vnpy_ctp/api'
   api_dir = meson.current_source_dir() / 'vnpy_ctp/api'
+  install_rpath_value = '@loader_path'
+  build_rpath_value = api_dir
 
   # 设置include目录
   include_dirs = include_directories(
     'vnpy_ctp/api/include/mac',
     'vnpy_ctp/api/vnctp',
-    pybind11_include_dir,
   )
   
-  # 定义Mac Framework依赖
-  thostmduserapi_lib = declare_dependency(
-    dependencies: [py_dep],
-    link_args: [
-      '-F', meson.current_source_dir() / 'vnpy_ctp/api',
-      '-framework', 'thostmduserapi_se'
-    ]
-  )
-  
-  thosttraderapi_lib = declare_dependency(
-    dependencies: [py_dep],
-    link_args: [
-      '-F', meson.current_source_dir() / 'vnpy_ctp/api',
-      '-framework', 'thosttraderapi_se'
-    ]
-  )
+  md_link_args = extra_link_args + [
+    '-F', api_dir,
+    '-framework', 'thostmduserapi_se',
+  ]
+
+  td_link_args = extra_link_args + [
+    '-F', api_dir,
+    '-framework', 'thosttraderapi_se',
+  ]
 
 # 设置Linux特定编译选项
 else  # Linux
@@ -129,7 +123,6 @@ else  # Linux
   include_dirs = include_directories(
     'vnpy_ctp/api/include',
     'vnpy_ctp/api/vnctp',
-    pybind11_include_dir,
   )
   
   # 定义CTP库
@@ -141,6 +134,22 @@ else  # Linux
                                        required: true)
 endif
 
+if host_machine.system() != 'darwin'
+  md_link_args = extra_link_args + [
+    '-L' + lib_dir,
+    '-lthostmduserapi_se',
+    '-Wl,-rpath,$ORIGIN'
+  ]
+
+  td_link_args = extra_link_args + [
+    '-L' + lib_dir,
+    '-lthosttraderapi_se',
+    '-Wl,-rpath,$ORIGIN'
+  ]
+endif
+
+extra_cpp_args += ['-I' + pybind11_include_dir]
+
 # 创建MD模块扩展
 md_module = py.extension_module(
   'vnctpmd',
@@ -148,13 +157,10 @@ md_module = py.extension_module(
   include_directories: include_dirs,
   dependencies: [py_dep],
   cpp_args: extra_cpp_args,
-  link_args: extra_link_args + [
-    '-L' + lib_dir,
-    '-lthostmduserapi_se',
-    '-Wl,-rpath,$ORIGIN'
-  ],
+  link_args: md_link_args,
   install: true,
-  install_rpath: '$ORIGIN',
+  build_rpath: build_rpath_value,
+  install_rpath: install_rpath_value,
   subdir: 'vnpy_ctp/api'
 )
 
@@ -165,13 +171,10 @@ td_module = py.extension_module(
   include_directories: include_dirs,
   dependencies: [py_dep],
   cpp_args: extra_cpp_args,
-  link_args: extra_link_args + [
-    '-L' + lib_dir,
-    '-lthosttraderapi_se',
-    '-Wl,-rpath,$ORIGIN'
-  ],
+  link_args: td_link_args,
   install: true,
-  install_rpath: '$ORIGIN',
+  build_rpath: build_rpath_value,
+  install_rpath: install_rpath_value,
   subdir: 'vnpy_ctp/api'
 )
 
