@@ -2977,7 +2977,7 @@ void TdApi::OnRspQryInvestorProdRULEMargin(CThostFtdcInvestorProdRULEMarginField
 	this->task_queue.push(task);
 };
 
-void TdApi::OnRspQryInvestorPortfSetting(CThostFtdcInvestorPortfSettingField *pInvestorPortfSetting, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
+void TdApi::OnRspQryInvestorPortfSetting(CThostFtdcInvestorPortfSettingField *pInvestorPortfSetting, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
 {
 	Task task = Task();
 	task.task_name = ONRSPQRYINVESTORPORTFSETTING;
@@ -2998,6 +2998,8 @@ void TdApi::OnRspQryInvestorPortfSetting(CThostFtdcInvestorPortfSettingField *pI
 	this->task_queue.push(task);
 };
 
+// These callbacks rely on newer CTP structs absent in the macOS headers bundled with this project.
+#if !defined(__APPLE__)
 void TdApi::OnRspQryInvestorInfoCommRec(CThostFtdcInvestorInfoCommRecField* pInvestorInfoCommRec, CThostFtdcRspInfoField* pRspInfo, int nRequestID, bool bIsLast)
 {
 	Task task = Task();
@@ -3153,6 +3155,7 @@ void TdApi::OnRspQryOffsetSetting(CThostFtdcOffsetSettingField* pOffsetSetting, 
 	task.task_last = bIsLast;
 	this->task_queue.push(task);
 };
+#endif
 
 ///-------------------------------------------------------------------------------------
 ///工作线程从队列中取出数据，转化为python对象后，进行推送
@@ -4104,6 +4107,7 @@ void TdApi::processTask()
 				break;
 			}
 
+#if !defined(__APPLE__)
 			case ONRSPQRYINVESTORINFOCOMMREC:
 			{
 				this->processRspQryInvestorInfoCommRec(&task);
@@ -4151,7 +4155,8 @@ void TdApi::processTask()
 				this->processRspQryOffsetSetting(&task);
 				break;
 			}
-            };
+#endif
+			};
         }
     }
     catch (const TerminatedError&)
@@ -4224,10 +4229,12 @@ void TdApi::processRspUserLogin(Task *task)
 		data["INETime"] = toUtf(task_data->INETime);
 		data["SysVersion"] = toUtf(task_data->SysVersion);
 		data["GFEXTime"] = toUtf(task_data->GFEXTime);
+#if !defined(__APPLE__)
 		data["LoginDRIdentityID"] = task_data->LoginDRIdentityID;
 		data["UserDRIdentityID"] = task_data->UserDRIdentityID;
 		data["LastLoginTime"] = toUtf(task_data->LastLoginTime);
 		data["ReserveInfo"] = toUtf(task_data->ReserveInfo);
+#endif
 		delete task_data;
 	}
 	dict error;
@@ -5222,7 +5229,9 @@ void TdApi::processRspQryInvestorPosition(Task *task)
 		data["TasPosition"] = task_data->TasPosition;
 		data["TasPositionCost"] = task_data->TasPositionCost;
 		data["InstrumentID"] = toUtf(task_data->InstrumentID);
+#if !defined(__APPLE__)
 		data["OptionValue"] = task_data->OptionValue;
+#endif
 		delete task_data;
 	}
 	dict error;
@@ -5292,7 +5301,9 @@ void TdApi::processRspQryTradingAccount(Task *task)
 		data["BizType"] = task_data->BizType;
 		data["FrozenSwap"] = task_data->FrozenSwap;
 		data["RemainSwap"] = task_data->RemainSwap;
+#if !defined(__APPLE__)
 		data["OptionValue"] = task_data->OptionValue;
+#endif
 		delete task_data;
 	}
 	dict error;
@@ -6315,7 +6326,9 @@ void TdApi::processRspQrySecAgentTradingAccount(Task *task)
 		data["BizType"] = task_data->BizType;
 		data["FrozenSwap"] = task_data->FrozenSwap;
 		data["RemainSwap"] = task_data->RemainSwap;
+#if !defined(__APPLE__)
 		data["OptionValue"] = task_data->OptionValue;
+#endif
 		delete task_data;
 	}
 	dict error;
@@ -10450,6 +10463,7 @@ void TdApi::processRspQryInvestorPortfSetting(Task *task)
 	this->onRspQryInvestorPortfSetting(data, error, task->task_id, task->task_last);
 };
 
+#if !defined(__APPLE__)
 void TdApi::processRspQryInvestorInfoCommRec(Task* task)
 {
 	gil_scoped_acquire acquire;
@@ -10750,6 +10764,7 @@ void TdApi::processRspQryOffsetSetting(Task* task)
 	}
 	this->onRspQryOffsetSetting(data, error, task->task_id, task->task_last);
 };
+#endif
 
 ///-------------------------------------------------------------------------------------
 ///主动函数
@@ -10757,7 +10772,12 @@ void TdApi::processRspQryOffsetSetting(Task* task)
 
 void TdApi::createFtdcTraderApi(string pszFlowPath, bool bIsProductionMode)
 {
+#if defined(__APPLE__)
+    (void)bIsProductionMode;
+    this->api = CThostFtdcTraderApi::CreateFtdcTraderApi(pszFlowPath.c_str());
+#else
     this->api = CThostFtdcTraderApi::CreateFtdcTraderApi(pszFlowPath.c_str(), bIsProductionMode);
+#endif
     this->api->RegisterSpi(this);
 };
 
@@ -10884,6 +10904,11 @@ int TdApi::submitUserSystemInfo(const dict& req)
 
 int TdApi::registerWechatUserSystemInfo(const dict& req)
 {
+#if defined(__APPLE__)
+	(void)req;
+	// Wechat-specific API is not exposed by bundled macOS CTP headers.
+	return -1;
+#else
 	CThostFtdcWechatUserSystemInfoField myreq = CThostFtdcWechatUserSystemInfoField();
 	memset(&myreq, 0, sizeof(myreq));
 	getString(req, "BrokerID", myreq.BrokerID);
@@ -10897,10 +10922,16 @@ int TdApi::registerWechatUserSystemInfo(const dict& req)
 	getString(req, "ClientLoginRemark", myreq.ClientLoginRemark);
 	int i = this->api->RegisterWechatUserSystemInfo(&myreq);
 	return i;
+#endif
 };
 
 int TdApi::submitWechatUserSystemInfo(const dict& req)
 {
+#if defined(__APPLE__)
+	(void)req;
+	// Wechat-specific API is not exposed by bundled macOS CTP headers.
+	return -1;
+#else
 	CThostFtdcWechatUserSystemInfoField myreq = CThostFtdcWechatUserSystemInfoField();
 	memset(&myreq, 0, sizeof(myreq));
 	getString(req, "BrokerID", myreq.BrokerID);
@@ -10914,6 +10945,7 @@ int TdApi::submitWechatUserSystemInfo(const dict& req)
 	getString(req, "ClientLoginRemark", myreq.ClientLoginRemark);
 	int i = this->api->SubmitWechatUserSystemInfo(&myreq);
 	return i;
+#endif
 };
 
 int TdApi::reqAuthenticate(const dict &req, int reqid)
@@ -11646,6 +11678,12 @@ int TdApi::reqQryInstrumentCommissionRate(const dict &req, int reqid)
 
 int TdApi::reqQryUserSession(const dict& req, int reqid)
 {
+#if defined(__APPLE__)
+	(void)req;
+	(void)reqid;
+	// API method is not available in bundled macOS CTP headers.
+	return -1;
+#else
 	CThostFtdcQryUserSessionField myreq = CThostFtdcQryUserSessionField();
 	memset(&myreq, 0, sizeof(myreq));
 	getInt(req, "FrontID", &myreq.FrontID);
@@ -11654,6 +11692,7 @@ int TdApi::reqQryUserSession(const dict& req, int reqid)
 	getString(req, "UserID", myreq.UserID);
 	int i = this->api->ReqQryUserSession(&myreq, reqid);
 	return i;
+#endif
 };
 
 int TdApi::reqQryExchange(const dict &req, int reqid)
@@ -12672,6 +12711,12 @@ int TdApi::reqQryInvestorPortfSetting(const dict &req, int reqid)
 
 int TdApi::reqQryInvestorInfoCommRec(const dict& req, int reqid)
 {
+#if defined(__APPLE__)
+	(void)req;
+	(void)reqid;
+	// API method/struct is not available in bundled macOS CTP headers.
+	return -1;
+#else
 	CThostFtdcQryInvestorInfoCommRecField myreq = CThostFtdcQryInvestorInfoCommRecField();
 	memset(&myreq, 0, sizeof(myreq));
 	getString(req, "InvestorID", myreq.InvestorID);
@@ -12679,19 +12724,33 @@ int TdApi::reqQryInvestorInfoCommRec(const dict& req, int reqid)
 	getString(req, "BrokerID", myreq.BrokerID);
 	int i = this->api->ReqQryInvestorInfoCommRec(&myreq, reqid);
 	return i;
+#endif
 };
 
 int TdApi::reqQryCombLeg(const dict& req, int reqid)
 {
+#if defined(__APPLE__)
+	(void)req;
+	(void)reqid;
+	// API method/struct is not available in bundled macOS CTP headers.
+	return -1;
+#else
 	CThostFtdcQryCombLegField myreq = CThostFtdcQryCombLegField();
 	memset(&myreq, 0, sizeof(myreq));
 	getString(req, "LegInstrumentID", myreq.LegInstrumentID);
 	int i = this->api->ReqQryCombLeg(&myreq, reqid);
 	return i;
+#endif
 };
 
 int TdApi::reqOffsetSetting(const dict& req, int reqid)
 {
+#if defined(__APPLE__)
+	(void)req;
+	(void)reqid;
+	// API method/struct is not available in bundled macOS CTP headers.
+	return -1;
+#else
 	CThostFtdcInputOffsetSettingField myreq = CThostFtdcInputOffsetSettingField();
 	memset(&myreq, 0, sizeof(myreq));
 	getString(req, "BrokerID", myreq.BrokerID);
@@ -12709,10 +12768,17 @@ int TdApi::reqOffsetSetting(const dict& req, int reqid)
 	getString(req, "MacAddress", myreq.MacAddress);
 	int i = this->api->ReqOffsetSetting(&myreq, reqid);
 	return i;
+#endif
 };
 
 int TdApi::reqCancelOffsetSetting(const dict& req, int reqid)
 {
+#if defined(__APPLE__)
+	(void)req;
+	(void)reqid;
+	// API method/struct is not available in bundled macOS CTP headers.
+	return -1;
+#else
 	CThostFtdcInputOffsetSettingField myreq = CThostFtdcInputOffsetSettingField();
 	memset(&myreq, 0, sizeof(myreq));
 	getString(req, "BrokerID", myreq.BrokerID);
@@ -12730,10 +12796,17 @@ int TdApi::reqCancelOffsetSetting(const dict& req, int reqid)
 	getString(req, "MacAddress", myreq.MacAddress);
 	int i = this->api->ReqCancelOffsetSetting(&myreq, reqid);
 	return i;
+#endif
 };
 
 int TdApi::reqQryOffsetSetting(const dict& req, int reqid)
 {
+#if defined(__APPLE__)
+	(void)req;
+	(void)reqid;
+	// API method/struct is not available in bundled macOS CTP headers.
+	return -1;
+#else
 	CThostFtdcQryOffsetSettingField myreq = CThostFtdcQryOffsetSettingField();
 	memset(&myreq, 0, sizeof(myreq));
 	getString(req, "BrokerID", myreq.BrokerID);
@@ -12742,6 +12815,7 @@ int TdApi::reqQryOffsetSetting(const dict& req, int reqid)
 	getChar(req, "OffsetType", &myreq.OffsetType);
 	int i = this->api->ReqQryOffsetSetting(&myreq, reqid);
 	return i;
+#endif
 };
 
 ///-------------------------------------------------------------------------------------
