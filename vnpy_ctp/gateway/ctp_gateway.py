@@ -169,7 +169,9 @@ class CtpGateway(BaseGateway):
         md_address: str = setting["行情服务器"]
         appid: str = setting["产品名称"]
         auth_code: str = setting["授权编码"]
-        production_mode: bool = setting["柜台环境"] == "实盘"
+
+        envrionment: str = setting.get("柜台环境", "实盘")
+        production_mode: bool = envrionment == "实盘"
 
         if (
             (not td_address.startswith("tcp://"))
