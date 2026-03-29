@@ -59,7 +59,8 @@ from ..api import (
     THOST_FTDC_VC_AV,
     THOST_FTDC_TC_IOC,
     THOST_FTDC_VC_CV,
-    THOST_FTDC_AF_Delete
+    THOST_FTDC_AF_Delete,
+    THOST_FTDC_OSS_InsertRejected
 )
 
 
@@ -674,6 +675,13 @@ class CtpTdApi(TdApi):
             self.gateway.write_log(f"收到不支持的委托状态，委托号：{orderid}")
             return
 
+        # 因为报单提交被拒绝导致的撤单状态，需要调整映射为拒单状态
+        if (
+            data["OrderStatus"] == THOST_FTDC_OST_Canceled
+            and data["OrderSubmitStatus"] == THOST_FTDC_OSS_InsertRejected
+        ):
+            status = Status.REJECTED
+
         timestamp: str = f"{data['InsertDate']} {data['InsertTime']}"
         dt: datetime = datetime.strptime(timestamp, "%Y%m%d %H:%M:%S")
         dt = dt.replace(tzinfo=CHINA_TZ)
@@ -703,11 +711,11 @@ class CtpTdApi(TdApi):
         self.sysid_orderid_map[data["OrderSysID"]] = orderid
 
         # 特殊情况撤单（非交易时段、资金不足等）的日志输出
+        status_msg: str = data["StatusMsg"]
         if (
             data["OrderStatus"] == THOST_FTDC_OST_Canceled
-            and data["StatusMsg"] != "已撤单"       # 正常撤单
+            and status_msg != "已撤单"       # 正常撤单
         ):
-            status_msg: str = data["StatusMsg"]
             self.gateway.write_log(f"委托 {orderid} 状态更新，{status_msg}")
 
     def onRtnTrade(self, data: dict) -> None:
