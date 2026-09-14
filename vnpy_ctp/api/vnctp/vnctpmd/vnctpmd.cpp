@@ -686,6 +686,18 @@ int MdApi::subscribeMarketData(string instrumentID)
 	return i;
 };
 
+int MdApi::subscribeMarketData(const vector<string> &instrumentIDs)
+{
+	vector<char*> myreq;
+	myreq.reserve(instrumentIDs.size());
+	for (const string &instrumentID : instrumentIDs)
+	{
+		myreq.push_back((char*)instrumentID.c_str());
+	}
+	int i = this->api->SubscribeMarketData(myreq.data(), (int)myreq.size());
+	return i;
+};
+
 int MdApi::unSubscribeMarketData(string instrumentID)
 {
 	char* buffer = (char*)instrumentID.c_str();
@@ -934,7 +946,8 @@ PYBIND11_MODULE(vnctpmd, m)
 		.def("registerFront", &MdApi::registerFront)
 		.def("registerNameServer", &MdApi::registerNameServer)
 		.def("registerFensUserInfo", &MdApi::registerFensUserInfo)
-		.def("subscribeMarketData", &MdApi::subscribeMarketData)
+		.def("subscribeMarketData", static_cast<int (MdApi::*)(string)>(&MdApi::subscribeMarketData))
+		.def("subscribeMarketData", static_cast<int (MdApi::*)(const vector<string>&)>(&MdApi::subscribeMarketData))
 		.def("unSubscribeMarketData", &MdApi::unSubscribeMarketData)
 		.def("subscribeForQuoteRsp", &MdApi::subscribeForQuoteRsp)
 		.def("unSubscribeForQuoteRsp", &MdApi::unSubscribeForQuoteRsp)

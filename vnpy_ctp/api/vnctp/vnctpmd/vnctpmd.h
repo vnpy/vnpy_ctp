@@ -5,6 +5,7 @@
 
 #include "vnctp.h"
 #include "pybind11/pybind11.h"
+#include "pybind11/stl.h"
 #include "ctp/ThostFtdcMdApi.h"
 
 
@@ -194,6 +195,8 @@ public:
 	void registerFensUserInfo(const dict &req);
 
 	int subscribeMarketData(string instrumentID);
+
+	int subscribeMarketData(const vector<string> &instrumentIDs);
 
 	int unSubscribeMarketData(string instrumentID);
 
