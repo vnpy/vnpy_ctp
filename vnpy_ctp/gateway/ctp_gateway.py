@@ -317,7 +317,7 @@ class CtpMdApi(MdApi):
         else:
             date_str = data["ActionDay"]
 
-        timestamp: str = f"{date_str} {data['UpdateTime']}.{data['UpdateMillisec']}"
+        timestamp: str = f"{date_str} {data['UpdateTime']}.{data['UpdateMillisec']:03d}"
         dt: datetime = datetime.strptime(timestamp, "%Y%m%d %H:%M:%S.%f")
         dt = dt.replace(tzinfo=CHINA_TZ)
 
