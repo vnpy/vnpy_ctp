@@ -40,10 +40,8 @@ WAIT_TIME = 10                                   # 回调等待时间
 
 
 class MyTdApi(TdApi):
-    """继承实现API接口类"""
 
     def __init__(self) -> None:
-        """构造函数"""
         super().__init__()
 
         self.callback_result: list = []
@@ -59,37 +57,30 @@ class MyTdApi(TdApi):
         self.trade_data: dict[str, dict] = {}
 
     def onFrontConnected(self) -> None:
-        """服务器连接成功回报"""
         self.connect_status = True
 
     def onFrontDisconnected(self, reason: int) -> None:
-        """服务器连接断开回报"""
         self.login_status = False
 
     def onRspAuthenticate(self, data: dict, error: dict, reqid: int, last: bool) -> None:
-        """用户授权验证回报"""
         self.callback_result = [data, error, reqid, last]
 
         with self.callback_done:
             self.callback_done.notify()
 
     def onRspUserLogin(self, data: dict, error: dict, reqid: int, last: bool) -> None:
-        """用户登录请求回报"""
         self.callback_result = [data, error, reqid, last]
 
         with self.callback_done:
             self.callback_done.notify()
 
     def onRspOrderInsert(self, data: dict, error: dict, reqid: int, last: bool) -> None:
-        """委托下单回报"""
         pass
 
     def onRspOrderAction(self, data: dict, error: dict, reqid: int, last: bool) -> None:
-        """委托撤单回报"""
         pass
 
     def onRspQryInvestorPosition(self, data: dict, error: dict, reqid: int, last: bool) -> None:
-        """持仓查询回报"""
         if last:
             self.callback_result = [data, error, reqid, last]
 
@@ -97,7 +88,6 @@ class MyTdApi(TdApi):
                 self.callback_done.notify()
 
     def onRspQryTradingAccount(self, data: dict, error: dict, reqid: int, last: bool) -> None:
-        """资金查询回报"""
         if last:
             self.callback_result = [data, error, reqid, last]
 
@@ -105,33 +95,28 @@ class MyTdApi(TdApi):
                 self.callback_done.notify()
 
     def onRspQryInstrument(self, data: dict, error: dict, reqid: int, last: bool) -> None:
-        """合约查询回报"""
         if last:
             self.callback_result = [data, error, reqid, last]
             with self.callback_done:
                 self.callback_done.notify()
 
     def onRspSettlementInfoConfirm(self, data: dict, error: dict, reqid: int, last: bool) -> None:
-        """结算单确认回报"""
         self.callback_result = [data, error, reqid, last]
 
         with self.callback_done:
             self.callback_done.notify()
 
     def onRtnOrder(self, data: dict) -> None:
-        """委托更新推送"""
         orderid: str = data["OrderRef"]
         self.order_data[orderid] = data
 
     def onRtnTrade(self, data: dict) -> None:
-        """成交数据推送"""
         tradeid: str = data["TradeID"]
         self.trade_data[tradeid] = data
 
 
 @pytest.fixture(scope="session")
 def login_api() -> Generator[MyTdApi, None, None]:
-    """初始化API对象"""
     # 实例化API对象
     api: MyTdApi = MyTdApi()
 
@@ -200,12 +185,10 @@ def login_api() -> Generator[MyTdApi, None, None]:
 
 
 def test_login(login_api: MyTdApi) -> None:
-    """测试API登录"""
     assert login_api.login_status is True
 
 
 def test_confirm_settlement(login_api: MyTdApi) -> None:
-    """测试结算单确认"""
     login_api.reqid += 1
     confirm_req: dict = {
       "BrokerID": TD_SETTING["BrokerID"],
@@ -222,7 +205,6 @@ def test_confirm_settlement(login_api: MyTdApi) -> None:
 
 
 def test_query_instrument(login_api: MyTdApi) -> None:
-    """测试合约查询"""
     # 由于流控，单次查询可能失败，通过while循环持续尝试，直到成功发出请求
     while True:
         login_api.reqid += 1
@@ -242,7 +224,6 @@ def test_query_instrument(login_api: MyTdApi) -> None:
 
 
 def test_query_account(login_api: MyTdApi) -> None:
-    """测试资金查询"""
     login_api.reqid += 1
     login_api.reqQryTradingAccount({}, login_api.reqid)
 
@@ -256,7 +237,6 @@ def test_query_account(login_api: MyTdApi) -> None:
 
 
 def test_query_position(login_api: MyTdApi) -> None:
-    """测试持仓查询"""
     login_api.reqid += 1
     position_req = {
         "BrokerID": TD_SETTING["BrokerID"],
@@ -272,7 +252,6 @@ def test_query_position(login_api: MyTdApi) -> None:
 
 
 def test_insert_order(login_api: MyTdApi) -> None:
-    """测试委托下单"""
     # 构造委托请求
     login_api.order_ref += 1
     order_id: str = str(login_api.order_ref)
@@ -313,7 +292,6 @@ def test_insert_order(login_api: MyTdApi) -> None:
 
 
 def test_cancel_order(login_api: MyTdApi) -> None:
-    """测试委托撤单"""
     # 构造委托请求
     login_api.order_ref += 1
     order_id: str = str(login_api.order_ref)
