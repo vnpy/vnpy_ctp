@@ -49,7 +49,7 @@ jobs:
         shell: bash
         run: |
           if [ "$RUNNER_OS" = "Windows" ]; then
-            uv pip install "ta-lib==0.6.4" --index https://pypi.vnpy.com --system
+            python -m pip install "ta-lib==0.6.4" --index-url https://pypi.vnpy.com
           else
             python -m pip install "ta-lib==0.6.4"
           fi
