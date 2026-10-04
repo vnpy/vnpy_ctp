@@ -127,6 +127,19 @@ void getString(const pybind11::dict &d, const char *key, string_literal<size> &v
 #ifndef __APPLE__
 inline string toUtf(const string &gb2312)
 {
+    bool ascii = true;
+    for (unsigned char c : gb2312)
+    {
+        if (c >= 0x80)
+        {
+            ascii = false;
+            break;
+        }
+    }
+    if (ascii)
+    {
+        return gb2312;
+    }
 
     #ifdef _MSC_VER
         const static locale loc("zh-CN");
