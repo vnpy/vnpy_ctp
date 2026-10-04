@@ -174,7 +174,7 @@ class CtpGateway(BaseGateway):
         md_address: str = setting["行情服务器"]
         appid: str = setting["产品名称"]
         auth_code: str = setting["授权编码"]
-        product_info: str = setting["产品信息"]
+        product_info: str = setting.get("产品信息", "")
 
         envrionment: str = setting.get("柜台环境", "实盘")
         production_mode: bool = envrionment == "实盘"
