@@ -61,7 +61,7 @@ class MyMdApi(MdApi):
 
 
 @pytest.fixture(scope="session")
-def login_api() -> Generator[MyMdApi, None, None]:
+def login_api() -> Generator[MyMdApi]:
     # 实例化API对象
     api: MyMdApi = MyMdApi()
 

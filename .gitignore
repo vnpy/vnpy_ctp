@@ -36,3 +36,8 @@ __pycache__/
 x64/
 
 .DS_Store
+
+# Type checker / linter / test caches
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/

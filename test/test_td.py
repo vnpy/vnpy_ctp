@@ -116,7 +116,7 @@ class MyTdApi(TdApi):
 
 
 @pytest.fixture(scope="session")
-def login_api() -> Generator[MyTdApi, None, None]:
+def login_api() -> Generator[MyTdApi]:
     # 实例化API对象
     api: MyTdApi = MyTdApi()
 

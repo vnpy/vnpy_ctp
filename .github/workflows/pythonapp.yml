@@ -1,32 +1,72 @@
 name: Python application
 
-on: [push]
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
-
-    runs-on: windows-latest
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+        python-version: ["3.13"]
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Set up Python 3.13
-      uses: actions/setup-python@v1
-      with:
-        python-version: '3.13'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install ta-lib==0.6.4 --index=https://pypi.vnpy.com
-        pip install vnpy ruff mypy==1.19.1 uv
-    - name: Lint with ruff
-      run: |
-        # Run ruff linter based on pyproject.toml configuration
-        ruff check .
-    - name: Type check with mypy
-      run: |
-        # Run mypy type checking based on pyproject.toml configuration
-        mypy vnpy_ctp
-    - name: Build packages with uv
-      run: |
-        # Build source distribution and wheel distribution
-        uv build
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install TA-Lib C library
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential ninja-build
+          curl -fsSL -o /tmp/ta-lib.deb https://github.com/TA-Lib/ta-lib/releases/download/v0.6.4/ta-lib_0.6.4_amd64.deb
+          sudo dpkg -i /tmp/ta-lib.deb
+          sudo ldconfig
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install uv
+          pip install "mypy==1.19.1" "ruff==0.14.1" pytest meson-python meson ninja pybind11
+
+      - name: Install ta-lib
+        shell: bash
+        run: |
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            uv pip install "ta-lib==0.6.4" --index https://pypi.vnpy.com --system
+          else
+            python -m pip install "ta-lib==0.6.4"
+          fi
+          python -m pip install "vnpy==4.4.0"
+
+      - name: Lint
+        run: ruff check .
+
+      - name: Type check
+        run: mypy vnpy_ctp
+
+      - name: Build and install
+        run: |
+          pip install -e . --no-build-isolation --config-settings=build-dir=build
+
+      - name: Import extension
+        run: python -c "import vnpy_ctp.api"
+
+      - name: Test
+        run: python -m pytest tests
