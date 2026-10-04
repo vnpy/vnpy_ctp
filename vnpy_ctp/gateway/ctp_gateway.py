@@ -150,7 +150,8 @@ class CtpGateway(BaseGateway):
         "行情服务器": "",
         "产品名称": "",
         "授权编码": "",
-        "柜台环境": ["实盘", "测试"]
+        "柜台环境": ["实盘", "测试"],
+        "产品信息": ""
     }
 
     exchanges: list[Exchange] = list(EXCHANGE_CTP2VT.values())
@@ -173,6 +174,7 @@ class CtpGateway(BaseGateway):
         md_address: str = setting["行情服务器"]
         appid: str = setting["产品名称"]
         auth_code: str = setting["授权编码"]
+        product_info: str = setting["产品信息"]
 
         envrionment: str = setting.get("柜台环境", "实盘")
         production_mode: bool = envrionment == "实盘"
@@ -191,7 +193,7 @@ class CtpGateway(BaseGateway):
         ):
             md_address = "tcp://" + md_address
 
-        self.td_api.connect(td_address, userid, password, brokerid, auth_code, appid, production_mode)
+        self.td_api.connect(td_address, userid, password, brokerid, auth_code, appid, production_mode, product_info)
         self.md_api.connect(md_address, userid, password, brokerid, production_mode)
 
         self.init_query()
@@ -445,6 +447,7 @@ class CtpTdApi(TdApi):
         self.brokerid: str = ""
         self.auth_code: str = ""
         self.appid: str = ""
+        self.product_info: str = ""
 
         self.frontid: int = 0
         self.sessionid: int = 0
@@ -759,7 +762,8 @@ class CtpTdApi(TdApi):
         brokerid: str,
         auth_code: str,
         appid: str,
-        production_mode: bool
+        production_mode: bool,
+        product_info: str
     ) -> None:
         """连接服务器"""
         self.userid = userid
@@ -767,6 +771,7 @@ class CtpTdApi(TdApi):
         self.brokerid = brokerid
         self.auth_code = auth_code
         self.appid = appid
+        self.product_info = product_info
 
         if not self.connect_status:
             path: Path = get_folder_path(self.gateway_name.lower())
@@ -791,7 +796,8 @@ class CtpTdApi(TdApi):
             "UserID": self.userid,
             "BrokerID": self.brokerid,
             "AuthCode": self.auth_code,
-            "AppID": self.appid
+            "AppID": self.appid,
+            "UserProductInfo": self.product_info
         }
 
         self.reqid += 1
