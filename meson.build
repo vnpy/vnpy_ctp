@@ -1,7 +1,7 @@
 project(
   'vnpy_ctp',
   'cpp',
-  version: '6.7.11.4',
+  version: '6.7.11.5',
   license: 'MIT',
   meson_version: '>=1.7.0',
   default_options: [
