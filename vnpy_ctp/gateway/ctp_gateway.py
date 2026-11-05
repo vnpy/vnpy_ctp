@@ -3,6 +3,7 @@
 from collections.abc import Callable
 import sys
 from datetime import datetime
+from functools import lru_cache
 from threading import Lock
 from time import sleep
 from pathlib import Path
@@ -324,9 +325,8 @@ class CtpMdApi(MdApi):
         else:
             date_str = data["ActionDay"]
 
-        timestamp: str = f"{date_str} {data['UpdateTime']}.{data['UpdateMillisec']:03d}"
-        dt: datetime = datetime.strptime(timestamp, "%Y%m%d %H:%M:%S.%f")
-        dt = dt.replace(tzinfo=CHINA_TZ)
+        # 直接拆分日期和时间字段生成时间戳，避免strptime的解析开销
+        dt: datetime = generate_datetime(date_str, data["UpdateTime"], data["UpdateMillisec"])
 
         tick: TickData = TickData(
             symbol=symbol,
@@ -925,3 +925,24 @@ def adjust_price(price: float) -> float:
     if price == MAX_FLOAT:
         price = 0
     return price
+
+
+@lru_cache(maxsize=16)
+def parse_date(date_str: str) -> tuple[int, int, int]:
+    """解析YYYYMMDD格式的日期字符串，行情推送中同一日期会反复出现，结果缓存"""
+    return int(date_str[:4]), int(date_str[4:6]), int(date_str[6:8])
+
+
+def generate_datetime(date_str: str, time_str: str, millisec: int) -> datetime:
+    """基于日期（YYYYMMDD）、时间（HH:MM:SS）和毫秒生成带时区的时间戳"""
+    year, month, day = parse_date(date_str)
+    return datetime(
+        year,
+        month,
+        day,
+        int(time_str[:2]),
+        int(time_str[3:5]),
+        int(time_str[6:8]),
+        millisec * 1000,
+        tzinfo=CHINA_TZ
+    )
