@@ -432,6 +432,26 @@ def test_shfe_depth_uses_action_day(md_api: CtpMdApi, sink: Sink) -> None:
     assert tick.last_price == 0
 
 
+@pytest.mark.parametrize(
+    ("date_str", "time_str", "millisec"),
+    [
+        ("20250926", "09:30:00", 500),
+        ("20250926", "21:00:00", 0),
+        ("20251231", "23:59:59", 999),
+        ("20260101", "00:00:01", 5),
+    ],
+)
+def test_generate_datetime_matches_strptime(date_str: str, time_str: str, millisec: int) -> None:
+    expected: datetime = datetime.strptime(
+        f"{date_str} {time_str}.{millisec:03d}", "%Y%m%d %H:%M:%S.%f"
+    ).replace(tzinfo=CHINA_TZ)
+
+    dt: datetime = ctp_gateway.generate_datetime(date_str, time_str, millisec)
+
+    assert dt == expected
+    assert dt.tzinfo is CHINA_TZ
+
+
 def test_close_without_connection_does_not_exit(
     td_api: CtpTdApi,
     md_api: CtpMdApi,
